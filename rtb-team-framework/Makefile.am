@@ -50,6 +50,8 @@ empty-Robot5-TeamThree.robot
 %.conf: createrobotconf.sh
 	"$(srcdir)/createrobotconf.sh" "$@" $(loggingpriority)
 
+rtb_team_LDADD= @ETR_SOCKET_LIBS@
+
 rtb_team_SOURCES= initcomponents.h \
 	common.h\
 	stdnamespace.h \

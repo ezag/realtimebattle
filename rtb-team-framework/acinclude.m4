@@ -5,7 +5,7 @@ dnl define HAVE_BOOL. Note that a typedef is not a separate
 dnl type since you cannot overload a function such that it accepts either
 dnl the basic type or the typedef.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_BOOL],
@@ -30,7 +30,7 @@ dnl
 dnl If the C math functions are in the cmath header file and std:: namespace,
 dnl define HAVE_MATH_FN_IN_NAMESPACE_STD.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_COMPLEX_MATH_IN_NAMESPACE_STD],
@@ -57,7 +57,7 @@ dnl @synopsis AC_CXX_CONST_CAST
 dnl
 dnl If the compiler supports const_cast<>, define HAVE_CONST_CAST.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_CONST_CAST],
@@ -78,7 +78,7 @@ dnl
 dnl If the compiler supports default template parameters,
 dnl define HAVE_DEFAULT_TEMPLATE_PARAMETERS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_DEFAULT_TEMPLATE_PARAMETERS],
@@ -104,7 +104,7 @@ dnl define HAVE_DTOR_AFTER_ATEXIT.
 dnl WARNING: If cross-compiling, the test cannot be performed, the
 dnl default action is to define HAVE_DTOR_AFTER_ATEXIT.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_DTOR_AFTER_ATEXIT],
@@ -142,7 +142,7 @@ dnl @synopsis AC_CXX_DYNAMIC_CAST
 dnl
 dnl If the compiler supports dynamic_cast<>, define HAVE_DYNAMIC_CAST.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_DYNAMIC_CAST],
@@ -166,7 +166,7 @@ dnl
 dnl If the compiler handle computations inside an enum, define
 dnl HAVE_ENUM_COMPUTATIONS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_ENUM_COMPUTATIONS],
@@ -199,7 +199,7 @@ dnl
 dnl If the compiler handle (int) casts in enum computations, define
 dnl HAVE_ENUM_COMPUTATIONS_WITH_CAST.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_ENUM_COMPUTATIONS_WITH_CAST],
@@ -232,7 +232,7 @@ dnl
 dnl If the C++ compiler supports exceptions handling (try,
 dnl throw and catch), define HAVE_EXCEPTIONS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_EXCEPTIONS],
@@ -253,7 +253,7 @@ dnl
 dnl If the C++ compiler supports explicit instanciations syntax,
 dnl define HAVE_INSTANTIATIONS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_EXPLICIT_INSTANTIATIONS],
@@ -276,7 +276,7 @@ dnl If the compiler can be asked to prevent using implicitly one argument
 dnl constructors as converting constructors with the explicit
 dnl keyword, define HAVE_EXPLICIT.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_EXPLICIT],
@@ -298,7 +298,7 @@ dnl
 dnl If the compiler supports explicit template function qualification,
 dnl define HAVE_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_EXPLICIT_TEMPLATE_FUNCTION_QUALIFICATION],
@@ -323,7 +323,7 @@ dnl
 dnl If the compiler recognizes the full specialization syntax, define
 dnl HAVE_FULL_SPECIALIZATION_SYNTAX.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_FULL_SPECIALIZATION_SYNTAX],
@@ -348,7 +348,7 @@ dnl
 dnl If the compiler supports function templates with non-type parameters,
 dnl define HAVE_FUNCTION_NONTYPE_PARAMETERS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_FUNCTION_NONTYPE_PARAMETERS],
@@ -372,7 +372,7 @@ dnl @synopsis AC_CXX_HAVE_COMPLEX
 dnl
 dnl If the compiler has complex<T>, define HAVE_COMPLEX.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_COMPLEX],
@@ -397,7 +397,7 @@ dnl
 dnl If the compiler has the complex math functions cos, cosh, exp, log,
 dnl pow, sin, sinh, sqrt, tan and tanh, define HAVE_COMPLEX_MATH1.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_COMPLEX_MATH1],
@@ -428,7 +428,7 @@ dnl
 dnl If the compiler has the complex math functions acos, asin,
 dnl atan, atan2 and log10, define HAVE_COMPLEX_MATH2.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_COMPLEX_MATH2],
@@ -499,7 +499,7 @@ dnl This file is Alain BARBET's AC_CXX_HAVE_EXT_HASH_SET 1.1
 dnl with s/set/map/g :)
 dnl
 dnl @author Perceval ANICHINI <perceval.anichini@epita.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl
 AC_DEFUN([AC_CXX_HAVE_EXT_HASH_MAP],
 [AC_CACHE_CHECK(whether the compiler has ext/hash_map,
@@ -647,7 +647,7 @@ dnl If the compiler has the double math functions acosh,
 dnl asinh, atanh, expm1, erf, erfc, isnan, j0, j1, lgamma, logb,
 dnl log1p, rint, y0 and y1, define HAVE_IEEE_MATH.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_IEEE_MATH],
@@ -734,7 +734,7 @@ dnl @synopsis AC_CXX_HAVE_NUMERIC_LIMITS
 dnl
 dnl If the compiler has numeric_limits<T>, define HAVE_NUMERIC_LIMITS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_NUMERIC_LIMITS],
@@ -759,7 +759,7 @@ dnl
 dnl If the C++ library has a working stringstream, define HAVE_SSTREAM.
 dnl
 dnl @author Ben Stanley
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl
 AC_DEFUN([AC_CXX_HAVE_SSTREAM],
 [AC_CACHE_CHECK(whether the compiler has stringstream,
@@ -783,7 +783,7 @@ dnl
 dnl If the compiler supports ISO C++ standard library (i.e., can include the
 dnl files iostream, map, iomanip and cmath}), define HAVE_STD.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_STD],
@@ -810,7 +810,7 @@ dnl @synopsis AC_CXX_HAVE_STL
 dnl
 dnl If the compiler supports the Standard Template Library, define HAVE_STL.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_STL],
@@ -837,7 +837,7 @@ dnl
 dnl If the implementation of the C++ library provides the method
 dnl std::string::push_back (char), define HAVE_STRING_PUSH_BACK.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Jan Langer <jan@langernetz.de>
 dnl
 AC_DEFUN([AC_CXX_HAVE_STRING_PUSH_BACK],
@@ -864,7 +864,7 @@ dnl If the compiler has the double math functions _class,
 dnl ilogb, itrunc, nearest, rsqrt, uitrunc, copysign, drem, fmod, hypot,
 dnl nextafter, remainder, scalb and unordered, define HAVE_SYSTEM_V_MATH.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_SYSTEM_V_MATH],
@@ -901,7 +901,7 @@ dnl @synopsis AC_CXX_HAVE_VALARRAY
 dnl
 dnl If the compiler has valarray<T>, define HAVE_VALARRAY.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_HAVE_VALARRAY],
@@ -926,7 +926,7 @@ dnl
 dnl If the implementation of the C++ library provides the method
 dnl std::vector::at(std::size_t), define HAVE_VECTOR_AT.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Jan Langer <jan@langernetz.de>
 dnl
 AC_DEFUN([AC_CXX_HAVE_VECTOR_AT],
@@ -951,7 +951,7 @@ dnl @synopsis AC_CXX_MEMBER_CONSTANTS
 dnl
 dnl If the compiler supports member constants, define HAVE_MEMBER_CONSTANTS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_MEMBER_CONSTANTS],
@@ -972,7 +972,7 @@ dnl @synopsis AC_CXX_MEMBER_TEMPLATES
 dnl
 dnl If the compiler supports member templates, define HAVE_MEMBER_TEMPLATES.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_MEMBER_TEMPLATES],
@@ -997,7 +997,7 @@ dnl
 dnl If the compiler supports member templates outside the class declaration,
 dnl define HAVE_MEMBER_TEMPLATES_OUTSIDE_CLASS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_MEMBER_TEMPLATES_OUTSIDE_CLASS],
@@ -1027,7 +1027,7 @@ dnl If the compiler allows modifying class data members flagged with
 dnl the mutable keyword even in const objects (for example in the
 dnl body of a const member function), define HAVE_MUTABLE.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_MUTABLE],
@@ -1053,7 +1053,7 @@ dnl
 dnl If the compiler can prevent names clashes using namespaces, define
 dnl HAVE_NAMESPACES.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_NAMESPACES],
@@ -1075,7 +1075,7 @@ dnl
 dnl If the compiler supports the Numerical C Extensions Group
 dnl restrict keyword, define HAVE_NCEG_RESTRICT.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_NCEG_RESTRICT],
@@ -1105,7 +1105,7 @@ dnl If the compiler accepts the new for scoping rules (the scope of a
 dnl variable declared inside the parentheses is restricted to the
 dnl for-body), define HAVE_NEW_FOR_SCOPING.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_NEW_FOR_SCOPING],
@@ -1135,7 +1135,7 @@ dnl for-body), define HAVE_OLD_FOR_SCOPING. Note that some
 dnl compilers (notably g++ and egcs) support both new and old
 dnl rules since they accept the old rules and only generate a warning.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_OLD_FOR_SCOPING],
@@ -1155,7 +1155,7 @@ dnl @synopsis AC_CXX_PARTIAL_ORDERING
 dnl
 dnl If the compiler supports partial ordering, define HAVE_PARTIAL_ORDERING.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_PARTIAL_ORDERING],
@@ -1183,7 +1183,7 @@ dnl
 dnl If the compiler supports partial specialization,
 dnl define HAVE_PARTIAL_SPECIALIZATION.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_PARTIAL_SPECIALIZATION],
@@ -1208,7 +1208,7 @@ dnl @synopsis AC_CXX_REINTERPRET_CAST
 dnl
 dnl If the compiler supports reinterpret_cast<>, define HAVE_REINTERPRET_CAST.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_REINTERPRET_CAST],
@@ -1235,7 +1235,7 @@ dnl
 dnl If the compiler supports Run-Time Type Identification (typeinfo
 dnl header and typeid keyword), define HAVE_RTTI.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_RTTI],
@@ -1268,7 +1268,7 @@ dnl @synopsis AC_CXX_STATIC_CAST
 dnl
 dnl If the compiler supports static_cast<>, define HAVE_STATIC_CAST.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_STATIC_CAST],
@@ -1294,7 +1294,7 @@ dnl
 dnl If the compiler supports use of the template keyword as a qualifier,
 dnl define HAVE_TEMPLATE_KEYWORD_QUALIFIER.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen, Bernardo Innocenti, and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATE_KEYWORD_QUALIFIER],
@@ -1346,7 +1346,7 @@ dnl      xsolaris*) AC_DISABLE_SHARED ;;
 dnl    esac
 dnl    AM_PROG_LIBTOOL
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Luc Maisonobe
 dnl
 AC_DEFUN([AC_CXX_TEMPLATE_OBJS],
@@ -1417,7 +1417,7 @@ dnl
 dnl If the compiler supports template-qualified base class specifiers,
 dnl define HAVE_TEMPLATE_QUALIFIED_BASE_CLASS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATE_QUALIFIED_BASE_CLASS],
@@ -1452,7 +1452,7 @@ dnl
 dnl If the compiler supports template-qualified return types, define
 dnl HAVE_TEMPLATE_QUALIFIED_RETURN_TYPE.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATE_QUALIFIED_RETURN_TYPE],
@@ -1485,7 +1485,7 @@ dnl
 dnl If the compiler supports templates as template arguments, define
 dnl HAVE_TEMPLATES_AS_TEMPLATE_ARGUMENTS.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATES_AS_TEMPLATE_ARGUMENTS],
@@ -1511,7 +1511,7 @@ dnl
 dnl If the compiler supports function matching with argument types which are
 dnl template scope-qualified, define HAVE_TEMPLATE_SCOPED_ARGUMENT_MATCHING.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATE_SCOPED_ARGUMENT_MATCHING],
@@ -1540,7 +1540,7 @@ dnl @synopsis AC_CXX_TEMPLATES
 dnl
 dnl If the compiler supports basic templates, define HAVE_TEMPLATES.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TEMPLATES],
@@ -1562,7 +1562,7 @@ dnl @synopsis AC_CXX_TYPENAME
 dnl
 dnl If the compiler recognizes the typename keyword, define HAVE_TYPENAME.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_TYPENAME],
@@ -1584,7 +1584,7 @@ dnl
 dnl If the compiler supports numeric traits promotions, define
 dnl HAVE_USE_NUMTRAIT.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Todd Veldhuizen and Luc Maisonobe <luc@spaceroots.org>
 dnl
 AC_DEFUN([AC_CXX_USE_NUMTRAIT],
@@ -1615,7 +1615,7 @@ dnl
 dnl If the compiler does have the verbose terminate handler, define
 dnl HAVE_VERBOSE_TERMINATE_HANDLER.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Lapo Luchini <lapo@lapo.it>
 dnl
 AC_DEFUN([AC_CXX_VERBOSE_TERMINATE_HANDLER],
@@ -1643,7 +1643,7 @@ dnl and abi::__cxa_demangle() function), define HAVE_GCC_ABI_DEMANGLE
 dnl
 dnl Adapted from AC_CXX_RTTI by Luc Maisonobe
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Neil Ferguson <nferguso@eso.org>
 dnl
 AC_DEFUN([AX_CXX_GCC_ABI_DEMANGLE],
@@ -1681,7 +1681,7 @@ dnl
 dnl If the C++ compiler supports function try blocks, define
 dnl `HAVE_FUNCTION_TRY_BLOCKS'.
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Matthew D. Langston <langston@SLAC.Stanford.EDU>
 dnl
 AC_DEFUN([MDL_CXX_FUNCTION_TRY_BLOCKS],
@@ -1709,7 +1709,7 @@ dnl
 dnl Define CXX_HAVE_KOENIG_LOOKUP if the C++ compiler has
 dnl argument-dependent name lookup (a.k.a. Koenig lookup).
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:30 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
 dnl @author Steve Robbins
 dnl
 AC_DEFUN([mni_CXX_HAVE_KOENIG_LOOKUP],
@@ -1753,3 +1753,80 @@ AC_DEFUN(RTB_EXPAND_DIR, [
             eval echo \""[$]$1"\"
         )`
 ])
+dnl @synopsis ETR_SOCKET_NSL
+dnl
+dnl This macro figures out what libraries are required on this platform
+dnl to link sockets programs.  It's usually -lsocket and/or -lnsl or
+dnl neither.  We test for all three combinations.
+dnl
+dnl @version $Id: acinclude.m4,v 1.2 2005/02/24 10:27:53 jonico Exp $
+dnl @author Warren Young <warren@etr-usa.com>
+dnl
+AC_DEFUN([ETR_SOCKET_NSL],
+[
+AC_CACHE_CHECK(for libraries containing socket functions,
+ac_cv_socket_libs, [
+        oCFLAGS=$CFLAGS
+
+        AC_TRY_LINK([
+                        #include <sys/types.h>
+                        #include <sys/socket.h>
+                        #include <netinet/in.h>
+                        #include <arpa/inet.h>
+                ],
+                [
+                        struct in_addr add;
+                        int sd = socket(AF_INET, SOCK_STREAM, 0);
+                        inet_ntoa(add);
+                ],
+                ac_cv_socket_libs=-lc, ac_cv_socket_libs=no)
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket"
+                AC_TRY_LINK([
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+                        ],
+                        [
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+                        ],
+                        ac_cv_socket_libs=-lsocket, ac_cv_socket_libs=no)
+        fi
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket -lnsl"
+                AC_TRY_LINK([
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+                        ],
+                        [
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+                        ],
+                        ac_cv_socket_libs="-lsocket -lnsl", ac_cv_socket_libs=no)
+        fi
+
+        CFLAGS=$oCFLAGS
+])
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                AC_MSG_ERROR([Cannot find socket libraries])
+        elif test x"$ac_cv_socket_libs" = "x-lc"
+        then
+                ETR_SOCKET_LIBS=""
+        else
+                ETR_SOCKET_LIBS="$ac_cv_socket_libs"
+        fi
+
+        AC_SUBST(ETR_SOCKET_LIBS)
+]) dnl ETR_SOCKET_NSL

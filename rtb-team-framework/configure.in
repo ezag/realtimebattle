@@ -35,6 +35,8 @@ AC_FUNC_ERROR_AT_LINE
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_CHECK_FUNCS([select socket strerror])
+dnl Here we test whether we have to link against lsocket and lnsl
+ETR_SOCKET_NSL
 
 dnl Find out where RealTime Battle lives
 AC_PREFIX_DEFAULT(/usr/local)

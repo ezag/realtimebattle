@@ -9,12 +9,12 @@
 # If the third argument is not present, take the included HERE document configuration template 
 # Will create file called like argument one
 
-strategy=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.robot$/\1/p'`
-name=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.robot$/\2/p'`
-team=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.robot$/\3/p'`
+strategy=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.robot$/\1/p'`
+name=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.robot$/\2/p'`
+team=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.robot$/\3/p'`
 
 rtbhome=`echo "$2" | sed -ne 's/[&|@]/FAULT/p'`
-if test ! -z $rtbhome; then
+if test ! x$rtbhome = "x"; then
 	echo "<rtb home> contained illegal characters (e. g. &, |, @): $2." 
 	exit 1
 fi

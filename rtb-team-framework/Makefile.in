@@ -97,7 +97,7 @@ am_rtb_team_OBJECTS = initcomponents.$(OBJEXT) \
 	empty_server_derivatedstate.$(OBJEXT) \
 	empty_sharedserverspecificrepository.$(OBJEXT)
 rtb_team_OBJECTS = $(am_rtb_team_OBJECTS)
-rtb_team_LDADD = $(LDADD)
+rtb_team_DEPENDENCIES =
 robotSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(noinst_SCRIPTS) $(robot_SCRIPTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
@@ -160,6 +160,7 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ETR_SOCKET_LIBS = @ETR_SOCKET_LIBS@
 EXEEXT = @EXEEXT@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -258,6 +259,7 @@ empty-Robot3-TeamThree.robot\
 empty-Robot4-TeamThree.robot\
 empty-Robot5-TeamThree.robot
 
+rtb_team_LDADD = @ETR_SOCKET_LIBS@
 rtb_team_SOURCES = initcomponents.h \
 	common.h\
 	stdnamespace.h \

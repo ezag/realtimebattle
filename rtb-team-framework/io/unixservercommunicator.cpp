@@ -1,5 +1,5 @@
 /************************************************************************
-    $Id: unixservercommunicator.cpp,v 1.2 2005/01/27 18:16:27 jonico Exp $
+    $Id: unixservercommunicator.cpp,v 1.3 2005/02/24 10:27:54 jonico Exp $
     
     RTB - Team Framework: Framework for RealTime Battle robots to communicate efficiently in a team
     Copyright (C) 2004 The RTB- Team Framework Group: http://rtb-team.sourceforge.net
@@ -19,8 +19,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
     $Log: unixservercommunicator.cpp,v $
-    Revision 1.2  2005/01/27 18:16:27  jonico
-    Framework code maintenance update to reflect an important bug fix
+    Revision 1.3  2005/02/24 10:27:54  jonico
+    Updated newest version of the framework
 
     Revision 1.3  2005/01/27 18:08:04  jonico
     Fixed busy waiting select bug in the server communicators, fixed NullLogger problem in createrobotconf

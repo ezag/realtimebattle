@@ -7,9 +7,9 @@
 # If the third argument is not present, take the included HERE document configuration template 
 # Will create file called like argument one
 
-strategy=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.conf$/\1/p'`
-name=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.conf$/\2/p'`
-team=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)-\([^-\\\/@&]\+\)\.conf$/\3/p'`
+strategy=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.conf$/\1/p'`
+name=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.conf$/\2/p'`
+team=`echo "$1" | sed -ne 's/^\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)-\([^-\\\/@&]\{1,\}\)\.conf$/\3/p'`
 if test -z "$strategy" -o -z "$name" -o -z "$team"; then
 	echo "Robot config file name was not valid (contained hyphens or some kind of slashes, the at symbol or the ampersand or does not follow the scheme <Strategy>-<RobotName>-<Team>.conf): $1."
 	exit 1
@@ -17,7 +17,7 @@ else
 	echo "Should generate configfile for robot $name playing in $team with strategy $strategy."
 fi
 
-logprio=`echo "$2" | sed -ne 's/^[0-9]\+$/&/p'`
+logprio=`echo "$2" | sed -ne 's/^[0-9]\{1,\}$/&/p'`
 if test -z "$logprio"; then
 	if test -z "$2"; then
 		echo "Logpriority not specified, assuming value 3."

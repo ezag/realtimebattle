@@ -1,5 +1,5 @@
 /************************************************************************
-    $Id: common.h,v 1.1 2005/01/10 18:35:31 jonico Exp $
+    $Id: common.h,v 1.2 2005/02/24 10:27:53 jonico Exp $
     
     RTB - Team Framework: Framework for RealTime Battle robots to communicate efficiently in a team
     Copyright (C) 2004 The RTB- Team Framework Group: http://rtb-team.sourceforge.net
@@ -19,8 +19,11 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
     $Log: common.h,v $
-    Revision 1.1  2005/01/10 18:35:31  jonico
-    Initial revision
+    Revision 1.2  2005/02/24 10:27:53  jonico
+    Updated newest version of the framework
+
+    Revision 1.1  2005/01/10 18:23:31  jonico
+    Added common.h
 
 
 **************************************************************************/
