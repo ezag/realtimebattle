@@ -71,9 +71,24 @@ extern bool no_graphics;
 void
 Error(const bool fatal, const String& error_msg, const String& function_name)
 {
+#ifndef NO_GRAPHICS
+  
+  String info_text = "Error in " + function_name + ":\n\n" + error_msg + "\n";
+  if( fatal )
+    info_text += "\nFatal Error - program will terminate!";
+  List<String> string_list;
+  string_list.insert_last( new String( _("Ok") ) );
+  Dialog( info_text, string_list,
+          (DialogFunction) ok_click,
+          "Error" );
+
+#else
+  
   cerr << "RealTimeBattle: " << _("Error in") << " "
        << function_name << ": " << error_msg << endl;
   //  perror("RealTimeBattle: errno message");
+
+#endif 
 
   if( fatal == true )
     {
@@ -99,7 +114,6 @@ Quit(const bool success)
       
   exit(EXIT_SUCCESS);
 }
-
 
 int
 factorial(const int n)
@@ -275,6 +289,63 @@ check_if_filename_is_arena( String& fname, bool* err_in_file)
     }
 
   return retval;
+}
+
+bool
+check_logfile( String& fname )
+{
+  struct stat filestat;
+  if( 0 == stat( fname.chars(), &filestat ) )
+    // Check if file is a regular and readable file
+    if( S_ISREG( filestat.st_mode) &&
+        ( filestat.st_mode & ( S_IROTH | S_IRGRP | S_IRUSR ) ) )
+    {
+      // So far so good. Now do a rudimentary sanity check.
+      ifstream fin( fname.chars() );
+      long line = 0;
+      for(;;)
+      {
+        char buffer[200];
+        fin.getline(buffer, 200);
+        if( fin.eof() )
+        {
+          fin.close();
+          return true;
+        }
+      
+        line++;
+        switch(buffer[0])
+        {
+          case 'H':
+            if( 1 != line )
+            {
+              Error(false, "Header not first line in logfile!", "Various::check_logfile");
+              return false;
+            }
+          case 'A':
+          case 'G':
+          case 'O':
+          case 'L':
+          case 'R':
+          case 'T':
+          case 'P':
+          case 'C':
+          case 'M':
+          case 'S':
+          case 'D':
+            // Ok
+            break;
+          default:
+            if( 1 == line )
+              Error(false, "No header found in logfile!", "Various::check_logfile");
+            else
+              Error(false, "Unrecognized first letter in logfile line " + String(line) + ": " + String(buffer[0]),
+                     "Various::check_logfile");
+            fin.close();
+            return false;
+        }
+      }
+    }
 }
 
 void

@@ -33,6 +33,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Robot.h"
 #include "Options.h"
 #include "String.h"
+#include "Various.h"
 
 extern class ControlWindow* controlwindow_p;
 
@@ -638,8 +639,12 @@ ControlWindow::replay( GtkWidget* widget,
   if( filename[filename.get_length() - 1] == '/' )  
     return;  // no file is selected
 
-  the_arena_controller.replay_filename = filename;
-  the_arena_controller.start_replay_arena();
+  // rudimentary sanity check
+  if( check_logfile( filename ) )
+  {
+    the_arena_controller.replay_filename = filename;
+    the_arena_controller.start_replay_arena();
+  }
 }
 
 void

@@ -28,6 +28,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #endif 
 
 #include "List.h"
+#include "Dialog.h"
 
 //#include "String.h"
 class String;
@@ -61,7 +62,7 @@ struct entry_t
 
 void Error(const bool fatal, const String& error_msg, const String& function_name);
 void Quit(const bool success = true);
-
+static void ok_click(int result) {}
 int factorial(const int n);
 
 int binomial(const int n, const int k);
@@ -73,6 +74,7 @@ void split_colonseparated_dirs(String& dirs, List<String>& arenadirs);
 
 bool check_if_filename_is_robot( String& fname, bool* err_in_file );
 bool check_if_filename_is_arena( String& fname, bool* err_in_file );
+bool check_logfile( String& fname );
 void check_for_robots_and_arenas( String& word, 
                                   List<start_tournament_info_t>& tour_list,
                                   List<String>& dir_list, 

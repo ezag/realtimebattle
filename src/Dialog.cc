@@ -30,12 +30,12 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 //
 
 Dialog::Dialog( const String& info, const List<String>& button_labels,
-                const DialogFunction func )
+                const DialogFunction func, const gchar* window_title )
 {
   // The window
 
   window_p = gtk_window_new( GTK_WINDOW_TOPLEVEL );
-  gtk_window_set_title( GTK_WINDOW( window_p ), "RealTimeBattle" );
+  gtk_window_set_title( GTK_WINDOW( window_p ), window_title );
   gtk_widget_set_name( window_p, "RTB Dialog" );
   gtk_window_set_policy( GTK_WINDOW( window_p ), FALSE, FALSE, FALSE );
   gtk_window_position( GTK_WINDOW( window_p ), GTK_WIN_POS_CENTER );
