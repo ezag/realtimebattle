@@ -30,7 +30,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 using namespace std;
 
-#ifdef TIME_WITH_SYS_TIME 
+#ifdef TIME_WITH_SYS_TIME
 # include <sys/time.h>
 # include <time.h>
 #else
@@ -75,7 +75,7 @@ Robot::Robot(const String& filename)
   velocity = Vector2D(0.0, 0.0);
   acceleration = 0.0;
   robot_filename = filename;
-  
+
   int nr;
   if( ( nr = robot_filename.find( '/', 0, true) ) == -1 )
     robot_plain_filename = robot_filename;
@@ -99,7 +99,7 @@ Robot::Robot(const String& filename)
   alive = false;
   dead_but_stats_not_set = false;
   //  total_points = 0.0;
-  
+
   has_competed = false;
 
   id = the_arena.increase_robot_count();
@@ -124,7 +124,7 @@ Robot::Robot(const int r_id, const long int col, const String& name)
   process_running = false;
   alive = false;
   //  total_points = 0.0;
-  
+
   has_competed = false;
 
   last_drawn_robot_center = Vector2D(infinity,infinity);
@@ -139,16 +139,16 @@ Robot::~Robot()
       if( is_process_running() ) kill_process_forcefully();
       delete_pipes();
     }
-} 
+}
 
 void
 Robot::start_process()
 {
   int pipe_in[2], pipe_out[2];
-  if (pipe (pipe_in)) 
+  if (pipe (pipe_in))
     Error(true, "Couldn't setup pipe_in for robot " + robot_filename, "Robot::start_process");
 
-  if (pipe (pipe_out)) 
+  if (pipe (pipe_out))
     Error(true, "Couldn't setup pipe_out for robot " + robot_filename, "Robot::start_process");
 
   if( (pid = fork()) < 0 )
@@ -169,49 +169,51 @@ Robot::start_process()
       if( use_non_blocking )
         {
           int pd_flags;
-          if( (pd_flags = fcntl(pipe_out[0], F_GETFL, 0)) == -1 ) 
-            Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename, 
+          if( (pd_flags = fcntl(pipe_out[0], F_GETFL, 0)) == -1 )
+            Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename,
                   "Robot::start_process, child");
           pd_flags |= O_NONBLOCK;
-          if( fcntl(pipe_out[0], F_SETFL, pd_flags) == -1 ) 
-            Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename, 
+          if( fcntl(pipe_out[0], F_SETFL, pd_flags) == -1 )
+            Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename,
                   "Robot::start_process, child");
-          
-          
-          if( (pd_flags = fcntl(pipe_in[1], F_GETFL, 0)) == -1 ) 
-            Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename, 
+
+
+          if( (pd_flags = fcntl(pipe_in[1], F_GETFL, 0)) == -1 )
+            Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename,
                   "Robot::start_process, child");
           pd_flags |= O_NONBLOCK;
-          if( fcntl(pipe_in[1], F_SETFL, pd_flags) == -1 ) 
-            Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename, 
+          if( fcntl(pipe_in[1], F_SETFL, pd_flags) == -1 )
+            Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename,
                   "Robot::start_process, child");
         }
-      
+
       // Check file attributes
 
       struct stat filestat;
-      if( 0 != stat( robot_filename.chars(), &filestat ) ) 
+      if( 0 != stat( robot_filename.chars(), &filestat ) )
         Error(true, "Couldn't get stats for robot " + robot_filename, "Robot::start_process, child");
       if( !S_ISREG( filestat.st_mode) )
-        Error(true, "Robot file isn't regular, error for robot " + robot_filename, 
+        Error(true, "Robot file isn't regular, error for robot " + robot_filename,
               "Robot::start_process, child");
       if( !(filestat.st_mode & S_IXOTH) )
-        Error(true, "Robot file isn't executable for user, error for robot " + robot_filename, 
+        Error(true, "Robot file isn't executable for user, error for robot " + robot_filename,
               "Robot::start_process, child");
       if( (filestat.st_mode & S_ISUID) )
-        Error(true, "Set user ID is not allowed, error for robot " + robot_filename, 
+        Error(true, "Set user ID is not allowed, error for robot " + robot_filename,
               "Robot::start_process, child");
 
       // Lower priority by one
-     
+// setpriority/getpriority not yet defined in Cygwin (2/2005)
+#ifndef __CYGWIN__
       int old;
       if( (old = getpriority (PRIO_PROCESS, 0)) == -1 )
         Error(true, "Couldn't get priority for robot " + robot_filename, "Robot::start_process, child");
       if( setpriority (PRIO_PROCESS, 0, old + 1) == -1)
         Error(true, "Couldn't set priority for robot " + robot_filename, "Robot::start_process, child");
-      
+#endif
+
       // Close all pipes not belonging to the robot
-      
+
       Robot* robotp;
 
       ListIterator<Robot> li;
@@ -228,27 +230,27 @@ Robot::start_process()
           //          struct rlimit res_limit;
 
           //        // Deny file access
-          
+
           //            if( getrlimit( RLIMIT_NOFILE, &res_limit ) == -1 )
-          //              Error(true, "Couldn't get file limits for robot " + robot_filename, 
+          //              Error(true, "Couldn't get file limits for robot " + robot_filename,
           //                    "Robot::start_process, child");
-          
+
           //            //res_limit.rlim_cur = 7;   // Don't know why, but it is the lowest number that works
           //            if( setrlimit( RLIMIT_NOFILE, &res_limit ) == -1 )
-          //              Error(true, "Couldn't limit file access for robot " + robot_filename, 
+          //              Error(true, "Couldn't limit file access for robot " + robot_filename,
           //                    "Robot::start_process, child");
-          
+
 
           // Forbid creation of child processes
-          
+
 //  #ifdef HAVE_RLIMIT_NPROC
 //            if( getrlimit( RLIMIT_NPROC, &res_limit ) == -1 )
-//              Error(true, "Couldn't get proc limits for robot " + robot_filename, 
+//              Error(true, "Couldn't get proc limits for robot " + robot_filename,
 //                    "Robot::start_process, child");
-          
+
 //            res_limit.rlim_cur = 0;
 //            if( setrlimit( RLIMIT_NPROC, &res_limit ) == -1 )
-//              Error(true, "Couldn't limit child processes for robot " + robot_filename, 
+//              Error(true, "Couldn't limit child processes for robot " + robot_filename,
 //                    "Robot::start_process, child");
 //  #endif
       //        }
@@ -257,52 +259,52 @@ Robot::start_process()
       if( execl(robot_filename.chars(), robot_filename.chars(), NULL) == -1 )
         Error(true, "Couldn't open robot " + robot_filename, "Robot::start_process, child");
 
-      Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + robot_filename, 
+      Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + robot_filename,
             "Robot::start_process, child");
     }
   else
     {
       close(pipe_out[0]);     // Close input side of pipe_out
-      close(pipe_in[1]);      // Close output side of pipe_in  
-		
+      close(pipe_in[1]);      // Close output side of pipe_in
+
       pipes[0] = pipe_out[1];
       pipes[1] = pipe_in[0];
 
       // Make the pipes non-blocking
       int pd_flags;
-      if( (pd_flags = fcntl(pipe_in[0], F_GETFL, 0)) == -1 ) 
-        Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename, 
+      if( (pd_flags = fcntl(pipe_in[0], F_GETFL, 0)) == -1 )
+        Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename,
               "Robot::start_process, parent");
       pd_flags |= O_NONBLOCK;
-      if( fcntl(pipe_in[0], F_SETFL, pd_flags) == -1 ) 
-        Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename, 
+      if( fcntl(pipe_in[0], F_SETFL, pd_flags) == -1 )
+        Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename,
               "Robot::start_process, parent");
-      if( (pd_flags = fcntl(pipe_out[1], F_GETFL, 0)) == -1 ) 
-        Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename, 
+      if( (pd_flags = fcntl(pipe_out[1], F_GETFL, 0)) == -1 )
+        Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename,
               "Robot::start_process, parent");
       pd_flags |= O_NONBLOCK;
-      if( fcntl(pipe_out[1], F_SETFL, pd_flags) == -1 ) 
-        Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename, 
+      if( fcntl(pipe_out[1], F_SETFL, pd_flags) == -1 )
+        Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename,
               "Robot::start_process, parent");
 
 	// Der Schrott geht nimmer in libstdc++ v3
 
      // outstreamp = new ofstream(pipe_out[1]);
      // instreamp = new ifstream(pipe_in[0]);
-      
-     outstreamp = new boost::fdostream(pipe_out[1]);  
+
+     outstreamp = new boost::fdostream(pipe_out[1]);
      instreamp = new boost::fdistream(pipe_in[0]);
-              
+
     }
 
   // wait some time to let process start up
- 
-  struct timeval timeout; 
+
+  struct timeval timeout;
   timeout.tv_sec = 0;
-  timeout.tv_usec = 40000;  //  1/25 s 
+  timeout.tv_usec = 40000;  //  1/25 s
 
   select(FD_SETSIZE, NULL, NULL, NULL, &timeout);
-  
+
   set_values_at_process_start_up();
 }
 
@@ -316,23 +318,23 @@ void
 Robot::update_cpu_time_used()
 {
   if( network_robot || !process_running ) return;
-  
+
   String procfilename = "/proc/" + String(pid) + "/stat";
   ifstream procfile(procfilename.chars());
   if( !procfile ) return;
-   
+
   char buf[64];
-  
+
   // step to the correct value
-  for(int i=0; i<15; i++) 
-    procfile >> buf; 
+  for(int i=0; i<15; i++)
+    procfile >> buf;
 
   // The next four values should be added to get the correct cpu usage
   double current_cpu = 0.0;
-  int jiffies;  
+  int jiffies;
   for(int i=0; i<4; i++)
     {
-      procfile >> jiffies;  
+      procfile >> jiffies;
       current_cpu += (double)jiffies / 100.0;
     }
 
@@ -350,7 +352,7 @@ void
 Robot::reset_cpu_time()
 {
   if( network_robot ) return;
-  
+
   update_cpu_time_used();
   cpu_used = 0;
 }
@@ -363,7 +365,7 @@ Robot::check_process()
   if( !is_process_running() || !alive || network_robot ) return;
 
     //    ifstream procfile(procfilename.chars());
-//        if( !procfile ) 
+//        if( !procfile )
 //          {
 //            process_running = false;
 //            return;
@@ -373,9 +375,9 @@ Robot::check_process()
 
 //        for(int i=0; i<13; i++)
 //          procfile >> buf;
-      
+
 //        int jiffies;
-      
+
 //        procfile >> jiffies;
 
       update_cpu_time_used();
@@ -384,7 +386,7 @@ Robot::check_process()
       if( cpu_used > cpu_limit )
         {
           if( tot_time >= cpu_timeout ) // ok, within time limit
-            { 
+            {
               // add extra time
               reset_cpu_time();
               cpu_limit = the_opts.get_d(OPTION_CPU_EXTRA);
@@ -392,11 +394,11 @@ Robot::check_process()
               cpu_timeout = tot_time + the_opts.get_d(OPTION_CPU_PERIOD);
             }
           else // cpu limit exceeded, robot disqualified
-            {              
+            {
               die();
 
               // restart with full cpu_time next game
-              reset_cpu_time(); 
+              reset_cpu_time();
               cpu_limit = the_opts.get_d(OPTION_CPU_START_LIMIT);
               cpu_warning_limit = cpu_limit * the_opts.get_d(OPTION_CPU_WARNING_PERCENT);
               cpu_timeout = 0.0;
@@ -452,12 +454,12 @@ Robot::delete_pipes()
       outstreamp = NULL;
     }
 
-  if( pipes[0] != -1 ) 
+  if( pipes[0] != -1 )
     {
       close(pipes[0]);
       pipes[0] = -1;
     }
-  if( pipes[1] != -1 ) 
+  if( pipes[1] != -1 )
     {
       close(pipes[1]);
       pipes[1] = -1;
@@ -517,7 +519,7 @@ Robot::set_stats(const int robots_killed_same_time, const bool timeout)
      the_arena.get_sequence_nr(),
      the_arena.get_game_nr(),
      position_this_game,
-     points,   
+     points,
      the_arena.get_total_time(),
      get_total_points() + points
      );
@@ -532,7 +534,7 @@ Robot::set_stats(const int robots_killed_same_time, const bool timeout)
 // Version of set_stats used by ArenaReplay
 //
 void
-Robot::set_stats(const double pnts, const int pos, const double time_survived, 
+Robot::set_stats(const double pnts, const int pos, const double time_survived,
                  const bool make_stats)
 {
   position_this_game = pos;
@@ -553,7 +555,7 @@ Robot::set_stats(const double pnts, const int pos, const double time_survived,
          time_survived,
          total_points + pnts
          );
-  
+
       statistics.insert_last( statp );
     }
 #ifndef NO_GRAPHICS
@@ -562,8 +564,8 @@ Robot::set_stats(const double pnts, const int pos, const double time_survived,
 }
 
 void
-Robot::change_position( const double x, const double y, 
-                        const double robot_a, const double cannon_a, 
+Robot::change_position( const double x, const double y,
+                        const double robot_a, const double cannon_a,
                         const double radar_a, const double en )
 {
   center = Vector2D(x, y);
@@ -571,7 +573,7 @@ Robot::change_position( const double x, const double y,
   cannon_angle.pos = cannon_a;
   radar_angle.pos  = radar_a;
   energy = en;
-#ifndef NO_GRAPHICS  
+#ifndef NO_GRAPHICS
   if( !no_graphics )  display_score();
 #endif
 }
@@ -583,7 +585,7 @@ Robot::check_name_uniqueness()
   int first_avail = 0;
 
   robot_name = plain_robot_name;
-  
+
   ListIterator<Robot> li;
   for( the_arena.get_all_robots_in_tournament()->first(li); li.ok(); li++ )
     {
@@ -598,7 +600,7 @@ Robot::check_name_uniqueness()
 
           first_avail = max_rtb( robotp->robot_name_uniqueness_number + 1, first_avail );
 
-          if( robot_name_uniqueness_number == robotp->robot_name_uniqueness_number 
+          if( robot_name_uniqueness_number == robotp->robot_name_uniqueness_number
               || robot_name_uniqueness_number == 0 )
             robot_name_uniqueness_number = first_avail;
         }
@@ -614,7 +616,7 @@ Robot::get_total_points()
   ListIterator<stat_t> li;
   double total_pnts;
 
-  if( the_arena_controller.is_realtime() || replay_arena.is_log_from_stdin() ) 
+  if( the_arena_controller.is_realtime() || replay_arena.is_log_from_stdin() )
     {
       statistics.last(li);
 
@@ -622,7 +624,7 @@ Robot::get_total_points()
 
       if( is_alive() )
         total_pnts += the_arena.get_robots_per_game() - the_arena.get_robots_left();
-        
+
 
     }
   else     // Replaying
@@ -630,8 +632,8 @@ Robot::get_total_points()
       ListIterator<stat_t> li=get_current_game_stats();
 
       if( is_alive() )
-        {          
-          total_pnts = li()->total_points - li()->points + 
+        {
+          total_pnts = li()->total_points - li()->points +
             the_arena.get_robots_per_game() - the_arena.get_robots_left();
         }
       else // if robot dead
@@ -639,7 +641,7 @@ Robot::get_total_points()
     }
 
   return total_pnts;
-} 
+}
 
 
 
@@ -648,25 +650,25 @@ Robot::get_last_position()
 {
   ListIterator<stat_t> li;
 
-  if( the_arena_controller.is_realtime() || replay_arena.is_log_from_stdin() ) 
+  if( the_arena_controller.is_realtime() || replay_arena.is_log_from_stdin() )
     {
-      
+
       statistics.last(li);
 
       if( !li.ok() ) return 0;
-      
+
       if( li()->game_nr < the_arena.get_game_nr() )
         return li()->position;
-    }      
+    }
   else
     {
       li = get_current_game_stats();
     }
-     
+
   if( !li.ok() ) return 0;
   li--;
   if( !li.ok() ) return 0;
-  
+
   if( li()->sequence_nr == the_arena.get_sequence_nr() )
     return li()->position;
   else
@@ -688,9 +690,9 @@ Robot::get_current_game_stats()
             {
               current_game_stats = li;
               return current_game_stats;
-            }          
+            }
         }
-      Error(true, "Couldn't find stats", "Robot::get_current_game_stats");  
+      Error(true, "Couldn't find stats", "Robot::get_current_game_stats");
     }
 
   return current_game_stats;
@@ -714,9 +716,9 @@ Robot::update_rotation(rotation_t& angle, const double timestep)
       angle.set_rot( angle.right, -angle.vel, angle.left, angle.right, SWEEP_LEFT);
       if( send_rotation_reached >= 2 ) rot_reached = true;
     }
-  
+
   if( angle.pos <= angle.left && angle.mode == ROTATE_TO_LEFT )
-    {      
+    {
       angle.set_rot( angle.left, 0.0, -infinity, infinity, NORMAL_ROT);
       if( send_rotation_reached >= 1 ) rot_reached = true;
     }
@@ -740,7 +742,7 @@ Robot::update_radar_and_cannon(const double timestep)
 
   if( rot_reached > 0 ) send_message(ROTATION_REACHED, rot_reached);
 
-  shot_energy = min_rtb( the_opts.get_d(OPTION_SHOT_MAX_ENERGY), 
+  shot_energy = min_rtb( the_opts.get_d(OPTION_SHOT_MAX_ENERGY),
                      shot_energy+timestep*the_opts.get_d(OPTION_SHOT_ENERGY_INCREASE_SPEED) );
 
   object_type closest_arenaobject;
@@ -758,21 +760,21 @@ Robot::update_radar_and_cannon(const double timestep)
     }
 
   if( the_opts.get_l(OPTION_SEND_ROBOT_COORDINATES) == 1 ) // Relative starting pos
-    send_message(COORDINATES, center[0] - start_pos[0], center[1] - start_pos[1], 
+    send_message(COORDINATES, center[0] - start_pos[0], center[1] - start_pos[1],
                  robot_angle.pos - start_angle);
-  
+
   if( the_opts.get_l(OPTION_SEND_ROBOT_COORDINATES) == 2 ) // Absolute coordinates
     send_message(COORDINATES, center[0], center[1], robot_angle.pos);
 
-  send_message(INFO, the_arena.get_total_time(), length(velocity), cannon_angle.pos); 
-  
+  send_message(INFO, the_arena.get_total_time(), length(velocity), cannon_angle.pos);
+
 }
 
 void
 Robot::bounce_on_wall(const double bounce_c, const double hardness_c, const Vector2D& normal)
 {
   double h, p, b;
-  
+
   if( -dot(normal, angle2vec(robot_angle.pos)) > cos(the_opts.get_d(OPTION_ROBOT_FRONTSIZE)*0.5) )
     {
       h = the_opts.get_d(OPTION_ROBOT_FRONT_HARDNESS);
@@ -784,7 +786,7 @@ Robot::bounce_on_wall(const double bounce_c, const double hardness_c, const Vect
       h = the_opts.get_d(OPTION_ROBOT_HARDNESS);
       b = the_opts.get_d(OPTION_ROBOT_BOUNCE_COEFF);
       p = the_opts.get_d(OPTION_ROBOT_PROTECTION);
-    }  
+    }
 
   double e = b * bounce_c;
   Vector2D start_vel = velocity;
@@ -802,7 +804,7 @@ bounce_on_robot(Robot& robot1, Robot& robot2, const Vector2D& normal)
 {
   double h1, h2, p1, p2, b1, b2;
   Vector2D dir1_2 = unit(robot2.center - robot1.center);
-  
+
   if( dot(dir1_2, angle2vec(robot1.robot_angle.pos)) > cos(the_opts.get_d(OPTION_ROBOT_FRONTSIZE)*0.5) )
     {
       h1 = the_opts.get_d(OPTION_ROBOT_FRONT_HARDNESS);
@@ -880,7 +882,7 @@ Robot::set_values_at_process_start_up()
       cpu_limit = the_opts.get_d(OPTION_CPU_START_LIMIT);
       cpu_warning_limit = cpu_limit * the_opts.get_d(OPTION_CPU_WARNING_PERCENT);
       cpu_timeout = 0.0;
-    }  
+    }
 
   time_survived_in_sequence = 0.0;
 
@@ -899,7 +901,7 @@ Robot::set_values_at_process_start_up()
       if( col != newcol ) set_colour( newcol );
       // TODO: probably free color!
       send_message(YOUR_COLOUR, newcol);
-    } 
+    }
 }
 
 void
@@ -907,10 +909,10 @@ Robot::change_velocity(const double timestep)
 {
   Vector2D dir = angle2vec(robot_angle.pos);
   double gt = the_opts.get_d(OPTION_GRAV_CONST) * timestep;
-  double fric = the_opts.get_d(OPTION_ROLL_FRICTION) * (1.0 - brake_percent) + 
+  double fric = the_opts.get_d(OPTION_ROLL_FRICTION) * (1.0 - brake_percent) +
     the_opts.get_d(OPTION_SLIDE_FRICTION) * brake_percent;
   velocity = -velocity* min_rtb(the_opts.get_d(OPTION_AIR_RESISTANCE) * timestep, 0.5) +
-    timestep*acceleration*dir + 
+    timestep*acceleration*dir +
     dot(velocity, dir) * max_rtb(0.0, 1.0-gt*fric) * dir +
     vedge(dir, velocity) * max_rtb(0.0, 1.0-gt*the_opts.get_d(OPTION_SLIDE_FRICTION)) * rotate90(dir);
 }
@@ -922,7 +924,7 @@ Robot::move(const double timestep)
 
   if( is_alive() )
     realtime_arena.print_to_logfile('R', id, center[0], center[1],
-                                    robot_angle.pos, cannon_angle.pos, 
+                                    robot_angle.pos, cannon_angle.pos,
                                     radar_angle.pos, energy);
 
 }
@@ -932,8 +934,8 @@ Robot::move(const double timestep, int iterstep, const double eps)
 {
   object_type closest_shape;
   Shape* colliding_object;
-  double time_to_collision = 
-    the_arena.get_shortest_distance(center, velocity, radius, 
+  double time_to_collision =
+    the_arena.get_shortest_distance(center, velocity, radius,
                                     closest_shape, colliding_object, this);
   if( time_to_collision > timestep )
     {
@@ -942,17 +944,17 @@ Robot::move(const double timestep, int iterstep, const double eps)
   else
     {
       if( iterstep > 10 ) time_to_collision = max_rtb( time_to_collision , eps );
-      double time_remaining = timestep - time_to_collision; 
+      double time_remaining = timestep - time_to_collision;
       center += time_to_collision*velocity;
       //      Vector2D new_center = center - min_rtb(eps, time_to_collision)*velocity;
-      
+
 
       switch( closest_shape )
         {
         case WALL:
           {
             Vector2D normal = colliding_object->get_normal(center);
-            bounce_on_wall(colliding_object->get_bounce_coeff(), 
+            bounce_on_wall(colliding_object->get_bounce_coeff(),
                            colliding_object->get_hardness_coeff(), normal);
             center += normal*eps;
           }
@@ -998,9 +1000,9 @@ Robot::move(const double timestep, int iterstep, const double eps)
           Error(true, "Collided with unknown object", "Robot::move");
           break;
         }
-      
+
       //      center = new_center;
-      //if( iterstep % 10 == 0 ) 
+      //if( iterstep % 10 == 0 )
       //  cout << "Iterstep: " << iterstep << "   time_remaining: " << time_remaining
       //       << "  Collided on: " << closest_shape << "   time_to_col: " << time_to_collision << endl;
       if( iterstep > 65 ) Error(true, "Too many bounces, must be a bug!", "Robot::move");
@@ -1013,13 +1015,13 @@ Robot::send_message(const message_to_robot_type msg_type ...)
 {
   va_list args;
   va_start(args, msg_type);
-		
+
   *outstreamp << message_to_robot[msg_type].msg << " ";
   for(int i=0; i<message_to_robot[msg_type].number_of_args; i++)
     {
       switch(message_to_robot[msg_type].arg_type[i])
         {
-        case NONE: 
+        case NONE:
           Error(true, "Couldn't send message, no arg_type", "Robot::send_message");
           break;
         case INT:
@@ -1030,7 +1032,7 @@ Robot::send_message(const message_to_robot_type msg_type ...)
           break;
         case STRING:
           *outstreamp << va_arg(args, char*) << " ";
-          break;   
+          break;
         case HEX:
           *outstreamp << std::hex << va_arg(args, int) << " ";
           break;
@@ -1044,7 +1046,7 @@ Robot::send_message(const message_to_robot_type msg_type ...)
 
 
 // This is the function which gets messages from the robot,
-// parses them and take appropriate action. It is certainly 
+// parses them and take appropriate action. It is certainly
 // too long, but who cares :-)
 void
 Robot::get_messages()
@@ -1058,12 +1060,12 @@ Robot::get_messages()
   instreamp->clear();
   instreamp->peek();
 
-	
+
 
   while( !(*instreamp >> msg_name).eof() )
     {
-	
-     
+
+
       //*instreamp >> msg_name;
       msg_t = name2msg_from_robot_type(msg_name);
       //      cerr << "Got message: " << msg_name << endl;
@@ -1102,7 +1104,7 @@ Robot::get_messages()
 
                     }
                   else
-                    {                      
+                    {
                       if( val >= NSIG ) send_message(WARNING, UNKNOWN_OPTION, msg_name);
                       signal_to_send = 0;
                       send_usr_signal = false;
@@ -1121,7 +1123,7 @@ Robot::get_messages()
                   if( network_robot )
                     {
                       *outstreamp << '@' << ( val ? 'N' : 'B' ) << endl;
-                      send_message(INITIALIZE, 1);  
+                      send_message(INITIALIZE, 1);
                     }
                   else
                     set_non_blocking_state( val );
@@ -1146,21 +1148,21 @@ Robot::get_messages()
           if( check_state_for_message(msg_t, STARTING_ROBOTS) )
             {
               long home_colour, away_colour;
-              
+
               *instreamp >> std::hex >> home_colour >> away_colour >> std::dec;
-              
-              // TODO: check if colour is already allocated! 
+
+              // TODO: check if colour is already allocated!
               set_colour( realtime_arena.find_free_colour(home_colour, away_colour, this) );
               colour_given = true;
             }
           break;
         case ROTATE:
           if( check_state_for_message(msg_t, GAME_IN_PROGRESS) )
-            { 
+            {
               int bits;
               double rot_speed;
               *instreamp >> bits >> rot_speed;
-              
+
               double rot_sign = sgn_rtb(rot_speed);
               rot_speed = fabs(rot_speed);
               if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
@@ -1168,11 +1170,11 @@ Robot::get_messages()
               if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
               rot_speed *= rot_sign;
 
-              if( bits & 1 ) 
+              if( bits & 1 )
                 robot_angle.set_rot( robot_angle.pos, rot_speed,
                                      -infinity, infinity, NORMAL_ROT );
-              if( bits & 2 ) 
-                cannon_angle.set_rot( cannon_angle.pos, rot_speed,  
+              if( bits & 2 )
+                cannon_angle.set_rot( cannon_angle.pos, rot_speed,
                                       -infinity, infinity, NORMAL_ROT );
               if( bits & 4 )
                 radar_angle.set_rot( radar_angle.pos, rot_speed,
@@ -1197,12 +1199,12 @@ Robot::get_messages()
                   cannon_angle.pos -= rint( (cannon_angle.pos-rot_end_angle) / (2.0*M_PI) ) * 2.0 * M_PI;
                   rot_amount = rot_end_angle - cannon_angle.pos;
                   if( rot_amount > 0 )
-                    cannon_angle.set_rot( cannon_angle.pos, rot_speed, 
-                                          -infinity, cannon_angle.pos + rot_amount, 
+                    cannon_angle.set_rot( cannon_angle.pos, rot_speed,
+                                          -infinity, cannon_angle.pos + rot_amount,
                                           ROTATE_TO_RIGHT );
                   else
                     cannon_angle.set_rot( cannon_angle.pos, -rot_speed,
-                                          cannon_angle.pos + rot_amount, infinity, 
+                                          cannon_angle.pos + rot_amount, infinity,
                                           ROTATE_TO_LEFT );
                 }
               if( bits & 4 )
@@ -1211,13 +1213,13 @@ Robot::get_messages()
                   rot_amount = rot_end_angle - radar_angle.pos;
                   if( rot_amount > 0 )
                     radar_angle.set_rot( radar_angle.pos, rot_speed,
-                                         -infinity, radar_angle.pos + rot_amount, 
+                                         -infinity, radar_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     radar_angle.set_rot( radar_angle.pos, -rot_speed,
-                                         radar_angle.pos + rot_amount, infinity, 
+                                         radar_angle.pos + rot_amount, infinity,
                                          ROTATE_TO_LEFT );
-                }            
+                }
             }
           break;
 
@@ -1237,33 +1239,33 @@ Robot::get_messages()
                 {
                   if( rot_amount > 0 )
                     robot_angle.set_rot( robot_angle.pos, rot_speed,
-                                         -infinity, robot_angle.pos + rot_amount, 
+                                         -infinity, robot_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     robot_angle.set_rot( robot_angle.pos, -rot_speed,
-                                         robot_angle.pos + rot_amount, infinity, 
+                                         robot_angle.pos + rot_amount, infinity,
                                          ROTATE_TO_LEFT );
                 }
               if( bits & 2 )
                 {
                   if( rot_amount > 0 )
                     cannon_angle.set_rot( cannon_angle.pos, rot_speed,
-                                          -infinity, cannon_angle.pos + rot_amount, 
+                                          -infinity, cannon_angle.pos + rot_amount,
                                           ROTATE_TO_RIGHT );
                   else
                     cannon_angle.set_rot( cannon_angle.pos, -rot_speed,
-                                          cannon_angle.pos + rot_amount, infinity, 
+                                          cannon_angle.pos + rot_amount, infinity,
                                           ROTATE_TO_LEFT );
                 }
               if( bits & 4 )
                 {
                   if( rot_amount > 0 )
                     radar_angle.set_rot( radar_angle.pos, rot_speed,
-                                         -infinity, radar_angle.pos + rot_amount, 
+                                         -infinity, radar_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     radar_angle.set_rot( radar_angle.pos, -rot_speed,
-                                         radar_angle.pos + rot_amount, infinity, 
+                                         radar_angle.pos + rot_amount, infinity,
                                          ROTATE_TO_LEFT );
                 }
             }
@@ -1281,34 +1283,34 @@ Robot::get_messages()
 
               if( bits & 2 ) rot_speed = min_rtb( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
               if( bits & 4 ) rot_speed = min_rtb( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
-            
+
               if( bits & 2 )
                 {
-                  cannon_angle.pos -= rint( (cannon_angle.pos - 0.5*(sweep_left+sweep_right)) / 
+                  cannon_angle.pos -= rint( (cannon_angle.pos - 0.5*(sweep_left+sweep_right)) /
                                             (2.0*M_PI) ) * 2.0 * M_PI;
-                  if( fabs(cannon_angle.vel) > 1e-10 ) 
+                  if( fabs(cannon_angle.vel) > 1e-10 )
                     rot_dir = ( cannon_angle.vel < 0 ? SWEEP_LEFT :  SWEEP_RIGHT );
-                  
+
                   if( cannon_angle.pos <= sweep_left  ) rot_dir = SWEEP_RIGHT;
                   if( cannon_angle.pos >= sweep_right ) rot_dir = SWEEP_LEFT;
 
                   double cannon_speed = rot_speed;
-                  if( rot_dir == SWEEP_LEFT ) cannon_speed = -rot_speed;    
-                  cannon_angle.set_rot( cannon_angle.pos, cannon_speed, 
+                  if( rot_dir == SWEEP_LEFT ) cannon_speed = -rot_speed;
+                  cannon_angle.set_rot( cannon_angle.pos, cannon_speed,
                                         sweep_left, sweep_right, rot_dir );
                 }
               if( bits & 4 )
                 {
-                  radar_angle.pos -= rint( (radar_angle.pos - 0.5*(sweep_left+sweep_right)) / 
+                  radar_angle.pos -= rint( (radar_angle.pos - 0.5*(sweep_left+sweep_right)) /
                                            (2.0*M_PI) ) * 2.0 * M_PI;
-                  if( fabs(radar_angle.vel) > 1e-10 ) 
+                  if( fabs(radar_angle.vel) > 1e-10 )
                     rot_dir = ( radar_angle.vel < 0 ? SWEEP_LEFT :  SWEEP_RIGHT );
-                  
+
                   if( radar_angle.pos <= sweep_left  ) rot_dir = SWEEP_RIGHT;
                   if( radar_angle.pos >= sweep_right ) rot_dir = SWEEP_LEFT;
-                
+
                   double radar_speed = rot_speed;
-                  if( rot_dir == SWEEP_LEFT ) radar_speed = -rot_speed;    
+                  if( rot_dir == SWEEP_LEFT ) radar_speed = -rot_speed;
                   radar_angle.set_rot( radar_angle.pos, radar_speed,
                                        sweep_left, sweep_right, rot_dir );
                 }
@@ -1346,14 +1348,14 @@ Robot::get_messages()
                 {
                   double a1, d1, a2, d2;
                   *instreamp >> a1 >> d1 >> a2 >> d2;
-                  
+
                   Vector2D start = d1 * angle2vec(a1 + robot_angle.pos);
                   Vector2D direction = d2 * angle2vec(a2 + robot_angle.pos) - start;
-                  
+
                   the_gui.get_arenawindow_p()->
                     draw_line(start + center, direction, 1.0, gdk_colour);
                 }
-#endif              
+#endif
             }
           break;
 
@@ -1376,9 +1378,9 @@ Robot::get_messages()
                   the_gui.get_arenawindow_p()->
                     draw_circle(c, r, gdk_colour, false);
                 }
-#endif 
-            }         
-          break;          
+#endif
+            }
+          break;
 
         case SHOOT:
           if( check_state_for_message(msg_t, GAME_IN_PROGRESS) )
@@ -1388,7 +1390,7 @@ Robot::get_messages()
               en = min_rtb(en, shot_energy);
               if( en < the_opts.get_d(OPTION_SHOT_MIN_ENERGY) ) break;
               shot_energy -= en;
-              
+
               Vector2D dir = angle2vec(cannon_angle.pos+robot_angle.pos);
               double shot_radius = the_opts.get_d(OPTION_SHOT_RADIUS);
               Vector2D shot_center = center + (radius+1.5*shot_radius)*dir;
@@ -1399,21 +1401,21 @@ Robot::get_messages()
                   Shot* shotp = new Shot( shot_center, shot_vel, en );
                   realtime_arena.get_object_lists()[SHOT].insert_last( shotp );
 
-                  realtime_arena.print_to_logfile('S', shotp->get_id(), shot_center[0], shot_center[1], 
+                  realtime_arena.print_to_logfile('S', shotp->get_id(), shot_center[0], shot_center[1],
                                                   shot_vel[0], shot_vel[1]);
                 }
               else  // No space for shot, direct hit!!
-                { 
+                {
                   Shape* col_obj;
                   object_type cl_shape;
                   double dist;
                   if( (dist = realtime_arena.get_shortest_distance
-                       ( center, dir, shot_radius*1.00001, 
+                       ( center, dir, shot_radius*1.00001,
                          cl_shape, col_obj, this))    >   radius+1.5*shot_radius )
                     {
                       cerr << "dist: " << dist << "      r+1.5sh_r: " << radius+1.5*shot_radius << endl;
-                      cerr << "col_shape: " << (int)cl_shape << endl; 
-                      Error(false, "Shot has space available after all?", "Robot::get_messages");                  
+                      cerr << "col_shape: " << (int)cl_shape << endl;
+                      Error(false, "Shot has space available after all?", "Robot::get_messages");
                     }
                   switch(cl_shape)
                     {
@@ -1423,7 +1425,7 @@ Robot::get_messages()
                       {
                         Robot* robotp = (Robot*)col_obj;
                         robotp->change_energy(-en);
-                        robotp->send_message(COLLISION, SHOT, 
+                        robotp->send_message(COLLISION, SHOT,
                                              vec2angle(center+dir*radius-robotp->get_center()) - robotp->get_robot_angle().pos);
                       }
                       break;
@@ -1471,7 +1473,7 @@ Robot::get_messages()
               brk = max_rtb( brk, 0.0);
               brk = min_rtb( brk, 1.0);
               brake_percent = brk;
-            } 
+            }
           break;
           //          case LOAD_DATA:
           //            if( check_state_for_message(msg_t, STARTING_ROBOTS) )
@@ -1510,8 +1512,8 @@ Robot::get_messages()
       instreamp->clear();
       instreamp->peek();
     }
-    
-   
+
+
 }
 
 message_from_robot_type
@@ -1533,13 +1535,13 @@ Robot::check_state_for_message(const message_from_robot_type msg_t, const state_
       //cout << "Server: Warning sent for message: " << msg_name << "     State: " << the_arena.get_state() << endl;
 
       if( the_arena.get_state() != BEFORE_GAME_START )
-        send_message(WARNING, MESSAGE_SENT_IN_ILLEGAL_STATE, 
+        send_message(WARNING, MESSAGE_SENT_IN_ILLEGAL_STATE,
                      message_from_robot[msg_t].msg);
       char buffer[80];
       instreamp->get(buffer, 80, '\n');
       return false;
     }
-  
+
   return true;
 }
 
@@ -1548,14 +1550,14 @@ Robot::get_default_non_blocking_state()
 {
   String filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
     "/" + robot_plain_filename;
-  
+
   int fd;
   if( ( fd = open(filename.chars(), O_RDONLY) ) != -1 )
     {
       close(fd);
       return false;
     }
-  
+
   return true;
 }
 
@@ -1578,8 +1580,8 @@ Robot::set_non_blocking_state(const bool non_bl)
       int fd = open(filename.chars(), O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
       if( fd != -1 )  close( fd );
     }
-  
- 
+
+
   use_non_blocking = non_bl;
 
   //  restart_process
@@ -1603,7 +1605,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 //  //    else
 //  //      filename = the_gui.get_robotdir() + robot_name + ".robotdata";
 
-//    int mode = _IO_OUTPUT;  
+//    int mode = _IO_OUTPUT;
 //    if( append ) mode = _IO_APPEND;
 
 //    ofstream file(filename.chars(), mode);
@@ -1617,7 +1619,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 //        *instreamp >> bytes;
 
 //        // TODO: check if data is avalable (peek), wait otherwise (select)
-      
+
 //        for(int i=0; i < bytes; i++)
 //          {
 //            instreamp->get(c);
@@ -1627,7 +1629,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 //    else
 //      {
 //        char buf[256];
-      
+
 //        instreamp->get(buf, 256 ,'\n');
 //        file << buf << endl;
 
@@ -1657,7 +1659,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 //  //        file.open(filename.chars());
 //  //      }
 
-//    if (!file) 
+//    if (!file)
 //      {
 //        send_message(LOAD_DATA_FINISHED);
 //        return;
@@ -1681,7 +1683,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 //      {
 //        while( !file.eof() )
 //          {
-          
+
 //            file.get(buf, 256 ,'\n');
 //            send_message(ASCII_DATA_TO, buf);
 //          }
@@ -1694,7 +1696,7 @@ void
 Robot::change_energy(const double energy_diff)
 {
   energy = min_rtb(energy+energy_diff, the_opts.get_d(OPTION_ROBOT_MAX_ENERGY));
-#ifndef NO_GRAPHICS  
+#ifndef NO_GRAPHICS
   if( !no_graphics )  display_score();
 #endif
   if( energy <= 0.0 ) die();
@@ -1794,13 +1796,13 @@ Robot::draw_radar_and_cannon()
 void
 Robot::get_score_pixmap( GdkWindow* win, GdkPixmap*& pixm, GdkBitmap*& bitm )
 {
-  score_pixmap.get_pixmap( gdk_colour, win, pixm, bitm ); 
+  score_pixmap.get_pixmap( gdk_colour, win, pixm, bitm );
 }
 
 void
 Robot::get_stat_pixmap( GdkWindow* win, GdkPixmap*& pixm, GdkBitmap*& bitm )
 {
-  stat_pixmap.get_pixmap( gdk_colour, win, pixm, bitm ); 
+  stat_pixmap.get_pixmap( gdk_colour, win, pixm, bitm );
 }
 
 #endif

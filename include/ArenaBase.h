@@ -27,7 +27,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #ifndef NO_GRAPHICS
 #include <glib.h>
 #include <gdk/gdk.h>
-#endif 
+#endif
 
 #include <iostream>
 #include <fstream>
@@ -36,7 +36,7 @@ using namespace std;
 
 #ifndef NO_GRAPHICS
 #include "Gui.h"
-#endif 
+#endif
 
 #include "Vector2D.h"
 #include "Messagetypes.h"
@@ -60,7 +60,8 @@ class WallLine;
 class WallCircle;
 class WallInnerCircle;
 
-static const double infinity = 1.0e10;  //approximatly ;-)
+// infinity is already defined in math.h; compile error on cygwin. replaced with #define.
+#define infinity (1.0e10)
 static const int max_debug_level = 5;
 
 extern class Options the_opts;
@@ -83,22 +84,22 @@ public:
   enum game_mode_t { DEBUG_MODE, NORMAL_MODE, COMPETITION_MODE };
 
 
-  double get_shortest_distance(const Vector2D& pos, 
-                               const Vector2D& vel, 
-                               const double size, 
-                               enum object_type& closest_shape, 
-                               Shape*& colliding_object, 
+  double get_shortest_distance(const Vector2D& pos,
+                               const Vector2D& vel,
+                               const double size,
+                               enum object_type& closest_shape,
+                               Shape*& colliding_object,
                                const class Robot* the_robot = NULL );
 
   bool space_available(const Vector2D& pos, const double margin);
 
   virtual void interrupt_tournament();
-  
+
   virtual bool timeout_function() = 0;
 
   virtual bool end_game() = 0;
 
-protected: 
+protected:
   virtual void update() = 0;
   virtual bool start_game() = 0;
   virtual void start_sequence() = 0;
@@ -107,7 +108,7 @@ protected:
 
 public:
 
-  void delete_lists(const bool kill_robots, const bool del_seq_list, 
+  void delete_lists(const bool kill_robots, const bool del_seq_list,
                     const bool del_tourn_list, const bool del_arena_filename_list,
                     const bool del_robot_obj_list=true);
   void save_statistics_to_file(String filename);
@@ -123,7 +124,7 @@ public:
   int get_sequences_in_tournament() { return sequences_in_tournament; }
   int get_robots_per_game() { return robots_per_game; }
   int get_number_of_robots() { return number_of_robots; }
-  
+
   void print_message( const String& messager, const String& text );
 
   int get_robots_left() { return robots_left; }
@@ -152,21 +153,21 @@ protected:
   void update_timer( const double factor = 1.0 );
   void reset_timer();
 
-  void move_shots(const double time_period); 
-  void move_shots_no_check(const double time_period); 
+  void move_shots(const double time_period);
+  void move_shots_no_check(const double time_period);
 
-  bool parse_arena_line(ifstream& file, double& scale, 
+  bool parse_arena_line(ifstream& file, double& scale,
                         int& succession, double& angle_factor);
 
   void set_state( const state_t );
 
-  bool find_object_by_id(const List<Shape>& obj_list, 
+  bool find_object_by_id(const List<Shape>& obj_list,
                          ListIterator<Shape>& li, const int obj_id);
-  bool find_object_by_id(const List<Robot>& obj_list, 
+  bool find_object_by_id(const List<Robot>& obj_list,
                          ListIterator<Robot>& li, const int obj_id);
 
   List<Shape> object_lists[LAST_OBJECT_TYPE];
-  
+
   List<Robot> all_robots_in_tournament;
   List<Robot> all_robots_in_sequence;
   List<Vector2D> exclusion_points;
@@ -201,10 +202,10 @@ protected:
   int robots_killed_this_round;
 
   Vector2D boundary[2];   // {top-left, bottom-right}
-  
+
   state_t state;
   game_mode_t game_mode;
-  
+
   int debug_level;
 
   bool halt_next;

@@ -292,7 +292,7 @@ OptionsWindow::add_option_to_notebook( GtkWidget* description_table,
   gtk_table_attach_defaults( GTK_TABLE( description_table ),
                              label, 0, 1, row, row + 1 );
   gtk_widget_show( label );
-  
+
   gtk_signal_connect( GTK_OBJECT( entry ), "changed",
                       (GtkSignalFunc) entry_handler, info);
   gtk_entry_set_text( GTK_ENTRY( entry ), entry_text.chars() );
@@ -335,10 +335,10 @@ OptionsWindow::set_all_options()
       option_info_t<String>* string_opts = the_opts.get_all_string_options();
       for(int i=0;i<LAST_DOUBLE_OPTION;i++)
         {
-			
+
 		double entry_value = str2dbl
             ( gtk_entry_get_text( GTK_ENTRY( double_opts[i].entry ) ) );
-			
+
           if( entry_value > double_opts[i].max_value )
             entry_value = double_opts[i].max_value;
           if( entry_value < double_opts[i].min_value )
@@ -608,7 +608,7 @@ OptionsWindow::grab_windows( GtkWidget* widget,
 }
 
 void
-OptionsWindow::double_min_rtb( GtkWidget* widget,
+OptionsWindow::double_min( GtkWidget* widget,
                            option_info_t<double>* option )
 {
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
@@ -624,7 +624,7 @@ OptionsWindow::double_def( GtkWidget* widget,
 }
 
 void
-OptionsWindow::double_max_rtb( GtkWidget* widget,
+OptionsWindow::double_max( GtkWidget* widget,
                            option_info_t<double>* option )
 {
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
@@ -632,7 +632,7 @@ OptionsWindow::double_max_rtb( GtkWidget* widget,
 }
 
 void
-OptionsWindow::long_min_rtb( GtkWidget* widget,
+OptionsWindow::long_min( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
@@ -656,7 +656,7 @@ OptionsWindow::long_def( GtkWidget* widget,
 }
 
 void
-OptionsWindow::long_max_rtb( GtkWidget* widget,
+OptionsWindow::long_max( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )

@@ -30,7 +30,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ArenaController.h"
 #include "ArenaRealTime.h"
 
-extern const double infinity;
+// infinity already #define'd in ArenaBase.h
+//extern const double infinity;
 
 Line::Line()
 {
@@ -52,7 +53,7 @@ Line::Line(const Vector2D& sp, const Vector2D& d, const double len, const double
   last_drawn_thickness = thickness = th;
 }
 
-// Line::Line(const Vector2D& sp, const Vector2D& d, const double len, 
+// Line::Line(const Vector2D& sp, const Vector2D& d, const double len,
 //            const double th, const double b_c, const double hardn)
 // {
 //   last_drawn_start_point = start_point = sp;
@@ -70,7 +71,7 @@ Line::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
 
   Vector2D y = start_point - pos;
 
-  det = 1.0 / vedge(direction, vel);  
+  det = 1.0 / vedge(direction, vel);
   t_middle = vedge(direction, y) * det;
 
   if( t_middle < 0 ) return infinity;
@@ -105,7 +106,7 @@ bool
 Line::within_distance(const Vector2D& pos, const double size)
 {
   Vector2D y = start_point - pos;
-  
+
   return ((fabs(vedge(y, direction)) <= (size+thickness)) &&
           (-dot(y,direction) >= 0 && -dot(y,direction) <= length));
 }
@@ -268,7 +269,7 @@ InnerCircle::draw_shape(bool erase)
 }
 
 
-#endif 
+#endif
 
 // ------- Arc -----------
 
@@ -314,7 +315,7 @@ Arc::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
   if( lengthsqr( d ) > mid_radiussqr )
     {
       // Outside circle
-  
+
       r = size + outer_radius;
       c = dt*dt + speedsqr * (r*r - lengthsqr(d));
       if( c < 0.0 || dt <= 0.0) return infinity;
@@ -327,17 +328,17 @@ Arc::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
       // Can still hit inner circle.
     }
 
-  
+
 
   // Test inner circle
-      
+
   r = size - inner_radius;
-  
+
   c = dt*dt + speedsqr*( r*r - lengthsqr(d) );
   if( c < 0.0 ) return infinity;  // Can happen if object outside circle
-  
+
   t =  max_rtb( (dt + sqrt(c))/speedsqr, 0 );
-  
+
   if( !within_angle( vec2angle( vel * t - d  ) ) )
     return infinity;
 
@@ -391,8 +392,8 @@ Arc::draw_shape(bool erase)
                                            *(the_gui.get_bg_gdk_colour_p()) );
   last_drawn_center = center;
 
-  
-  the_gui.get_arenawindow_p()->draw_arc( center, 
+
+  the_gui.get_arenawindow_p()->draw_arc( center,
                                          inner_radius, outer_radius,
                                          start_angle, end_angle,
                                          gdk_colour );
