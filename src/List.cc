@@ -27,8 +27,9 @@ using namespace std;
 
 #include "List.h"
 #include "String.h"
+#include <string>
 
-void Error(const bool fatal, const String& error_msg, const String& function_name);
+void Error(const bool fatal, const string& error_msg, const string& function_name);
 
 template <class T>
 List<T>::List(bool resp)
@@ -225,6 +226,7 @@ List<T>::insert_last(T* x)
 
 #include "String.h"
 template class List<String>;
+template class List<string>;
 
 #include "Vector2D.h"
 template class List<Vector2D>;

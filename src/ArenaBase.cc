@@ -31,6 +31,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <iostream>
 #include <iomanip>
 #include <stdarg.h>
+#include <string>
+using namespace std;
 
 #if HAVE_DIRENT_H
 # include <dirent.h>
@@ -107,7 +109,7 @@ ArenaBase::set_state( const state_t st )
 #ifndef NO_GRAPHICS
   if( !no_graphics )
     {
-      String infotext;
+      string infotext;
       switch( state )
         {
         case NO_STATE:
@@ -115,33 +117,33 @@ ArenaBase::set_state( const state_t st )
           infotext = "RealTimeBattle";
           break;
         case STARTING_ROBOTS:
-          infotext = "RTB  " + (String)_("*Starting robots*");
+          infotext = "RTB  " + string( _("*Starting robots*") );
           break;
         case SHUTTING_DOWN_ROBOTS:
-          infotext = "RTB  " + (String)_("*Shutting down robots*");
+          infotext = "RTB  " + string( _("*Shutting down robots*") );
           break;
         case BEFORE_GAME_START:
         case GAME_IN_PROGRESS:
-          infotext = "RealTimeBattle  " + (String)_("*Running*");
+          infotext = "RealTimeBattle  " + string( _("*Running*") );
           if( pause_after_next_game )
-            infotext = "RTB  " + (String)_("*Pausing after game*");
+            infotext = "RTB  " + string( _("*Pausing after game*") );
           break;
         case PAUSING_BETWEEN_GAMES:
         case PAUSED:
-          infotext = "RealTimeBattle  " + (String)_("*Paused*");
+          infotext = "RealTimeBattle  " + string( _("*Paused*") );
           break;
         case EXITING:
-          infotext = "RealTimeBattle  " + (String)_("*Exiting*");
+          infotext = "RealTimeBattle  " + string( _("*Exiting*") );
           break;
         case FINISHED:
-          infotext = "RealTimeBattle  " + (String)_("*Finished*");
+          infotext = "RealTimeBattle  " + string( _("*Finished*") );
           break;
 
         default:
           Error(true, "Unknown state", "ArenaBase::set_state");
         }
 
-      controlwindow_p->set_window_title( infotext );
+      controlwindow_p->set_window_title( String(infotext.c_str()) );
     }
 #endif
 }
@@ -171,11 +173,11 @@ ArenaBase::interrupt_tournament()
 
 // This function takes the statistics and saves into a selected file
 void
-ArenaBase::save_statistics_to_file(String filename)
+ArenaBase::save_statistics_to_file(string filename)
 {
 
 
-  ofstream file(filename.chars());
+  ofstream file(filename.c_str());
 
   stat_t* statp;
   Robot* robotp;
@@ -202,14 +204,14 @@ ArenaBase::save_statistics_to_file(String filename)
 }
 
 void
-ArenaBase::print_message( const String& messager,
-                          const String& text )
+ArenaBase::print_message( const string& messager,
+                          const string& text )
 {
   if( use_message_file )
-    message_file << messager << ": " << text << endl;
+    message_file << String(messager.c_str()) << ": " << String(text.c_str()) << endl;
 #ifndef NO_GRAPHICS
   else if( !no_graphics && the_gui.is_messagewindow_up() )
-    the_gui.get_messagewindow_p()->add_message( messager, text );
+    the_gui.get_messagewindow_p()->add_message( String(messager.c_str()), String(text.c_str()) );
 #endif
 }
 
@@ -253,7 +255,7 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
         angle_factor = M_PI / 180.0;
       else
       {
-        Error(false, "Error in arenafile: Unknown angle unit: " + String(unit),
+        Error(false, "Error in arenafile: Unknown angle unit: " + string(unit),
               "ArenaBase::parse_arena_line");
         return false;
       }
@@ -581,7 +583,7 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
 
             default:
               Error(false, "Incorrect arenafile, unknown command in poly_curve: "
-                    + (String)c, "ArenaBase::parse_arena_line");
+                    + string(1,c), "ArenaBase::parse_arena_line");
               return false;
               break;
             }
@@ -591,7 +593,7 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
 
   else if( text[0] != '\0' )
   {
-    Error(false, "Incorrect arenafile, unknown keyword: " + (String)text,
+    Error(false, "Incorrect arenafile, unknown keyword: " + string(text),
           "ArenaBase::parse_arena_line");
     return false;
   }

@@ -48,9 +48,9 @@ public:
   
   bool parse_arena_file(String& filename);
   
-  void set_filenames( String& log_fname, const String& statistics_fname, 
-                      const String& tournament_fname,
-                      String& message_fname, const String& option_fname );
+  void set_filenames( string& log_fname, const string& statistics_fname, 
+                      const string& tournament_fname,
+                      string& message_fname, const string& option_fname );
 
   void print_to_logfile(  char first_letter ... );
   

@@ -55,6 +55,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Dialog.h"
 #include "Options.h"
 
+#include <string>
+using namespace std;
+
 const String tmp_tournament_file( "/tmp.tour" );
 
 StartTournamentWindow::StartTournamentWindow( const int default_width,
@@ -90,8 +93,8 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
 
   // Lists for clists
 
-  List<String> robotdirs;
-  List<String> arenadirs;
+  List<string> robotdirs;
+  List<string> arenadirs;
 
   read_dirs_from_system( robotdirs, arenadirs );
 
@@ -180,7 +183,7 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
 
       add_clist( dir_clist, hbox );
 
-      ListIterator<String> li;
+      ListIterator<string> li;
 
       if( robot )
         robotdirs.first(li);
@@ -190,16 +193,16 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
       for( ; li.ok() ; li++ )
         {
         	
-          String* current_dir = li();
+          string* current_dir = li();
           DIR* dir;
           bool err_in_file = false; // set by called functions but not currently checked here
           
-          if( dir = opendir(current_dir->chars()) )
+          if( dir = opendir(current_dir->c_str()) )
             {
               struct dirent * entry;
               while (NULL != ( entry = readdir( dir ) ) )
                 {
-                  String full_file_name = *current_dir + entry->d_name;
+                  string full_file_name = *current_dir + entry->d_name;
                   if( ( robot && check_if_filename_is_robot( full_file_name, &err_in_file ) ) ||
                       ( !robot && check_if_filename_is_arena( full_file_name, &err_in_file ) ) )
                     {
@@ -215,7 +218,7 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
                       info = new start_tournament_info_t
                         ( row, false,
                           entry->d_name,
-                          current_dir->chars() );
+                          current_dir->c_str() );
                       dir_list->insert_last( info );
                     }
                 }
@@ -561,10 +564,10 @@ StartTournamentWindow::load_tournament_file( const String& full_filename,
                              StartTournamentWindow::new_tournament_from_tournament_file,
                              this, false ) && display_fail_message )
     {
-      String error_msg( _("Error in specified tournament file.") );
-      List<String> button_list;
-      button_list.insert_last( new String( _(" Ok ") ) );
-      String info_text = (String)_("Tournament could not be loaded.") + String('\n')
+      string error_msg( _("Error in specified tournament file.") );
+      List<string> button_list;
+      button_list.insert_last( new string( _(" Ok ") ) );
+      string info_text = _("Tournament could not be loaded.") + string(1, '\n')
         + error_msg;
       Dialog( info_text, button_list, 
               (DialogFunction) StartTournamentWindow::dummy_result );
@@ -692,22 +695,22 @@ StartTournamentWindow::save_tournament_file( const String& full_filename,
     }
   else if( display_file_fail_message || display_tour_fail_message )
     {
-      String error_msg( "" );
+      string error_msg( "" );
       if( display_tour_fail_message )
         {
           if( robot_number <= 1 )
-            error_msg += String('\n') + _("There are too few robots in the tournament.");
+            error_msg += string(1, '\n') + _("There are too few robots in the tournament.");
           if( selected_arena_tournament.is_empty() )
-            error_msg += String('\n') + _("There are no arenas in the tournament.");
+            error_msg += string(1, '\n') + _("There are no arenas in the tournament.");
         }
       if( display_file_fail_message && !file )
-        error_msg += String('\n') + _("Could not open file.");
+        error_msg += string(1, '\n') + _("Could not open file.");
 
       if( error_msg != "" )
         {
-          List<String> button_list;
-          button_list.insert_last( new String( _(" Ok ") ) );
-          String info_text = (String)_("Tournament could not be saved.") + error_msg;
+          List<string> button_list;
+          button_list.insert_last( new string( _(" Ok ") ) );
+          string info_text = string( _("Tournament could not be saved.") ) + error_msg;
           Dialog( info_text, button_list, 
                   (DialogFunction) StartTournamentWindow::dummy_result );
         }
@@ -836,17 +839,17 @@ StartTournamentWindow::start( GtkWidget* widget,
     }
   else
     {
-      String error_msg( "" );
+      string error_msg( "" );
       if( robot_number <= 1 )
-        error_msg += String('\n') + _("There must be at least two robots in the tournament.");
+        error_msg += string(1,'\n') + _("There must be at least two robots in the tournament.");
       if( stw_p->selected_arena_tournament.is_empty() )
-        error_msg += String('\n') + _("There are no arenas in the tournament.");
+        error_msg += string(1,'\n') + _("There are no arenas in the tournament.");
 
       if( error_msg != "" )
         {
-          List<String> button_list;
-          button_list.insert_last( new String( _(" Ok ") ) );
-          String info_text = _("Tournament could not be started.") + error_msg;
+          List<string> button_list;
+          button_list.insert_last( new string( _(" Ok ") ) );
+          string info_text = _("Tournament could not be started.") + error_msg;
           Dialog( info_text, button_list, 
                   (DialogFunction) StartTournamentWindow::dummy_result );
         }

@@ -25,6 +25,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <sys/stat.h>
 #include <math.h>
 #include <stdio.h>
+#include <string>
+#include <sstream>
+using namespace std;
 
 #include "ArenaReplay.h"
 #include "ArenaController.h"
@@ -123,7 +126,7 @@ ArenaReplay::timeout_function()
           the_gui.get_scorewindow_p()->update_robots();
           char msg[64];
           snprintf(msg, 63, _("Game %d of sequence %d"), game_nr, sequence_nr);
-          print_message( "RealTimeBattle", (String)msg );
+          print_message( "RealTimeBattle", string(msg) );
         }
 #endif
       set_state( GAME_IN_PROGRESS );
@@ -133,7 +136,7 @@ ArenaReplay::timeout_function()
       if( the_arena_controller.auto_start_and_end )
         {
           if( statistics_file_name != "" )
-            save_statistics_to_file( statistics_file_name );
+            save_statistics_to_file( string(statistics_file_name.chars()) );
 
           Quit();
         }
@@ -329,7 +332,7 @@ ArenaReplay::parse_log_line()
         if( li.ok() )
           {
             Robot* robotp = (Robot*)li();
-            print_message( robotp->get_robot_name(), (String)message );
+            print_message( string(robotp->get_robot_name().chars()), string(message) );
           }
         // else: robot sent a message before first game of sequences.
         // Robot data is not yet known to us, thus ignore!
@@ -448,7 +451,7 @@ ArenaReplay::parse_log_line()
     case '?':
     default:
       Error( false, "Unrecognized first letter in logfile: " +
-             String(first_letter), "ArenaReplay::parse_log_line" );
+             string(1, first_letter), "ArenaReplay::parse_log_line" );
       char buffer[400];
       log_file.get( buffer, 400, '\n' );
       log_file >> ws;
@@ -736,14 +739,14 @@ ArenaReplay::parse_log_line_rewind( const char first_letter )
 }
 
 void
-ArenaReplay::set_filenames( String& replay_fname, String& message_fname,
-                            const String& statistics_fname,
-                            const String& option_fname )
+ArenaReplay::set_filenames( string& replay_fname, string& message_fname,
+                            const string& statistics_fname,
+                            const string& option_fname )
 {
 
   if( replay_fname != "-" )
     {
-      log_file.open( replay_fname.chars() );
+      log_file.open( replay_fname.c_str() );
       if( !log_file )
         Error( true, "Couldn't open replay file",
                "ArenaReplay::set_filenames" );
@@ -759,7 +762,7 @@ ArenaReplay::set_filenames( String& replay_fname, String& message_fname,
       log_from_stdin = true;
     }
 
-  if( message_fname == "" )
+  if( message_fname.empty() )
     use_message_file = false;
   else if( message_fname == "-" || message_fname == "STDOUT" )
     {
@@ -770,7 +773,7 @@ ArenaReplay::set_filenames( String& replay_fname, String& message_fname,
   else
     {
       use_message_file = true;
-      message_file.open( message_fname.chars(), ios::out);
+      message_file.open( message_fname.c_str(), ios::out);
       if( !message_file )
         {
           Error( false, "Couldn't open message file. Message file disabled",
@@ -780,8 +783,8 @@ ArenaReplay::set_filenames( String& replay_fname, String& message_fname,
 
     }
 
-  statistics_file_name = statistics_fname;
-  option_file_name = option_fname;
+  statistics_file_name = String(statistics_fname.c_str());
+  option_file_name = String(option_fname.c_str());
 }
 
 // Changes game when replaying to fast forward, rewind or normal speed
@@ -1388,8 +1391,12 @@ ArenaReplay::get_time_positions_in_game()
                     obj_info->end_time = cur_time;
                   }
                 else
-                  Error(false, "Dying object not in list: " + String(obj) + " "
-                        + String(object_id), "ArenaReplay::get_time_positions_in_game");
+                {
+                  ostringstream number2string;
+                  number2string << object_id;
+                  Error(false, "Dying object not in list: " + string(1,obj) + " "
+                        + number2string.str(), "ArenaReplay::get_time_positions_in_game");
+                }
               }
           }
           break;

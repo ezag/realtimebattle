@@ -49,8 +49,8 @@ public:
     GtkWidget* widget;
   };
 
-  Dialog                            ( const String& info,
-                                      const List<String>& button_labels,
+  Dialog                            ( const string& info,
+                                      const List<string>& button_labels,
                                       const DialogFunction func,
                                       const gchar* window_title = "RealTimeBattle" );
   ~Dialog                           () {}

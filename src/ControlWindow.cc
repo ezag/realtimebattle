@@ -35,6 +35,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "String.h"
 #include "Various.h"
 
+#include <iostream>
+using namespace std;
+
 extern class ControlWindow* controlwindow_p;
 
 ControlWindow::ControlWindow( const int default_width,
@@ -509,11 +512,11 @@ ControlWindow::replay_tournament( GtkWidget* widget,
       ( the_arena.get_state() != NOT_STARTED &&
         the_arena.get_state() != FINISHED ) )
     {
-      String info_text = _("This action will kill the current tournament.\n"
-                           "Do you want to do that?");
-      List<String> string_list;
-      string_list.insert_last( new String( _("Yes") ) );
-      string_list.insert_last( new String( _("No")  ) );
+      string info_text( _("This action will kill the current tournament.\n"
+                           "Do you want to do that?") );
+      List<string> string_list;
+      string_list.insert_last( new string( _("Yes") ) );
+      string_list.insert_last( new string( _("No")  ) );
       Dialog( info_text, string_list,
               (DialogFunction) ControlWindow::kill_and_open_filesel );
     }
@@ -642,7 +645,7 @@ ControlWindow::replay( GtkWidget* widget,
   // rudimentary sanity check
   if( check_logfile( filename ) )
   {
-    the_arena_controller.replay_filename = filename;
+    the_arena_controller.replay_filename = string(filename.chars());
     the_arena_controller.start_replay_arena();
   }
 }
@@ -662,11 +665,11 @@ ControlWindow::end_clicked( GtkWidget* widget, gpointer data )
     if( the_arena.get_state() != NOT_STARTED &&
         the_arena.get_state() != FINISHED )
       {
-        String info_text = _("This action will kill the current tournament.\n"
-                             "Do you want to do that?");
-        List<String> string_list;
-        string_list.insert_last( new String( _("Yes") ) );
-        string_list.insert_last( new String( _("No")  ) );
+        string info_text( _("This action will kill the current tournament.\n"
+                             "Do you want to do that?") );
+        List<string> string_list;
+        string_list.insert_last( new string( _("Yes") ) );
+        string_list.insert_last( new string( _("No")  ) );
         Dialog( info_text, string_list,
                 (DialogFunction) ControlWindow::end_tournament );
       }

@@ -28,6 +28,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <string>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ using namespace std;
 #include "String.h"
 
 
-void Error(const bool fatal, const String& function_name, const String& error_msg);
+void Error(const bool fatal, const string& function_name, const string& error_msg);
 
 String::String()
 {

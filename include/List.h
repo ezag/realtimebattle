@@ -89,7 +89,7 @@ private:
   bool responsible_for_deletion;
 };
 
-void Error(const bool fatal, const String& error_msg, const String& function_name);
+void Error(const bool fatal, const string& error_msg, const string& function_name);
 
 template <class T>
 inline T*

@@ -60,7 +60,7 @@ struct entry_t
   bool allow_sign;
 };
 
-void Error(const bool fatal, const String& error_msg, const String& function_name);
+void Error(const bool fatal, const string& error_msg, const string& function_name);
 void Quit(const bool success = true);
 static void ok_click(int result) {}
 int factorial(const int n);
@@ -69,15 +69,15 @@ int binomial(const int n, const int k);
 
 void reorder_pointer_array(void** array, int size);
 
-void read_dirs_from_system(List<String>& robotdirs, List<String>& arenadirs);
-void split_colonseparated_dirs(String& dirs, List<String>& arenadirs);
+void read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs);
+void split_colonseparated_dirs(string& dirs, List<string>& arenadirs);
 
-bool check_if_filename_is_robot( String& fname, bool* err_in_file );
-bool check_if_filename_is_arena( String& fname, bool* err_in_file );
+bool check_if_filename_is_robot( string& fname, bool* err_in_file );
+bool check_if_filename_is_arena( string& fname, bool* err_in_file );
 bool check_logfile( String& fname );
-void check_for_robots_and_arenas( String& word, 
+void check_for_robots_and_arenas( string& word, 
                                   List<start_tournament_info_t>& tour_list,
-                                  List<String>& dir_list, 
+                                  List<string>& dir_list, 
                                   const bool check_robots );
 void search_directories( String directory, List<start_tournament_info_t>& tour_list,
                          const bool check_robots );

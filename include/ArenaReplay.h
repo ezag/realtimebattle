@@ -52,9 +52,9 @@ public:
   bool timeout_function         ();
   void start_tournament         ();
   bool end_game                 ();
-  void set_filenames            ( String& replay_fname, String& message_fname,
-                                  const String& statistics_fname,
-                                  const String& option_fname );
+  void set_filenames            ( string& replay_fname, string& message_fname,
+                                  const string& statistics_fname,
+                                  const string& option_fname );
   void   change_speed           ( const bool forward, const bool fast );
   void   change_game            ( const int inc_game, const int inc_seq );
   bool   step_forward           ( const int n_o_steps, const bool clear_time = true );

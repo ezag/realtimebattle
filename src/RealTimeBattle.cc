@@ -68,6 +68,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ArenaReplay.h"
 #include "ArenaController.h"
 #include "String.h"
+#include <string>
 #include "Various.h"
 //#include "Server.h"
 
@@ -248,23 +249,23 @@ parse_command_line(int argc, char **argv)
               the_arena_controller.game_mode = ArenaBase::DEBUG_MODE;
               break;
             case 6: 
-              the_arena_controller.option_filename = (String)optarg;
+              the_arena_controller.option_filename = string(optarg);
               break;
             case 7:
-              the_arena_controller.log_filename = (String)optarg;
+              the_arena_controller.log_filename = string(optarg);
               break;
             case 8:
-              the_arena_controller.statistics_filename = (String)optarg;
+              the_arena_controller.statistics_filename = string(optarg);
               break;
             case 9:
-              the_arena_controller.tournament_filename = (String)optarg;
+              the_arena_controller.tournament_filename = string(optarg);
               the_arena_controller.auto_start_and_end = true;
               break;
             case 10:
-              the_arena_controller.message_filename = (String)optarg;
+              the_arena_controller.message_filename = string(optarg);
               break;
             case 11:
-              the_arena_controller.replay_filename = (String)optarg;
+              the_arena_controller.replay_filename = string(optarg);
               break;
             default:
               Error( true, "Bad error, this shouldn't happen",
@@ -300,28 +301,28 @@ parse_command_line(int argc, char **argv)
           break;
 
         case 'o':
-          the_arena_controller.option_filename = (String)optarg;
+          the_arena_controller.option_filename = string(optarg);
           break;
 
         case 'l':
-          the_arena_controller.log_filename = (String)optarg;
+          the_arena_controller.log_filename = string(optarg);
           break;
 
         case 's':
-          the_arena_controller.statistics_filename = (String)optarg;
+          the_arena_controller.statistics_filename = string(optarg);
           break;
 
         case 't':
-          the_arena_controller.tournament_filename = (String)optarg;
+          the_arena_controller.tournament_filename = string(optarg);
           the_arena_controller.auto_start_and_end = true;
           break;
 
         case 'm':
-          the_arena_controller.message_filename = (String)optarg;
+          the_arena_controller.message_filename = string(optarg);
           break;
 
         case 'r':
-          the_arena_controller.replay_filename = (String)optarg;
+          the_arena_controller.replay_filename = string(optarg);
           break;
 
         case 'g':
@@ -353,20 +354,20 @@ parse_command_line(int argc, char **argv)
 
   if( help_flag || version_flag ) exit( EXIT_SUCCESS );
 
-  if( the_arena_controller.option_filename == "" )
+  if( the_arena_controller.option_filename.empty() )
     {
       the_opts.get_options_from_rtbrc();
       the_arena_controller.option_filename = ".rtbrc";
     }
   else
-    the_opts.read_options_file( the_arena_controller.option_filename,true );
+    the_opts.read_options_file( String(the_arena_controller.option_filename.c_str()),true );
 
  // the_arena_controller.auto_start_and_end
  // = ( ( the_arena_controller.tournament_filename != "" ) ||
  //     ( the_arena_controller.replay_filename == "-" ) );
  
   the_arena_controller.auto_start_and_end
-    = ( the_arena_controller.tournament_filename != "" ); 
+    = ( !the_arena_controller.tournament_filename.empty() ); 
 
 
   no_graphics = !graphics_flag;
@@ -420,9 +421,9 @@ main ( int argc, char* argv[] )
 */
   parse_command_line(argc, argv);
 
-  if( the_arena_controller.tournament_filename != "" )
+  if( !the_arena_controller.tournament_filename.empty() )
     the_arena_controller.start_realtime_arena();
-  else if( the_arena_controller.replay_filename != "" )
+  else if( !the_arena_controller.replay_filename.empty() )
     the_arena_controller.start_replay_arena();
 
   signal(SIGCHLD, sig_handler);

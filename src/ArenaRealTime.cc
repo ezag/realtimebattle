@@ -27,6 +27,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <unistd.h>
 #include <stdlib.h>
 #include <iostream>
+#include <string>
 #include <iomanip>
 #include <stdarg.h>
 #include <sys/stat.h>
@@ -98,19 +99,19 @@ ArenaRealTime::clear()
 }
 
 void
-ArenaRealTime::set_filenames( String& log_fname,
-                              const String& statistics_fname, 
-                              const String& tournament_fname,
-                              String& message_fname,
-                              const String& option_fname )
+ArenaRealTime::set_filenames( string& log_fname,
+                              const string& statistics_fname, 
+                              const string& tournament_fname,
+                              string& message_fname,
+                              const string& option_fname )
 {
   bool log_stdout = false;
 
-  if( log_fname == "" )
+  if( log_fname.empty() )
     {
       use_log_file = false;
     }
-  else if( log_fname == "-" || log_fname == "STDOUT" )  // use stdout as log_file
+  else if( log_fname.empty() || log_fname == "STDOUT" )  // use stdout as log_file
     {
       //cout << "Currently writing logs to standard out is not possible " << endl;
       use_log_file = false;
@@ -121,7 +122,7 @@ ArenaRealTime::set_filenames( String& log_fname,
   else
     {
        //LOG_FILE.open(log_fname.chars(), ios::out, S_IRUSR | S_IWUSR);
-		LOG_FILE.open(log_fname.chars(), ios::out);
+		LOG_FILE.open(log_fname.c_str(), ios::out);
 		
       use_log_file = true;
       if( !LOG_FILE )
@@ -131,7 +132,7 @@ ArenaRealTime::set_filenames( String& log_fname,
           use_log_file = false;
         }
     }
-  if( message_fname == "" )
+  if( message_fname.empty() )
     {
       use_message_file = false;
     }
@@ -151,7 +152,7 @@ ArenaRealTime::set_filenames( String& log_fname,
   else
     {
       use_message_file = true;
-      message_file.open( message_fname.chars(), ios::out);
+      message_file.open( message_fname.c_str(), ios::out);
       if( !message_file )
         {
           Error( false, "Couldn't open message file. Message file disabled",
@@ -161,11 +162,11 @@ ArenaRealTime::set_filenames( String& log_fname,
       
     }
 
-  statistics_file_name = statistics_fname;
+  statistics_file_name = String(statistics_fname.c_str());
 
-  tournament_file_name = tournament_fname;
+  tournament_file_name = String(tournament_fname.c_str());
 
-  option_file_name = option_fname;
+  option_file_name = String(option_fname.c_str());
 }
 
 bool
@@ -176,7 +177,7 @@ ArenaRealTime::parse_arena_file(String& filename)
   ifstream file(filename.chars());
   if( !file )
   {
-    Error(false, "Couldn't open arena file" + filename, "ArenaRealtime::parse_arena_file");
+    Error(false, "Couldn't open arena file" + string(filename.chars()), "ArenaRealtime::parse_arena_file");
     return false;
   }
 
@@ -187,7 +188,8 @@ ArenaRealTime::parse_arena_file(String& filename)
     {
       if ( !file.good() || !parse_arena_line(file, scale, succession, angle_factor) )
       {
-          Error(false, "Error parsing arena file " + filename, "ArenaRealtime::parse_arena_file");
+          Error(false, "Error parsing arena file " + string(filename.chars()),
+                "ArenaRealtime::parse_arena_file");
           file.close();
           return false;
       }
@@ -204,7 +206,7 @@ ArenaRealTime::parse_arena_file(String& filename)
       ifstream file(filename.chars());
       if( !file )
       {
-        Error(false, "Couldn't open arena file for log file " + filename,
+        Error(false, "Couldn't open arena file for log file " + string(filename.chars()),
               "ArenaRealtime::parse_arena_file");
         return false;
       }
@@ -433,7 +435,7 @@ ArenaRealTime::timeout_function()
       if( the_arena_controller.auto_start_and_end )
         {
           if( statistics_file_name != "" )
-            save_statistics_to_file( statistics_file_name );
+            save_statistics_to_file( string(statistics_file_name.chars()) );
 
           Quit();
         }
@@ -785,7 +787,7 @@ ArenaRealTime::start_game()
 
   if ( !parse_arena_file(*filename))
   {
-    Error(false, "Error parsing arena file " + *filename, "ArenaRealTime::start_game");
+    Error(false, "Error parsing arena file " + string(filename->chars()), "ArenaRealTime::start_game");
     return false;
   }
 
@@ -794,14 +796,14 @@ ArenaRealTime::start_game()
     current_arena_filename = get_segment(*filename, charpos+1, -1);
   else
   {
-    Error(false, "Incomplete arena file path " + *filename, "ArenaRealTime::start_game");
+    Error(false, "Incomplete arena file path " + string(filename->chars()), "ArenaRealTime::start_game");
     return false;
   }
 
   char msg[128];
   snprintf( msg, 127, _("Game %d of sequence %d begins on arena"),
             game_nr+1, sequence_nr );
-  print_message( "RealTimeBattle", String(msg) + " " + current_arena_filename );
+  print_message( "RealTimeBattle", string(msg) + " " + string(current_arena_filename.chars()) );
 
   // reset some variables
 
@@ -986,7 +988,7 @@ ArenaRealTime::start_sequence_follow_up()
               char msg[128];
               snprintf( msg, 127, _("Robot with filename %s has not given any name"),
                         robotp->get_robot_filename().chars() );
-              print_message( "RealTimeBattle", String(msg) );
+              print_message( "RealTimeBattle", string(msg) );
             }
 
           if( !robotp->is_colour_given() )

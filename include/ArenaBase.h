@@ -110,7 +110,7 @@ public:
   void delete_lists(const bool kill_robots, const bool del_seq_list,
                     const bool del_tourn_list, const bool del_arena_filename_list,
                     const bool del_robot_obj_list=true);
-  void save_statistics_to_file(String filename);
+  void save_statistics_to_file(string filename);
 
 
   List<Shape>* get_object_lists() { return object_lists; }
@@ -124,7 +124,7 @@ public:
   int get_robots_per_game() { return robots_per_game; }
   int get_number_of_robots() { return number_of_robots; }
 
-  void print_message( const String& messager, const String& text );
+  void print_message( const string& messager, const string& text );
 
   int get_robots_left() { return robots_left; }
   double get_total_time() { return (double)total_time; }
