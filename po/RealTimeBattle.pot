@@ -1,0 +1,864 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The RealTime Battle translators, see AUTHORS for detail
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: johannes_nicolai@tiscalinet.de\n"
+"POT-Creation-Date: 2005-01-10 18:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/RealTimeBattle.cc:97
+msgid " Usage: RealTimeBattle [options] "
+msgstr ""
+
+#: src/RealTimeBattle.cc:98
+msgid " Options:"
+msgstr ""
+
+#: src/RealTimeBattle.cc:99
+msgid "    --debug_mode,                -d   debug mode"
+msgstr ""
+
+#: src/RealTimeBattle.cc:100
+msgid ""
+"    --debug_level [0-5],         -D   sets the initial debug level. Implies -"
+"d"
+msgstr ""
+
+#: src/RealTimeBattle.cc:101
+msgid "    --normal_mode,               -n   normal mode (default)"
+msgstr ""
+
+#: src/RealTimeBattle.cc:102
+msgid "    --competition_mode,          -c   competition mode"
+msgstr ""
+
+#: src/RealTimeBattle.cc:104
+msgid "    --no_graphics,               -g   no graphics will be displayed"
+msgstr ""
+
+#: src/RealTimeBattle.cc:105
+msgid ""
+"    --option_file [file],        -o   selects option-file (default: $HOME/."
+"rtbrc)"
+msgstr ""
+
+#: src/RealTimeBattle.cc:107
+msgid ""
+"    --log_file [file],           -l   make log file, if 'file' is '-'\n"
+"                                      the log is sent to STDOUT"
+msgstr ""
+
+#: src/RealTimeBattle.cc:110
+msgid ""
+"    --tournament_file [file],    -t   specify a tournament file to\n"
+"                                      autostart a tournament"
+msgstr ""
+
+#: src/RealTimeBattle.cc:113
+msgid ""
+"    --statistics_file [file],    -s   file to print the statistics to\n"
+"                                       when autostarting"
+msgstr ""
+
+#: src/RealTimeBattle.cc:116
+msgid ""
+"    --message_file [file],       -m   redirect messages to 'file'.\n"
+"                                      With '-' as 'file', STDOUT is used.\n"
+"                                      If both log and messages are sent\n"
+"                                      to STDOUT, '-m' will be ignored"
+msgstr ""
+
+#: src/RealTimeBattle.cc:121
+msgid ""
+"    --replay [file]              -r   a log file to replay.\n"
+"                                      if '-' is specified as file,\n"
+"                                      input is taken from STDIN"
+msgstr ""
+
+#: src/RealTimeBattle.cc:125
+msgid "    --help,                      -h   prints this message"
+msgstr ""
+
+#: src/RealTimeBattle.cc:126
+msgid "    --version,                   -v   prints the version number"
+msgstr ""
+
+#: src/ArenaBase.cc:118
+msgid "*Starting robots*"
+msgstr ""
+
+#: src/ArenaBase.cc:121
+msgid "*Shutting down robots*"
+msgstr ""
+
+#: src/ArenaBase.cc:125
+msgid "*Running*"
+msgstr ""
+
+#: src/ArenaBase.cc:127
+msgid "*Pausing after game*"
+msgstr ""
+
+#: src/ArenaBase.cc:131
+msgid "*Paused*"
+msgstr ""
+
+#: src/ArenaBase.cc:134
+msgid "*Exiting*"
+msgstr ""
+
+#: src/ArenaBase.cc:137
+msgid "*Finished*"
+msgstr ""
+
+#: src/ArenaRealTime.cc:773
+#, c-format
+msgid "Game %d of sequence %d begins on arena"
+msgstr ""
+
+#: src/ArenaRealTime.cc:950
+#, c-format
+msgid "Robot with filename %s has not given any name"
+msgstr ""
+
+#: src/ArenaReplay.cc:121
+#, c-format
+msgid "Game %d of sequence %d"
+msgstr ""
+
+#: src/ArenaWindow.cc:78
+msgid " No Zoom "
+msgstr ""
+
+#: src/ArenaWindow.cc:80
+msgid " Zoom In "
+msgstr ""
+
+#: src/ArenaWindow.cc:82
+msgid " Zoom Out "
+msgstr ""
+
+#: src/ArenaWindow.cc:150
+msgid "Arena"
+msgstr ""
+
+#: src/ControlWindow.cc:78
+msgid " New Tournament "
+msgstr ""
+
+#: src/ControlWindow.cc:80
+msgid " Replay Tournament "
+msgstr ""
+
+#: src/ControlWindow.cc:82
+msgid " Pause "
+msgstr ""
+
+#: src/ControlWindow.cc:84
+msgid " End "
+msgstr ""
+
+#: src/ControlWindow.cc:86
+msgid " Options "
+msgstr ""
+
+#: src/ControlWindow.cc:88
+msgid " Statistics "
+msgstr ""
+
+#: src/ControlWindow.cc:90
+msgid "         Quit         "
+msgstr ""
+
+#: src/ControlWindow.cc:116
+msgid "Show arena window"
+msgstr ""
+
+#: src/ControlWindow.cc:118
+msgid "Show message window"
+msgstr ""
+
+#: src/ControlWindow.cc:120
+msgid "Show score window"
+msgstr ""
+
+#: src/ControlWindow.cc:199
+msgid " Step "
+msgstr ""
+
+#: src/ControlWindow.cc:201
+msgid " End Game "
+msgstr ""
+
+#: src/ControlWindow.cc:203
+msgid " Kill Marked Robot "
+msgstr ""
+
+#: src/ControlWindow.cc:231
+msgid " Debug Level: "
+msgstr ""
+
+#: src/ControlWindow.cc:332
+msgid " Step forward "
+msgstr ""
+
+#: src/ControlWindow.cc:336
+msgid " Step backward "
+msgstr ""
+
+#: src/ControlWindow.cc:340
+msgid " Next Game "
+msgstr ""
+
+#: src/ControlWindow.cc:344
+msgid " Prev Game "
+msgstr ""
+
+#: src/ControlWindow.cc:348
+msgid " Next Seq "
+msgstr ""
+
+#: src/ControlWindow.cc:352
+msgid " Prev Seq "
+msgstr ""
+
+#: src/ControlWindow.cc:511 src/ControlWindow.cc:660 src/Gui.cc:153
+msgid ""
+"This action will kill the current tournament.\n"
+"Do you want to do that?"
+msgstr ""
+
+#: src/ControlWindow.cc:514 src/ControlWindow.cc:663
+msgid "Yes"
+msgstr ""
+
+#: src/ControlWindow.cc:515 src/ControlWindow.cc:664
+msgid "No"
+msgstr ""
+
+#: src/ControlWindow.cc:528
+msgid "Choose a log file to replay"
+msgstr ""
+
+#: src/MessageWindow.cc:79
+msgid " Clear all messages "
+msgstr ""
+
+#: src/MessageWindow.cc:81
+msgid " Show only marked robot "
+msgstr ""
+
+#: src/MessageWindow.cc:83
+msgid " Show all "
+msgstr ""
+
+#: src/MessageWindow.cc:109 src/StatisticsWindow.cc:90
+msgid " Robot "
+msgstr ""
+
+#: src/MessageWindow.cc:109
+msgid " Message "
+msgstr ""
+
+#: src/MessageWindow.cc:173
+msgid "Messages"
+msgstr ""
+
+#: src/MessageWindow.cc:177
+msgid " All "
+msgstr ""
+
+#: src/Options.cc:69
+msgid "Gravitational Constant"
+msgstr ""
+
+#: src/Options.cc:73
+msgid "Air resistance"
+msgstr ""
+
+#: src/Options.cc:77
+msgid "Roll friction"
+msgstr ""
+
+#: src/Options.cc:82
+msgid "Slide/brake friction"
+msgstr ""
+
+#: src/Options.cc:87
+msgid "Send robot coordinates"
+msgstr ""
+
+#: src/Options.cc:92
+msgid "Robot max acceleration"
+msgstr ""
+
+#: src/Options.cc:97
+msgid "Robot min acceleration"
+msgstr ""
+
+#: src/Options.cc:101
+msgid "Robot radius"
+msgstr ""
+
+#: src/Options.cc:105
+msgid "Robot mass"
+msgstr ""
+
+#: src/Options.cc:110
+msgid "Robot bounce coefficient"
+msgstr ""
+
+#: src/Options.cc:115
+msgid "Robot hardness coefficient"
+msgstr ""
+
+#: src/Options.cc:120
+msgid "Robot protection coefficient"
+msgstr ""
+
+#: src/Options.cc:125
+msgid "Robot frontsize [radians]"
+msgstr ""
+
+#: src/Options.cc:130
+msgid "Robot front bounce coefficient"
+msgstr ""
+
+#: src/Options.cc:135
+msgid "Robot front hardness coefficient"
+msgstr ""
+
+#: src/Options.cc:140
+msgid "Robot front protection coefficient"
+msgstr ""
+
+#: src/Options.cc:145
+msgid "Robot start energy"
+msgstr ""
+
+#: src/Options.cc:150
+msgid "Robot max energy"
+msgstr ""
+
+#: src/Options.cc:156
+msgid "Robot max rotate speed [rad/s]"
+msgstr ""
+
+#: src/Options.cc:162
+msgid "Robot cannon max rotate speed [rad/s]"
+msgstr ""
+
+#: src/Options.cc:168
+msgid "Robot radar max rotate speed [rad/s]"
+msgstr ""
+
+#: src/Options.cc:173
+msgid "Process check interval"
+msgstr ""
+
+#: src/Options.cc:177
+msgid "Robot energy levels"
+msgstr ""
+
+#: src/Options.cc:181
+msgid "Shot radius"
+msgstr ""
+
+#: src/Options.cc:185
+msgid "Shot speed"
+msgstr ""
+
+#: src/Options.cc:190
+msgid "Shooting penalty (times shot energy)"
+msgstr ""
+
+#: src/Options.cc:194
+msgid "Shot min energy"
+msgstr ""
+
+#: src/Options.cc:198
+msgid "Shot max energy"
+msgstr ""
+
+#: src/Options.cc:203
+msgid "Shot energy increase speed [energy/s]"
+msgstr ""
+
+#: src/Options.cc:207
+msgid "Background colour"
+msgstr ""
+
+#: src/Options.cc:211
+msgid "Foreground colour"
+msgstr ""
+
+#: src/Options.cc:216
+msgid "Colour for RTB messages"
+msgstr ""
+
+#: src/Options.cc:220
+msgid "Cookie max energy"
+msgstr ""
+
+#: src/Options.cc:224
+msgid "Cookie min energy"
+msgstr ""
+
+#: src/Options.cc:229
+msgid "Cookie frequency [cookies per second]"
+msgstr ""
+
+#: src/Options.cc:233
+msgid "Cookie radius"
+msgstr ""
+
+#: src/Options.cc:237
+msgid "Cookie colour"
+msgstr ""
+
+#: src/Options.cc:241
+msgid "Mine max energy"
+msgstr ""
+
+#: src/Options.cc:245
+msgid "Mine min energy"
+msgstr ""
+
+#: src/Options.cc:250
+msgid "Mine frequency [mines per second]"
+msgstr ""
+
+#: src/Options.cc:254
+msgid "Mine radius"
+msgstr ""
+
+#: src/Options.cc:258
+msgid "Mine colour"
+msgstr ""
+
+#: src/Options.cc:262
+msgid "Arena scale"
+msgstr ""
+
+#: src/Options.cc:267
+msgid "Fast forward factor"
+msgstr ""
+
+#: src/Options.cc:271
+msgid "Timeout [s]"
+msgstr ""
+
+#: src/Options.cc:275
+msgid "Max timestep"
+msgstr ""
+
+#: src/Options.cc:279
+msgid "Timescale"
+msgstr ""
+
+#: src/Options.cc:284
+msgid "Update interval [s]"
+msgstr ""
+
+#: src/Options.cc:289
+msgid "Robot startup time [s]"
+msgstr ""
+
+#: src/Options.cc:293
+msgid "Start CPU time [s]"
+msgstr ""
+
+#: src/Options.cc:297
+msgid "Extra CPU time [s]"
+msgstr ""
+
+#: src/Options.cc:302
+msgid "Extra CPU period [s]"
+msgstr ""
+
+#: src/Options.cc:307
+msgid "CPU time warning percentage"
+msgstr ""
+
+#: src/Options.cc:312
+msgid "Logging frequency [Each n:th update interval]"
+msgstr ""
+
+#: src/Options.cc:317
+msgid "Max robots allowed simultaneously"
+msgstr ""
+
+#: src/Options.cc:321
+msgid "Robot search path"
+msgstr ""
+
+#: src/Options.cc:325
+msgid "Arena search path"
+msgstr ""
+
+#: src/Options.cc:330
+msgid "Directory for temporary files"
+msgstr ""
+
+#: src/Options.cc:335
+msgid "Initial Arena window width"
+msgstr ""
+
+#: src/Options.cc:340
+msgid "Initial Arena window height"
+msgstr ""
+
+#: src/Options.cc:345
+msgid "Initial Arena window x position"
+msgstr ""
+
+#: src/Options.cc:350
+msgid "Initial Arena window y position"
+msgstr ""
+
+#: src/Options.cc:355
+msgid "Initial Control window x position"
+msgstr ""
+
+#: src/Options.cc:360
+msgid "Initial Control window y position"
+msgstr ""
+
+#: src/Options.cc:365
+msgid "Initial Message window width"
+msgstr ""
+
+#: src/Options.cc:370
+msgid "Initial Message window height"
+msgstr ""
+
+#: src/Options.cc:375
+msgid "Initial Message window x position"
+msgstr ""
+
+#: src/Options.cc:380
+msgid "Initial Message window y position"
+msgstr ""
+
+#: src/Options.cc:385
+msgid "Initial Score window width"
+msgstr ""
+
+#: src/Options.cc:390
+msgid "Initial Score window height"
+msgstr ""
+
+#: src/Options.cc:395
+msgid "Initial Score window x position"
+msgstr ""
+
+#: src/Options.cc:400
+msgid "Initial Score window y position"
+msgstr ""
+
+#: src/Options.cc:405
+msgid "Initial Statistics window width"
+msgstr ""
+
+#: src/Options.cc:410
+msgid "Initial Statistics window height"
+msgstr ""
+
+#: src/ScoreWindow.cc:69 src/StatisticsWindow.cc:222
+#: src/StatisticsWindow.cc:369
+msgid "Name"
+msgstr ""
+
+#: src/ScoreWindow.cc:69
+msgid "Energy"
+msgstr ""
+
+#: src/ScoreWindow.cc:69
+msgid "Place"
+msgstr ""
+
+#: src/ScoreWindow.cc:70
+msgid "Last"
+msgstr ""
+
+#: src/ScoreWindow.cc:70 src/ScoreWindow.cc:137
+msgid "Score"
+msgstr ""
+
+#: src/ScoreWindow.cc:138
+msgid " Seq: "
+msgstr ""
+
+#: src/ScoreWindow.cc:141 src/StatisticsWindow.cc:87
+#: src/StatisticsWindow.cc:386 src/StatisticsWindow.cc:498
+msgid "Game"
+msgstr ""
+
+#: src/ScoreWindow.cc:144 src/OptionsWindow.cc:79
+msgid "Time"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:76
+msgid "Start New Tournament"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:122
+msgid "Robots in Tournament"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:123
+msgid "Robots in Directory"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:132
+msgid "Arenas in Tournament"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:133
+msgid "Arenas in Directory"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:151
+msgid " Remove "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:151 src/StartTournamentWindow.cc:153
+msgid " Select All "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:152 src/StartTournamentWindow.cc:153
+msgid " Unselect All "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:152
+msgid " Add "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:246
+msgid "Games per sequence"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:246
+msgid "Robots per sequence"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:247
+msgid "Number of sequences"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:304 src/OptionsWindow.cc:137
+#: src/OptionsWindow.cc:174
+msgid " Min "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:316
+msgid " All Arenas "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:328
+msgid " Full Round "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:338 src/OptionsWindow.cc:141
+#: src/OptionsWindow.cc:178
+msgid " Max "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:366
+msgid " Load tournament "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:366
+msgid " Save tournament "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:388
+msgid " Start "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:388 src/OptionsWindow.cc:258
+msgid " Cancel "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:486
+msgid "Choose a tournament file to load"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:520
+msgid "Choose file to save tournament into"
+msgstr ""
+
+#: src/StartTournamentWindow.cc:564
+msgid "Error in specified tournament file."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:566 src/StartTournamentWindow.cc:709
+#: src/StartTournamentWindow.cc:848 src/OptionsWindow.cc:256
+msgid " Ok "
+msgstr ""
+
+#: src/StartTournamentWindow.cc:567
+msgid "Tournament could not be loaded."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:699
+msgid "There are too few robots in the tournament."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:701 src/StartTournamentWindow.cc:843
+msgid "There are no arenas in the tournament."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:704
+msgid "Could not open file."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:710
+msgid "Tournament could not be saved."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:841
+msgid "There must be at least two robots in the tournament."
+msgstr ""
+
+#: src/StartTournamentWindow.cc:849
+msgid "Tournament could not be started."
+msgstr ""
+
+#: src/StatisticsWindow.cc:46
+msgid "Statistics"
+msgstr ""
+
+#: src/StatisticsWindow.cc:79
+msgid " Close "
+msgstr ""
+
+#: src/StatisticsWindow.cc:81
+msgid " Save Statistics "
+msgstr ""
+
+#: src/StatisticsWindow.cc:83
+msgid " Total "
+msgstr ""
+
+#: src/StatisticsWindow.cc:85
+msgid " Sequence Total "
+msgstr ""
+
+#: src/StatisticsWindow.cc:222
+msgid "Position"
+msgstr ""
+
+#: src/StatisticsWindow.cc:222
+msgid "Points"
+msgstr ""
+
+#: src/StatisticsWindow.cc:223
+msgid "Games"
+msgstr ""
+
+#: src/StatisticsWindow.cc:223
+msgid "Survival Time"
+msgstr ""
+
+#: src/StatisticsWindow.cc:223
+msgid "Total Points"
+msgstr ""
+
+#: src/StatisticsWindow.cc:307
+msgid "Choose a statistics file to save"
+msgstr ""
+
+#: src/StatisticsWindow.cc:385
+msgid "Seq"
+msgstr ""
+
+#: src/StatisticsWindow.cc:482
+msgid " Grand Total "
+msgstr ""
+
+#: src/StatisticsWindow.cc:485
+msgid " Sequence "
+msgstr ""
+
+#: src/StatisticsWindow.cc:497
+msgid " Sequence: "
+msgstr ""
+
+#: src/Various.cc:74
+msgid "Error in"
+msgstr ""
+
+#: src/OptionsWindow.cc:52
+msgid "Options"
+msgstr ""
+
+#: src/OptionsWindow.cc:78
+msgid "Environment"
+msgstr ""
+
+#: src/OptionsWindow.cc:78
+msgid "Robot"
+msgstr ""
+
+#: src/OptionsWindow.cc:78
+msgid "Shot"
+msgstr ""
+
+#: src/OptionsWindow.cc:79
+msgid "Extras"
+msgstr ""
+
+#: src/OptionsWindow.cc:79
+msgid "Window sizes"
+msgstr ""
+
+#: src/OptionsWindow.cc:80
+msgid "Misc"
+msgstr ""
+
+#: src/OptionsWindow.cc:139 src/OptionsWindow.cc:176 src/OptionsWindow.cc:201
+msgid " Def "
+msgstr ""
+
+#: src/OptionsWindow.cc:226
+msgid " Grab sizes and positions from present windows "
+msgstr ""
+
+#: src/OptionsWindow.cc:246
+msgid " Default "
+msgstr ""
+
+#: src/OptionsWindow.cc:248
+msgid " Load options "
+msgstr ""
+
+#: src/OptionsWindow.cc:250
+msgid " Save options "
+msgstr ""
+
+#: src/OptionsWindow.cc:252
+msgid " Save as default "
+msgstr ""
+
+#: src/OptionsWindow.cc:254
+msgid " Apply "
+msgstr ""
+
+#: src/OptionsWindow.cc:429
+msgid "Choose an options file to load"
+msgstr ""
+
+#: src/OptionsWindow.cc:453
+msgid "Choose an options file to save"
+msgstr ""
