@@ -1556,11 +1556,11 @@ Robot::check_state_for_message(const message_from_robot_type msg_t, const state_
 bool
 Robot::get_default_non_blocking_state()
 {
-  String filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
-    "/" + robot_plain_filename;
+  string filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
+    "/" + string(robot_plain_filename.chars());
 
   int fd;
-  if( ( fd = open(filename.chars(), O_RDONLY) ) != -1 )
+  if( ( fd = open(filename.c_str(), O_RDONLY) ) != -1 )
     {
       close(fd);
       return false;
@@ -1576,16 +1576,16 @@ Robot::set_non_blocking_state(const bool non_bl)
 {
   if( non_bl == use_non_blocking ) return;
 
-  String filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
-    "/" + robot_plain_filename;
+  string filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
+    "/" + string(robot_plain_filename.chars());
 
   create_tmp_rtb_dir();
 
   if( non_bl )
-    remove( filename.chars() );
+    remove( filename.c_str() );
   else
     {
-      int fd = open(filename.chars(), O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+      int fd = open(filename.c_str(), O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
       if( fd != -1 )  close( fd );
     }
 

@@ -136,9 +136,9 @@ private:
   start_tournament_info_t* find_row_in_clist
                                        ( const int row,
                                          List<start_tournament_info_t>* info_list );
-  void load_tournament_file            ( const String& full_filename,
+  void load_tournament_file            ( const string& full_filename,
                                          bool display_fail_message );
-  void save_tournament_file            ( const String& full_filename,
+  void save_tournament_file            ( const string& full_filename,
                                          bool display_file_fail_message,
                                          bool display_tour_fail_message );
 

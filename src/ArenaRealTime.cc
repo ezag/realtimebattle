@@ -162,22 +162,22 @@ ArenaRealTime::set_filenames( string& log_fname,
       
     }
 
-  statistics_file_name = String(statistics_fname.c_str());
+  statistics_file_name = statistics_fname;
 
-  tournament_file_name = String(tournament_fname.c_str());
+  tournament_file_name = tournament_fname;
 
-  option_file_name = String(option_fname.c_str());
+  option_file_name = option_fname;
 }
 
 bool
-ArenaRealTime::parse_arena_file(String& filename)
+ArenaRealTime::parse_arena_file(string& filename)
 {
   Vector2D vec1, vec2, vec0;
 
-  ifstream file(filename.chars());
+  ifstream file(filename.c_str());
   if( !file )
   {
-    Error(false, "Couldn't open arena file" + string(filename.chars()), "ArenaRealtime::parse_arena_file");
+    Error(false, "Couldn't open arena file" + filename, "ArenaRealtime::parse_arena_file");
     return false;
   }
 
@@ -188,7 +188,7 @@ ArenaRealTime::parse_arena_file(String& filename)
     {
       if ( !file.good() || !parse_arena_line(file, scale, succession, angle_factor) )
       {
-          Error(false, "Error parsing arena file " + string(filename.chars()),
+          Error(false, "Error parsing arena file " + filename,
                 "ArenaRealtime::parse_arena_file");
           file.close();
           return false;
@@ -203,10 +203,10 @@ ArenaRealTime::parse_arena_file(String& filename)
     {
       char buffer[500];
       
-      ifstream file(filename.chars());
+      ifstream file(filename.c_str());
       if( !file )
       {
-        Error(false, "Couldn't open arena file for log file " + string(filename.chars()),
+        Error(false, "Couldn't open arena file for log file " + filename,
               "ArenaRealtime::parse_arena_file");
         return false;
       }
@@ -435,7 +435,7 @@ ArenaRealTime::timeout_function()
       if( the_arena_controller.auto_start_and_end )
         {
           if( statistics_file_name != "" )
-            save_statistics_to_file( string(statistics_file_name.chars()) );
+            save_statistics_to_file( statistics_file_name );
 
           Quit();
         }
@@ -781,29 +781,29 @@ ArenaRealTime::start_game()
   
   current_arena_nr = current_arena_nr % number_of_arenas + 1;
   
-  String* filename = arena_filenames.get_nth(current_arena_nr);
+  string* filename = arena_filenames.get_nth(current_arena_nr);
 
   print_to_logfile('G', sequence_nr, game_nr + 1);
 
-  if ( !parse_arena_file(*filename))
+  if ( !parse_arena_file(*filename) )
   {
-    Error(false, "Error parsing arena file " + string(filename->chars()), "ArenaRealTime::start_game");
+    Error(false, "Error parsing arena file " + *filename, "ArenaRealTime::start_game");
     return false;
   }
 
   int charpos;
-  if( (charpos = filename->find('/',0,true)) != -1 )
-    current_arena_filename = get_segment(*filename, charpos+1, -1);
+  if( (charpos = String(filename->c_str()).find('/',0,true)) != -1 )
+    current_arena_filename = string(get_segment(String(filename->c_str()), charpos+1, -1).chars());
   else
   {
-    Error(false, "Incomplete arena file path " + string(filename->chars()), "ArenaRealTime::start_game");
+    Error(false, "Incomplete arena file path " + *filename, "ArenaRealTime::start_game");
     return false;
   }
 
   char msg[128];
   snprintf( msg, 127, _("Game %d of sequence %d begins on arena"),
             game_nr+1, sequence_nr );
-  print_message( "RealTimeBattle", string(msg) + " " + string(current_arena_filename.chars()) );
+  print_message( "RealTimeBattle", string(msg) + " " + current_arena_filename );
 
   // reset some variables
 
@@ -1084,7 +1084,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   robot_count = 0;
   Robot* robotp;
   start_tournament_info_t* infop = NULL;
-  String* stringp;
+  string* stringp;
 
   ListIterator<start_tournament_info_t> li;
   for( robotfilename_list.first(li); li.ok(); li++ )
@@ -1100,7 +1100,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   
   for( arenafilename_list.first(li); li.ok(); li++ )
     {
-      stringp = new String(li()->filename);
+      stringp = new string(li()->filename.chars());
       arena_filenames.insert_last( stringp );
       number_of_arenas++;
     }

@@ -199,7 +199,7 @@ read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs)
   robotdirs.delete_list();
   arenadirs.delete_list();
 
-  dirs = string(the_opts.get_s(OPTION_ROBOT_SEARCH_PATH).chars());
+  dirs = the_opts.get_s(OPTION_ROBOT_SEARCH_PATH);
   split_colonseparated_dirs(dirs, robotdirs);
 
 #ifdef ROBOTDIR
@@ -207,7 +207,7 @@ read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs)
   robotdirs.insert_last( str );
 #endif
 
-  dirs = string(the_opts.get_s(OPTION_ARENA_SEARCH_PATH).chars());
+  dirs = the_opts.get_s(OPTION_ARENA_SEARCH_PATH);
   split_colonseparated_dirs(dirs, arenadirs);
 
 #ifdef ARENADIR
@@ -453,7 +453,7 @@ search_directories( String directory,
 }
 
 bool
-parse_tournament_file( const String& fname, const StartTournamentFunction function,
+parse_tournament_file( const string& fname, const StartTournamentFunction function,
                        void* data, bool fatal_error_on_file_failure )
 {
   List<string> robotdirs;
@@ -461,7 +461,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
 
   read_dirs_from_system(robotdirs, arenadirs);
 
-  ifstream file(fname.chars());
+  ifstream file(fname.c_str());
   if( !file )
     {
       if( fatal_error_on_file_failure )
@@ -611,10 +611,10 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
 void
 create_tmp_rtb_dir()
 {
-  String dirname = the_opts.get_s( OPTION_TMP_RTB_DIR );
+  string dirname = the_opts.get_s( OPTION_TMP_RTB_DIR );
   struct stat filestat;
-  if( 0 != stat( dirname.chars(), &filestat ) )
-    mkdir( dirname.chars(), S_IRWXU | S_IRWXG | S_IRWXO );
+  if( 0 != stat( dirname.c_str(), &filestat ) )
+    mkdir( dirname.c_str(), S_IRWXU | S_IRWXG | S_IRWXO );
 }
 
 #ifndef NO_GRAPHICS

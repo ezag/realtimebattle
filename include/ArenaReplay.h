@@ -25,8 +25,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 using namespace std;
 
-class String;
-
 class ArenaReplay : public ArenaBase
 {
 public:
@@ -61,9 +59,9 @@ public:
   void   step_forward_or_backward(const bool forward );
   void   change_replay_time     ( const double time );
 
-  char   search_forward         ( const String& search_letters );
-  String search_forward         ( const List<String>& search_strings );
-  String search_backwards       ( const String& search_letters );
+  char   search_forward         ( const string& search_letters );
+  string search_forward         ( const List<string>& search_strings );
+  string search_backwards       ( const string& search_letters );
 
   double get_current_replay_time() { return current_replay_time; }
   double get_length_of_current_game();

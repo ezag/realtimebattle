@@ -81,7 +81,7 @@ void check_for_robots_and_arenas( string& word,
                                   const bool check_robots );
 void search_directories( String directory, List<start_tournament_info_t>& tour_list,
                          const bool check_robots );
-bool parse_tournament_file( const String& fname,
+bool parse_tournament_file( const string& fname,
                             const StartTournamentFunction function,
                             void* data, bool fatal_error_on_file_failure = true );
 

@@ -360,7 +360,7 @@ parse_command_line(int argc, char **argv)
       the_arena_controller.option_filename = ".rtbrc";
     }
   else
-    the_opts.read_options_file( String(the_arena_controller.option_filename.c_str()),true );
+    the_opts.read_options_file( the_arena_controller.option_filename,true );
 
  // the_arena_controller.auto_start_and_end
  // = ( ( the_arena_controller.tournament_filename != "" ) ||

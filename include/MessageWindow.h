@@ -24,12 +24,13 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <config.h>
 #endif
 
+#include <iostream>
+using namespace std;
+
 struct _GtkWidget;
 typedef struct _GtkWidget GtkWidget;
 union _GdkEvent;
 typedef union _GdkEvent GdkEvent;
-
-class String;
 
 class MessageWindow
 {
@@ -41,8 +42,8 @@ public:
   ~MessageWindow                 ();
 
   void set_window_title          ();
-  void add_message               ( const String& name_of_messager, 
-                                   const String& message );
+  void add_message               ( const string& name_of_messager, 
+                                   const string& message );
 
   static gboolean hide_window        ( GtkWidget* widget, GdkEvent* event,
                                    class MessageWindow* messagewindow_p );

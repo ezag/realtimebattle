@@ -81,7 +81,7 @@ OptionsWindow::OptionsWindow( const int default_width,
 
   option_info_t<double>* double_opts = the_opts.get_all_double_options();
   option_info_t<long>* long_opts = the_opts.get_all_long_options();
-  option_info_t<String>* string_opts = the_opts.get_all_string_options();
+  option_info_t<string>* string_opts = the_opts.get_all_string_options();
 
   for( int i=0; i < LAST_PAGE; i++ )
     {
@@ -143,7 +143,7 @@ OptionsWindow::OptionsWindow( const int default_width,
 
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, double_opts[opt].translated_label,
+                                    row, String(double_opts[opt].translated_label.c_str()),
                                     double_opts[opt].entry,
                                     String( double_opts[opt].value ),
                                     info, buttons );
@@ -180,7 +180,7 @@ OptionsWindow::OptionsWindow( const int default_width,
 
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, long_opts[opt].translated_label,
+                                    row, String(long_opts[opt].translated_label.c_str()),
                                     long_opts[opt].entry,
                                     entry_text, info, buttons );
 
@@ -204,9 +204,9 @@ OptionsWindow::OptionsWindow( const int default_width,
 
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, string_opts[opt].translated_label,
+                                    row, String(string_opts[opt].translated_label.c_str()),
                                     string_opts[opt].entry,
-                                    string_opts[opt].value,
+                                    String(string_opts[opt].value.c_str()),
                                     info, buttons );
 
           }
@@ -332,7 +332,7 @@ OptionsWindow::set_all_options()
     {
       option_info_t<double>* double_opts = the_opts.get_all_double_options();
       option_info_t<long>* long_opts = the_opts.get_all_long_options();
-      option_info_t<String>* string_opts = the_opts.get_all_string_options();
+      option_info_t<string>* string_opts = the_opts.get_all_string_options();
       for(int i=0;i<LAST_DOUBLE_OPTION;i++)
         {
 
@@ -381,7 +381,7 @@ OptionsWindow::update_all_gtk_entries()
 {
   option_info_t<double>* double_opts = the_opts.get_all_double_options();
   option_info_t<long>* long_opts = the_opts.get_all_long_options();
-  option_info_t<String>* string_opts = the_opts.get_all_string_options();
+  option_info_t<string>* string_opts = the_opts.get_all_string_options();
 
   for(int i=0;i<LAST_DOUBLE_OPTION;i++)
 	  {
@@ -399,7 +399,7 @@ OptionsWindow::update_all_gtk_entries()
     }
   for(int i=0;i<LAST_STRING_OPTION;i++)
     gtk_entry_set_text( GTK_ENTRY( string_opts[i].entry ),
-                        string_opts[i].value.chars() );
+                        string_opts[i].value.c_str() );
 }
 
 void
@@ -408,7 +408,7 @@ OptionsWindow::default_opts( GtkWidget* widget,
 {
   option_info_t<double>* double_opts = the_opts.get_all_double_options();
   option_info_t<long>* long_opts = the_opts.get_all_long_options();
-  option_info_t<String>* string_opts = the_opts.get_all_string_options();
+  option_info_t<string>* string_opts = the_opts.get_all_string_options();
 
   for(int i=0;i<LAST_DOUBLE_OPTION;i++)
     double_opts[i].value = double_opts[i].default_value;

@@ -58,7 +58,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <string>
 using namespace std;
 
-const String tmp_tournament_file( "/tmp.tour" );
+const string tmp_tournament_file( "/tmp.tour" );
 
 StartTournamentWindow::StartTournamentWindow( const int default_width,
                                               const int default_height,
@@ -507,7 +507,7 @@ StartTournamentWindow::load_file_selected( GtkWidget* widget,
                                            class StartTournamentWindow* stw_p )
 {
   stw_p->load_tournament_file
-    ( String( gtk_file_selection_get_filename
+    ( string( gtk_file_selection_get_filename
               ( GTK_FILE_SELECTION( stw_p->get_filesel() ) ) ),
       true );
   destroy_filesel( stw_p->get_filesel(), stw_p );
@@ -541,7 +541,7 @@ StartTournamentWindow::save_file_selected( GtkWidget* widget,
                                            class StartTournamentWindow* stw_p )
 {
   stw_p->save_tournament_file
-    ( String( gtk_file_selection_get_filename
+    ( string( gtk_file_selection_get_filename
              ( GTK_FILE_SELECTION( stw_p->get_filesel() ) ) ),
       true, true );
   destroy_filesel( stw_p->get_filesel(), stw_p );
@@ -556,7 +556,7 @@ StartTournamentWindow::destroy_filesel( GtkWidget* widget,
 }
 
 void
-StartTournamentWindow::load_tournament_file( const String& full_filename,
+StartTournamentWindow::load_tournament_file( const string& full_filename,
                                              bool display_fail_message )
 {
   if(!parse_tournament_file( full_filename,
@@ -647,7 +647,7 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
 }
 
 void
-StartTournamentWindow::save_tournament_file( const String& full_filename,
+StartTournamentWindow::save_tournament_file( const string& full_filename,
                                              bool display_file_fail_message,
                                              bool display_tour_fail_message )
 {
@@ -676,7 +676,7 @@ StartTournamentWindow::save_tournament_file( const String& full_filename,
       value[i] = max_rtb( min_value, value[i] );
     }
 
-  ofstream file(full_filename.chars(), ios::out);
+  ofstream file(full_filename.c_str(), ios::out);
   if( robot_number > 1 && file &&
       !( selected_arena_tournament.is_empty() ) )
     {

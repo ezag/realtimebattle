@@ -54,7 +54,6 @@ extern ArenaController the_arena_controller;
 #define replay_arena   (*( (ArenaReplay*) (the_arena_controller.get_the_arena()) ))
 
 class Robot;
-class String;
 class Options;
 class WallLine;
 class WallCircle;
@@ -116,7 +115,7 @@ public:
   List<Shape>* get_object_lists() { return object_lists; }
   List<Robot>* get_all_robots_in_sequence() { return &all_robots_in_sequence; }
   List<Robot>* get_all_robots_in_tournament() { return &all_robots_in_tournament; }
-  String get_current_arena_filename() { return current_arena_filename; }
+  string get_current_arena_filename() { return current_arena_filename; }
   int get_game_nr() { return game_nr; }
   int get_games_per_sequence() { return games_per_sequence; }
   int get_sequence_nr() { return sequence_nr; }
@@ -171,11 +170,11 @@ protected:
   List<Robot> all_robots_in_sequence;
   List<Vector2D> exclusion_points;
 
-  String current_arena_filename;
-  List<String> arena_filenames;               // list of Strings
+  string current_arena_filename;
+  List<string> arena_filenames;               // list of Strings
 
-  String statistics_file_name;
-  String option_file_name;
+  string statistics_file_name;
+  string option_file_name;
   ofstream message_file;
   bool use_message_file;
 

@@ -30,7 +30,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Extras.h"
 #include "Robot.h"
 #include "Shot.h"
-#include "String.h"
 #include "Structs.h"
 #include "Vector2D.h"
 
@@ -72,14 +71,14 @@ ArenaWindow::ArenaWindow( const int default_width,
   
   // Zoom buttons
 
-  struct button_t { String label; GtkSignalFunc func; };
+  struct button_t { string label; GtkSignalFunc func; };
 
   struct button_t buttons[] = {
-    { (String)_(" No Zoom ") + (String)"[0] ",
+    { string( _(" No Zoom ") ) + string("[0] "),
       (GtkSignalFunc) ArenaWindow::no_zoom  },
-    { (String)_(" Zoom In ") + (String)"[+] ",
+    { string( _(" Zoom In ") ) + string("[+] "),
       (GtkSignalFunc) ArenaWindow::zoom_in  },
-    { (String)_(" Zoom Out ") + (String)"[-] ",
+    { string( _(" Zoom Out ") ) + string("[-] "),
       (GtkSignalFunc) ArenaWindow::zoom_out } };
 
   GtkWidget* button_table = gtk_table_new( 1, 3, TRUE );
@@ -88,7 +87,7 @@ ArenaWindow::ArenaWindow( const int default_width,
   for( int i=0; i < 3; i++ )
     {
       GtkWidget* button =
-        gtk_button_new_with_label( buttons[i].label.chars() );
+        gtk_button_new_with_label( buttons[i].label.c_str() );
       gtk_signal_connect( GTK_OBJECT( button ), "clicked",
                           buttons[i].func, (gpointer) this );
       gtk_table_attach_defaults( GTK_TABLE( button_table ),
@@ -147,9 +146,9 @@ ArenaWindow::~ArenaWindow()
 void
 ArenaWindow::set_window_title()
 {
-  String title = (String)_("Arena") + "   " +
+  string title = string( _("Arena") ) + "   " +
     the_arena.get_current_arena_filename();
-  gtk_window_set_title( GTK_WINDOW( window_p ), title.chars() );
+  gtk_window_set_title( GTK_WINDOW( window_p ), title.c_str() );
 }
 
 void

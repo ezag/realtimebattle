@@ -26,7 +26,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #ifndef NO_GRAPHICS
 
-class String;
+#include <string>
+using namespace std;
 
 struct _GtkWidget;
 typedef struct _GtkWidget GtkWidget;
@@ -49,7 +50,7 @@ public:
                                      const int default_y_pos  = -1 );
   ~ControlWindow                   ();
 
-  void set_window_title            ( const String& text );
+  void set_window_title            ( const string& text );
   void remove_replay_widgets       ();
   void clear_extra_widgets         ();
   void display_debug_widgets       ();

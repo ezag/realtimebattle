@@ -46,7 +46,7 @@ public:
 
   void broadcast(enum message_to_robot_type ...);
   
-  bool parse_arena_file(String& filename);
+  bool parse_arena_file(string& filename);
   
   void set_filenames( string& log_fname, const string& statistics_fname, 
                       const string& tournament_fname,
@@ -56,7 +56,7 @@ public:
   
   bool get_use_message_file() { return use_message_file; }
   Vector2D get_random_position();
-  List<String> get_arena_filenames() { return arena_filenames; }
+  List<string> get_arena_filenames() { return arena_filenames; }
   int get_current_arena_nr() { return current_arena_nr; }
 
   int set_debug_level( const int new_level);
@@ -93,7 +93,7 @@ private:
   void end_tournament();
 
 
-  String tournament_file_name;
+  string tournament_file_name;
   
   ofstream LOG_FILE;
   bool use_log_file;

@@ -143,7 +143,7 @@ ArenaBase::set_state( const state_t st )
           Error(true, "Unknown state", "ArenaBase::set_state");
         }
 
-      controlwindow_p->set_window_title( String(infotext.c_str()) );
+      controlwindow_p->set_window_title( infotext );
     }
 #endif
 }
@@ -211,7 +211,7 @@ ArenaBase::print_message( const string& messager,
     message_file << String(messager.c_str()) << ": " << String(text.c_str()) << endl;
 #ifndef NO_GRAPHICS
   else if( !no_graphics && the_gui.is_messagewindow_up() )
-    the_gui.get_messagewindow_p()->add_message( String(messager.c_str()), String(text.c_str()) );
+    the_gui.get_messagewindow_p()->add_message( messager, text );
 #endif
 }
 

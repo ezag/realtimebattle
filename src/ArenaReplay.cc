@@ -136,7 +136,7 @@ ArenaReplay::timeout_function()
       if( the_arena_controller.auto_start_and_end )
         {
           if( statistics_file_name != "" )
-            save_statistics_to_file( string(statistics_file_name.chars()) );
+            save_statistics_to_file( statistics_file_name );
 
           Quit();
         }
@@ -411,7 +411,7 @@ ArenaReplay::parse_log_line()
         char label[200];
         log_file.get( label, 200, ':');
         log_file.get( temp );
-        option_return_t opt = the_opts.get_option_from_string( String( label ) );
+        option_return_t opt = the_opts.get_option_from_string( string( label ) );
         switch( opt.datatype )
           {
           case ENTRY_INT:
@@ -783,8 +783,8 @@ ArenaReplay::set_filenames( string& replay_fname, string& message_fname,
 
     }
 
-  statistics_file_name = String(statistics_fname.c_str());
-  option_file_name = String(option_fname.c_str());
+  statistics_file_name = statistics_fname;
+  option_file_name = option_fname;
 }
 
 // Changes game when replaying to fast forward, rewind or normal speed
@@ -1032,7 +1032,7 @@ ArenaReplay::recreate_lists()
 // The file pointer will be directly after the found letter.
 // Returns the letter found, or '?' if none found.
 char
-ArenaReplay::search_forward( const String& search_letters )
+ArenaReplay::search_forward( const string& search_letters )
 {
   if( log_from_stdin )
     return '?';
@@ -1046,7 +1046,7 @@ ArenaReplay::search_forward( const String& search_letters )
       log_file.clear();
 
       log_file >> letter;   // check first letter of line
-      if( search_letters.find( letter ) != -1 )
+      if( String(search_letters.c_str()).find( letter ) != -1 )
         {
           return letter;
         }
@@ -1061,14 +1061,14 @@ ArenaReplay::search_forward( const String& search_letters )
 // Similar to the previous function, but the argument is a list
 // of strings (string lengths between 1 and 16) to serach for.
 // Returns the string found, or the empty string if none found.
-String
-ArenaReplay::search_forward( const List<String>& search_strings )
+string
+ArenaReplay::search_forward( const List<string>& search_strings )
 {
   if( log_from_stdin ) return "";
 
   bool found = false;
   char buffer[400];
-  ListIterator<String> li;
+  ListIterator<string> li;
   int i;
   int read_letters;
   char letter[16];
@@ -1082,7 +1082,7 @@ ArenaReplay::search_forward( const List<String>& search_strings )
       for( search_strings.first(li); li.ok() && !found; li++ )
         {
           found = true;
-          for( i=0; i < li()->get_length() && found; i++ )
+          for( i=0; i < String(li()->c_str()).get_length() && found; i++ )
             {
               if( read_letters < i+1 )
                 {
@@ -1102,8 +1102,8 @@ ArenaReplay::search_forward( const List<String>& search_strings )
 }
 
 
-String
-ArenaReplay::search_backwards( const String& search_letters )
+string
+ArenaReplay::search_backwards( const string& search_letters )
 {
 /* if( log_from_stdin )
     return "";
@@ -1168,18 +1168,18 @@ ArenaReplay::beginning_of_current_line()
 void
 ArenaReplay::make_statistics_from_file()
 {
-  List<String> str_list;
-  str_list.insert_last( new String("DR") );
-  str_list.insert_last( new String("L") );
-  str_list.insert_last( new String("G") );
-  str_list.insert_last( new String("T") );
-  str_list.insert_last( new String("H") );
+  List<string> str_list;
+  str_list.insert_last( new string("DR") );
+  str_list.insert_last( new string("L") );
+  str_list.insert_last( new string("G") );
+  str_list.insert_last( new string("T") );
+  str_list.insert_last( new string("H") );
 
   ListIterator<Shape> li;
   double points_received;
   int pos_this_game, object_id;
   char buffer[400];
-  String letters;
+  string letters;
 
   streampos old_pos = log_file.tellg();
 
@@ -1266,7 +1266,7 @@ void
 ArenaReplay::get_time_positions_in_game()
 {
 
-  String letter_list = "TGHSMCDR";
+  string letter_list = "TGHSMCDR";
   char letter;
   char buffer[400];
   int time_pos_index = 0;

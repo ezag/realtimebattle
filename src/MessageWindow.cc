@@ -74,18 +74,18 @@ MessageWindow::MessageWindow( const int default_width,
   gtk_box_pack_start( GTK_BOX( vbox ), hbox, FALSE, FALSE, 0 );
   gtk_widget_show( hbox );
 
-  struct button_t { String label; GtkSignalFunc func; };
+  struct button_t { string label; GtkSignalFunc func; };
   struct button_t buttons[] = {
-    { (String)_(" Clear all messages "), 
+    { string( _(" Clear all messages ") ), 
       (GtkSignalFunc) MessageWindow::clear_clist },
-    { (String)_(" Show only marked robot "), 
+    { string( _(" Show only marked robot ") ), 
       (GtkSignalFunc) MessageWindow::show_one_robot },
-    { (String)_(" Show all "),
+    { string( _(" Show all ") ),
       (GtkSignalFunc) MessageWindow::show_all } };
   for(int i = 0;i < 3; i++)
     {
       GtkWidget* button =
-        gtk_button_new_with_label( buttons[i].label.chars() );
+        gtk_button_new_with_label( buttons[i].label.c_str() );
       gtk_signal_connect( GTK_OBJECT( button ), "clicked",
                           (GtkSignalFunc) buttons[i].func,
                           (gpointer) this );
@@ -170,29 +170,33 @@ MessageWindow::~MessageWindow()
 void
 MessageWindow::set_window_title()
 {
-  String title = (String)_("Messages");
+  string title = string( _("Messages") );
   if( viewed_robot != NULL )
-    title += "  -  " + viewed_robot->get_robot_name();
+    title += "  -  " + string(viewed_robot->get_robot_name().chars());
   else
-    title += "  -  " + (String)_(" All ");
+    title += "  -  " + string( _(" All ") );
 
-  gtk_window_set_title( GTK_WINDOW( window_p ), title.chars() );
+  gtk_window_set_title( GTK_WINDOW( window_p ), title.c_str() );
 }
 
 void
-MessageWindow::add_message( const String& name_of_messager, 
-                            const String& message )
+MessageWindow::add_message( const string& name_of_messager, 
+                            const string& message )
 {
   if( window_shown )
     {
       if( viewed_robot != NULL &&
-          viewed_robot->get_robot_name() != name_of_messager &&
+          viewed_robot->get_robot_name() != String(name_of_messager.c_str()) &&
           name_of_messager != "RealTimeBattle" )
         return;
-
-      char* lst[2] = { name_of_messager.non_const_chars(),
-                       g_utf8_normalize (message.non_const_chars(), -1, G_NORMALIZE_ALL) };
-  					   
+      
+      char tmp_name_of_messager[name_of_messager.size()+1];
+      char tmp_message[message.size()+1];
+      strcpy(tmp_name_of_messager, name_of_messager.c_str());
+      strcpy(tmp_message, message.c_str());
+      char* lst[2] = { tmp_name_of_messager/*.non_const_chars()*/,
+                       g_utf8_normalize (tmp_message/*.non_const_chars()*/, -1, G_NORMALIZE_ALL) };
+      
       int row = 0;
       row = gtk_clist_insert( GTK_CLIST( clist ), row, lst );
 

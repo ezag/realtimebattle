@@ -33,7 +33,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Dialog.h"
 #include "List.h"
 #include "Options.h"
-#include "String.h"
 
 #include <string>
 using namespace std;
