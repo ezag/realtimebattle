@@ -203,14 +203,11 @@ Robot::start_process()
               "Robot::start_process, child");
 
       // Lower priority by one
-// setpriority/getpriority not yet defined in Cygwin (2/2005)
-#ifndef __CYGWIN__
       int old;
       if( (old = getpriority (PRIO_PROCESS, 0)) == -1 )
         Error(true, "Couldn't get priority for robot " + robot_filename, "Robot::start_process, child");
       if( setpriority (PRIO_PROCESS, 0, old + 1) == -1)
         Error(true, "Couldn't set priority for robot " + robot_filename, "Robot::start_process, child");
-#endif
 
       // Close all pipes not belonging to the robot
 
