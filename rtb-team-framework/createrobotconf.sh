@@ -32,7 +32,7 @@ if test -z "$3"; then
 #echo "No template file specified, take included HERE document configuration template ..." 
 cat <<__EOF| sed -ne "s/@STRATEGY@/$strategy/g; s/@ROBOTNAME@/$name/g; s/@TEAM@/$team/g; s/@LOGPRIO@/$logprio/g; w $1"
 [Main]
-logDriverName="NullLogDriver"
+logDriverName="UnixFileLogDriver"
 logDriverParameters="file:/tmp/@STRATEGY@-@ROBOTNAME@-@TEAM@.log"
 logPriority="@LOGPRIO@"
 RotationReachedValue="0"

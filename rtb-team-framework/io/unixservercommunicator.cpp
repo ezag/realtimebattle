@@ -1,5 +1,5 @@
 /************************************************************************
-    $Id: unixservercommunicator.cpp,v 1.1 2005/01/10 18:35:33 jonico Exp $
+    $Id: unixservercommunicator.cpp,v 1.2 2005/01/27 18:16:27 jonico Exp $
     
     RTB - Team Framework: Framework for RealTime Battle robots to communicate efficiently in a team
     Copyright (C) 2004 The RTB- Team Framework Group: http://rtb-team.sourceforge.net
@@ -19,10 +19,13 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
     $Log: unixservercommunicator.cpp,v $
-    Revision 1.1  2005/01/10 18:35:33  jonico
-    Initial revision
+    Revision 1.2  2005/01/27 18:16:27  jonico
+    Framework code maintenance update to reflect an important bug fix
 
-    Revision 1.2  2005/01/06 17:59:33  jonico
+    Revision 1.3  2005/01/27 18:08:04  jonico
+    Fixed busy waiting select bug in the server communicators, fixed NullLogger problem in createrobotconf
+
+    Revision 1.3  2005/01/06 17:59:28  jonico
     Now all files in the repository have their new header format.
 
 
@@ -129,55 +132,41 @@ namespace IO {
 		
 		//wait until RTB-Server is sending data (=> Exception) or a client wants to connect 
 		_logger->logMessage(2, "Waiting for remoteclients.");
-		while(true) {
 			
-			//set timeOut for polling
-			timeval	timeOut;
-			timeOut.tv_sec = 0;
-			timeOut.tv_usec = 0;
-		
-			//select stdin (RTB-Server)
-			fd_set listenSocketSet;
-			FD_ZERO(&listenSocketSet);
-			FD_SET(0, &listenSocketSet);
-			if( select(1, &listenSocketSet, NULL, NULL, &timeOut) < 0 ) 
-				throw IOException("Could not create remote connection. fcntl() failed.");
-			
-			//nothing from RTB-Server recieved?
-			if( !FD_ISSET(0, &listenSocketSet) ) {
-				
-				//set timeOut for polling
-				timeOut.tv_sec = 0;
-				timeOut.tv_usec = 0;
-			
-				FD_ZERO(&listenSocketSet);
-				FD_SET(_serverSocket, &listenSocketSet);
-				if( select(_serverSocket + 1, &listenSocketSet, NULL, NULL, &timeOut) < 0 )
-					throw IOException("Could not create remote connection. select() failed.");
+		fd_set listenSocketSet;
+		FD_ZERO(&listenSocketSet);
+		FD_SET(0, &listenSocketSet);
+		FD_SET(_serverSocket, &listenSocketSet);
 
-				//remoteclient wants to connect				
-				if( FD_ISSET(_serverSocket, &listenSocketSet) ) {
-				
-					//establish client connection
-					_logger->logMessage(5, "Establish connection to new remoteclient.");
-					sockaddr clientAddress;
-					socklen_t addressLen;
-					int clientSocket = accept(_serverSocket, &clientAddress, &addressLen);
-					
-					if( clientSocket >= 0 ) {
-					
-						//switch clientSocket to blocking-mode
-						if( fcntl(clientSocket, F_SETFL, fcntl(clientSocket, F_GETFL, 0) & (~O_NONBLOCK)) != 0 )
-							throw IOException("Could not create remote connection. fcntl() failed.");
-		
-						return auto_ptr <ClientConnection>(new UnixRemoteClientConnection(clientSocket));
-					}
-				}
-			}
-			else
-				//received data from RTB-Server => time to connect is over
-				throw ServerIsPresentException("");
+		if( select(_serverSocket+1, &listenSocketSet, NULL, NULL, NULL) < 0 ) 
+			throw IOException("Could not create remote connection. select() failed.");
+			
+		//nothing from RTB-Server received?
+		if(FD_ISSET(0, &listenSocketSet) ) {
+			//received data from RTB-Server => time to connect is over
+			throw ServerIsPresentException("Master server answered, no pending connection requests will be accepted.");
 		}
+
+
+		if( FD_ISSET(_serverSocket, &listenSocketSet) ) {
+		
+			//establish client connection
+			_logger->logMessage(5, "Establish connection to new remoteclient.");
+			sockaddr clientAddress;
+			socklen_t addressLen;
+			int clientSocket = accept(_serverSocket, &clientAddress, &addressLen);
+				
+			if( clientSocket >= 0 ) {
+				
+				//switch clientSocket to blocking-mode
+				if( fcntl(clientSocket, F_SETFL, fcntl(clientSocket, F_GETFL, 0) & (~O_NONBLOCK)) != 0 )
+					throw IOException("Could not create remote connection. fcntl() failed.");
+	
+				return auto_ptr <ClientConnection>(new UnixRemoteClientConnection(clientSocket));
+			}
+		}
+		
+		throw IOException("Select returns but no file descriptor was ready to read from.");
 		
 	}
 }
