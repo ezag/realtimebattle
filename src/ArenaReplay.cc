@@ -29,7 +29,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <sstream>
 using namespace std;
 
-#include "String.h"
 #include "ArenaReplay.h"
 #include "ArenaController.h"
 #include "IntlDefs.h"
@@ -383,12 +382,13 @@ ArenaReplay::parse_log_line()
       {
         if( log_from_stdin )
           {
-            int robot_id;
+            int robot_id, col;
             char robot_colour[7];
             char name[200];
             log_file >> robot_id >> ws;
             log_file.get( robot_colour, 7, ' ');
-            long int col = str2hex( (String)robot_colour );
+            istringstream string2hex(robot_colour);
+            string2hex >> std::hex >> col;
             log_file.get( name, 200, '\n' );
             Robot* robotp = new Robot( robot_id, col, string(name) );
             all_robots_in_tournament.insert_last(robotp); // used by statistics
@@ -1083,7 +1083,7 @@ ArenaReplay::search_forward( const List<string>& search_strings )
       for( search_strings.first(li); li.ok() && !found; li++ )
         {
           found = true;
-          for( i=0; i < String(li()->c_str()).get_length() && found; i++ )
+          for( i=0; i < li()->size() && found; i++ )
             {
               if( read_letters < i+1 )
                 {
@@ -1204,12 +1204,13 @@ ArenaReplay::make_statistics_from_file()
 	    // check whether the L is not from the arena file
 	    if (log_file.peek()==' ')
 		    break;
-            int robot_id;
+            int robot_id, col;
             char robot_colour[7];
             char name[200];
             log_file >> robot_id >> ws;
             log_file.get( robot_colour, 7, ' ');
-            long int col = str2hex( (String)robot_colour );
+            istringstream string2hex(robot_colour);
+            string2hex >> std::hex >> col;
             log_file >> ws;
             log_file.get( name, 200, '\n' );
             Robot* robotp = new Robot( robot_id, col, string(name) );

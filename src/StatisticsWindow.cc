@@ -23,11 +23,11 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "IntlDefs.h"
 #include "Gui.h"
 #include "ArenaController.h"
-#include "String.h"
 #include "Various.h"
 #include "Robot.h"
 
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 //extern class Gui the_gui;
@@ -572,24 +572,24 @@ StatisticsWindow::add_new_row( Robot* robot_p, stat_t average_stat,
       sequence_nr_str << average_stat.sequence_nr;
       game_nr_str << average_stat.game_nr;
       gtk_clist_set_text( GTK_CLIST( clist ), row, 0,
-                          sequence_nr_str.str().c_str()/*non_const_chars()*/ );
+                          sequence_nr_str.str().c_str() );
       gtk_clist_set_text( GTK_CLIST( clist ), row, 1,
-                          game_nr_str.str().c_str()/*non_const_chars()*/ );
+                          game_nr_str.str().c_str() );
     }
 
   ostringstream position_str;
   position_str << average_stat.position;
   gtk_clist_set_text( GTK_CLIST( clist ), row, 2,
-                      position_str.str().c_str()/*non_const_chars()*/ );
+                      position_str.str().c_str() );
 
-  String str;
+  ostringstream points_str;
   if( type == STAT_TYPE_SEQUENCE ||
       type == STAT_TYPE_TOTAL)
-    str = String(average_stat.points, 2, STRING_FIXED_FORM );
+    points_str << setiosflags(ios::fixed) << setprecision(2) << average_stat.points;
   else
-    str = String(average_stat.points );
+    points_str << average_stat.points;
 
-  gtk_clist_set_text( GTK_CLIST( clist ), row, 3, str.non_const_chars() );
+  gtk_clist_set_text( GTK_CLIST( clist ), row, 3, points_str.str().c_str() );
 
   if( type == STAT_TYPE_TOTAL ||
       type == STAT_TYPE_SEQUENCE )
@@ -597,19 +597,20 @@ StatisticsWindow::add_new_row( Robot* robot_p, stat_t average_stat,
       ostringstream games_played_str;
       games_played_str << games_played;
       gtk_clist_set_text( GTK_CLIST( clist ), row, 4,
-                          games_played_str.str().c_str()/*non_const_chars()*/ );
+                          games_played_str.str().c_str() );
   }
   else
       gtk_clist_set_text( GTK_CLIST( clist ), row, 4,
-                          string( "" ).c_str()/*non_const_chars()*/ );
+                          string( "" ).c_str() );
 
-  gtk_clist_set_text( GTK_CLIST( clist ), row, 5,
-                      String( average_stat.time_survived, 2,
-                              STRING_FIXED_FORM).non_const_chars() );
+  ostringstream time_survived_str;
+  time_survived_str << setiosflags(ios::fixed) << setprecision(2) << average_stat.time_survived;
+  gtk_clist_set_text( GTK_CLIST( clist ), row, 5, time_survived_str.str().c_str() );
+
   ostringstream total_points_str;
   total_points_str << average_stat.total_points;
   gtk_clist_set_text( GTK_CLIST( clist ), row, 6,
-                      total_points_str.str().c_str()/*non_const_chars()*/ );
+                      total_points_str.str().c_str() );
 }
 
 void

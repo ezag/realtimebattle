@@ -49,7 +49,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "IntlDefs.h"
 #include "ArenaRealTime.h"
 #include "StartTournamentWindow.h"
-#include "String.h"
 #include "Various.h"
 #include "List.h"
 #include "Dialog.h"
@@ -594,7 +593,8 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
                 const int games_p_sequence, 
                 const int n_o_sequences )
 {
-
+ try
+  {
   for( int i = 0; i<2; i++ )
     {
       GtkWidget* tour_clist;
@@ -632,7 +632,7 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
 
       
           string fname = info->filename;
-          fname = string(get_segment( String(fname.c_str()), fname.rfind( '/', fname.size() ) + 1, -1 ).chars());
+          fname = fname.substr(fname.rfind( '/', fname.size() ) + 1);
       
           gtk_clist_set_text( GTK_CLIST( tour_clist ),
                               row, 0, fname.c_str() );
@@ -641,6 +641,11 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
           tour_list->insert_last( new start_tournament_info_t
                                   ( info->row, false, info->filename, info->directory ) );
         }
+    }
+   }
+  catch(exception& e)
+    {
+      Error(true, e.what(), "StartTournamentWindow::new_tournament");
     }
   ostringstream robots_p_game_str, games_p_sequence_str, n_o_sequences_str;
   robots_p_game_str << robots_p_game;
@@ -658,6 +663,7 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
 {
   int value[3];
   int robot_number = get_selected_robot_tournament()->number_of_elements();
+  istringstream string2number;
 
   for( int i = 0; i < 3; i++ )
     {
@@ -675,7 +681,8 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
       else
         min_value = 2;
 
-      istringstream string2number(gtk_entry_get_text( GTK_ENTRY( get_entries()[i] ) ));
+      string2number.clear();
+      string2number.str(gtk_entry_get_text( GTK_ENTRY( get_entries()[i] ) ));
       int tmp;
       string2number >> tmp;
       value[i] = tmp;
@@ -813,6 +820,7 @@ StartTournamentWindow::start( GtkWidget* widget,
 
   int value[3];
   int robot_number = stw_p->get_selected_robot_tournament()->number_of_elements();
+  istringstream string2number;
 
   for( int i = 0; i < 3; i++ )
     {
@@ -830,7 +838,8 @@ StartTournamentWindow::start( GtkWidget* widget,
       else
         min_value = 2;
 
-      istringstream string2number(gtk_entry_get_text( GTK_ENTRY( stw_p->get_entries()[i] ) ));
+      string2number.clear();
+      string2number.str(gtk_entry_get_text( GTK_ENTRY( stw_p->get_entries()[i] ) ));
       int tmp;
       string2number >> tmp;
       value[i] = tmp;

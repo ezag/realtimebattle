@@ -194,6 +194,7 @@ parse_command_line(int argc, char **argv)
 {
   int version_flag=false, help_flag=false, graphics_flag=true;
   int c;
+  istringstream string2number;
 
   extern char* optarg;
   extern int optind;
@@ -246,7 +247,8 @@ parse_command_line(int argc, char **argv)
             {
             case 3:
               {
-                istringstream string2number(optarg);
+                string2number.clear();
+                string2number.str(optarg);
                 int optarg_num;
                 string2number >> optarg_num;
                 the_arena_controller.debug_level = optarg_num;
@@ -286,7 +288,8 @@ parse_command_line(int argc, char **argv)
 
         case 'D':
           {
-            istringstream string2number(optarg);
+            string2number.clear();
+            string2number.str(optarg);
             int optarg_num;
             string2number >> optarg_num;
             the_arena_controller.debug_level = optarg_num;

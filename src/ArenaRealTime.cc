@@ -27,6 +27,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <unistd.h>
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <iomanip>
 #include <stdarg.h>
@@ -44,7 +45,6 @@ using namespace std;
 #include "IntlDefs.h"
 #include "Extras.h"
 #include "Various.h"
-#include "String.h"
 #include "Shot.h"
 #include "Options.h"
 #include "Wall.h"
@@ -242,6 +242,7 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
 
   int prec = 2;
   LOG_FILE << setiosflags(ios::fixed) << setprecision(prec);
+  ostringstream hex2string;
 
   switch(first_letter)
     {
@@ -315,9 +316,10 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
     case 'L': // List of robot properties
       {
         LOG_FILE << va_arg(args, int  ) << " ";  // robot id
-        LOG_FILE << hex2str(va_arg(args, long )) << " ";  // robot colour
+        hex2string << std::hex << va_arg(args, long );
+        LOG_FILE << hex2string.str();
        
-        String name = va_arg(args, char*);   // robot name
+        string name = va_arg(args, char*);   // robot name
         if( name == "" ) name = "Anonymous";
         LOG_FILE << name;
       }
@@ -340,7 +342,10 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
             LOG_FILE << va_arg(args, long);   // Option value
             break;
           case 'H':
-            LOG_FILE << hex2str( va_arg(args, long) ).chars();   // Option value
+            {
+              hex2string << std::hex << va_arg(args, long);
+              LOG_FILE << hex2string.str();   // Option value
+            }
             break;
           case 'S':
             LOG_FILE << va_arg(args, char*);   // Option value
@@ -372,25 +377,35 @@ ArenaRealTime::broadcast(const message_to_robot_type msg_type ...)
 {
   va_list args;
   va_start(args, msg_type);
-  String str = (String)message_to_robot[msg_type].msg + ' ';
+  string str = string(message_to_robot[msg_type].msg) + " ";
   for(int i=0; i<message_to_robot[msg_type].number_of_args; i++)
     {
+      ostringstream number2string;
       switch(message_to_robot[msg_type].arg_type[i])
         {
         case NONE: 
           Error(true, "Couldn't send message, no arg_type", "ArenaRealTime::broadcast");
           break;
         case INT:
-          str += (String)va_arg(args, int) + ' ';
+          {
+            number2string << va_arg(args, int);
+            str += number2string.str() + " ";
+          }
           break;
         case DOUBLE:
-          str += String(va_arg(args, double), 6) + ' ';
+          {
+            number2string << std::hex << va_arg(args, double);
+            str += number2string.str() + " ";
+          }
           break;
         case STRING:
-          str += (String)va_arg(args, char*) + ' ';
+          str += string(va_arg(args, char*)) + " ";
           break;   
         case HEX:
-          str += hex2str(va_arg(args, int)) + ' ';
+          {
+            number2string << std::hex << va_arg(args, int);
+            str += number2string.str() + " "; 
+          }
           break;
         default:
           Error(true, "Couldn't send message, unknown arg_type", "ArenaRealTime::broadcast");

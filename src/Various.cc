@@ -47,7 +47,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # endif
 #endif
 #include <stdlib.h>
-#include <String.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -504,6 +503,7 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
   int robots_p_s = 2;
   int n_o_sequences = 1;
   int looking_for = 0; // 0 = keyword, 1 = robot, 2 = arena
+  istringstream string2number;
 
   List<start_tournament_info_t> robot_list;
   List<start_tournament_info_t> arena_list;
@@ -592,7 +592,8 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
             games_p_s = -1;
           else
             {
-              istringstream string2number(buffer);
+              string2number.clear();
+              string2number.str(buffer);
               string2number >> games_p_s;
             }
         }
@@ -605,7 +606,8 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
             robots_p_s = -1;
           else
           {
-            istringstream string2number(buffer);
+            string2number.clear();
+            string2number.str(buffer);
             string2number >> robots_p_s;
           }
         }
@@ -618,7 +620,8 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
             n_o_sequences = -1;
           else
           {
-            istringstream string2number(buffer);
+            string2number.clear();
+            string2number.str(buffer);
             string2number >> n_o_sequences;
           }
         }
@@ -663,18 +666,18 @@ create_tmp_rtb_dir()
 void
 entry_handler( GtkWidget * entry, entry_t * entry_info )
 {
-  String entry_text = gtk_entry_get_text(GTK_ENTRY(entry));
-  String old_entry_text = entry_text;
+  string entry_text = gtk_entry_get_text(GTK_ENTRY(entry));
+  string old_entry_text = entry_text;
   bool point_found = false;
 
-  for(int i=0;i<entry_text.get_length();i++)
-    {
+  try {
+    for(int i=0;i<entry_text.size();i++) {
       switch( entry_info->datatype )
         {
         case ENTRY_INT:
           if( !((entry_text[i] >= '0' && entry_text[i] <= '9') ||
                 (entry_text[i] == '-' && i == 0 && entry_info->allow_sign ))  )
-            entry_text.erase(i);
+            entry_text.erase(i,1);
           break;
         case ENTRY_DOUBLE:
         /* if( !((entry_text[i] >= '0' && entry_text[i] <= '9') ||
@@ -691,7 +694,7 @@ entry_handler( GtkWidget * entry, entry_t * entry_info )
                  (entry_text[i] >= 'a' && entry_text[i] <= 'f') ||
                  (entry_text[i] >= 'A' && entry_text[i] <= 'F')) ||
                 (entry_text[i] == '-' && i == 0 ) && entry_info->allow_sign ) )
-            entry_text.erase(i);
+            entry_text.erase(i,1);
           break;
         case ENTRY_CHAR:
           break;
@@ -699,9 +702,13 @@ entry_handler( GtkWidget * entry, entry_t * entry_info )
           break;
         }
     }
-
+  }
+  catch(exception& e) {
+    Error(true, e.what(), "entry_handler");
+  }
+ 
   if(old_entry_text != entry_text)
-    gtk_entry_set_text(GTK_ENTRY(entry),entry_text.chars());
+    gtk_entry_set_text(GTK_ENTRY(entry),entry_text.c_str());
 }
 
 gint

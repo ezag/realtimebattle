@@ -34,7 +34,6 @@ using namespace std;
 #include "StatisticsWindow.h"
 #include "Options.h"
 #include "Various.h"
-#include "String.h"
 
 extern class Options the_opts;
 extern class Gui the_gui;
@@ -167,8 +166,11 @@ OptionsWindow::OptionsWindow( const int default_width,
               number2string << long_opts[opt].value;
               entry_text = number2string.str();
             }
-            else if( long_opts[opt].datatype == ENTRY_HEX )
-              entry_text = string(hex2str( long_opts[opt].value ).chars());
+            else if( long_opts[opt].datatype == ENTRY_HEX ) {
+              ostringstream hex2string;
+              hex2string << std::hex << long_opts[opt].value;
+              entry_text = hex2string.str();
+            }
 
             entry_t* info = new entry_t( long_opts[opt].datatype, sign );
 
@@ -326,6 +328,7 @@ void
 OptionsWindow::set_all_options()
 {
   bool allowed = false;
+  istringstream string2number;
 
   if( the_arena_controller.is_started() )
     {
@@ -344,7 +347,8 @@ OptionsWindow::set_all_options()
       for(int i=0;i<LAST_DOUBLE_OPTION;i++)
         {
 
-          istringstream string2number(gtk_entry_get_text( GTK_ENTRY( double_opts[i].entry ) ) );
+          string2number.clear();
+          string2number.str(gtk_entry_get_text( GTK_ENTRY( double_opts[i].entry ) ) );
           double entry_value;
           string2number >> entry_value;
 
@@ -361,12 +365,16 @@ OptionsWindow::set_all_options()
           long entry_value = 0;
           if( long_opts[i].datatype == ENTRY_INT )
             {
-              istringstream string2number(gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ));
+              string2number.clear();
+              string2number.str(gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ));
               string2number >> entry_value;
             }
           if( long_opts[i].datatype == ENTRY_HEX )
-            entry_value = str2hex
-              ( gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ) );
+            {
+              string2number.clear();
+              string2number.str(gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ));
+              string2number >> std::hex >> entry_value >> std::dec;
+            }
 
           if( entry_value > long_opts[i].max_value )
             entry_value = long_opts[i].max_value;
@@ -410,9 +418,12 @@ OptionsWindow::update_all_gtk_entries()
         gtk_entry_set_text( GTK_ENTRY( long_opts[i].entry ),
                             number2string.str().c_str() );
       }
-      else if (long_opts[i].datatype == ENTRY_HEX) 
+      else if (long_opts[i].datatype == ENTRY_HEX) {
+        ostringstream hex2string;
+        hex2string << std::hex << long_opts[i].value;
         gtk_entry_set_text( GTK_ENTRY( long_opts[i].entry ),
-                            hex2str(long_opts[i].value).chars() );
+                            hex2string.str().c_str() );
+      }
     }
   for(int i=0;i<LAST_STRING_OPTION;i++)
     gtk_entry_set_text( GTK_ENTRY( string_opts[i].entry ),
@@ -665,9 +676,12 @@ OptionsWindow::long_min( GtkWidget* widget,
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         number2string.str().c_str() );
   }
-  else if( option->datatype == ENTRY_HEX )
+  else if( option->datatype == ENTRY_HEX ) {
+    ostringstream hex2string;
+    hex2string << std::hex << option->min_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        hex2str( option->min_value).chars() );
+                        hex2string.str().c_str() );
+  }
 }
 
 void
@@ -681,9 +695,12 @@ OptionsWindow::long_def( GtkWidget* widget,
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         number2string.str().c_str() );
   }
-  else if( option->datatype == ENTRY_HEX )
+  else if( option->datatype == ENTRY_HEX ) {
+    ostringstream hex2string;
+    hex2string << std::hex << option->default_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        hex2str( option->default_value).chars() );
+                        hex2string.str().c_str() );
+  }
 }
 
 void
@@ -697,9 +714,12 @@ OptionsWindow::long_max( GtkWidget* widget,
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         number2string.str().c_str() );
   }
-  else if( option->datatype == ENTRY_HEX )
+  else if( option->datatype == ENTRY_HEX ) {
+    ostringstream hex2string;
+    hex2string << std::hex << option->max_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        hex2str( option->max_value).chars() );
+                        hex2string.str().c_str() );
+  }
 }
 
 void

@@ -49,7 +49,6 @@ using namespace std;
 #include <stdio.h>
 
 #include "Robot.h"
-#include "String.h"
 #include "ArenaController.h"
 #include "ArenaRealTime.h"
 #include "ArenaReplay.h"
@@ -80,7 +79,6 @@ Robot::Robot(const string& filename)
 
   int nr;
   if( ( nr = robot_filename.rfind( '/', robot_filename.size()) ) == -1 )
-//   if( ( nr = String(robot_filename.c_str()).find( '/', 0, true) ) == -1 )
     robot_plain_filename = robot_filename;
   else
     {
@@ -1741,28 +1739,36 @@ Robot::display_score()
   if( last_displayed_energy != (int)energy )
     {
       last_displayed_energy = (int)energy;
+      ostringstream number2string;
+      number2string << (int)energy;
       gtk_clist_set_text(GTK_CLIST(the_gui.get_scorewindow_p()->get_clist()),
                          row_in_score_clist,
-                         2, String((int)energy).non_const_chars());
+                         2, number2string.str().c_str());
     }
 
   if( last_displayed_place != position_this_game )
     {
-      String str;
-      if( position_this_game != 0 ) str = String(position_this_game);
+      string str;
+      if( position_this_game != 0 ) {
+        ostringstream number2string;
+        number2string << position_this_game ;
+        str = number2string.str();
+      }
       last_displayed_place = position_this_game;
       gtk_clist_set_text(GTK_CLIST(the_gui.get_scorewindow_p()->get_clist()),
                          row_in_score_clist,
-                         3, str.non_const_chars());
+                         3, str.c_str());
     }
 
   p = get_last_position();
   if( p != 0 && p != last_displayed_last_place  )
     {
       last_displayed_last_place = p;
+      ostringstream number2string;
+      number2string << p ;
       gtk_clist_set_text(GTK_CLIST(the_gui.get_scorewindow_p()->get_clist()),
                          row_in_score_clist,
-                         4, String(p).non_const_chars());
+                         4, number2string.str().c_str());
     }
 
 
@@ -1770,9 +1776,11 @@ Robot::display_score()
   if( last_displayed_score != (int)(10 * pnts) )
     {
       last_displayed_score = (int)(10 * pnts);
+      ostringstream number2string;
+      number2string << pnts ;
       gtk_clist_set_text(GTK_CLIST(the_gui.get_scorewindow_p()->get_clist()),
                          row_in_score_clist,
-                         5, String(pnts).non_const_chars());
+                         5, number2string.str().c_str());
     }
 }
 

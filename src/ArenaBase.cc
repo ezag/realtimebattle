@@ -59,7 +59,6 @@ using namespace std;
 #include "IntlDefs.h"
 #include "Extras.h"
 #include "Various.h"
-#include "String.h"
 #include "Shot.h"
 #include "Options.h"
 #include "Wall.h"
@@ -208,7 +207,7 @@ ArenaBase::print_message( const string& messager,
                           const string& text )
 {
   if( use_message_file )
-    message_file << String(messager.c_str()) << ": " << String(text.c_str()) << endl;
+    message_file << messager << ": " << text << endl;
 #ifndef NO_GRAPHICS
   else if( !no_graphics && the_gui.is_messagewindow_up() )
     the_gui.get_messagewindow_p()->add_message( messager, text );

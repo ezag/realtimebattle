@@ -24,10 +24,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <fstream>
 #include <math.h>
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
-
-#include "String.h"
 
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
@@ -492,8 +491,9 @@ Options::read_options_file(string file_string, const bool as_default)
   ifstream file(file_string.c_str());
   if( !file )
     return;
-
-  for(;;)
+  try
+   {
+    for(;;)
     {
       char temp;
       char buffer[1000];
@@ -531,12 +531,13 @@ Options::read_options_file(string file_string, const bool as_default)
               file >> option_value;
             if( all_long_options[i].datatype == ENTRY_HEX )
               {
-                String temp_string;
+                string temp_string;
                 file >> temp_string;
-							
+                
                 while( temp_string[0] == ' ' )
-                  temp_string = get_segment(temp_string,1,-1);
-                option_value = str2hex(temp_string);
+                  temp_string = temp_string.substr(1);
+                istringstream string2hex(temp_string);
+                string2hex >> std::hex >> option_value;
               }
             //file.get(buffer,100,'\n');
             option_value = min_rtb( option_value,
@@ -552,20 +553,25 @@ Options::read_options_file(string file_string, const bool as_default)
       for(int i=0;i<LAST_STRING_OPTION;i++)
         if(option_name == all_string_options[i].label )
           {
-            String option_value;
+            string option_value;
             file >> option_value;
             while( option_value[0] == ' ' )
-              option_value = get_segment(option_value,1,-1);
+              option_value = option_value.substr(1);
             //file.get(buffer,100,'\n');
-            all_string_options[i].value = string(option_value.chars());
+            all_string_options[i].value = option_value;
             if(as_default)
-              all_string_options[i].default_value = string(option_value.chars());
+              all_string_options[i].default_value = option_value;
             option_found_flag = true;
 	  }
      // if(!option_found_flag)
      //   file.get(buffer,1000,'\n');  
 	 
     } 
+   }
+  catch(exception& e)
+    {
+      Error(true, e.what(), "Options::read_options_file");
+    }
 }
 
 void
@@ -594,7 +600,7 @@ Options::save_all_options_to_file(string filename, const bool as_default)
 #endif
 
   for(int i=0;i<LAST_DOUBLE_OPTION;i++){
-    file << String(all_double_options[i].label.c_str()) << ": " << all_double_options[i].value << endl;
+    file << all_double_options[i].label << ": " << all_double_options[i].value << endl;
  	//cout << all_double_options[i].label << ": " << all_double_options[i].value << endl;
   }
   
@@ -602,18 +608,20 @@ Options::save_all_options_to_file(string filename, const bool as_default)
   for(int i=0;i<LAST_LONG_OPTION;i++)
     {
       if(all_long_options[i].datatype == ENTRY_INT){
-        file << String(all_long_options[i].label.c_str()) << ": " << all_long_options[i].value << endl;
+        file << all_long_options[i].label << ": " << all_long_options[i].value << endl;
 		//cout << all_long_options[i].label << ": " << all_long_options[i].value << endl;
 	  }
 	  
       if(all_long_options[i].datatype == ENTRY_HEX){ 
-        file << String(all_long_options[i].label.c_str()) << ": " << hex2str(all_long_options[i].value) << endl;
+        ostringstream hex2string;
+        hex2string << std::hex << all_long_options[i].value;
+        file << all_long_options[i].label << ": " << hex2string.str() << endl;
 		//cout << all_long_options[i].label << ": " << hex2str(all_long_options[i].value) << endl;
 	  }
     }
 
   for(int i=0;i<LAST_STRING_OPTION;i++){
-    file << String(all_string_options[i].label.c_str()) << ": " << all_string_options[i].value << endl;
+    file << all_string_options[i].label << ": " << all_string_options[i].value << endl;
  	//cout << all_string_options[i].label << ": " << all_string_options[i].value << endl;
   }
 }

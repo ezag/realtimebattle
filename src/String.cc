@@ -266,7 +266,7 @@ String::insert(const String& str, const int pos)
 // Returns -1 if char was not found in string
 // If char was found => returns its position
 // If reverse: start also counts from the end
-/*int
+int
 String::find( const char c, const int start, const bool reverse ) const
 {
   char * ans;
@@ -279,7 +279,7 @@ String::find( const char c, const int start, const bool reverse ) const
 
   return -1;
 }
-*/
+
 //   if start or end negativ, count from the end. -1 == the last.
 // start = 0 and end = -1 => return the string as it is
 String
@@ -301,7 +301,7 @@ get_segment(const String& str, const int start, const int end)
   return segment;
 }
 
-/*String
+String
 make_lower_case(const String& str)
 {
   String lower_str(str);
@@ -327,7 +327,7 @@ str2dbl(const String& str)
 {
   return atof(str.array);
 }
-*/
+
 long
 str2hex(const String& str)
 {

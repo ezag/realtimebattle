@@ -21,13 +21,11 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <config.h>
 #endif
 
-#include <iostream>
-
-using namespace std;
-
 #include "List.h"
-#include "String.h"
+
+#include <iostream>
 #include <string>
+using namespace std;
 
 void Error(const bool fatal, const string& error_msg, const string& function_name);
 
@@ -224,8 +222,6 @@ List<T>::insert_last(T* x)
 }
 
 
-#include "String.h"
-template class List<String>;
 template class List<string>;
 
 #include "Vector2D.h"
