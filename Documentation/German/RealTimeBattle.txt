@@ -220,14 +220,14 @@
 
 
   Die deutsche Übersetzung(für RTB-Version 0.9.7) wurde von Uwe Hermann
-  <uh1763@bingo-ev.de> <mailto:uh1763@bingo-ev.de> am 16. Mai
+  <uwe@hermann-uwe.de> <mailto:uh1763@bingo-ev.de> am 16. Mai
   fertiggestellt.  Ich habe mir Mühe gegeben die englische Anleitung
   möglichst genau zu übersetzen, und trotzdem ein gut verständliches
   Deutsch zu erhalten.  Ich hoffe dies ist mir, trotz einiger Ausdrücke
   die mir selber nicht sonderlich gefallen, einigermaßen gelungen.
   Fehler, Verbesserungsvorschläge o.ä. in der Übersetzung bitte an
   uh1763@bingo-ev.de schicken.  Ich möchte mich bei Daniel Reutter
-  <br1764@bingo-ev.de> dafür bedanken, dass er die Übersetzung
+  <reutter@dhreutter.de> dafür bedanken, dass er die Übersetzung
   durchgelesen hat, und mich auf "ein paar" Fehler aufmerksam gemacht
   hat :-).
 
