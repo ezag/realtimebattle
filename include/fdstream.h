@@ -28,9 +28,7 @@
 #ifndef BOOST_FDSTREAM_HPP
 #define BOOST_FDSTREAM_HPP
 
-#include <istream>
-#include <ostream>
-#include <streambuf>
+#include <iostream>
 // for EOF:
 #include <cstdio>
 // for memmove():
