@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.11\n"
 "Report-Msgid-Bugs-To: johannes_nicolai@tiscalinet.de\n"
-"POT-Creation-Date: 2005-01-10 18:51+0100\n"
+"POT-Creation-Date: 2005-02-10 14:20+0100\n"
 "PO-Revision-Date: 1999-10-10 18:08+0200\n"
 "Last-Translator: Uwe Hermann <uh1763@bingo-ev.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -139,12 +139,12 @@ msgstr "*Verlasse Programm*"
 msgid "*Finished*"
 msgstr "*Beendet*"
 
-#: src/ArenaRealTime.cc:773
+#: src/ArenaRealTime.cc:802
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "Spiel %d von Sequenz %d beginnt in der Arena"
 
-#: src/ArenaRealTime.cc:950
+#: src/ArenaRealTime.cc:987
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "Roboter mit Dateinamen %s hat keinen Namen angegeben"

@@ -317,14 +317,14 @@ classjbot.stamp: $(jbot_JAVA)
 install-jbotJAVA: classjbot.stamp
 	@$(NORMAL_INSTALL)
 	test -z "$(jbotdir)" || $(mkdir_p) "$(DESTDIR)$(jbotdir)"
-	@test -z "$(jbot_JAVA)" || for p in *.class; do \
+	for p in `find . -name  "*.class"`; do \
 	  echo " $(INSTALL_DATA) '$$p' '$(DESTDIR)$(jbotdir)/$$p'"; \
 	  $(INSTALL_DATA) "$$p" "$(DESTDIR)$(jbotdir)/$$p"; \
 	done
 
 uninstall-jbotJAVA:
 	@$(NORMAL_UNINSTALL)
-	@test -z "$(jbot_JAVA)" || for p in *.class; do \
+	@for p in `find . -name "*.class"`; do \
 	  echo " rm -f '$(DESTDIR)$(jbotdir)/$$p'"; \
 	  rm -f "$(DESTDIR)$(jbotdir)/$$p"; \
 	done

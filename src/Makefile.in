@@ -39,6 +39,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = realtimebattle$(EXEEXT)
+@NO_GETOPT_LONG_TRUE@am__append_1 = getopt.c
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -65,6 +66,15 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
+am__realtimebattle_SOURCES_DIST = RealTimeBattle.cc ArenaBase.cc \
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
+	ArenaWindow.cc ControlWindow.cc Dialog.cc Extras.cc \
+	GeometricalObjects.cc Gui.cc List.cc MessageWindow.cc \
+	Options.cc Robot.cc ScoreWindow.cc Shape.cc Shot.cc \
+	StartTournamentWindow.cc StatisticsWindow.cc String.cc \
+	Structs.cc Timer.cc Various.cc Vector2D.cc OptionsWindow.cc \
+	getopt.c
+@NO_GETOPT_LONG_TRUE@am__objects_1 = getopt.$(OBJEXT)
 am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-ArenaBase.$(OBJEXT) \
 	realtimebattle-ArenaController.$(OBJEXT) \
@@ -88,20 +98,24 @@ am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-Timer.$(OBJEXT) \
 	realtimebattle-Various.$(OBJEXT) \
 	realtimebattle-Vector2D.$(OBJEXT) \
-	realtimebattle-OptionsWindow.$(OBJEXT)
+	realtimebattle-OptionsWindow.$(OBJEXT) $(am__objects_1)
 realtimebattle_OBJECTS = $(am_realtimebattle_OBJECTS)
 am__DEPENDENCIES_1 =
 realtimebattle_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 SOURCES = $(realtimebattle_SOURCES)
-DIST_SOURCES = $(realtimebattle_SOURCES)
+DIST_SOURCES = $(am__realtimebattle_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -278,34 +292,14 @@ INCLUDES = \
 	 -I$(top_srcdir)/include
 
 realtimebattle_CXXFLAGS = 
-realtimebattle_SOURCES = \
-	RealTimeBattle.cc\
-	ArenaBase.cc\
-	ArenaController.cc\
-	ArenaRealTime.cc\
-	ArenaReplay.cc\
-	ArenaWindow.cc\
-	ControlWindow.cc\
-	Dialog.cc\
-	Extras.cc\
-	GeometricalObjects.cc\
-	Gui.cc\
-	List.cc\
-	MessageWindow.cc\
-	Options.cc\
-	Robot.cc\
-	ScoreWindow.cc\
-	Shape.cc\
-	Shot.cc\
-	StartTournamentWindow.cc\
-	StatisticsWindow.cc\
-	String.cc\
-	Structs.cc\
-	Timer.cc\
-	Various.cc\
-	Vector2D.cc\
-	OptionsWindow.cc
-
+realtimebattle_SOURCES = RealTimeBattle.cc ArenaBase.cc \
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
+	ArenaWindow.cc ControlWindow.cc Dialog.cc Extras.cc \
+	GeometricalObjects.cc Gui.cc List.cc MessageWindow.cc \
+	Options.cc Robot.cc ScoreWindow.cc Shape.cc Shot.cc \
+	StartTournamentWindow.cc StatisticsWindow.cc String.cc \
+	Structs.cc Timer.cc Various.cc Vector2D.cc OptionsWindow.cc \
+	$(am__append_1)
 realtimebattle_LDFLAGS = 
 realtimebattle_LDADD = \
 	$(GTK_LIBS)
@@ -313,7 +307,7 @@ realtimebattle_LDADD = \
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .o .obj
+.SUFFIXES: .c .cc .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -376,6 +370,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getopt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaBase.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaController.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaRealTime.Po@am__quote@
@@ -402,6 +397,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Various.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Vector2D.Po@am__quote@
+
+.c.o:
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c $<
+
+.c.obj:
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
 .cc.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
