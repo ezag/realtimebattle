@@ -62,13 +62,13 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ControlWindow.h"
 #endif 
 
+#include "ArenaRealTime.h"
 #include "IntlDefs.h"
 #include "Options.h"
-#include "ArenaRealTime.h"
 #include "ArenaReplay.h"
-#include "Various.h"
 #include "ArenaController.h"
 #include "String.h"
+#include "Various.h"
 //#include "Server.h"
 
 #ifndef WAIT_ANY

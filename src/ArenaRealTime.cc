@@ -1075,7 +1075,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   int complete_rounds = n_o_sequences / games_per_round;
   int rem_games = n_o_sequences % games_per_round;
 
-  robots_in_sequence = new (int*)[n_o_sequences];
+  robots_in_sequence = new int*[n_o_sequences];
   for(int i=0; i<n_o_sequences; i++) robots_in_sequence[i] = new int[robots_per_game];
   
   int current_sequence[robots_per_game];
