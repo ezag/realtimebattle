@@ -38,10 +38,10 @@ typedef void (*StartTournamentFunction)( const List<start_tournament_info_t>&,
                                          const List<start_tournament_info_t>&,
                                          const int, const int, const int, void* );
 
-#define min(a,b) ((a) < (b) ? (a) : (b))
-#define max(a,b) ((a) > (b) ? (a) : (b))
-#define abs(a) ((a) > 0 ? (a) : -(a))
-#define sgn(a) ((a) > 0 ? 1 : -1)
+#define min_rtb(a,b) ((a) < (b) ? (a) : (b))
+#define max_rtb(a,b) ((a) > (b) ? (a) : (b))
+#define abs_rtb(a) ((a) > 0 ? (a) : -(a))
+#define sgn_rtb(a) ((a) > 0 ? 1 : -1)
 
 enum entry_datatype_t
 {

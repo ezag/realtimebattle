@@ -596,7 +596,7 @@ Robot::check_name_uniqueness()
               robotp->robot_name += "(1)";
             }
 
-          first_avail = max( robotp->robot_name_uniqueness_number + 1, first_avail );
+          first_avail = max_rtb( robotp->robot_name_uniqueness_number + 1, first_avail );
 
           if( robot_name_uniqueness_number == robotp->robot_name_uniqueness_number 
               || robot_name_uniqueness_number == 0 )
@@ -740,7 +740,7 @@ Robot::update_radar_and_cannon(const double timestep)
 
   if( rot_reached > 0 ) send_message(ROTATION_REACHED, rot_reached);
 
-  shot_energy = min( the_opts.get_d(OPTION_SHOT_MAX_ENERGY), 
+  shot_energy = min_rtb( the_opts.get_d(OPTION_SHOT_MAX_ENERGY), 
                      shot_energy+timestep*the_opts.get_d(OPTION_SHOT_ENERGY_INCREASE_SPEED) );
 
   object_type closest_arenaobject;
@@ -909,10 +909,10 @@ Robot::change_velocity(const double timestep)
   double gt = the_opts.get_d(OPTION_GRAV_CONST) * timestep;
   double fric = the_opts.get_d(OPTION_ROLL_FRICTION) * (1.0 - brake_percent) + 
     the_opts.get_d(OPTION_SLIDE_FRICTION) * brake_percent;
-  velocity = -velocity* min(the_opts.get_d(OPTION_AIR_RESISTANCE) * timestep, 0.5) +
+  velocity = -velocity* min_rtb(the_opts.get_d(OPTION_AIR_RESISTANCE) * timestep, 0.5) +
     timestep*acceleration*dir + 
-    dot(velocity, dir) * max(0.0, 1.0-gt*fric) * dir +
-    vedge(dir, velocity) * max(0.0, 1.0-gt*the_opts.get_d(OPTION_SLIDE_FRICTION)) * rotate90(dir);
+    dot(velocity, dir) * max_rtb(0.0, 1.0-gt*fric) * dir +
+    vedge(dir, velocity) * max_rtb(0.0, 1.0-gt*the_opts.get_d(OPTION_SLIDE_FRICTION)) * rotate90(dir);
 }
 
 void
@@ -941,10 +941,10 @@ Robot::move(const double timestep, int iterstep, const double eps)
     }
   else
     {
-      if( iterstep > 10 ) time_to_collision = max( time_to_collision , eps );
+      if( iterstep > 10 ) time_to_collision = max_rtb( time_to_collision , eps );
       double time_remaining = timestep - time_to_collision; 
       center += time_to_collision*velocity;
-      //      Vector2D new_center = center - min(eps, time_to_collision)*velocity;
+      //      Vector2D new_center = center - min_rtb(eps, time_to_collision)*velocity;
       
 
       switch( closest_shape )
@@ -1161,11 +1161,11 @@ Robot::get_messages()
               double rot_speed;
               *instreamp >> bits >> rot_speed;
               
-              double rot_sign = sgn(rot_speed);
+              double rot_sign = sgn_rtb(rot_speed);
               rot_speed = fabs(rot_speed);
-              if( bits & 1 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 2 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 4 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
+              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
               rot_speed *= rot_sign;
 
               if( bits & 1 ) 
@@ -1186,11 +1186,11 @@ Robot::get_messages()
               int bits;
               double rot_speed, rot_end_angle, rot_amount;
               *instreamp >> bits >> rot_speed >> rot_end_angle;
-              rot_end_angle = max(min(rot_end_angle, infinity), -infinity);
+              rot_end_angle = max_rtb(min_rtb(rot_end_angle, infinity), -infinity);
 
               rot_speed = fabs(rot_speed);
-              if( bits & 2 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 4 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
+              if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
 
               if( bits & 2 )
                 {
@@ -1229,9 +1229,9 @@ Robot::get_messages()
               *instreamp >> bits >> rot_speed >> rot_amount;
 
               rot_speed = fabs(rot_speed);
-              if( bits & 1 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 2 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 4 ) rot_speed = min( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
+              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
 
               if( bits & 1 )
                 {
@@ -1274,13 +1274,13 @@ Robot::get_messages()
               int bits;
               double rot_speed, sweep_left, sweep_right;
               *instreamp >> bits >> rot_speed >> sweep_left >> sweep_right;
-              sweep_left = max(min(sweep_left, infinity), -infinity);
-              sweep_right = max(min(sweep_right, infinity), -infinity);
+              sweep_left = max_rtb(min_rtb(sweep_left, infinity), -infinity);
+              sweep_right = max_rtb(min_rtb(sweep_right, infinity), -infinity);
               rotation_mode_t rot_dir;
               rot_dir = ( rot_speed < 0 ? SWEEP_LEFT :  SWEEP_RIGHT );
 
-              if( bits & 2 ) rot_speed = min( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
-              if( bits & 4 ) rot_speed = min( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
+              if( bits & 2 ) rot_speed = min_rtb( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 4 ) rot_speed = min_rtb( fabs(rot_speed), the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
             
               if( bits & 2 )
                 {
@@ -1385,7 +1385,7 @@ Robot::get_messages()
             {
               double en;
               *instreamp >> en;
-              en = min(en, shot_energy);
+              en = min_rtb(en, shot_energy);
               if( en < the_opts.get_d(OPTION_SHOT_MIN_ENERGY) ) break;
               shot_energy -= en;
               
@@ -1456,8 +1456,8 @@ Robot::get_messages()
             {
               double acc;
               *instreamp >> acc;
-              acc = max( acc, the_opts.get_d(OPTION_ROBOT_MIN_ACCELERATION) );
-              acc = min( acc, the_opts.get_d(OPTION_ROBOT_MAX_ACCELERATION) );
+              acc = max_rtb( acc, the_opts.get_d(OPTION_ROBOT_MIN_ACCELERATION) );
+              acc = min_rtb( acc, the_opts.get_d(OPTION_ROBOT_MAX_ACCELERATION) );
               acceleration = acc;
             }
           break;
@@ -1468,8 +1468,8 @@ Robot::get_messages()
             {
               double brk;
               *instreamp >> brk;
-              brk = max( brk, 0.0);
-              brk = min( brk, 1.0);
+              brk = max_rtb( brk, 0.0);
+              brk = min_rtb( brk, 1.0);
               brake_percent = brk;
             } 
           break;
@@ -1693,7 +1693,7 @@ Robot::set_non_blocking_state(const bool non_bl)
 void
 Robot::change_energy(const double energy_diff)
 {
-  energy = min(energy+energy_diff, the_opts.get_d(OPTION_ROBOT_MAX_ENERGY));
+  energy = min_rtb(energy+energy_diff, the_opts.get_d(OPTION_ROBOT_MAX_ENERGY));
 #ifndef NO_GRAPHICS  
   if( !no_graphics )  display_score();
 #endif

@@ -504,9 +504,9 @@ Options::read_options_file(String file_string, const bool as_default)
             double option_value;
             file >> option_value;
             //file.get(buffer,100,'\n');
-            option_value = min( option_value,
+            option_value = min_rtb( option_value,
                                 all_double_options[i].max_value );
-            option_value = max( option_value,
+            option_value = max_rtb( option_value,
                                 all_double_options[i].min_value );
             all_double_options[i].value = option_value;
             if(as_default)
@@ -531,9 +531,9 @@ Options::read_options_file(String file_string, const bool as_default)
                 option_value = str2hex(temp_string);
               }
             //file.get(buffer,100,'\n');
-            option_value = min( option_value,
+            option_value = min_rtb( option_value,
                                 all_long_options[i].max_value );
-            option_value = max( option_value,
+            option_value = max_rtb( option_value,
                                 all_long_options[i].min_value );
             all_long_options[i].value = option_value;
             if(as_default)

@@ -531,7 +531,7 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
               file >> radius;
 
               angle *= angle_factor;
-              center = current_pos - rotate90( direction ) * radius * sgn( angle );
+              center = current_pos - rotate90( direction ) * radius * sgn_rtb( angle );
               start_angle = vec2angle( current_pos - center );
               current_pos = center + radius * angle2vec( start_angle - angle );
               end_angle = vec2angle( current_pos - center );
@@ -669,7 +669,7 @@ ArenaBase::space_available(const Vector2D& pos, const double margin)
 double 
 ArenaBase::get_shooting_penalty() 
 { 
-  return min( the_opts.get_d(OPTION_SHOOTING_PENALTY), 0.5 / (double)robots_left ); 
+  return min_rtb( the_opts.get_d(OPTION_SHOOTING_PENALTY), 0.5 / (double)robots_left ); 
 }
 
 
@@ -681,11 +681,11 @@ ArenaBase::update_timer(const double factor)
   current_timer = timer.get();
   double timescale = 1.0;
   if( state == GAME_IN_PROGRESS ) timescale = the_opts.get_d(OPTION_TIMESCALE);
-  timestep = min( (current_timer - last_timer) * timescale, 
+  timestep = min_rtb( (current_timer - last_timer) * timescale, 
                   the_opts.get_d(OPTION_MAX_TIMESTEP) );
   total_time += timestep*factor;
 
-  total_time = max(total_time, 0.0);
+  total_time = max_rtb(total_time, 0.0);
 }
 
 void

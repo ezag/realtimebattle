@@ -451,15 +451,15 @@ StatisticsWindow::change_stats_viewed( GtkWidget* widget,
   if( info_p->extreme_change && max_nr > 0 )
     {
       if( info_p->change < 0 )
-        number = abs( info_p->change );
+        number = abs_rtb( info_p->change );
       else if( info_p->change > 0 )
-        number = max( max_nr - info_p->change + 1, 1 );
+        number = max_rtb( max_nr - info_p->change + 1, 1 );
     }
   else
     {
       number += info_p->change;
-      number = min( number, max_nr );
-      number = max( number, 1 );
+      number = min_rtb( number, max_nr );
+      number = max_rtb( number, 1 );
     }
 
   info_p->sw_p->set_looking_at_nr( number );

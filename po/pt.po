@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTime Battle\n"
 "Report-Msgid-Bugs-To: johannes_nicolai@tiscalinet.de\n"
-"POT-Creation-Date: 2005-02-10 14:20+0100\n"
+"POT-Creation-Date: 2005-02-24 11:28+0100\n"
 "PO-Revision-Date: 2004-11-12 20:10+0100\n"
 "Last-Translator: Rui Sousa <rsousa@grad.physics.sunysb.edu>\n"
 "Language-Team: Rui Sousa\n"
@@ -153,7 +153,7 @@ msgstr "Jogo %d da sequncia %d comea na arena"
 msgid "Robot with filename %s has not given any name"
 msgstr "Robot com nome de ficheiro %s no deu nenhum nome"
 
-#: src/ArenaReplay.cc:121
+#: src/ArenaReplay.cc:125
 #, c-format
 msgid "Game %d of sequence %d"
 msgstr "Jogo %d da sequncia %d"
@@ -174,87 +174,87 @@ msgstr " Afastar "
 msgid "Arena"
 msgstr "Arena"
 
-#: src/ControlWindow.cc:78
+#: src/ControlWindow.cc:79
 msgid " New Tournament "
 msgstr " Novo Torneio "
 
-#: src/ControlWindow.cc:80
+#: src/ControlWindow.cc:81
 msgid " Replay Tournament "
 msgstr " Repetio do Torneio "
 
-#: src/ControlWindow.cc:82
+#: src/ControlWindow.cc:83
 msgid " Pause "
 msgstr " Parar "
 
-#: src/ControlWindow.cc:84
+#: src/ControlWindow.cc:85
 msgid " End "
 msgstr " Acabar "
 
-#: src/ControlWindow.cc:86
+#: src/ControlWindow.cc:87
 msgid " Options "
 msgstr " Opes "
 
-#: src/ControlWindow.cc:88
+#: src/ControlWindow.cc:89
 msgid " Statistics "
 msgstr " Estatsticas "
 
-#: src/ControlWindow.cc:90
+#: src/ControlWindow.cc:91
 msgid "         Quit         "
 msgstr "       Abandonar      "
 
-#: src/ControlWindow.cc:116
+#: src/ControlWindow.cc:117
 msgid "Show arena window"
 msgstr "Mostrar janela da arena"
 
-#: src/ControlWindow.cc:118
+#: src/ControlWindow.cc:119
 msgid "Show message window"
 msgstr "Mostrar janela das mensagens"
 
-#: src/ControlWindow.cc:120
+#: src/ControlWindow.cc:121
 msgid "Show score window"
 msgstr "Mostrar janela da pontuao"
 
-#: src/ControlWindow.cc:199
+#: src/ControlWindow.cc:200
 msgid " Step "
 msgstr " Passo a Passo "
 
-#: src/ControlWindow.cc:201
+#: src/ControlWindow.cc:202
 msgid " End Game "
 msgstr " Acabar o Jogo"
 
-#: src/ControlWindow.cc:203
+#: src/ControlWindow.cc:204
 msgid " Kill Marked Robot "
 msgstr " Matar Robot Seleccionado "
 
-#: src/ControlWindow.cc:231
+#: src/ControlWindow.cc:232
 msgid " Debug Level: "
 msgstr " Nvel de debug: "
 
-#: src/ControlWindow.cc:332
+#: src/ControlWindow.cc:333
 msgid " Step forward "
 msgstr " Passo  frente "
 
-#: src/ControlWindow.cc:336
+#: src/ControlWindow.cc:337
 msgid " Step backward "
 msgstr " Passo a trs "
 
-#: src/ControlWindow.cc:340
+#: src/ControlWindow.cc:341
 msgid " Next Game "
 msgstr " Jogo Seguinte "
 
-#: src/ControlWindow.cc:344
+#: src/ControlWindow.cc:345
 msgid " Prev Game "
 msgstr " Jogo Anter "
 
-#: src/ControlWindow.cc:348
+#: src/ControlWindow.cc:349
 msgid " Next Seq "
 msgstr " Seq Seguinte "
 
-#: src/ControlWindow.cc:352
+#: src/ControlWindow.cc:353
 msgid " Prev Seq "
 msgstr " Seq Anter "
 
-#: src/ControlWindow.cc:511 src/ControlWindow.cc:660 src/Gui.cc:153
+#: src/ControlWindow.cc:512 src/ControlWindow.cc:665 src/Gui.cc:153
 msgid ""
 "This action will kill the current tournament.\n"
 "Do you want to do that?"
@@ -262,15 +262,15 @@ msgstr ""
 "Esta aco ir matar o presente torneio.\n"
 "Quer fazer isto?"
 
-#: src/ControlWindow.cc:514 src/ControlWindow.cc:663
+#: src/ControlWindow.cc:515 src/ControlWindow.cc:668
 msgid "Yes"
 msgstr "Sim"
 
-#: src/ControlWindow.cc:515 src/ControlWindow.cc:664
+#: src/ControlWindow.cc:516 src/ControlWindow.cc:669
 msgid "No"
 msgstr "No"
 
-#: src/ControlWindow.cc:528
+#: src/ControlWindow.cc:529
 msgid "Choose a log file to replay"
 msgstr "Escolha um ficheiro de relatrio para a repetio"
 
@@ -819,7 +819,12 @@ msgstr " Sequncia "
 msgid " Sequence: "
 msgstr " Sequncia: "
 
-#: src/Various.cc:74
+#: src/Various.cc:80
+#, fuzzy
+msgid "Ok"
+msgstr " Ok "
+
+#: src/Various.cc:87
 msgid "Error in"
 msgstr "Erro em"
 

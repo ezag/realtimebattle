@@ -131,7 +131,7 @@ factorial(const int n)
 int
 binomial(const int n, const int k)
 {
-  int k2 = min(k, n-k);
+  int k2 = min_rtb(k, n-k);
   
   double bin = 1;
   for(int i=n; i>n-k2; i--)  
@@ -487,7 +487,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
           if (n_o_sequences == -1)
             n_o_sequences=binomial(robots_counted, games_p_s);
 
-          robots_p_s = min(robots_counted,robots_p_s);
+          robots_p_s = min_rtb(robots_counted,robots_p_s);
           
           if(robots_p_s < 2)
             {

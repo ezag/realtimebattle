@@ -660,7 +660,7 @@ StartTournamentWindow::save_tournament_file( const String& full_filename,
         max_value = 10000;
       else
         {
-          max_value = min( the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ),robot_number);
+          max_value = min_rtb( the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ),robot_number);
         }
       if(i != 1)
         min_value = 1;
@@ -669,8 +669,8 @@ StartTournamentWindow::save_tournament_file( const String& full_filename,
 
       value[i] = str2int( gtk_entry_get_text( GTK_ENTRY( get_entries()[i] ) ) );
 
-      value[i] = min( max_value, value[i] );
-      value[i] = max( min_value, value[i] );
+      value[i] = min_rtb( max_value, value[i] );
+      value[i] = max_rtb( min_value, value[i] );
     }
 
   ofstream file(full_filename.chars(), ios::out);
@@ -805,7 +805,7 @@ StartTournamentWindow::start( GtkWidget* widget,
         max_value = 10000;
       else
         {
-          max_value = min(the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ),robot_number);
+          max_value = min_rtb(the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ),robot_number);
         }
       if(i != 1)
         min_value = 1;
@@ -814,8 +814,8 @@ StartTournamentWindow::start( GtkWidget* widget,
 
       value[i] = str2int( gtk_entry_get_text( GTK_ENTRY( stw_p->get_entries()[i] ) ) );
 
-      value[i] = min( max_value, value[i] );
-      value[i] = max( min_value, value[i] );
+      value[i] = min_rtb( max_value, value[i] );
+      value[i] = max_rtb( min_value, value[i] );
     }
   if( robot_number > 1 &&
       !( stw_p->get_selected_arena_tournament()->is_empty() ) )

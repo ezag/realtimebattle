@@ -608,7 +608,7 @@ OptionsWindow::grab_windows( GtkWidget* widget,
 }
 
 void
-OptionsWindow::double_min( GtkWidget* widget,
+OptionsWindow::double_min_rtb( GtkWidget* widget,
                            option_info_t<double>* option )
 {
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
@@ -624,7 +624,7 @@ OptionsWindow::double_def( GtkWidget* widget,
 }
 
 void
-OptionsWindow::double_max( GtkWidget* widget,
+OptionsWindow::double_max_rtb( GtkWidget* widget,
                            option_info_t<double>* option )
 {
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
@@ -632,7 +632,7 @@ OptionsWindow::double_max( GtkWidget* widget,
 }
 
 void
-OptionsWindow::long_min( GtkWidget* widget,
+OptionsWindow::long_min_rtb( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
@@ -656,7 +656,7 @@ OptionsWindow::long_def( GtkWidget* widget,
 }
 
 void
-OptionsWindow::long_max( GtkWidget* widget,
+OptionsWindow::long_max_rtb( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
