@@ -397,7 +397,8 @@ main ( int argc, char* argv[] )
 	
 #ifdef ENABLE_NLS
   bindtextdomain ("RealTimeBattle", RTB_LOCALEDIR);
-//  bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
+  // allow german umlauts
+  bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
   textdomain ("RealTimeBattle");
 #endif
 

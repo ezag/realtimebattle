@@ -47,12 +47,14 @@ using namespace std;
 
 Options::Options()
 {
-/*
+
 #ifdef ENABLE_NLS
 #ifdef HAVE_LOCALE_H
   setlocale( LC_MESSAGES, "" );
   setlocale( LC_NUMERIC, "POSIX" );
 #endif
+// allow german umlauts
+  bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
 #ifdef RTB_LOCALEDIR
   bindtextdomain( "RealTimeBattle", RTB_LOCALEDIR );
 #else
@@ -60,7 +62,7 @@ Options::Options()
 #endif
   textdomain( "RealTimeBattle" );
 #endif
-*/
+
 
   // Entries are: entry_datatype, page in option, 
   //              default value, max value, min value, 
