@@ -26,7 +26,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #ifndef NO_GRAPHICS
 
-#include "String.h"
 #include "List.h"
 
 struct _GtkWidget;

@@ -48,20 +48,20 @@ public:
 
   char operator[](int) const;
 
-  friend ostream& operator<<(ostream&, const String&);
-  friend istream& operator>>(istream&, String&);  
+   friend ostream& operator<<(ostream&, const String&);
+   friend istream& operator>>(istream&, String&);  
 
-  friend int str2int(const String&);
-  friend long str2long(const String&);
-  friend double str2dbl(const String&);
+//    friend int str2int(const String&);
+//    friend long str2long(const String&);
+//    friend double str2dbl(const String&);
   friend long str2hex(const String&);
   friend String hex2str(const long);
 
   String& erase(const int pos, const int size = 1);
   String& insert(const String&, const int pos = 0);
-  int find( const char c, const int start = 0, const bool reverse = false ) const;
+//   int find( const char c, const int start = 0, const bool reverse = false ) const;
   friend String get_segment(const String& str, const int start, const int end);
-  friend String make_lower_case(const String& str);
+//   friend String make_lower_case(const String& str);
 
   int get_length() const { return length; }
   bool is_empty() const { return length == 0; }

@@ -792,13 +792,20 @@ ArenaRealTime::start_game()
   }
 
   int charpos;
-  if( (charpos = String(filename->c_str()).find('/',0,true)) != -1 )
-    current_arena_filename = string(get_segment(String(filename->c_str()), charpos+1, -1).chars());
-  else
-  {
-    Error(false, "Incomplete arena file path " + *filename, "ArenaRealTime::start_game");
-    return false;
-  }
+  try
+    {
+      if( (charpos = filename->rfind('/',filename->size())) != -1 )
+        current_arena_filename = filename->substr(charpos+1, filename->size()-charpos-1);
+      else
+      {
+        Error(false, "Incomplete arena file path " + *filename, "ArenaRealTime::start_game");
+        return false;
+      }
+    }
+  catch(exception& e)
+    {
+      Error(true, e.what(), "ArenaRealTime::start_game");
+    }
 
   char msg[128];
   snprintf( msg, 127, _("Game %d of sequence %d begins on arena"),
@@ -1090,7 +1097,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   for( robotfilename_list.first(li); li.ok(); li++ )
     {
       infop = li();
-      robotp = new Robot(string(infop->filename.chars()));
+      robotp = new Robot(infop->filename);
       all_robots_in_tournament.insert_last( robotp );
       number_of_robots++;
     }
@@ -1100,7 +1107,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   
   for( arenafilename_list.first(li); li.ok(); li++ )
     {
-      stringp = new string(li()->filename.chars());
+      stringp = new string(li()->filename);
       arena_filenames.insert_last( stringp );
       number_of_arenas++;
     }

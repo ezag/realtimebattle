@@ -68,6 +68,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ArenaReplay.h"
 #include "ArenaController.h"
 #include <string>
+#include <sstream>
 #include "Various.h"
 //#include "Server.h"
 
@@ -244,8 +245,13 @@ parse_command_line(int argc, char **argv)
           switch( option_index )
             {
             case 3:
-              the_arena_controller.debug_level = str2int( optarg );
-              the_arena_controller.game_mode = ArenaBase::DEBUG_MODE;
+              {
+                istringstream string2number(optarg);
+                int optarg_num;
+                string2number >> optarg_num;
+                the_arena_controller.debug_level = optarg_num;
+                the_arena_controller.game_mode = ArenaBase::DEBUG_MODE;
+              }
               break;
             case 6: 
               the_arena_controller.option_filename = string(optarg);
@@ -279,8 +285,13 @@ parse_command_line(int argc, char **argv)
           break;
 
         case 'D':
-          the_arena_controller.debug_level = str2int( optarg );
-          the_arena_controller.game_mode = ArenaBase::DEBUG_MODE;
+          {
+            istringstream string2number(optarg);
+            int optarg_num;
+            string2number >> optarg_num;
+            the_arena_controller.debug_level = optarg_num;
+            the_arena_controller.game_mode = ArenaBase::DEBUG_MODE;
+          }
           break;
 
         case 'n':

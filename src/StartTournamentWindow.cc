@@ -631,11 +631,11 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
                                     the_gui.get_bg_gdk_colour_p());
 
       
-          String fname = info->filename;
-          fname = get_segment( fname, fname.find( '/', 0, true ) + 1, -1 );
+          string fname = info->filename;
+          fname = string(get_segment( String(fname.c_str()), fname.rfind( '/', fname.size() ) + 1, -1 ).chars());
       
           gtk_clist_set_text( GTK_CLIST( tour_clist ),
-                              row, 0, fname.chars() );
+                              row, 0, fname.c_str() );
           info->selected = false;
           info->row = row;
           tour_list->insert_last( new start_tournament_info_t
@@ -675,7 +675,10 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
       else
         min_value = 2;
 
-      value[i] = str2int( gtk_entry_get_text( GTK_ENTRY( get_entries()[i] ) ) );
+      istringstream string2number(gtk_entry_get_text( GTK_ENTRY( get_entries()[i] ) ));
+      int tmp;
+      string2number >> tmp;
+      value[i] = tmp;
 
       value[i] = min_rtb( max_value, value[i] );
       value[i] = max_rtb( min_value, value[i] );
@@ -759,9 +762,10 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
         int number_of_robots = mmf_p->stw_p->
           get_selected_robot_tournament()->number_of_elements();
 
-        int robots_per_sequence = 
-          str2int( gtk_entry_get_text
-                   ( GTK_ENTRY( mmf_p->stw_p->get_entries()[1] ) ) );
+        istringstream string2number(gtk_entry_get_text
+                   ( GTK_ENTRY( mmf_p->stw_p->get_entries()[1] ) ));
+        int robots_per_sequence;
+        string2number >> robots_per_sequence;
 
         if( number_of_robots < robots_per_sequence )
           robots_per_sequence = number_of_robots;
@@ -826,7 +830,10 @@ StartTournamentWindow::start( GtkWidget* widget,
       else
         min_value = 2;
 
-      value[i] = str2int( gtk_entry_get_text( GTK_ENTRY( stw_p->get_entries()[i] ) ) );
+      istringstream string2number(gtk_entry_get_text( GTK_ENTRY( stw_p->get_entries()[i] ) ));
+      int tmp;
+      string2number >> tmp;
+      value[i] = tmp;
 
       value[i] = min_rtb( max_value, value[i] );
       value[i] = max_rtb( min_value, value[i] );
@@ -976,14 +983,14 @@ StartTournamentWindow::add_all_selected( const bool robots )
 
 
           gtk_clist_set_text( GTK_CLIST( clist_tourn ), row, 0,
-                              info_dir_p->filename.non_const_chars() );
+                              info_dir_p->filename.c_str()/*.non_const_chars()*/ );
       
           start_tournament_info_t* info_tourn_p;
           string full_filename;
           if(robots)
-            full_filename = string(info_dir_p->directory.chars()) + string(info_dir_p->filename.chars());
+            full_filename = info_dir_p->directory + info_dir_p->filename;
           else
-            full_filename = string(info_dir_p->directory.chars()) + string(info_dir_p->filename.chars());
+            full_filename = info_dir_p->directory + info_dir_p->filename;
 
           info_tourn_p = new start_tournament_info_t
             ( row, false, full_filename.c_str(), info_dir_p->directory );

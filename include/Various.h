@@ -30,8 +30,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "List.h"
 #include "Dialog.h"
 
-//#include "String.h"
-class String;
 struct start_tournament_info_t;
 
 typedef void (*StartTournamentFunction)( const List<start_tournament_info_t>&,
@@ -74,12 +72,12 @@ void split_colonseparated_dirs(string& dirs, List<string>& arenadirs);
 
 bool check_if_filename_is_robot( string& fname, bool* err_in_file );
 bool check_if_filename_is_arena( string& fname, bool* err_in_file );
-bool check_logfile( String& fname );
+bool check_logfile( string& fname );
 void check_for_robots_and_arenas( string& word, 
                                   List<start_tournament_info_t>& tour_list,
                                   List<string>& dir_list, 
                                   const bool check_robots );
-void search_directories( String directory, List<start_tournament_info_t>& tour_list,
+void search_directories( string directory, List<start_tournament_info_t>& tour_list,
                          const bool check_robots );
 bool parse_tournament_file( const string& fname,
                             const StartTournamentFunction function,

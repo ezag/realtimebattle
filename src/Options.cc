@@ -27,6 +27,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 using namespace std;
 
+#include "String.h"
+
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #endif

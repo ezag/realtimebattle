@@ -30,7 +30,6 @@ class ScoreWindow;
 class StatisticsWindow;
 class StartTournamentWindow;
 class Robot;
-class String;
 
 class Gui
 {

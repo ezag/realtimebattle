@@ -24,9 +24,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <gdk/gdk.h>
 #endif
 
-#include "String.h"
-
-
+#include <string>
+using namespace std;
 
 struct stat_t
 {
@@ -64,12 +63,12 @@ enum state_t { NO_STATE, NOT_STARTED, STARTING_ROBOTS, GAME_IN_PROGRESS,
 struct start_tournament_info_t
 {
   start_tournament_info_t(const int r, const bool s,
-                          const class String fn, const class String dir) :
+                          const string fn, const string dir) :
     row(r), selected(s), filename(fn), directory(dir) {}
   int row;
   bool selected;
-  class String filename;
-  class String directory;
+  string filename;
+  string directory;
 };
 
 

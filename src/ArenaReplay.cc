@@ -29,6 +29,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <sstream>
 using namespace std;
 
+#include "String.h"
 #include "ArenaReplay.h"
 #include "ArenaController.h"
 #include "IntlDefs.h"
@@ -1046,7 +1047,7 @@ ArenaReplay::search_forward( const string& search_letters )
       log_file.clear();
 
       log_file >> letter;   // check first letter of line
-      if( String(search_letters.c_str()).find( letter ) != -1 )
+      if( search_letters.find( letter ) != -1 )
         {
           return letter;
         }

@@ -53,7 +53,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <string>
 #include <sstream>
 #include <dirent.h>
-
+#include <algorithm>
+#include <cctype>
 using namespace std;
 
 #include "Various.h"
@@ -220,29 +221,36 @@ read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs)
 void
 split_colonseparated_dirs(string& dirs, List<string>& str_list)
 {
-  String current_dir = String(dirs.c_str());
+  string current_dir = dirs;
   int pos, lastpos = 0;
-  while( (pos = dirs.find(':', lastpos)) != -1 )
-    {
-      current_dir = get_segment(String(dirs.c_str()), lastpos, pos-1);
-      if(current_dir[current_dir.get_length() - 1] != '/')
-        current_dir += '/';
+  try 
+  {
+    while( (pos = dirs.find(':', lastpos)) != -1 )
+      {
+        current_dir = string( dirs.substr(lastpos, pos-lastpos));
+        if(current_dir.at(current_dir.size() - 1) != '/')
+          current_dir += '/';
 
-      string* str = new string(current_dir.chars());
-      str_list.insert_last( str );
+        string* str = new string(current_dir);
+        str_list.insert_last( str );
 
-      lastpos = pos+1;
-    }
+        lastpos = pos+1;
+      }
+  
+    if(current_dir != "")
+      {
+        current_dir = dirs.substr(lastpos, dirs.size()-lastpos);
+        if(current_dir.at(current_dir.size() - 1) != '/')
+          current_dir += '/';
 
-  if(current_dir != "")
-    {
-      current_dir = get_segment(String(dirs.c_str()), lastpos, -1);
-      if(current_dir[current_dir.get_length() - 1] != '/')
-        current_dir += '/';
-
-      string* str = new string(current_dir.chars());
-      str_list.insert_last( str );
-    }
+        string* str = new string(current_dir);
+        str_list.insert_last( str );
+      }
+  }
+  catch(exception& e)
+  {
+    Error(true, e.what(), "split_colonseparated_dirs");
+  }
 }
 
 bool
@@ -254,15 +262,23 @@ check_if_filename_is_robot( string& fname, bool* err_in_file ) // err_in_file no
 
 
   // Check if file is a regular file that can be executed and ends with .robot (or .robot.exe for cygwin)
-  if( S_ISREG( filestat.st_mode) &&
-      ( filestat.st_mode & ( S_IXOTH | S_IXGRP | S_IXUSR )) &&
+  try
+    {
+      if( S_ISREG( filestat.st_mode) &&
+        ( filestat.st_mode & ( S_IXOTH | S_IXGRP | S_IXUSR )) &&
 #ifdef __CYGWIN__
-      ( String(".robot") == get_segment(String(fname.c_str()), -6, -1) ||
-        String(".robot.exe") == get_segment(String(fname.c_str()), -10, -1) ) )
+        ( string(".robot") == fname.substr(fname.size()-6, 6) ||
+          string(".robot.exe") == fname.substr(fname.size()-10, 10) ) )
+
 #else
-      ( String(".robot") == get_segment(String(fname.c_str()), -6, -1) ) )
+        ( string(".robot") == fname.substr(fname.size()-6, 6) ) )
 #endif
-    return true;
+      return true;
+    }
+  catch(exception& e)
+    {
+    Error(true, e.what(), "check_if_filename_is_robot");
+    }
 
 
   return false;
@@ -273,41 +289,48 @@ check_if_filename_is_arena( string& fname, bool* err_in_file)
 {
   bool retval = false;
   struct stat filestat;
-  if( 0 == stat( fname.c_str(), &filestat ) && fname.size() > 6 )
-    // Check if file is a regular file that is readable and ends with .arena
-    if( S_ISREG( filestat.st_mode) &&
-        ( filestat.st_mode & ( S_IROTH | S_IRGRP | S_IRUSR ) )  &&
-        ( String(".arena") == get_segment(String(fname.c_str()), -6, -1) ) )
+  try
     {
-      // So far so good. Now do a rudimentary sanity check.
-      ifstream fin( fname.c_str() );
-      char text[20];
-      fin.get(text, 7);
-      if( 0 == strcmp(text, "scale " ) )
-        retval = true;
-      else
-      {
-        Error(false, "Error in arenafile '" + fname + "': 'scale' not first command. Skipping file.",
-              "Various::check_if_filename_is_arena");
-        *err_in_file = true;
-      }
-      fin.close();
+      if( 0 == stat( fname.c_str(), &filestat ) && fname.size() > 6 )
+        // Check if file is a regular file that is readable and ends with .arena
+        if( S_ISREG( filestat.st_mode) &&
+            ( filestat.st_mode & ( S_IROTH | S_IRGRP | S_IRUSR ) )  &&
+            ( string(".arena") == fname.substr(fname.size()-6,6) ) )
+        {
+          // So far so good. Now do a rudimentary sanity check.
+          ifstream fin( fname.c_str() );
+          char text[20];
+          fin.get(text, 7);
+          if( 0 == strcmp(text, "scale " ) )
+            retval = true;
+          else
+          {
+            Error(false, "Error in arenafile '" + fname + "': 'scale' not first command. Skipping file.",
+                  "Various::check_if_filename_is_arena");
+            *err_in_file = true;
+          }
+          fin.close();
+        }
+    }
+  catch(exception& e)
+    {
+    Error(true, e.what(), "check_if_filename_is_arena");
     }
 
   return retval;
 }
 
 bool
-check_logfile( String& fname )
+check_logfile( string& fname )
 {
   struct stat filestat;
-  if( 0 == stat( fname.chars(), &filestat ) )
+  if( 0 == stat( fname.c_str(), &filestat ) )
     // Check if file is a regular and readable file
     if( S_ISREG( filestat.st_mode) &&
         ( filestat.st_mode & ( S_IROTH | S_IRGRP | S_IRUSR ) ) )
     {
       // So far so good. Now do a rudimentary sanity check.
-      ifstream fin( fname.chars() );
+      ifstream fin( fname.c_str() );
       long line = 0;
       for(;;)
       {
@@ -367,19 +390,25 @@ check_for_robots_and_arenas( string& word,
   bool found = false;
   bool err_in_file = false;
   string full_file_name = "";
-
-  if( word.size() > 1 )
-    if( get_segment( String(word.c_str()), -2, -1 ) == "/*" )
-      {
-        search_directories( get_segment( String(word.c_str()), 0, -2 ), tour_list, check_robots );
-        return;
-      }
+  try
+    {
+      if( word.size() > 1 )
+        if( word.substr(word.size()-2, 2 ) == "/*" )
+          {
+            search_directories( word.substr(0, word.size()-1), tour_list, check_robots );
+            return;
+          }
+    }
+  catch(exception& e)
+    {
+      Error(true, e.what(), "check_for_robots_and_arenas");
+    }
   if( word.size() == 1 && word[0] == '*' )
     {
 
       ListIterator<string> li;
       for( dir_list.first(li); li.ok(); li++ )
-        search_directories( String(li()->c_str()), tour_list, check_robots );
+        search_directories( *li(), tour_list, check_robots );
       return;
     }
   if( word.find('/') != -1 )
@@ -411,7 +440,7 @@ check_for_robots_and_arenas( string& word,
   if( found )
     {
       start_tournament_info_t* info;
-      info = new start_tournament_info_t(0, false, String(full_file_name.c_str()), "");
+      info = new start_tournament_info_t(0, false, full_file_name, "");
       tour_list.insert_last( info );
     }
   else if(!err_in_file)
@@ -424,18 +453,18 @@ check_for_robots_and_arenas( string& word,
 }
 
 void
-search_directories( String directory,
+search_directories( string directory,
                     List<start_tournament_info_t>& tour_list,
                     const bool check_robots )
 {
   bool err_in_file = false;
   DIR* dir;
-  if( NULL != ( dir = opendir(directory.chars()) ) )
+  if( NULL != ( dir = opendir(directory.c_str()) ) )
     {
       struct dirent* entry;
       while( NULL != ( entry = readdir( dir ) ) )
         {
-          string full_file_name = string(directory.chars()) + entry->d_name;
+          string full_file_name = directory + entry->d_name;
           bool res = false;
           if(check_robots)
             res = check_if_filename_is_robot(full_file_name, &err_in_file);
@@ -444,7 +473,7 @@ search_directories( String directory,
           if(res)
             {
               start_tournament_info_t* info;
-              info = new start_tournament_info_t(0, false, String(full_file_name.c_str()), "");
+              info = new start_tournament_info_t(0, false, full_file_name, "");
               tour_list.insert_last( info );
             }
         }
@@ -550,42 +579,54 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
         }
 
       string word(buffer);
+      string word_lower;
+      word_lower.resize(word.size());
+      transform (word.begin(),word.end(), word_lower.begin(), (int(*)(int))tolower);
 
-      if((make_lower_case(String(word.c_str())) == "games/sequence:") ||
-         (make_lower_case(String(word.c_str())) == "g/s:"))
+      if((word_lower == "games/sequence:") ||
+         (word_lower == "g/s:"))
         {
           looking_for = 0;
           file >> buffer;
           if( buffer[0] == '*' )
             games_p_s = -1;
           else
-            games_p_s = str2int( buffer );
+            {
+              istringstream string2number(buffer);
+              string2number >> games_p_s;
+            }
         }
-      else if((make_lower_case(String(word.c_str())) == "robots/sequence:") ||
-              (make_lower_case(String(word.c_str())) == "r/s:"))
+      else if((word_lower == "robots/sequence:") ||
+              (word_lower == "r/s:"))
         {
           looking_for = 0;
           file >> buffer;
           if( buffer[0] == '*' )
             robots_p_s = -1;
           else
-            robots_p_s = str2int( buffer );
+          {
+            istringstream string2number(buffer);
+            string2number >> robots_p_s;
+          }
         }
-      else if((make_lower_case(String(word.c_str())) == "sequences:") ||
-              (make_lower_case(String(word.c_str())) == "seq:"))
+      else if((word_lower == "sequences:") ||
+              (word_lower == "seq:"))
         {
           looking_for = 0;
           file >> buffer;
           if( buffer[0] == '*' )
             n_o_sequences = -1;
           else
-            n_o_sequences = str2int( buffer );
+          {
+            istringstream string2number(buffer);
+            string2number >> n_o_sequences;
+          }
         }
-      else if((make_lower_case(String(word.c_str())) == "robots:") ||
-              (make_lower_case(String(word.c_str())) == "r:"))
+      else if((word_lower == "robots:") ||
+              (word_lower == "r:"))
         looking_for = 1;
-      else if((make_lower_case(String(word.c_str())) == "arenas:") ||
-              (make_lower_case(String(word.c_str())) == "a:"))
+      else if((word_lower == "arenas:") ||
+              (word_lower == "a:"))
         looking_for = 2;
       else
         {
@@ -702,7 +743,11 @@ int_compare(GtkCList* clist, gconstpointer ptr1, gconstpointer ptr2)
   if (!text1)
     return -1;
 
-  return (str2int(text1) - str2int(text2));
+  istringstream text1_c(text1), text2_c(text2);
+  int text1_num, text2_num;
+  text1_c >> text1_num;
+  text2_c >> text2_num;
+  return (text1_num - text2_num);
 }
 
 gint
@@ -744,8 +789,10 @@ float_compare(GtkCList *clist, gconstpointer ptr1, gconstpointer ptr2)
   if (!text1)
     return -1;
 
-  double n1 = str2dbl(text1);
-  double n2 = str2dbl(text2);
+  istringstream text1_c(text1), text2_c(text2);
+  double n1, n2;
+  text1_c >> n1;
+  text2_c >> n2;
 
   if(n1 > n2)
     return 1;

@@ -34,6 +34,7 @@ using namespace std;
 #include "StatisticsWindow.h"
 #include "Options.h"
 #include "Various.h"
+#include "String.h"
 
 extern class Options the_opts;
 extern class Gui the_gui;
@@ -343,8 +344,9 @@ OptionsWindow::set_all_options()
       for(int i=0;i<LAST_DOUBLE_OPTION;i++)
         {
 
-		double entry_value = str2dbl
-            ( gtk_entry_get_text( GTK_ENTRY( double_opts[i].entry ) ) );
+          istringstream string2number(gtk_entry_get_text( GTK_ENTRY( double_opts[i].entry ) ) );
+          double entry_value;
+          string2number >> entry_value;
 
           if( entry_value > double_opts[i].max_value )
             entry_value = double_opts[i].max_value;
@@ -358,8 +360,10 @@ OptionsWindow::set_all_options()
         {
           long entry_value = 0;
           if( long_opts[i].datatype == ENTRY_INT )
-            entry_value = str2long
-              ( gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ) );
+            {
+              istringstream string2number(gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ));
+              string2number >> entry_value;
+            }
           if( long_opts[i].datatype == ENTRY_HEX )
             entry_value = str2hex
               ( gtk_entry_get_text( GTK_ENTRY( long_opts[i].entry ) ) );

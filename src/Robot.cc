@@ -79,10 +79,20 @@ Robot::Robot(const string& filename)
   robot_filename = filename;
 
   int nr;
-  if( ( nr = String(robot_filename.c_str()).find( '/', 0, true) ) == -1 )
+  if( ( nr = robot_filename.rfind( '/', robot_filename.size()) ) == -1 )
+//   if( ( nr = String(robot_filename.c_str()).find( '/', 0, true) ) == -1 )
     robot_plain_filename = robot_filename;
   else
-    robot_plain_filename = string(get_segment(String(robot_filename.c_str()), nr+1, -1).chars());
+    {
+      try 
+        {
+          robot_plain_filename = robot_filename.substr(nr+1,robot_filename.size()-nr-1);
+        }
+      catch(exception& e)
+        {
+          Error(true, e.what(), "Robot::Robot");
+        }
+    }
 
 
   network_robot = false;

@@ -633,20 +633,27 @@ void
 ControlWindow::replay( GtkWidget* widget,
                        class ControlWindow* cw_p )
 {
-  String filename =
-    gtk_file_selection_get_filename
-    ( GTK_FILE_SELECTION( cw_p->get_filesel() ) );
-
-  destroy_filesel( cw_p->get_filesel(), cw_p );
-
-  if( filename[filename.get_length() - 1] == '/' )  
-    return;  // no file is selected
-
-  // rudimentary sanity check
-  if( check_logfile( filename ) )
+  try 
   {
-    the_arena_controller.replay_filename = string(filename.chars());
-    the_arena_controller.start_replay_arena();
+    string filename =
+      gtk_file_selection_get_filename
+      ( GTK_FILE_SELECTION( cw_p->get_filesel() ) );
+
+    destroy_filesel( cw_p->get_filesel(), cw_p );
+
+    if( filename.at(filename.size() - 1) == '/' )  
+      return;  // no file is selected
+
+    // rudimentary sanity check
+    if( check_logfile( filename ) )
+    {
+      the_arena_controller.replay_filename = filename;
+      the_arena_controller.start_replay_arena();
+    }
+  }
+  catch(exception& e)
+  {
+    Error(true, e.what(), "ControlWindow::replay");
   }
 }
 
