@@ -42,11 +42,11 @@ public:
                         const int games_p_sequence, 
                         const int n_o_sequences);
 
-  void end_game();
+  bool end_game();
 
   void broadcast(enum message_to_robot_type ...);
   
-  void parse_arena_file(String& filename);
+  bool parse_arena_file(String& filename);
   
   void set_filenames( String& log_fname, const String& statistics_fname, 
                       const String& tournament_fname,
@@ -85,10 +85,10 @@ private:
   bool is_colour_allowed(const long int col, const double min_dist, const class Robot*);
   double colour_dist(const long int col1, const long int col2);
 
-  void start_game();
+  bool start_game();
   void start_sequence();
   void end_sequence();
-  void start_sequence_follow_up();
+  bool start_sequence_follow_up();
   void end_sequence_follow_up();
   void end_tournament();
 

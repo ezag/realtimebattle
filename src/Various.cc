@@ -231,7 +231,7 @@ split_colonseparated_dirs(String& dirs, List<String>& str_list)
 }
 
 bool
-check_if_filename_is_robot( String& fname )
+check_if_filename_is_robot( String& fname, bool* err_in_file ) // err_in_file not currently used
 { 
   struct stat filestat;
   if( stat( fname.chars(), &filestat ) != 0 ) 
@@ -249,17 +249,32 @@ check_if_filename_is_robot( String& fname )
 }
 
 bool
-check_if_filename_is_arena( String& fname )
+check_if_filename_is_arena( String& fname, bool* err_in_file)
 {
+  bool retval = false;
   struct stat filestat;
   if( 0 == stat( fname.chars(), &filestat ) && fname.get_length() > 6 )
     // Check if file is a regular file that is readable and ends with .arena
     if( S_ISREG( filestat.st_mode) &&
         ( filestat.st_mode & ( S_IROTH | S_IRGRP | S_IRUSR ) )  &&
         ( String(".arena") == get_segment(fname, -6, -1) ) )
-      return true;
+    {
+      // So far so good. Now do a rudimentary sanity check.
+      ifstream fin( fname.chars() );
+      char text[20];
+      fin.get(text, 7);
+      if( 0 == strcmp(text, "scale " ) )
+        retval = true;
+      else
+      {
+        Error(false, "Error in arenafile '" + fname + "': 'scale' not first command. Skipping file.",
+              "Various::check_if_filename_is_arena");
+        *err_in_file = true;
+      }
+      fin.close();
+    }
 
-  return false;
+  return retval;
 }
 
 void
@@ -269,6 +284,7 @@ check_for_robots_and_arenas( String& word,
                              const bool check_robots )
 {
   bool found = false;
+  bool err_in_file = false;
   String full_file_name = "";
 
   if( word.get_length() > 1 )
@@ -287,13 +303,14 @@ check_for_robots_and_arenas( String& word,
     }
   if( word.find('/') != -1 )
     {
-      if((check_robots && check_if_filename_is_robot( word )) ||
-         (!check_robots && check_if_filename_is_arena( word )))
+      if((check_robots && check_if_filename_is_robot( word, &err_in_file )) ||
+         (!check_robots && check_if_filename_is_arena( word, &err_in_file )))
         {
           full_file_name = word;
           found = true;
         }
     }
+//  if( !found && !err_in_file )
   if( !found )
     {
       ListIterator<String> li;
@@ -301,8 +318,8 @@ check_for_robots_and_arenas( String& word,
         {
           String temp_name = *li() + word;
 
-          if((check_robots && check_if_filename_is_robot( temp_name )) ||
-             (!check_robots && check_if_filename_is_arena( temp_name )))
+          if((check_robots && check_if_filename_is_robot( temp_name, &err_in_file )) ||
+             (!check_robots && check_if_filename_is_arena( temp_name, &err_in_file )))
             {
               full_file_name= temp_name;
               found = true;
@@ -316,7 +333,7 @@ check_for_robots_and_arenas( String& word,
       info = new start_tournament_info_t(0, false, full_file_name, "");
       tour_list.insert_last( info );
     }
-  else
+  else if(!err_in_file)
     {
       if(check_robots)
         cerr << "Couldn't find an executable robot with filename " << word << endl;
@@ -330,6 +347,7 @@ search_directories( String directory,
                     List<start_tournament_info_t>& tour_list,
                     const bool check_robots )
 {
+  bool err_in_file = false;
   DIR* dir;
   if( NULL != ( dir = opendir(directory.chars()) ) )
     {
@@ -339,9 +357,9 @@ search_directories( String directory,
           String full_file_name = directory + entry->d_name;
           bool res = false;
           if(check_robots)
-            res = check_if_filename_is_robot(full_file_name);
+            res = check_if_filename_is_robot(full_file_name, &err_in_file);
           else
-            res = check_if_filename_is_arena(full_file_name);
+            res = check_if_filename_is_arena(full_file_name, &err_in_file);
           if(res)
             {
               start_tournament_info_t* info;

@@ -168,20 +168,29 @@ ArenaRealTime::set_filenames( String& log_fname,
   option_file_name = option_fname;
 }
 
-void
+bool
 ArenaRealTime::parse_arena_file(String& filename)
 {
   Vector2D vec1, vec2, vec0;
 
   ifstream file(filename.chars());
-  if( !file ) Error(true, "Couldn't open arena file" + filename, "ArenaBase::parse_arena_file");
+  if( !file )
+  {
+    Error(false, "Couldn't open arena file" + filename, "ArenaRealtime::parse_arena_file");
+    return false;
+  }
 
   int succession = 1;
   double scale = the_opts.get_d(OPTION_ARENA_SCALE);
   double angle_factor = 1.0;
   do
     {
-      parse_arena_line(file, scale, succession, angle_factor);
+      if ( !file.good() || !parse_arena_line(file, scale, succession, angle_factor) )
+      {
+          Error(false, "Error parsing arena file " + filename, "ArenaRealtime::parse_arena_file");
+          file.close();
+          return false;
+      }
 
     } while( !file.eof() );
 
@@ -193,7 +202,12 @@ ArenaRealTime::parse_arena_file(String& filename)
       char buffer[500];
       
       ifstream file(filename.chars());
-      if( !file ) Error(true, "Couldn't open arena file for log file" + filename, "ArenaBase::parse_arena_file");
+      if( !file )
+      {
+        Error(false, "Couldn't open arena file for log file " + filename,
+              "ArenaRealtime::parse_arena_file");
+        return false;
+      }
   
       do
         {
@@ -204,7 +218,7 @@ ArenaRealTime::parse_arena_file(String& filename)
       while( buffer[0] != '\0' );
       
     }
-
+  return true;
 }
 
 void
@@ -429,7 +443,15 @@ ArenaRealTime::timeout_function()
       {
         read_robot_messages();
 
-        if( total_time > next_check_time ) start_sequence_follow_up();
+        if( total_time > next_check_time )
+          if( !start_sequence_follow_up() )
+          {
+            Error(false, "Error starting game sequence, ending tournament!", "ArenaRealTime::timeout_function");
+            // Finish tournament
+            game_nr = games_per_sequence;
+            sequence_nr = sequences_in_tournament;
+            end_game();
+          }
       }
       break;
       
@@ -744,7 +766,7 @@ ArenaRealTime::set_debug_level( const int new_level)
   return debug_level;
 }
 
-void
+bool
 ArenaRealTime::start_game()
 {
   // put the arena together
@@ -752,7 +774,7 @@ ArenaRealTime::start_game()
   if( pause_after_next_game )
     {
       set_state( PAUSING_BETWEEN_GAMES );
-      return;
+      return true;
     }  
   
   current_arena_nr = current_arena_nr % number_of_arenas + 1;
@@ -761,13 +783,20 @@ ArenaRealTime::start_game()
 
   print_to_logfile('G', sequence_nr, game_nr + 1);
 
-  parse_arena_file(*filename);
+  if ( !parse_arena_file(*filename))
+  {
+    Error(false, "Error parsing arena file " + *filename, "ArenaRealTime::start_game");
+    return false;
+  }
 
   int charpos;
   if( (charpos = filename->find('/',0,true)) != -1 )
     current_arena_filename = get_segment(*filename, charpos+1, -1);
   else
-    Error(true, "Incomplete arena file path" + *filename, "ArenaRealTime::start_game");
+  {
+    Error(false, "Incomplete arena file path " + *filename, "ArenaRealTime::start_game");
+    return false;
+  }
 
   char msg[128];
   snprintf( msg, 127, _("Game %d of sequence %d begins on arena"),
@@ -805,7 +834,11 @@ ArenaRealTime::start_game()
           found_space = space_available(pos, the_opts.get_d(OPTION_ROBOT_RADIUS)*1.2);
         }
 
-      if( !found_space ) Error(true, "Couldn't find space for all robots", "ArenaRealTime::start_game");
+      if( !found_space )
+      {
+        Error(false, "Couldn't find space for all robots", "ArenaRealTime::start_game");
+        return false;
+      }
       angle = ((double)rand())*2.0*M_PI/RAND_MAX;
       robotp->set_values_before_game(pos, angle);
       object_lists[ROBOT].insert_last(robotp);
@@ -849,9 +882,10 @@ ArenaRealTime::start_game()
 
   reset_timer();  // Game starts !
   next_check_time = total_time + the_opts.get_d(OPTION_CHECK_INTERVAL);
+  return true;
 }
 
-void
+bool
 ArenaRealTime::end_game()
 {
   Robot* robotp;
@@ -875,9 +909,12 @@ ArenaRealTime::end_game()
   delete_lists(false, false, false, false);
   
   if(game_nr == games_per_sequence) 
+  {
     end_sequence();
+    return true;
+  }
   else
-    start_game();
+    return start_game();
 }
 
 
@@ -921,7 +958,7 @@ ArenaRealTime::start_sequence()
   next_check_time = total_time + the_opts.get_d(OPTION_ROBOT_STARTUP_TIME);
 }
 
-void
+bool
 ArenaRealTime::start_sequence_follow_up()
 {
   // check if the process have started correctly
@@ -961,7 +998,7 @@ ArenaRealTime::start_sequence_follow_up()
         }
 
     }
-  start_game();
+  return start_game();
 }
 
 void
@@ -1039,7 +1076,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
     }
 #endif
 
-  // Create robot classes and put them into the list all_robots_in_tournament
+  // Create robot classes and put them into start_sequencethe list all_robots_in_tournament
 
   number_of_robots = 0;
   robot_count = 0;
@@ -1083,7 +1120,6 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   //  for(int i=0; i<robots_per_game; i++) current_sequence[i] = i+1;
   
   // set complete rounds first
-
   for(int round_nr=0; round_nr < complete_rounds; round_nr++)
     {
       int k, i, j;

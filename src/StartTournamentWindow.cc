@@ -192,7 +192,7 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
         	
           String* current_dir = li();
           DIR* dir;
-          
+          bool err_in_file = false; // set by called functions but not currently checked here
           
           if( dir = opendir(current_dir->chars()) )
             {
@@ -200,8 +200,8 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
               while (NULL != ( entry = readdir( dir ) ) )
                 {
                   String full_file_name = *current_dir + entry->d_name;
-                  if( ( robot && check_if_filename_is_robot( full_file_name ) ) ||
-                      ( !robot && check_if_filename_is_arena( full_file_name ) ) )
+                  if( ( robot && check_if_filename_is_robot( full_file_name, &err_in_file ) ) ||
+                      ( !robot && check_if_filename_is_arena( full_file_name, &err_in_file ) ) )
                     {
                       char* lst[] = { entry->d_name };
 

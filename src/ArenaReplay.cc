@@ -256,7 +256,7 @@ ArenaReplay::start_tournament()
   set_state( BEFORE_GAME_START );
 }
   
-void 
+bool 
 ArenaReplay::end_game()
 {
 }
@@ -266,7 +266,7 @@ ArenaReplay::update()
 {
 }
 
-void 
+bool 
 ArenaReplay::start_game()
 {
 }

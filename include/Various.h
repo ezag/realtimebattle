@@ -71,8 +71,8 @@ void reorder_pointer_array(void** array, int size);
 void read_dirs_from_system(List<String>& robotdirs, List<String>& arenadirs);
 void split_colonseparated_dirs(String& dirs, List<String>& arenadirs);
 
-bool check_if_filename_is_robot( String& fname );
-bool check_if_filename_is_arena( String& fname );
+bool check_if_filename_is_robot( String& fname, bool* err_in_file );
+bool check_if_filename_is_arena( String& fname, bool* err_in_file );
 void check_for_robots_and_arenas( String& word, 
                                   List<start_tournament_info_t>& tour_list,
                                   List<String>& dir_list, 

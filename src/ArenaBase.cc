@@ -213,7 +213,7 @@ ArenaBase::print_message( const String& messager,
 #endif
 }
 
-void
+bool
 ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, double& angle_factor)
 {
   char text[20];
@@ -231,8 +231,12 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   file.get(text, 20, ' ');
   if( strcmp(text, "scale" ) == 0 )
     {
-      if( succession != 1 ) Error(true, "Error in arenafile: 'scale' not first", 
-                                  "ArenaBase::parse_arena_line");
+      if( succession != 1 )
+      {
+        Error(false, "Error in arenafile: 'scale' not first",
+                     "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 2;
       double scl;
       file >> scl;
@@ -248,14 +252,20 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       else if( strcmp(unit, "degrees" ) == 0 )
         angle_factor = M_PI / 180.0;
       else
-        Error(true, "Error in arenafile: Unknown angle unit: " + String(unit), 
+      {
+        Error(false, "Error in arenafile: Unknown angle unit: " + String(unit), 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
     }
   else if( strcmp(text, "boundary" ) == 0 )
     {
       if( succession > 2 ) 
-        Error(true, "Error in arenafile: 'boundary' after wallpieces or duplicate", 
+      {
+        Error(false, "Error in arenafile: 'boundary' after wallpieces or duplicate", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 3;
       double b1, b2;
       file >> b1;
@@ -266,22 +276,31 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       boundary[1] = Vector2D(scale*b1, scale*b2);
       if( boundary[1][0] - boundary[0][0] <= 0 || 
           boundary[1][1] - boundary[0][1] <= 0 ) 
-        Error(true, "Error in arenafile: 'boundary' negative", 
+      {
+        Error(false, "Error in arenafile: 'boundary' negative", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
     }
   else if( strcmp(text, "exclusion_point" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'boundary' after wallpieces or duplicate", 
+      {
+        Error(false, "Error in arenafile: 'boundary' after wallpieces or duplicate", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       file >> vec1;
       exclusion_points.insert_last(new Vector2D(scale*vec1));
     }
   else if( strcmp(text, "inner_circle" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'inner_circle' before boundary", 
+      {  
+        Error(false, "Error in arenafile: 'inner_circle' before boundary", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -294,8 +313,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   else if( strcmp(text, "circle" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'circle' before 'boundary'", 
+      {
+        Error(false, "Error in arenafile: 'circle' before 'boundary'", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -307,8 +329,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   else if( strcmp(text, "arc" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'arc' before 'boundary'", 
+      {
+        Error(false, "Error in arenafile: 'arc' before 'boundary'", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       double angle1, angle2;
       file >> bounce_c;
@@ -326,8 +351,12 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
     }
   else if( strcmp(text, "line" ) == 0 )
     {
-      if( succession < 3 ) Error(true, "Error in arenafile: 'line' before 'boundary'",
+      if( succession < 3 )
+      {
+        Error(false, "Error in arenafile: 'line' before 'boundary'",
                                  "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -337,9 +366,12 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       file >> vec2;      // end_point
 
 
-      if( length(vec2-vec1) == 0.0 ) 
-        Error(true, "Error in arenafile: Zero length line", 
+      if( length(vec2-vec1) == 0.0 )
+      { 
+        Error(false, "Error in arenafile: Zero length line", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
 
       wall_linep = new WallLine(scale*vec1, unit(vec2-vec1), scale*length(vec2-vec1), 
                                 scale*thickness, bounce_c , hardn);      
@@ -348,8 +380,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   else if( strcmp(text, "polygon" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'polygon' before 'boundary'", 
+      {  
+        Error(false, "Error in arenafile: 'polygon' before 'boundary'", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -365,9 +400,12 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
           vec2 = vec1;
           file >> vec1;      // next point
 
-          if( length(vec2-vec1) == 0.0 ) 
-            Error(true, "Error in arenafile: Zero length line in polygon", 
+          if( length(vec2-vec1) == 0.0 )
+          { 
+            Error(false, "Error in arenafile: Zero length line in polygon", 
                   "ArenaBase::parse_arena_line");
+            return false;
+          }
 
           wall_linep = new WallLine(scale*vec2, unit(vec1-vec2), 
                                     scale*length(vec1-vec2), 
@@ -380,8 +418,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   else if( strcmp(text, "closed_polygon" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'closed_polygon' before 'boundary'", 
+      {
+        Error(false, "Error in arenafile: 'closed_polygon' before 'boundary'", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -399,8 +440,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
           file >> vec1;      // next point
 
           if( length(vec2-vec1) == 0.0 )
-            Error(true, "Error in arenafile: Line in closed_polygon of zero length", 
+          {
+             Error(false, "Error in arenafile: Line in closed_polygon of zero length", 
                   "ArenaBase::parse_arena_line");
+             return false;
+          }
           
           wall_linep = new WallLine(scale*vec2, unit(vec1-vec2), 
                                     scale*length(vec1-vec2), 
@@ -411,8 +455,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
         }
 
       if( length(vec0-vec1) == 0.0 ) 
-        Error(true, "Error in arenafile: Last line in closed_polygon of zero length", 
+      {
+        Error(false, "Error in arenafile: Last line in closed_polygon of zero length", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
 
       wall_linep = new WallLine(scale*vec1, unit(vec0-vec1), scale*length(vec0-vec1), 
                                 scale*thickness, bounce_c , hardn);      
@@ -422,8 +469,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
   else if( strcmp(text, "poly_curve" ) == 0 )
     {
       if( succession < 3 ) 
-        Error(true, "Error in arenafile: 'closed_polygon' before 'boundary'", 
+      {
+        Error(false, "Error in arenafile: 'closed_polygon' before 'boundary'", 
               "ArenaBase::parse_arena_line");
+        return false;
+      }
       succession = 4;
       file >> bounce_c;
       file >> hardn;
@@ -440,9 +490,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       direction.normalize();
 
       if( lengthsqr(direction) < 0.01 ) 
-        Error(true, "Error in arenafile: directions must not be zero", 
+      {  
+        Error(false, "Error in arenafile: directions must not be zero", 
               "ArenaBase::parse_arena_line");
-
+        return false;
+      }
       vec0 = current_pos;
 
       char c;
@@ -457,8 +509,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
             case 'L':  // line
               file >> len;
               if( len <= 0.0 )
-                Error(true, "Error in arenafile: Line in poly_curve must be positive", 
+              {
+                Error(false, "Error in arenafile: Line in poly_curve must be positive", 
                       "ArenaBase::parse_arena_line");
+                return false;
+              }
                 
               wall_linep = new WallLine(scale*current_pos, direction, 
                                         scale*len, 
@@ -507,8 +562,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
               
             case 'C':   // connect to start point and quit
               if( length(vec0 - current_pos ) == 0.0 ) 
-                Error(true, "Error in arenafile: Last line in poly_curve of zero length", 
+              {
+                Error(false, "Error in arenafile: Last line in poly_curve of zero length", 
                       "ArenaBase::parse_arena_line");
+                return false;
+              }
               
               wall_linep = new WallLine(scale*current_pos, unit(vec0-current_pos), 
                                         scale*length(vec0-current_pos), 
@@ -522,8 +580,9 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
               break;
               
             default:
-              Error(true, "Incorrect arenafile, unknown command in poly_curve: " 
+              Error(false, "Incorrect arenafile, unknown command in poly_curve: " 
                     + (String)c, "ArenaBase::parse_arena_line");
+              return false;
               break;
             }
         }
@@ -531,8 +590,12 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
     }
 
   else if( text[0] != '\0' )
-    Error(true, "Incorrect arenafile, unknown keyword: " + (String)text, 
+  {
+    Error(false, "Incorrect arenafile, unknown keyword: " + (String)text, 
           "ArenaBase::parse_arena_line");
+    return false;
+  }
+  return true;
 
 }
 

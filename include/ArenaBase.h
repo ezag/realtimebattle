@@ -96,11 +96,11 @@ public:
   
   virtual bool timeout_function() = 0;
 
-  virtual void end_game() = 0;
+  virtual bool end_game() = 0;
 
 protected: 
   virtual void update() = 0;
-  virtual void start_game() = 0;
+  virtual bool start_game() = 0;
   virtual void start_sequence() = 0;
   virtual void end_sequence() = 0;
   virtual void end_tournament() = 0;
@@ -155,7 +155,7 @@ protected:
   void move_shots(const double time_period); 
   void move_shots_no_check(const double time_period); 
 
-  void parse_arena_line(ifstream& file, double& scale, 
+  bool parse_arena_line(ifstream& file, double& scale, 
                         int& succession, double& angle_factor);
 
   void set_state( const state_t );
