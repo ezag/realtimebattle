@@ -27,7 +27,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #ifndef NO_GRAPHICS
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#endif 
+#endif
 
 #include <sys/stat.h>
 #if HAVE_DIRENT_H
@@ -65,14 +65,14 @@ extern class Options the_opts;
 #ifndef NO_GRAPHICS
 # include "ControlWindow.h"
 extern class ControlWindow* controlwindow_p;
-#endif 
+#endif
 extern bool no_graphics;
 
 void
 Error(const bool fatal, const String& error_msg, const String& function_name)
 {
 #ifndef NO_GRAPHICS
-  
+
   String info_text = "Error in " + function_name + ":\n\n" + error_msg + "\n";
   if( fatal )
     info_text += "\nFatal Error - program will terminate!";
@@ -83,12 +83,12 @@ Error(const bool fatal, const String& error_msg, const String& function_name)
           "Error" );
 
 #else
-  
+
   cerr << "RealTimeBattle: " << _("Error in") << " "
        << function_name << ": " << error_msg << endl;
   //  perror("RealTimeBattle: errno message");
 
-#endif 
+#endif
 
   if( fatal == true )
     {
@@ -107,11 +107,11 @@ Quit(const bool success)
     if( !no_graphics )
       delete controlwindow_p;
   }
-#endif 
+#endif
 
   if( !success )
-    exit(EXIT_FAILURE);  
-      
+    exit(EXIT_FAILURE);
+
   exit(EXIT_SUCCESS);
 }
 
@@ -119,7 +119,7 @@ int
 factorial(const int n)
 {
   double fact = 1.0;
-  for(int i=1; i<=n; i++)  
+  for(int i=1; i<=n; i++)
     fact *= i;
 
   if( fact < (double)INT_MAX )
@@ -132,12 +132,12 @@ int
 binomial(const int n, const int k)
 {
   int k2 = min_rtb(k, n-k);
-  
+
   double bin = 1;
-  for(int i=n; i>n-k2; i--)  
+  for(int i=n; i>n-k2; i--)
     bin *= i;
 
-  for(int i=1; i<=k2; i++)  
+  for(int i=1; i<=k2; i++)
     bin /= i;
 
   if( bin < (double)INT_MAX )
@@ -146,7 +146,7 @@ binomial(const int n, const int k)
     return INT_MAX;
 }
 
-void 
+void
 reorder_pointer_array(void** array, int size)
 {
   int n1, n2;
@@ -181,14 +181,14 @@ make_gdk_colour(const long col)
   return colour;
 }
 
-long 
+long
 gdk2hex_colour(const GdkColor& col)
 {
-  return  ( (col.blue & 0xff) | 
+  return  ( (col.blue & 0xff) |
             ((col.green & 0xff) << 8) |
             ((col.red & 0xff) << 16) );
 }
-#endif 
+#endif
 
 void
 read_dirs_from_system(List<String>& robotdirs, List<String>& arenadirs)
@@ -235,7 +235,7 @@ split_colonseparated_dirs(String& dirs, List<String>& str_list)
 
   if(current_dir != "")
     {
-      current_dir = get_segment(dirs, lastpos, -1); 
+      current_dir = get_segment(dirs, lastpos, -1);
       if(current_dir[current_dir.get_length() - 1] != '/')
         current_dir += '/';
 
@@ -246,16 +246,21 @@ split_colonseparated_dirs(String& dirs, List<String>& str_list)
 
 bool
 check_if_filename_is_robot( String& fname, bool* err_in_file ) // err_in_file not currently used
-{ 
+{
   struct stat filestat;
-  if( stat( fname.chars(), &filestat ) != 0 ) 
+  if( stat( fname.chars(), &filestat ) != 0 )
     return false;
 
 
-  // Check if file is a regular file that can be executed and ends with .robot
-  if( S_ISREG( filestat.st_mode) && 
+  // Check if file is a regular file that can be executed and ends with .robot (or .robot.exe for cygwin)
+  if( S_ISREG( filestat.st_mode) &&
       ( filestat.st_mode & ( S_IXOTH | S_IXGRP | S_IXUSR )) &&
+#ifdef __CYGWIN__
+      ( String(".robot") == get_segment(fname, -6, -1) ||
+        String(".robot.exe") == get_segment(fname, -10, -1) ) )
+#else
       ( String(".robot") == get_segment(fname, -6, -1) ) )
+#endif
     return true;
 
 
@@ -312,7 +317,7 @@ check_logfile( String& fname )
           fin.close();
           return true;
         }
-      
+
         line++;
         switch(buffer[0])
         {
@@ -349,9 +354,9 @@ check_logfile( String& fname )
 }
 
 void
-check_for_robots_and_arenas( String& word, 
+check_for_robots_and_arenas( String& word,
                              List<start_tournament_info_t>& tour_list,
-                             List<String>& dir_list, 
+                             List<String>& dir_list,
                              const bool check_robots )
 {
   bool found = false;
@@ -366,7 +371,7 @@ check_for_robots_and_arenas( String& word,
       }
   if( word.get_length() == 1 && word[0] == '*' )
     {
-      
+
       ListIterator<String> li;
       for( dir_list.first(li); li.ok(); li++ )
         search_directories( *li(), tour_list, check_robots );
@@ -414,7 +419,7 @@ check_for_robots_and_arenas( String& word,
 }
 
 void
-search_directories( String directory, 
+search_directories( String directory,
                     List<start_tournament_info_t>& tour_list,
                     const bool check_robots )
 {
@@ -473,11 +478,11 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
     {
       char buffer[200];
       if ((file >> buffer).eof()){
-          
-          
+
+
           int robots_counted = robot_list.number_of_elements();
           int arenas_counted = arena_list.number_of_elements();
-          
+
           if (games_p_s == -1)
             games_p_s = arenas_counted;
 
@@ -488,12 +493,12 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
             n_o_sequences=binomial(robots_counted, games_p_s);
 
           robots_p_s = min_rtb(robots_counted,robots_p_s);
-          
+
           if(robots_p_s < 2)
             {
               if( fatal_error_on_file_failure )
-                Error(true, "Can't start tournament with only " + String(robots_p_s) + 
-                      " robots per sequence", 
+                Error(true, "Can't start tournament with only " + String(robots_p_s) +
+                      " robots per sequence",
                       "parse_tournament_file");
               else
                 return false;
@@ -502,7 +507,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
           if(games_p_s < 1)
             {
               if(fatal_error_on_file_failure)
-                Error(true, "Must have at least one game per sequence. " 
+                Error(true, "Must have at least one game per sequence. "
                       "Current value is: " + String(games_p_s),
                       "parse_tournament_file");
               else
@@ -512,7 +517,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
           if(n_o_sequences < 1)
             {
               if(fatal_error_on_file_failure)
-                Error(true, "Must have at least one sequence. Current value is: " + 
+                Error(true, "Must have at least one sequence. Current value is: " +
                       String(n_o_sequences),
                       "parse_tournament_file");
               else
@@ -521,7 +526,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
 
           // Startup the tournament
 
-          (*function)( robot_list, arena_list, robots_p_s, 
+          (*function)( robot_list, arena_list, robots_p_s,
                        games_p_s, n_o_sequences, data );
 
           return true;
@@ -529,7 +534,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
 
       String word(buffer);
 
-      if((make_lower_case(word) == "games/sequence:") || 
+      if((make_lower_case(word) == "games/sequence:") ||
          (make_lower_case(word) == "g/s:"))
         {
           looking_for = 0;
@@ -539,7 +544,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
           else
             games_p_s = str2int( buffer );
         }
-      else if((make_lower_case(word) == "robots/sequence:") || 
+      else if((make_lower_case(word) == "robots/sequence:") ||
               (make_lower_case(word) == "r/s:"))
         {
           looking_for = 0;
@@ -549,7 +554,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
           else
             robots_p_s = str2int( buffer );
         }
-      else if((make_lower_case(word) == "sequences:") || 
+      else if((make_lower_case(word) == "sequences:") ||
               (make_lower_case(word) == "seq:"))
         {
           looking_for = 0;
@@ -565,7 +570,7 @@ parse_tournament_file( const String& fname, const StartTournamentFunction functi
         looking_for = 2;
       else
         {
-        
+
           switch(looking_for)
             {
             case 0:
@@ -589,7 +594,7 @@ create_tmp_rtb_dir()
 {
   String dirname = the_opts.get_s( OPTION_TMP_RTB_DIR );
   struct stat filestat;
-  if( 0 != stat( dirname.chars(), &filestat ) ) 
+  if( 0 != stat( dirname.chars(), &filestat ) )
     mkdir( dirname.chars(), S_IRWXU | S_IRWXG | S_IRWXO );
 }
 
@@ -622,7 +627,7 @@ entry_handler( GtkWidget * entry, entry_t * entry_info )
             entry_text.erase(i);*/
           break;
         case ENTRY_HEX:
-          if( !(((entry_text[i] >= '0' && entry_text[i] <= '9') || 
+          if( !(((entry_text[i] >= '0' && entry_text[i] <= '9') ||
                  (entry_text[i] >= 'a' && entry_text[i] <= 'f') ||
                  (entry_text[i] >= 'A' && entry_text[i] <= 'F')) ||
                 (entry_text[i] == '-' && i == 0 ) && entry_info->allow_sign ) )
@@ -659,7 +664,7 @@ int_compare(GtkCList* clist, gconstpointer ptr1, gconstpointer ptr2)
     default:
       break;
     }
- 
+
   switch (row2->cell[clist->sort_column].type)
     {
     case GTK_CELL_TEXT:
@@ -701,7 +706,7 @@ float_compare(GtkCList *clist, gconstpointer ptr1, gconstpointer ptr2)
     default:
       break;
     }
- 
+
   switch (row2->cell[clist->sort_column].type)
     {
     case GTK_CELL_TEXT:
@@ -751,7 +756,7 @@ string_case_sensitive_compare(GtkCList *clist, gconstpointer ptr1, gconstpointer
     default:
       break;
     }
- 
+
   switch (row2->cell[clist->sort_column].type)
     {
     case GTK_CELL_TEXT:
@@ -793,7 +798,7 @@ string_case_insensitive_compare(GtkCList *clist, gconstpointer ptr1, gconstpoint
     default:
       break;
     }
- 
+
   switch (row2->cell[clist->sort_column].type)
     {
     case GTK_CELL_TEXT:

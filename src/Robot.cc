@@ -108,7 +108,7 @@ Robot::Robot(const String& filename)
   outstreamp = NULL;
   pipes[0] = pipes[1] = -1;
   pid = -1;
-  last_drawn_robot_center = Vector2D(infinity,infinity);
+  last_drawn_robot_center = Vector2D(infinity_rtb,infinity_rtb);
 
   use_non_blocking = get_default_non_blocking_state();
 }
@@ -127,7 +127,7 @@ Robot::Robot(const int r_id, const long int col, const String& name)
 
   has_competed = false;
 
-  last_drawn_robot_center = Vector2D(infinity,infinity);
+  last_drawn_robot_center = Vector2D(infinity_rtb,infinity_rtb);
   radius = the_opts.get_d(OPTION_ROBOT_RADIUS);
 }
 
@@ -486,7 +486,7 @@ Robot::die()
           the_gui.get_arenawindow_p()->
             draw_circle( last_drawn_center, last_drawn_radius,
                          *(the_gui.get_bg_gdk_colour_p()), true );
-          last_drawn_robot_center = Vector2D( infinity, infinity );
+          last_drawn_robot_center = Vector2D( infinity_rtb, infinity_rtb );
         }
 #endif
     }
@@ -707,7 +707,7 @@ Robot::update_rotation(rotation_t& angle, const double timestep)
 
   if( angle.pos >= angle.right && angle.mode == ROTATE_TO_RIGHT )
     {
-      angle.set_rot( angle.right, 0.0, -infinity, infinity, NORMAL_ROT);
+      angle.set_rot( angle.right, 0.0, -infinity_rtb, infinity_rtb, NORMAL_ROT);
       if( send_rotation_reached >= 1 ) rot_reached = true;
     }
 
@@ -719,7 +719,7 @@ Robot::update_rotation(rotation_t& angle, const double timestep)
 
   if( angle.pos <= angle.left && angle.mode == ROTATE_TO_LEFT )
     {
-      angle.set_rot( angle.left, 0.0, -infinity, infinity, NORMAL_ROT);
+      angle.set_rot( angle.left, 0.0, -infinity_rtb, infinity_rtb, NORMAL_ROT);
       if( send_rotation_reached >= 1 ) rot_reached = true;
     }
 
@@ -858,9 +858,9 @@ Robot::set_values_before_game(const Vector2D& pos, const double angle)
   center = pos;
   start_pos = pos;
   start_angle = angle;
-  robot_angle.set_rot (angle, 0.0, -infinity, infinity, NORMAL_ROT);
-  cannon_angle.set_rot(0.0,   0.0, -infinity, infinity, NORMAL_ROT);
-  radar_angle.set_rot (0.0,   0.0, -infinity, infinity, NORMAL_ROT);
+  robot_angle.set_rot (angle, 0.0, -infinity_rtb, infinity_rtb, NORMAL_ROT);
+  cannon_angle.set_rot(0.0,   0.0, -infinity_rtb, infinity_rtb, NORMAL_ROT);
+  radar_angle.set_rot (0.0,   0.0, -infinity_rtb, infinity_rtb, NORMAL_ROT);
   shot_energy = 0.0;
   radius = the_opts.get_d(OPTION_ROBOT_RADIUS);
   energy = the_opts.get_d(OPTION_ROBOT_START_ENERGY);
@@ -1172,13 +1172,13 @@ Robot::get_messages()
 
               if( bits & 1 )
                 robot_angle.set_rot( robot_angle.pos, rot_speed,
-                                     -infinity, infinity, NORMAL_ROT );
+                                     -infinity_rtb, infinity_rtb, NORMAL_ROT );
               if( bits & 2 )
                 cannon_angle.set_rot( cannon_angle.pos, rot_speed,
-                                      -infinity, infinity, NORMAL_ROT );
+                                      -infinity_rtb, infinity_rtb, NORMAL_ROT );
               if( bits & 4 )
                 radar_angle.set_rot( radar_angle.pos, rot_speed,
-                                     -infinity, infinity, NORMAL_ROT );
+                                     -infinity_rtb, infinity_rtb, NORMAL_ROT );
             }
           break;
 
@@ -1188,7 +1188,7 @@ Robot::get_messages()
               int bits;
               double rot_speed, rot_end_angle, rot_amount;
               *instreamp >> bits >> rot_speed >> rot_end_angle;
-              rot_end_angle = max_rtb(min_rtb(rot_end_angle, infinity), -infinity);
+              rot_end_angle = max_rtb(min_rtb(rot_end_angle, infinity_rtb), -infinity_rtb);
 
               rot_speed = fabs(rot_speed);
               if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
@@ -1200,11 +1200,11 @@ Robot::get_messages()
                   rot_amount = rot_end_angle - cannon_angle.pos;
                   if( rot_amount > 0 )
                     cannon_angle.set_rot( cannon_angle.pos, rot_speed,
-                                          -infinity, cannon_angle.pos + rot_amount,
+                                          -infinity_rtb, cannon_angle.pos + rot_amount,
                                           ROTATE_TO_RIGHT );
                   else
                     cannon_angle.set_rot( cannon_angle.pos, -rot_speed,
-                                          cannon_angle.pos + rot_amount, infinity,
+                                          cannon_angle.pos + rot_amount, infinity_rtb,
                                           ROTATE_TO_LEFT );
                 }
               if( bits & 4 )
@@ -1213,11 +1213,11 @@ Robot::get_messages()
                   rot_amount = rot_end_angle - radar_angle.pos;
                   if( rot_amount > 0 )
                     radar_angle.set_rot( radar_angle.pos, rot_speed,
-                                         -infinity, radar_angle.pos + rot_amount,
+                                         -infinity_rtb, radar_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     radar_angle.set_rot( radar_angle.pos, -rot_speed,
-                                         radar_angle.pos + rot_amount, infinity,
+                                         radar_angle.pos + rot_amount, infinity_rtb,
                                          ROTATE_TO_LEFT );
                 }
             }
@@ -1239,33 +1239,33 @@ Robot::get_messages()
                 {
                   if( rot_amount > 0 )
                     robot_angle.set_rot( robot_angle.pos, rot_speed,
-                                         -infinity, robot_angle.pos + rot_amount,
+                                         -infinity_rtb, robot_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     robot_angle.set_rot( robot_angle.pos, -rot_speed,
-                                         robot_angle.pos + rot_amount, infinity,
+                                         robot_angle.pos + rot_amount, infinity_rtb,
                                          ROTATE_TO_LEFT );
                 }
               if( bits & 2 )
                 {
                   if( rot_amount > 0 )
                     cannon_angle.set_rot( cannon_angle.pos, rot_speed,
-                                          -infinity, cannon_angle.pos + rot_amount,
+                                          -infinity_rtb, cannon_angle.pos + rot_amount,
                                           ROTATE_TO_RIGHT );
                   else
                     cannon_angle.set_rot( cannon_angle.pos, -rot_speed,
-                                          cannon_angle.pos + rot_amount, infinity,
+                                          cannon_angle.pos + rot_amount, infinity_rtb,
                                           ROTATE_TO_LEFT );
                 }
               if( bits & 4 )
                 {
                   if( rot_amount > 0 )
                     radar_angle.set_rot( radar_angle.pos, rot_speed,
-                                         -infinity, radar_angle.pos + rot_amount,
+                                         -infinity_rtb, radar_angle.pos + rot_amount,
                                          ROTATE_TO_RIGHT );
                   else
                     radar_angle.set_rot( radar_angle.pos, -rot_speed,
-                                         radar_angle.pos + rot_amount, infinity,
+                                         radar_angle.pos + rot_amount, infinity_rtb,
                                          ROTATE_TO_LEFT );
                 }
             }
@@ -1276,8 +1276,8 @@ Robot::get_messages()
               int bits;
               double rot_speed, sweep_left, sweep_right;
               *instreamp >> bits >> rot_speed >> sweep_left >> sweep_right;
-              sweep_left = max_rtb(min_rtb(sweep_left, infinity), -infinity);
-              sweep_right = max_rtb(min_rtb(sweep_right, infinity), -infinity);
+              sweep_left = max_rtb(min_rtb(sweep_left, infinity_rtb), -infinity_rtb);
+              sweep_right = max_rtb(min_rtb(sweep_right, infinity_rtb), -infinity_rtb);
               rotation_mode_t rot_dir;
               rot_dir = ( rot_speed < 0 ? SWEEP_LEFT :  SWEEP_RIGHT );
 

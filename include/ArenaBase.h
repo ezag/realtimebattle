@@ -60,8 +60,7 @@ class WallLine;
 class WallCircle;
 class WallInnerCircle;
 
-// infinity is already defined in math.h; compile error on cygwin. replaced with #define.
-#define infinity (1.0e10)
+static const double infinity_rtb = 1.0e10;  //approximately ;-)
 static const int max_debug_level = 5;
 
 extern class Options the_opts;

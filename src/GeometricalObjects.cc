@@ -30,8 +30,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ArenaController.h"
 #include "ArenaRealTime.h"
 
-// infinity already #define'd in ArenaBase.h
-//extern const double infinity;
+// infinity_rtb already #define'd in ArenaBase.h
+//extern const double infinity_rtb;
 
 Line::Line()
 {
@@ -39,8 +39,8 @@ Line::Line()
   direction = Vector2D(0.0, 0.0);
   length = 0.0;
   thickness = 0.0;
-  last_drawn_start_point = Vector2D(-infinity,-infinity);
-  last_drawn_direction = Vector2D(-infinity,-infinity);
+  last_drawn_start_point = Vector2D(-infinity_rtb,-infinity_rtb);
+  last_drawn_direction = Vector2D(-infinity_rtb,-infinity_rtb);
   last_drawn_length = 0.0;
   last_drawn_thickness = 0.0;
 }
@@ -74,7 +74,7 @@ Line::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
   det = 1.0 / vedge(direction, vel);
   t_middle = vedge(direction, y) * det;
 
-  if( t_middle < 0 ) return infinity;
+  if( t_middle < 0 ) return infinity_rtb;
 
   d = size + thickness;
   if( det > 0 )
@@ -87,8 +87,8 @@ Line::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
       t = (vedge(direction, y) + d) * det;
       s = (vedge(vel,y) + d * dot(vel, direction)) * det;
     }
-  if( s < 0 || s > length ) return infinity;
-  if( t < 0 && ((d=-dot(y, direction)) < 0.0 || d > length ) ) return infinity;
+  if( s < 0 || s > length ) return infinity_rtb;
+  if( t < 0 && ((d=-dot(y, direction)) < 0.0 || d > length ) ) return infinity_rtb;
 
   return max_rtb(t, 0);
 }
@@ -136,7 +136,7 @@ Circle::Circle()
 {
   center = Vector2D(0.0, 0.0);
   radius = 0.0;
-  last_drawn_center = Vector2D(-infinity,-infinity);
+  last_drawn_center = Vector2D(-infinity_rtb,-infinity_rtb);
   last_drawn_radius = 0.0;
 }
 
@@ -169,7 +169,7 @@ Circle::get_distance(const Vector2D& pos, const Vector2D& vel, const double size
   double dt = dot(vel, y);
   double r = size+radius;
   double c = dt*dt + speedsqr * (r*r - lengthsqr(y));
-  if( c < 0.0 || dt <= 0.0) return infinity;
+  if( c < 0.0 || dt <= 0.0) return infinity_rtb;
   return max_rtb( (dt - sqrt(c))/speedsqr, 0);
 }
 
@@ -206,7 +206,7 @@ InnerCircle::InnerCircle()
 {
   center = Vector2D(0.0, 0.0);
   radius = 0.0;
-  last_drawn_center = Vector2D(-infinity,-infinity);
+  last_drawn_center = Vector2D(-infinity_rtb,-infinity_rtb);
   last_drawn_radius = 0.0;
 }
 
@@ -229,7 +229,7 @@ InnerCircle::get_distance(const Vector2D& pos, const Vector2D& vel, const double
 {
   Vector2D y = center - pos;
   double speedsqr = lengthsqr(vel);
-  if( speedsqr == 0.0 ) return infinity;
+  if( speedsqr == 0.0 ) return infinity_rtb;
   double dt = dot(vel, y);
   double c = dt*dt + speedsqr*((size-radius)*(size-radius) - lengthsqr(y));
   return max_rtb( (dt + sqrt(c))/speedsqr, 0 );
@@ -279,7 +279,7 @@ Arc::Arc()
   center = Vector2D(0.0, 0.0);
   inner_radius = outer_radius = mid_radiussqr = 0.0;
   start_angle = -M_PI; end_angle = M_PI;
-  last_drawn_center = Vector2D(-infinity,-infinity);
+  last_drawn_center = Vector2D(-infinity_rtb,-infinity_rtb);
   //  last_drawn_radius = 0.0;
 }
 
@@ -307,7 +307,7 @@ Arc::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
 {
   Vector2D d = center - pos;
   double speedsqr = lengthsqr(vel);
-  if( speedsqr == 0.0 ) return infinity;
+  if( speedsqr == 0.0 ) return infinity_rtb;
 
   double c, r, t;
   double dt = dot(vel, d);
@@ -318,7 +318,7 @@ Arc::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
 
       r = size + outer_radius;
       c = dt*dt + speedsqr * (r*r - lengthsqr(d));
-      if( c < 0.0 || dt <= 0.0) return infinity;
+      if( c < 0.0 || dt <= 0.0) return infinity_rtb;
       t = max_rtb( (dt - sqrt(c))/speedsqr, 0);
 
       if( within_angle( vec2angle( vel * t - d ) ) )
@@ -335,12 +335,12 @@ Arc::get_distance(const Vector2D& pos, const Vector2D& vel, const double size)
   r = size - inner_radius;
 
   c = dt*dt + speedsqr*( r*r - lengthsqr(d) );
-  if( c < 0.0 ) return infinity;  // Can happen if object outside circle
+  if( c < 0.0 ) return infinity_rtb;  // Can happen if object outside circle
 
   t =  max_rtb( (dt + sqrt(c))/speedsqr, 0 );
 
   if( !within_angle( vec2angle( vel * t - d  ) ) )
-    return infinity;
+    return infinity_rtb;
 
 
   return t;
