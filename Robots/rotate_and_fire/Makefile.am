@@ -1,5 +1,5 @@
 robotexecdir = $(RTB_DIR)/Robots
-INCLUDES = -I$(top_srcdir)/include
+INCLUDES = -I$(top_srcdir)/include -I$(top_srcdir)/intl
 
 robotexec_PROGRAMS = rotate_and_fire_signal.robot \
                      rotate_and_fire_blocking.robot \
@@ -20,6 +20,4 @@ raf_DATA = $(rotate_and_fire_signal_robot_SOURCES) \
            $(rotate_and_fire_select_robot_SOURCES) \
 	   Makefile.am
 
-if !NO_GRAPHICS
-LDADD = ${GTK_LIBS}
-endif
+LDADD = $(LIBINTL)

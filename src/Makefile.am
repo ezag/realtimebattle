@@ -1,7 +1,9 @@
 INCLUDES = \
-	 -I$(top_srcdir)/include
+	 -I$(top_srcdir)/include\
+	 -I$(top_srcdir)/intl
+	 
 
-realtimebattle_LDADD = 
+realtimebattle_LDADD = $(LIBINTL)
 realtimebattle_CXXFLAGS =
 realtimebattle_LDFLAGS = 
 

@@ -1,4 +1,4 @@
-SUBDIRS =  m4 include po src intl Documentation Packages Robots Arenas $(subdirs)
+SUBDIRS =  m4 intl include po src Packages Robots Arenas $(subdirs) Documentation
 
 rtbextradir = $(RTB_DIR)
 rtbextra_DATA = RealTimeBattle.xpm tournament.txt rtblogo1024.jpg  rtblogo1600.jpg  rtb_logo.jpg
