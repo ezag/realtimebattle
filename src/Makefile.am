@@ -33,6 +33,9 @@ realtimebattle_SOURCES = \
 	Various.cc\
 	Vector2D.cc\
 	OptionsWindow.cc
+if NO_GETOPT_LONG
+realtimebattle_SOURCES += getopt.c
+endif
 
 realtimebattle_LDFLAGS = 
 

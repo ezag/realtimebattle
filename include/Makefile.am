@@ -36,5 +36,6 @@ EXTRA_DIST = \
 	ScoreWindow.h\
 	StatisticsWindow.h\
 	Dialog.h\
-	StartTournamentWindow.h
+	StartTournamentWindow.h\
+	getopt.h
 	
