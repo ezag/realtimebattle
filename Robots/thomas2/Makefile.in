@@ -39,7 +39,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-robotexec_PROGRAMS = thomas2.robot$(EXEEXT)
+@NO_GRAPHICS_FALSE@robotexec_PROGRAMS = thomas2.robot$(EXEEXT)
 subdir = Robots/thomas2
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -67,10 +67,11 @@ am__installdirs = "$(DESTDIR)$(robotexecdir)" \
 	"$(DESTDIR)$(thomas2dir)"
 robotexecPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(robotexec_PROGRAMS)
-am_thomas2_robot_OBJECTS = thomas2.$(OBJEXT)
+am__thomas2_robot_SOURCES_DIST = thomas2.cc
+@NO_GRAPHICS_FALSE@am_thomas2_robot_OBJECTS = thomas2.$(OBJEXT)
 thomas2_robot_OBJECTS = $(am_thomas2_robot_OBJECTS)
 am__DEPENDENCIES_1 =
-thomas2_robot_DEPENDENCIES = $(am__DEPENDENCIES_1)
+@NO_GRAPHICS_FALSE@thomas2_robot_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -80,7 +81,7 @@ CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 SOURCES = $(thomas2_robot_SOURCES)
-DIST_SOURCES = $(thomas2_robot_SOURCES)
+DIST_SOURCES = $(am__thomas2_robot_SOURCES_DIST)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -160,6 +161,8 @@ MSGFMT = @MSGFMT@
 MSGMERGE = @MSGMERGE@
 NO_GETOPT_LONG_FALSE = @NO_GETOPT_LONG_FALSE@
 NO_GETOPT_LONG_TRUE = @NO_GETOPT_LONG_TRUE@
+NO_GRAPHICS_FALSE = @NO_GRAPHICS_FALSE@
+NO_GRAPHICS_TRUE = @NO_GRAPHICS_TRUE@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -260,17 +263,17 @@ subdirs = @subdirs@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 uudecode = @uudecode@
-robotexecdir = $(RTB_DIR)/Robots
-INCLUDES = \
-	$(GTK_CFLAGS)\
-	-I$(top_srcdir)/include
+@NO_GRAPHICS_FALSE@robotexecdir = $(RTB_DIR)/Robots
+@NO_GRAPHICS_FALSE@INCLUDES = \
+@NO_GRAPHICS_FALSE@	$(GTK_CFLAGS)\
+@NO_GRAPHICS_FALSE@	-I$(top_srcdir)/include
 
-thomas2_robot_LDADD = \
-	$(GTK_LIBS)
+@NO_GRAPHICS_FALSE@thomas2_robot_LDADD = \
+@NO_GRAPHICS_FALSE@	$(GTK_LIBS)
 
-thomas2_robot_SOURCES = thomas2.cc
+@NO_GRAPHICS_FALSE@thomas2_robot_SOURCES = thomas2.cc
 thomas2dir = $(RTB_DIR)/Robots/thomas2
-thomas2_DATA = $(thomas2_robot_SOURCES) Makefile.am 
+thomas2_DATA = thomas2.cc Makefile.am 
 all: all-am
 
 .SUFFIXES:

@@ -33,10 +33,14 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Options.h"
 #include "Extras.h"
 #include "Shot.h"
+
+#ifndef NO_GRAPHICS
 #include "MessageWindow.h"
 #include "ArenaWindow.h"
 #include "ScoreWindow.h"
 #include "ControlWindow.h"
+#endif
+
 #include "Robot.h"
 
 const int max_time_infos = 16384;

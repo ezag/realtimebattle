@@ -311,7 +311,7 @@ ac_includes_default="\
 #endif"
 
 ac_subdirs_all="$ac_subdirs_all rtb-team-framework"
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS RTB_MAJOR_VERSION RTB_MINOR_VERSION RTB_MICRO_VERSION RTB_RPM_RELEASE RTB_RPM_VERSION RTB_VERSION PACKAGE VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar install_info sgml2html SGML2HTML_TRUE SGML2HTML_FALSE sgml2latex SGML2LATEX_TRUE SGML2LATEX_FALSE sgml2info SGML2INFO_TRUE SGML2INFO_FALSE sgml2txt SGML2TXT_TRUE SGML2TXT_FALSE sgml2lyx SGML2LYX_TRUE SGML2LYX_FALSE sgml2rtf SGML2RTF_TRUE SGML2RTF_FALSE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CC CFLAGS ac_ct_CC CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXCPP EGREP PKG_CONFIG GTK_CFLAGS GTK_LIBS ENABLE_RPM_TRUE ENABLE_RPM_FALSE RTB_DIR DOCS_DIR INSTALL_INFO ROBOTDIR ARENADIR RTB_LOCALEDIR STDCXX_LIBS NO_GETOPT_LONG_TRUE NO_GETOPT_LONG_FALSE MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE build build_cpu build_vendor build_os host host_cpu host_vendor host_os RANLIB ac_ct_RANLIB ALLOCA GLIBC21 HAVE_POSIX_PRINTF HAVE_ASPRINTF HAVE_SNPRINTF HAVE_WPRINTF LIBICONV LTLIBICONV INTLBISON BUILD_INCLUDED_LIBINTL USE_INCLUDED_LIBINTL CATOBJEXT DATADIRNAME INSTOBJEXT GENCAT INTLOBJS INTL_LIBTOOL_SUFFIX_PREFIX INTLLIBS LIBINTL LTLIBINTL POSUB GETTEXT_PACKAGE linuxjoystickavailable_TRUE linuxjoystickavailable_FALSE JAVAC javacavailable_TRUE javacavailable_FALSE JAVA uudecode javaavailable_TRUE javaavailable_FALSE PERLINTERP PERL_SHEBANG perlavailable_TRUE perlavailable_FALSE subdirs LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS RTB_MAJOR_VERSION RTB_MINOR_VERSION RTB_MICRO_VERSION RTB_RPM_RELEASE RTB_RPM_VERSION RTB_VERSION PACKAGE VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar install_info sgml2html SGML2HTML_TRUE SGML2HTML_FALSE sgml2latex SGML2LATEX_TRUE SGML2LATEX_FALSE sgml2info SGML2INFO_TRUE SGML2INFO_FALSE sgml2txt SGML2TXT_TRUE SGML2TXT_FALSE sgml2lyx SGML2LYX_TRUE SGML2LYX_FALSE sgml2rtf SGML2RTF_TRUE SGML2RTF_FALSE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CC CFLAGS ac_ct_CC CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXCPP EGREP NO_GRAPHICS_TRUE NO_GRAPHICS_FALSE PKG_CONFIG GTK_CFLAGS GTK_LIBS ENABLE_RPM_TRUE ENABLE_RPM_FALSE RTB_DIR DOCS_DIR INSTALL_INFO ROBOTDIR ARENADIR RTB_LOCALEDIR STDCXX_LIBS NO_GETOPT_LONG_TRUE NO_GETOPT_LONG_FALSE MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE build build_cpu build_vendor build_os host host_cpu host_vendor host_os RANLIB ac_ct_RANLIB ALLOCA GLIBC21 HAVE_POSIX_PRINTF HAVE_ASPRINTF HAVE_SNPRINTF HAVE_WPRINTF LIBICONV LTLIBICONV INTLBISON BUILD_INCLUDED_LIBINTL USE_INCLUDED_LIBINTL CATOBJEXT DATADIRNAME INSTOBJEXT GENCAT INTLOBJS INTL_LIBTOOL_SUFFIX_PREFIX INTLLIBS LIBINTL LTLIBINTL POSUB GETTEXT_PACKAGE linuxjoystickavailable_TRUE linuxjoystickavailable_FALSE JAVAC javacavailable_TRUE javacavailable_FALSE JAVA uudecode javaavailable_TRUE javaavailable_FALSE PERLINTERP PERL_SHEBANG perlavailable_TRUE perlavailable_FALSE subdirs LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -861,6 +861,7 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-graphics      make a version without a GUI
 
 RealTimeBattle options:
   --enable-debug=no/yes
@@ -4959,6 +4960,30 @@ rm -f conftest*
 
 
 
+# graphics / GTK
+
+# Check whether --enable-graphics or --disable-graphics was given.
+if test "${enable_graphics+set}" = set; then
+  enableval="$enable_graphics"
+  enable_graphics=no
+else
+  enable_graphics=yes
+fi;
+
+
+if test x$enable_graphics = xno; then
+  NO_GRAPHICS_TRUE=
+  NO_GRAPHICS_FALSE='#'
+else
+  NO_GRAPHICS_TRUE='#'
+  NO_GRAPHICS_FALSE=
+fi
+
+
+# Check for GTK+.
+
+if test "x$enable_graphics" = "xyes"; then
+
   succeeded=no
 
   if test -z "$PKG_CONFIG"; then
@@ -5056,6 +5081,7 @@ echo "${ECHO_T}$GTK_LIBS" >&6
 
 
 
+fi
 
 # Check whether --enable-debug or --disable-debug was given.
 if test "${enable_debug+set}" = set; then
@@ -12503,7 +12529,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12506 "configure" */
+/* #line 12532 "configure" */
 public class Test {
 }
 EOF
@@ -12681,7 +12707,7 @@ EOF
 if uudecode$EXEEXT Test.uue; then
         ac_cv_prog_uudecode_base64=yes
 else
-        echo "configure: 12684: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
+        echo "configure: 12710: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
         echo "configure: failed file was:" >&5
         cat Test.uue >&5
         ac_cv_prog_uudecode_base64=no
@@ -12797,7 +12823,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12800 "configure" */
+/* #line 12826 "configure" */
 public class Test {
 }
 EOF
@@ -12833,7 +12859,7 @@ JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 TEST=Test
 cat << \EOF > $JAVA_TEST
-/* [#]line 12836 "configure" */
+/* [#]line 12862 "configure" */
 public class Test {
 public static void main (String args[]) {
         System.exit (0);
@@ -13188,6 +13214,13 @@ if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${NO_GRAPHICS_TRUE}" && test -z "${NO_GRAPHICS_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"NO_GRAPHICS\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"NO_GRAPHICS\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -13873,6 +13906,8 @@ s,@am__fastdepCC_TRUE@,$am__fastdepCC_TRUE,;t t
 s,@am__fastdepCC_FALSE@,$am__fastdepCC_FALSE,;t t
 s,@CXXCPP@,$CXXCPP,;t t
 s,@EGREP@,$EGREP,;t t
+s,@NO_GRAPHICS_TRUE@,$NO_GRAPHICS_TRUE,;t t
+s,@NO_GRAPHICS_FALSE@,$NO_GRAPHICS_FALSE,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@GTK_CFLAGS@,$GTK_CFLAGS,;t t
 s,@GTK_LIBS@,$GTK_LIBS,;t t

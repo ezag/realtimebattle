@@ -1,8 +1,9 @@
 INCLUDES = \
-	$(GTK_CFLAGS)\
 	 -I$(top_srcdir)/include
 
+realtimebattle_LDADD = 
 realtimebattle_CXXFLAGS =
+realtimebattle_LDFLAGS = 
 
 bin_PROGRAMS = realtimebattle
 
@@ -12,33 +13,42 @@ realtimebattle_SOURCES = \
 	ArenaController.cc\
 	ArenaRealTime.cc\
 	ArenaReplay.cc\
-	ArenaWindow.cc\
-	ControlWindow.cc\
-	Dialog.cc\
 	Extras.cc\
 	GeometricalObjects.cc\
-	Gui.cc\
 	List.cc\
-	MessageWindow.cc\
 	Options.cc\
 	Robot.cc\
-	ScoreWindow.cc\
 	Shape.cc\
 	Shot.cc\
-	StartTournamentWindow.cc\
-	StatisticsWindow.cc\
 	String.cc\
-	Structs.cc\
 	Timer.cc\
 	Various.cc\
-	Vector2D.cc\
-	OptionsWindow.cc
+	Vector2D.cc
+
 if NO_GETOPT_LONG
 realtimebattle_SOURCES += getopt.c
 endif
 
-realtimebattle_LDFLAGS = 
-
-realtimebattle_LDADD =  \
+if NO_GRAPHICS
+realtimebattle_CXXFLAGS += \
+	-DNO_GRAPHICS
+else
+realtimebattle_SOURCES += \
+	Gui.cc\
+	ArenaWindow.cc\
+	ControlWindow.cc\
+	Dialog.cc\
+	MessageWindow.cc\
+	OptionsWindow.cc\
+	StatisticsWindow.cc\
+	StartTournamentWindow.cc\
+	Structs.cc\
+	ScoreWindow.cc
+	
+INCLUDES += \
+	$(GTK_CFLAGS)
+	
+realtimebattle_LDADD +=  \
 	$(GTK_LIBS)
+endif
 

@@ -40,6 +40,27 @@ build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = realtimebattle$(EXEEXT)
 @NO_GETOPT_LONG_TRUE@am__append_1 = getopt.c
+@NO_GRAPHICS_TRUE@am__append_2 = \
+@NO_GRAPHICS_TRUE@	-DNO_GRAPHICS
+
+@NO_GRAPHICS_FALSE@am__append_3 = \
+@NO_GRAPHICS_FALSE@	Gui.cc\
+@NO_GRAPHICS_FALSE@	ArenaWindow.cc\
+@NO_GRAPHICS_FALSE@	ControlWindow.cc\
+@NO_GRAPHICS_FALSE@	Dialog.cc\
+@NO_GRAPHICS_FALSE@	MessageWindow.cc\
+@NO_GRAPHICS_FALSE@	OptionsWindow.cc\
+@NO_GRAPHICS_FALSE@	StatisticsWindow.cc\
+@NO_GRAPHICS_FALSE@	StartTournamentWindow.cc\
+@NO_GRAPHICS_FALSE@	Structs.cc\
+@NO_GRAPHICS_FALSE@	ScoreWindow.cc
+
+@NO_GRAPHICS_FALSE@am__append_4 = \
+@NO_GRAPHICS_FALSE@	$(GTK_CFLAGS)
+
+@NO_GRAPHICS_FALSE@am__append_5 = \
+@NO_GRAPHICS_FALSE@	$(GTK_LIBS)
+
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -67,41 +88,41 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am__realtimebattle_SOURCES_DIST = RealTimeBattle.cc ArenaBase.cc \
-	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
-	ArenaWindow.cc ControlWindow.cc Dialog.cc Extras.cc \
-	GeometricalObjects.cc Gui.cc List.cc MessageWindow.cc \
-	Options.cc Robot.cc ScoreWindow.cc Shape.cc Shot.cc \
-	StartTournamentWindow.cc StatisticsWindow.cc String.cc \
-	Structs.cc Timer.cc Various.cc Vector2D.cc OptionsWindow.cc \
-	getopt.c
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
+	GeometricalObjects.cc List.cc Options.cc Robot.cc Shape.cc \
+	Shot.cc String.cc Timer.cc Various.cc Vector2D.cc getopt.c \
+	Gui.cc ArenaWindow.cc ControlWindow.cc Dialog.cc \
+	MessageWindow.cc OptionsWindow.cc StatisticsWindow.cc \
+	StartTournamentWindow.cc Structs.cc ScoreWindow.cc
 @NO_GETOPT_LONG_TRUE@am__objects_1 = getopt.$(OBJEXT)
+@NO_GRAPHICS_FALSE@am__objects_2 = realtimebattle-Gui.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-ArenaWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-ControlWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-Dialog.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-MessageWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-OptionsWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-StatisticsWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-StartTournamentWindow.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-Structs.$(OBJEXT) \
+@NO_GRAPHICS_FALSE@	realtimebattle-ScoreWindow.$(OBJEXT)
 am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-ArenaBase.$(OBJEXT) \
 	realtimebattle-ArenaController.$(OBJEXT) \
 	realtimebattle-ArenaRealTime.$(OBJEXT) \
 	realtimebattle-ArenaReplay.$(OBJEXT) \
-	realtimebattle-ArenaWindow.$(OBJEXT) \
-	realtimebattle-ControlWindow.$(OBJEXT) \
-	realtimebattle-Dialog.$(OBJEXT) \
 	realtimebattle-Extras.$(OBJEXT) \
 	realtimebattle-GeometricalObjects.$(OBJEXT) \
-	realtimebattle-Gui.$(OBJEXT) realtimebattle-List.$(OBJEXT) \
-	realtimebattle-MessageWindow.$(OBJEXT) \
-	realtimebattle-Options.$(OBJEXT) \
-	realtimebattle-Robot.$(OBJEXT) \
-	realtimebattle-ScoreWindow.$(OBJEXT) \
-	realtimebattle-Shape.$(OBJEXT) realtimebattle-Shot.$(OBJEXT) \
-	realtimebattle-StartTournamentWindow.$(OBJEXT) \
-	realtimebattle-StatisticsWindow.$(OBJEXT) \
-	realtimebattle-String.$(OBJEXT) \
-	realtimebattle-Structs.$(OBJEXT) \
+	realtimebattle-List.$(OBJEXT) realtimebattle-Options.$(OBJEXT) \
+	realtimebattle-Robot.$(OBJEXT) realtimebattle-Shape.$(OBJEXT) \
+	realtimebattle-Shot.$(OBJEXT) realtimebattle-String.$(OBJEXT) \
 	realtimebattle-Timer.$(OBJEXT) \
 	realtimebattle-Various.$(OBJEXT) \
-	realtimebattle-Vector2D.$(OBJEXT) \
-	realtimebattle-OptionsWindow.$(OBJEXT) $(am__objects_1)
+	realtimebattle-Vector2D.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2)
 realtimebattle_OBJECTS = $(am_realtimebattle_OBJECTS)
 am__DEPENDENCIES_1 =
-realtimebattle_DEPENDENCIES = $(am__DEPENDENCIES_1)
+@NO_GRAPHICS_FALSE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
+realtimebattle_DEPENDENCIES = $(am__DEPENDENCIES_2)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -187,6 +208,8 @@ MSGFMT = @MSGFMT@
 MSGMERGE = @MSGMERGE@
 NO_GETOPT_LONG_FALSE = @NO_GETOPT_LONG_FALSE@
 NO_GETOPT_LONG_TRUE = @NO_GETOPT_LONG_TRUE@
+NO_GRAPHICS_FALSE = @NO_GRAPHICS_FALSE@
+NO_GRAPHICS_TRUE = @NO_GRAPHICS_TRUE@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -287,23 +310,15 @@ subdirs = @subdirs@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 uudecode = @uudecode@
-INCLUDES = \
-	$(GTK_CFLAGS)\
-	 -I$(top_srcdir)/include
-
-realtimebattle_CXXFLAGS = 
-realtimebattle_SOURCES = RealTimeBattle.cc ArenaBase.cc \
-	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
-	ArenaWindow.cc ControlWindow.cc Dialog.cc Extras.cc \
-	GeometricalObjects.cc Gui.cc List.cc MessageWindow.cc \
-	Options.cc Robot.cc ScoreWindow.cc Shape.cc Shot.cc \
-	StartTournamentWindow.cc StatisticsWindow.cc String.cc \
-	Structs.cc Timer.cc Various.cc Vector2D.cc OptionsWindow.cc \
-	$(am__append_1)
+INCLUDES = -I$(top_srcdir)/include $(am__append_4)
+realtimebattle_LDADD = $(am__append_5)
+realtimebattle_CXXFLAGS = $(am__append_2)
 realtimebattle_LDFLAGS = 
-realtimebattle_LDADD = \
-	$(GTK_LIBS)
-
+realtimebattle_SOURCES = RealTimeBattle.cc ArenaBase.cc \
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
+	GeometricalObjects.cc List.cc Options.cc Robot.cc Shape.cc \
+	Shot.cc String.cc Timer.cc Various.cc Vector2D.cc \
+	$(am__append_1) $(am__append_3)
 all: all-am
 
 .SUFFIXES:
@@ -496,48 +511,6 @@ realtimebattle-ArenaReplay.obj: ArenaReplay.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaReplay.obj `if test -f 'ArenaReplay.cc'; then $(CYGPATH_W) 'ArenaReplay.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaReplay.cc'; fi`
 
-realtimebattle-ArenaWindow.o: ArenaWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ArenaWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" -c -o realtimebattle-ArenaWindow.o `test -f 'ArenaWindow.cc' || echo '$(srcdir)/'`ArenaWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" "$(DEPDIR)/realtimebattle-ArenaWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ArenaWindow.cc' object='realtimebattle-ArenaWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaWindow.o `test -f 'ArenaWindow.cc' || echo '$(srcdir)/'`ArenaWindow.cc
-
-realtimebattle-ArenaWindow.obj: ArenaWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ArenaWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" -c -o realtimebattle-ArenaWindow.obj `if test -f 'ArenaWindow.cc'; then $(CYGPATH_W) 'ArenaWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" "$(DEPDIR)/realtimebattle-ArenaWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ArenaWindow.cc' object='realtimebattle-ArenaWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaWindow.obj `if test -f 'ArenaWindow.cc'; then $(CYGPATH_W) 'ArenaWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaWindow.cc'; fi`
-
-realtimebattle-ControlWindow.o: ControlWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ControlWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" -c -o realtimebattle-ControlWindow.o `test -f 'ControlWindow.cc' || echo '$(srcdir)/'`ControlWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" "$(DEPDIR)/realtimebattle-ControlWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ControlWindow.cc' object='realtimebattle-ControlWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ControlWindow.o `test -f 'ControlWindow.cc' || echo '$(srcdir)/'`ControlWindow.cc
-
-realtimebattle-ControlWindow.obj: ControlWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ControlWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" -c -o realtimebattle-ControlWindow.obj `if test -f 'ControlWindow.cc'; then $(CYGPATH_W) 'ControlWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ControlWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" "$(DEPDIR)/realtimebattle-ControlWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ControlWindow.cc' object='realtimebattle-ControlWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ControlWindow.obj `if test -f 'ControlWindow.cc'; then $(CYGPATH_W) 'ControlWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ControlWindow.cc'; fi`
-
-realtimebattle-Dialog.o: Dialog.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Dialog.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Dialog.Tpo" -c -o realtimebattle-Dialog.o `test -f 'Dialog.cc' || echo '$(srcdir)/'`Dialog.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Dialog.Tpo" "$(DEPDIR)/realtimebattle-Dialog.Po"; else rm -f "$(DEPDIR)/realtimebattle-Dialog.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Dialog.cc' object='realtimebattle-Dialog.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Dialog.o `test -f 'Dialog.cc' || echo '$(srcdir)/'`Dialog.cc
-
-realtimebattle-Dialog.obj: Dialog.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Dialog.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Dialog.Tpo" -c -o realtimebattle-Dialog.obj `if test -f 'Dialog.cc'; then $(CYGPATH_W) 'Dialog.cc'; else $(CYGPATH_W) '$(srcdir)/Dialog.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Dialog.Tpo" "$(DEPDIR)/realtimebattle-Dialog.Po"; else rm -f "$(DEPDIR)/realtimebattle-Dialog.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Dialog.cc' object='realtimebattle-Dialog.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Dialog.obj `if test -f 'Dialog.cc'; then $(CYGPATH_W) 'Dialog.cc'; else $(CYGPATH_W) '$(srcdir)/Dialog.cc'; fi`
-
 realtimebattle-Extras.o: Extras.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Extras.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Extras.Tpo" -c -o realtimebattle-Extras.o `test -f 'Extras.cc' || echo '$(srcdir)/'`Extras.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Extras.Tpo" "$(DEPDIR)/realtimebattle-Extras.Po"; else rm -f "$(DEPDIR)/realtimebattle-Extras.Tpo"; exit 1; fi
@@ -566,20 +539,6 @@ realtimebattle-GeometricalObjects.obj: GeometricalObjects.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-GeometricalObjects.obj `if test -f 'GeometricalObjects.cc'; then $(CYGPATH_W) 'GeometricalObjects.cc'; else $(CYGPATH_W) '$(srcdir)/GeometricalObjects.cc'; fi`
 
-realtimebattle-Gui.o: Gui.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Gui.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Gui.Tpo" -c -o realtimebattle-Gui.o `test -f 'Gui.cc' || echo '$(srcdir)/'`Gui.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Gui.Tpo" "$(DEPDIR)/realtimebattle-Gui.Po"; else rm -f "$(DEPDIR)/realtimebattle-Gui.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Gui.cc' object='realtimebattle-Gui.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Gui.o `test -f 'Gui.cc' || echo '$(srcdir)/'`Gui.cc
-
-realtimebattle-Gui.obj: Gui.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Gui.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Gui.Tpo" -c -o realtimebattle-Gui.obj `if test -f 'Gui.cc'; then $(CYGPATH_W) 'Gui.cc'; else $(CYGPATH_W) '$(srcdir)/Gui.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Gui.Tpo" "$(DEPDIR)/realtimebattle-Gui.Po"; else rm -f "$(DEPDIR)/realtimebattle-Gui.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Gui.cc' object='realtimebattle-Gui.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Gui.obj `if test -f 'Gui.cc'; then $(CYGPATH_W) 'Gui.cc'; else $(CYGPATH_W) '$(srcdir)/Gui.cc'; fi`
-
 realtimebattle-List.o: List.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-List.o -MD -MP -MF "$(DEPDIR)/realtimebattle-List.Tpo" -c -o realtimebattle-List.o `test -f 'List.cc' || echo '$(srcdir)/'`List.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-List.Tpo" "$(DEPDIR)/realtimebattle-List.Po"; else rm -f "$(DEPDIR)/realtimebattle-List.Tpo"; exit 1; fi
@@ -593,20 +552,6 @@ realtimebattle-List.obj: List.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='List.cc' object='realtimebattle-List.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-List.obj `if test -f 'List.cc'; then $(CYGPATH_W) 'List.cc'; else $(CYGPATH_W) '$(srcdir)/List.cc'; fi`
-
-realtimebattle-MessageWindow.o: MessageWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-MessageWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" -c -o realtimebattle-MessageWindow.o `test -f 'MessageWindow.cc' || echo '$(srcdir)/'`MessageWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" "$(DEPDIR)/realtimebattle-MessageWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MessageWindow.cc' object='realtimebattle-MessageWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-MessageWindow.o `test -f 'MessageWindow.cc' || echo '$(srcdir)/'`MessageWindow.cc
-
-realtimebattle-MessageWindow.obj: MessageWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-MessageWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" -c -o realtimebattle-MessageWindow.obj `if test -f 'MessageWindow.cc'; then $(CYGPATH_W) 'MessageWindow.cc'; else $(CYGPATH_W) '$(srcdir)/MessageWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" "$(DEPDIR)/realtimebattle-MessageWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MessageWindow.cc' object='realtimebattle-MessageWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-MessageWindow.obj `if test -f 'MessageWindow.cc'; then $(CYGPATH_W) 'MessageWindow.cc'; else $(CYGPATH_W) '$(srcdir)/MessageWindow.cc'; fi`
 
 realtimebattle-Options.o: Options.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Options.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Options.Tpo" -c -o realtimebattle-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc; \
@@ -636,20 +581,6 @@ realtimebattle-Robot.obj: Robot.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Robot.obj `if test -f 'Robot.cc'; then $(CYGPATH_W) 'Robot.cc'; else $(CYGPATH_W) '$(srcdir)/Robot.cc'; fi`
 
-realtimebattle-ScoreWindow.o: ScoreWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ScoreWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" -c -o realtimebattle-ScoreWindow.o `test -f 'ScoreWindow.cc' || echo '$(srcdir)/'`ScoreWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" "$(DEPDIR)/realtimebattle-ScoreWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ScoreWindow.cc' object='realtimebattle-ScoreWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ScoreWindow.o `test -f 'ScoreWindow.cc' || echo '$(srcdir)/'`ScoreWindow.cc
-
-realtimebattle-ScoreWindow.obj: ScoreWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ScoreWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" -c -o realtimebattle-ScoreWindow.obj `if test -f 'ScoreWindow.cc'; then $(CYGPATH_W) 'ScoreWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ScoreWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" "$(DEPDIR)/realtimebattle-ScoreWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ScoreWindow.cc' object='realtimebattle-ScoreWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ScoreWindow.obj `if test -f 'ScoreWindow.cc'; then $(CYGPATH_W) 'ScoreWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ScoreWindow.cc'; fi`
-
 realtimebattle-Shape.o: Shape.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Shape.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Shape.Tpo" -c -o realtimebattle-Shape.o `test -f 'Shape.cc' || echo '$(srcdir)/'`Shape.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Shape.Tpo" "$(DEPDIR)/realtimebattle-Shape.Po"; else rm -f "$(DEPDIR)/realtimebattle-Shape.Tpo"; exit 1; fi
@@ -678,34 +609,6 @@ realtimebattle-Shot.obj: Shot.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Shot.obj `if test -f 'Shot.cc'; then $(CYGPATH_W) 'Shot.cc'; else $(CYGPATH_W) '$(srcdir)/Shot.cc'; fi`
 
-realtimebattle-StartTournamentWindow.o: StartTournamentWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StartTournamentWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" -c -o realtimebattle-StartTournamentWindow.o `test -f 'StartTournamentWindow.cc' || echo '$(srcdir)/'`StartTournamentWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" "$(DEPDIR)/realtimebattle-StartTournamentWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StartTournamentWindow.cc' object='realtimebattle-StartTournamentWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StartTournamentWindow.o `test -f 'StartTournamentWindow.cc' || echo '$(srcdir)/'`StartTournamentWindow.cc
-
-realtimebattle-StartTournamentWindow.obj: StartTournamentWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StartTournamentWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" -c -o realtimebattle-StartTournamentWindow.obj `if test -f 'StartTournamentWindow.cc'; then $(CYGPATH_W) 'StartTournamentWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StartTournamentWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" "$(DEPDIR)/realtimebattle-StartTournamentWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StartTournamentWindow.cc' object='realtimebattle-StartTournamentWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StartTournamentWindow.obj `if test -f 'StartTournamentWindow.cc'; then $(CYGPATH_W) 'StartTournamentWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StartTournamentWindow.cc'; fi`
-
-realtimebattle-StatisticsWindow.o: StatisticsWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StatisticsWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" -c -o realtimebattle-StatisticsWindow.o `test -f 'StatisticsWindow.cc' || echo '$(srcdir)/'`StatisticsWindow.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" "$(DEPDIR)/realtimebattle-StatisticsWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StatisticsWindow.cc' object='realtimebattle-StatisticsWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StatisticsWindow.o `test -f 'StatisticsWindow.cc' || echo '$(srcdir)/'`StatisticsWindow.cc
-
-realtimebattle-StatisticsWindow.obj: StatisticsWindow.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StatisticsWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" -c -o realtimebattle-StatisticsWindow.obj `if test -f 'StatisticsWindow.cc'; then $(CYGPATH_W) 'StatisticsWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StatisticsWindow.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" "$(DEPDIR)/realtimebattle-StatisticsWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StatisticsWindow.cc' object='realtimebattle-StatisticsWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StatisticsWindow.obj `if test -f 'StatisticsWindow.cc'; then $(CYGPATH_W) 'StatisticsWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StatisticsWindow.cc'; fi`
-
 realtimebattle-String.o: String.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-String.o -MD -MP -MF "$(DEPDIR)/realtimebattle-String.Tpo" -c -o realtimebattle-String.o `test -f 'String.cc' || echo '$(srcdir)/'`String.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-String.Tpo" "$(DEPDIR)/realtimebattle-String.Po"; else rm -f "$(DEPDIR)/realtimebattle-String.Tpo"; exit 1; fi
@@ -719,20 +622,6 @@ realtimebattle-String.obj: String.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='String.cc' object='realtimebattle-String.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-String.obj `if test -f 'String.cc'; then $(CYGPATH_W) 'String.cc'; else $(CYGPATH_W) '$(srcdir)/String.cc'; fi`
-
-realtimebattle-Structs.o: Structs.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Structs.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Structs.Tpo" -c -o realtimebattle-Structs.o `test -f 'Structs.cc' || echo '$(srcdir)/'`Structs.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Structs.Tpo" "$(DEPDIR)/realtimebattle-Structs.Po"; else rm -f "$(DEPDIR)/realtimebattle-Structs.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Structs.cc' object='realtimebattle-Structs.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Structs.o `test -f 'Structs.cc' || echo '$(srcdir)/'`Structs.cc
-
-realtimebattle-Structs.obj: Structs.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Structs.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Structs.Tpo" -c -o realtimebattle-Structs.obj `if test -f 'Structs.cc'; then $(CYGPATH_W) 'Structs.cc'; else $(CYGPATH_W) '$(srcdir)/Structs.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Structs.Tpo" "$(DEPDIR)/realtimebattle-Structs.Po"; else rm -f "$(DEPDIR)/realtimebattle-Structs.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Structs.cc' object='realtimebattle-Structs.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Structs.obj `if test -f 'Structs.cc'; then $(CYGPATH_W) 'Structs.cc'; else $(CYGPATH_W) '$(srcdir)/Structs.cc'; fi`
 
 realtimebattle-Timer.o: Timer.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Timer.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Timer.Tpo" -c -o realtimebattle-Timer.o `test -f 'Timer.cc' || echo '$(srcdir)/'`Timer.cc; \
@@ -776,6 +665,76 @@ realtimebattle-Vector2D.obj: Vector2D.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Vector2D.obj `if test -f 'Vector2D.cc'; then $(CYGPATH_W) 'Vector2D.cc'; else $(CYGPATH_W) '$(srcdir)/Vector2D.cc'; fi`
 
+realtimebattle-Gui.o: Gui.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Gui.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Gui.Tpo" -c -o realtimebattle-Gui.o `test -f 'Gui.cc' || echo '$(srcdir)/'`Gui.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Gui.Tpo" "$(DEPDIR)/realtimebattle-Gui.Po"; else rm -f "$(DEPDIR)/realtimebattle-Gui.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Gui.cc' object='realtimebattle-Gui.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Gui.o `test -f 'Gui.cc' || echo '$(srcdir)/'`Gui.cc
+
+realtimebattle-Gui.obj: Gui.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Gui.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Gui.Tpo" -c -o realtimebattle-Gui.obj `if test -f 'Gui.cc'; then $(CYGPATH_W) 'Gui.cc'; else $(CYGPATH_W) '$(srcdir)/Gui.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Gui.Tpo" "$(DEPDIR)/realtimebattle-Gui.Po"; else rm -f "$(DEPDIR)/realtimebattle-Gui.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Gui.cc' object='realtimebattle-Gui.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Gui.obj `if test -f 'Gui.cc'; then $(CYGPATH_W) 'Gui.cc'; else $(CYGPATH_W) '$(srcdir)/Gui.cc'; fi`
+
+realtimebattle-ArenaWindow.o: ArenaWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ArenaWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" -c -o realtimebattle-ArenaWindow.o `test -f 'ArenaWindow.cc' || echo '$(srcdir)/'`ArenaWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" "$(DEPDIR)/realtimebattle-ArenaWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ArenaWindow.cc' object='realtimebattle-ArenaWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaWindow.o `test -f 'ArenaWindow.cc' || echo '$(srcdir)/'`ArenaWindow.cc
+
+realtimebattle-ArenaWindow.obj: ArenaWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ArenaWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" -c -o realtimebattle-ArenaWindow.obj `if test -f 'ArenaWindow.cc'; then $(CYGPATH_W) 'ArenaWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo" "$(DEPDIR)/realtimebattle-ArenaWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ArenaWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ArenaWindow.cc' object='realtimebattle-ArenaWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaWindow.obj `if test -f 'ArenaWindow.cc'; then $(CYGPATH_W) 'ArenaWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaWindow.cc'; fi`
+
+realtimebattle-ControlWindow.o: ControlWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ControlWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" -c -o realtimebattle-ControlWindow.o `test -f 'ControlWindow.cc' || echo '$(srcdir)/'`ControlWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" "$(DEPDIR)/realtimebattle-ControlWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ControlWindow.cc' object='realtimebattle-ControlWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ControlWindow.o `test -f 'ControlWindow.cc' || echo '$(srcdir)/'`ControlWindow.cc
+
+realtimebattle-ControlWindow.obj: ControlWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ControlWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" -c -o realtimebattle-ControlWindow.obj `if test -f 'ControlWindow.cc'; then $(CYGPATH_W) 'ControlWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ControlWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo" "$(DEPDIR)/realtimebattle-ControlWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ControlWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ControlWindow.cc' object='realtimebattle-ControlWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ControlWindow.obj `if test -f 'ControlWindow.cc'; then $(CYGPATH_W) 'ControlWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ControlWindow.cc'; fi`
+
+realtimebattle-Dialog.o: Dialog.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Dialog.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Dialog.Tpo" -c -o realtimebattle-Dialog.o `test -f 'Dialog.cc' || echo '$(srcdir)/'`Dialog.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Dialog.Tpo" "$(DEPDIR)/realtimebattle-Dialog.Po"; else rm -f "$(DEPDIR)/realtimebattle-Dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Dialog.cc' object='realtimebattle-Dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Dialog.o `test -f 'Dialog.cc' || echo '$(srcdir)/'`Dialog.cc
+
+realtimebattle-Dialog.obj: Dialog.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Dialog.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Dialog.Tpo" -c -o realtimebattle-Dialog.obj `if test -f 'Dialog.cc'; then $(CYGPATH_W) 'Dialog.cc'; else $(CYGPATH_W) '$(srcdir)/Dialog.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Dialog.Tpo" "$(DEPDIR)/realtimebattle-Dialog.Po"; else rm -f "$(DEPDIR)/realtimebattle-Dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Dialog.cc' object='realtimebattle-Dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Dialog.obj `if test -f 'Dialog.cc'; then $(CYGPATH_W) 'Dialog.cc'; else $(CYGPATH_W) '$(srcdir)/Dialog.cc'; fi`
+
+realtimebattle-MessageWindow.o: MessageWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-MessageWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" -c -o realtimebattle-MessageWindow.o `test -f 'MessageWindow.cc' || echo '$(srcdir)/'`MessageWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" "$(DEPDIR)/realtimebattle-MessageWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MessageWindow.cc' object='realtimebattle-MessageWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-MessageWindow.o `test -f 'MessageWindow.cc' || echo '$(srcdir)/'`MessageWindow.cc
+
+realtimebattle-MessageWindow.obj: MessageWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-MessageWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" -c -o realtimebattle-MessageWindow.obj `if test -f 'MessageWindow.cc'; then $(CYGPATH_W) 'MessageWindow.cc'; else $(CYGPATH_W) '$(srcdir)/MessageWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo" "$(DEPDIR)/realtimebattle-MessageWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-MessageWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MessageWindow.cc' object='realtimebattle-MessageWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-MessageWindow.obj `if test -f 'MessageWindow.cc'; then $(CYGPATH_W) 'MessageWindow.cc'; else $(CYGPATH_W) '$(srcdir)/MessageWindow.cc'; fi`
+
 realtimebattle-OptionsWindow.o: OptionsWindow.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-OptionsWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-OptionsWindow.Tpo" -c -o realtimebattle-OptionsWindow.o `test -f 'OptionsWindow.cc' || echo '$(srcdir)/'`OptionsWindow.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-OptionsWindow.Tpo" "$(DEPDIR)/realtimebattle-OptionsWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-OptionsWindow.Tpo"; exit 1; fi
@@ -789,6 +748,62 @@ realtimebattle-OptionsWindow.obj: OptionsWindow.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='OptionsWindow.cc' object='realtimebattle-OptionsWindow.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-OptionsWindow.obj `if test -f 'OptionsWindow.cc'; then $(CYGPATH_W) 'OptionsWindow.cc'; else $(CYGPATH_W) '$(srcdir)/OptionsWindow.cc'; fi`
+
+realtimebattle-StatisticsWindow.o: StatisticsWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StatisticsWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" -c -o realtimebattle-StatisticsWindow.o `test -f 'StatisticsWindow.cc' || echo '$(srcdir)/'`StatisticsWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" "$(DEPDIR)/realtimebattle-StatisticsWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StatisticsWindow.cc' object='realtimebattle-StatisticsWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StatisticsWindow.o `test -f 'StatisticsWindow.cc' || echo '$(srcdir)/'`StatisticsWindow.cc
+
+realtimebattle-StatisticsWindow.obj: StatisticsWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StatisticsWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" -c -o realtimebattle-StatisticsWindow.obj `if test -f 'StatisticsWindow.cc'; then $(CYGPATH_W) 'StatisticsWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StatisticsWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo" "$(DEPDIR)/realtimebattle-StatisticsWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StatisticsWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StatisticsWindow.cc' object='realtimebattle-StatisticsWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StatisticsWindow.obj `if test -f 'StatisticsWindow.cc'; then $(CYGPATH_W) 'StatisticsWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StatisticsWindow.cc'; fi`
+
+realtimebattle-StartTournamentWindow.o: StartTournamentWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StartTournamentWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" -c -o realtimebattle-StartTournamentWindow.o `test -f 'StartTournamentWindow.cc' || echo '$(srcdir)/'`StartTournamentWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" "$(DEPDIR)/realtimebattle-StartTournamentWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StartTournamentWindow.cc' object='realtimebattle-StartTournamentWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StartTournamentWindow.o `test -f 'StartTournamentWindow.cc' || echo '$(srcdir)/'`StartTournamentWindow.cc
+
+realtimebattle-StartTournamentWindow.obj: StartTournamentWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-StartTournamentWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" -c -o realtimebattle-StartTournamentWindow.obj `if test -f 'StartTournamentWindow.cc'; then $(CYGPATH_W) 'StartTournamentWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StartTournamentWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo" "$(DEPDIR)/realtimebattle-StartTournamentWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-StartTournamentWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='StartTournamentWindow.cc' object='realtimebattle-StartTournamentWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-StartTournamentWindow.obj `if test -f 'StartTournamentWindow.cc'; then $(CYGPATH_W) 'StartTournamentWindow.cc'; else $(CYGPATH_W) '$(srcdir)/StartTournamentWindow.cc'; fi`
+
+realtimebattle-Structs.o: Structs.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Structs.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Structs.Tpo" -c -o realtimebattle-Structs.o `test -f 'Structs.cc' || echo '$(srcdir)/'`Structs.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Structs.Tpo" "$(DEPDIR)/realtimebattle-Structs.Po"; else rm -f "$(DEPDIR)/realtimebattle-Structs.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Structs.cc' object='realtimebattle-Structs.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Structs.o `test -f 'Structs.cc' || echo '$(srcdir)/'`Structs.cc
+
+realtimebattle-Structs.obj: Structs.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Structs.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Structs.Tpo" -c -o realtimebattle-Structs.obj `if test -f 'Structs.cc'; then $(CYGPATH_W) 'Structs.cc'; else $(CYGPATH_W) '$(srcdir)/Structs.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Structs.Tpo" "$(DEPDIR)/realtimebattle-Structs.Po"; else rm -f "$(DEPDIR)/realtimebattle-Structs.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Structs.cc' object='realtimebattle-Structs.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Structs.obj `if test -f 'Structs.cc'; then $(CYGPATH_W) 'Structs.cc'; else $(CYGPATH_W) '$(srcdir)/Structs.cc'; fi`
+
+realtimebattle-ScoreWindow.o: ScoreWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ScoreWindow.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" -c -o realtimebattle-ScoreWindow.o `test -f 'ScoreWindow.cc' || echo '$(srcdir)/'`ScoreWindow.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" "$(DEPDIR)/realtimebattle-ScoreWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ScoreWindow.cc' object='realtimebattle-ScoreWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ScoreWindow.o `test -f 'ScoreWindow.cc' || echo '$(srcdir)/'`ScoreWindow.cc
+
+realtimebattle-ScoreWindow.obj: ScoreWindow.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ScoreWindow.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" -c -o realtimebattle-ScoreWindow.obj `if test -f 'ScoreWindow.cc'; then $(CYGPATH_W) 'ScoreWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ScoreWindow.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo" "$(DEPDIR)/realtimebattle-ScoreWindow.Po"; else rm -f "$(DEPDIR)/realtimebattle-ScoreWindow.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ScoreWindow.cc' object='realtimebattle-ScoreWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ScoreWindow.obj `if test -f 'ScoreWindow.cc'; then $(CYGPATH_W) 'ScoreWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ScoreWindow.cc'; fi`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
