@@ -222,7 +222,7 @@ ArenaRealTime::parse_arena_file(String& filename)
 }
 
 void
-ArenaRealTime::print_to_logfile(const char first_letter ... )
+ArenaRealTime::print_to_logfile(char first_letter ... )
 {
   if( !use_log_file ) return;
 

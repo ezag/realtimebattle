@@ -52,7 +52,7 @@ public:
                       const String& tournament_fname,
                       String& message_fname, const String& option_fname );
 
-  void print_to_logfile( const char first_letter ... );
+  void print_to_logfile(  char first_letter ... );
   
   bool get_use_message_file() { return use_message_file; }
   Vector2D get_random_position();

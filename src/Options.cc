@@ -47,6 +47,8 @@ using namespace std;
 
 Options::Options()
 {
+/*
+#ifdef ENABLE_NLS
 #ifdef HAVE_LOCALE_H
   setlocale( LC_MESSAGES, "" );
   setlocale( LC_NUMERIC, "POSIX" );
@@ -57,6 +59,8 @@ Options::Options()
   bindtextdomain( "RealTimeBattle", "/usr/local/share/locale" );
 #endif
   textdomain( "RealTimeBattle" );
+#endif
+*/
 
   // Entries are: entry_datatype, page in option, 
   //              default value, max value, min value, 
