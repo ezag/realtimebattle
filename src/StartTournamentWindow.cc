@@ -56,6 +56,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Options.h"
 
 #include <string>
+#include <sstream>
 using namespace std;
 
 const string tmp_tournament_file( "/tmp.tour" );
@@ -641,9 +642,13 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
                                   ( info->row, false, info->filename, info->directory ) );
         }
     }
-  gtk_entry_set_text( GTK_ENTRY( entries[1] ), String(robots_p_game).chars() );
-  gtk_entry_set_text( GTK_ENTRY( entries[0] ), String(games_p_sequence).chars() );
-  gtk_entry_set_text( GTK_ENTRY( entries[2] ), String(n_o_sequences).chars() );
+  ostringstream robots_p_game_str, games_p_sequence_str, n_o_sequences_str;
+  robots_p_game_str << robots_p_game;
+  games_p_sequence_str << games_p_sequence;
+  n_o_sequences_str << n_o_sequences;
+  gtk_entry_set_text( GTK_ENTRY( entries[1] ), robots_p_game_str.str().c_str() );
+  gtk_entry_set_text( GTK_ENTRY( entries[0] ), games_p_sequence_str.str().c_str() );
+  gtk_entry_set_text( GTK_ENTRY( entries[2] ), n_o_sequences_str.str().c_str() );
 }
 
 void
@@ -741,9 +746,11 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
               get_selected_robot_tournament()->number_of_elements();
             if( number_of_robots > the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ) )
               number_of_robots = the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED );
+            ostringstream number_of_robots_str;
+            number_of_robots_str << number_of_robots;
             gtk_entry_set_text
               ( GTK_ENTRY( mmf_p->stw_p->get_entries()[mmf_p->entry] ),
-                String(number_of_robots).chars() );
+                number_of_robots_str.str().c_str() );
           }
       }
       break;
@@ -762,10 +769,12 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
           robots_per_sequence = the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED );
         if( robots_per_sequence < 2 )
           robots_per_sequence = 2;
+        ostringstream number2string;
+        number2string << min ( 9999, binomial( number_of_robots,
+                                          robots_per_sequence) );
         gtk_entry_set_text
           ( GTK_ENTRY( mmf_p->stw_p->get_entries()[mmf_p->entry] ),
-            String( min ( 9999, binomial( number_of_robots,
-                                          robots_per_sequence) ) ).chars() );
+            number2string.str().c_str() );
       }
       break;
     case MMF_ALL_ARENAS:
@@ -777,9 +786,11 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
           number_of_arenas = the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED );
         if( number_of_arenas < 1 )
           number_of_arenas = 1;
+        ostringstream number_of_arenas_str;
+        number_of_arenas_str << number_of_arenas;
         gtk_entry_set_text
           ( GTK_ENTRY( mmf_p->stw_p->get_entries()[mmf_p->entry] ),
-            String(number_of_arenas).chars() );
+            number_of_arenas_str.str().c_str() );
       }
       break;
     }
@@ -968,14 +979,14 @@ StartTournamentWindow::add_all_selected( const bool robots )
                               info_dir_p->filename.non_const_chars() );
       
           start_tournament_info_t* info_tourn_p;
-          String full_filename;
+          string full_filename;
           if(robots)
-            full_filename = info_dir_p->directory + info_dir_p->filename;
+            full_filename = string(info_dir_p->directory.chars()) + string(info_dir_p->filename.chars());
           else
-            full_filename = info_dir_p->directory + info_dir_p->filename;
+            full_filename = string(info_dir_p->directory.chars()) + string(info_dir_p->filename.chars());
 
           info_tourn_p = new start_tournament_info_t
-            ( row, false, full_filename.chars(), info_dir_p->directory );
+            ( row, false, full_filename.c_str(), info_dir_p->directory );
           info_tourn_list->insert_last( info_tourn_p );
         }
     }

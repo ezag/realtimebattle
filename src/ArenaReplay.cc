@@ -332,7 +332,7 @@ ArenaReplay::parse_log_line()
         if( li.ok() )
           {
             Robot* robotp = (Robot*)li();
-            print_message( string(robotp->get_robot_name().chars()), string(message) );
+            print_message( robotp->get_robot_name(), string(message) );
           }
         // else: robot sent a message before first game of sequences.
         // Robot data is not yet known to us, thus ignore!
@@ -389,7 +389,7 @@ ArenaReplay::parse_log_line()
             log_file.get( robot_colour, 7, ' ');
             long int col = str2hex( (String)robot_colour );
             log_file.get( name, 200, '\n' );
-            Robot* robotp = new Robot( robot_id, col, (String)name );
+            Robot* robotp = new Robot( robot_id, col, string(name) );
             all_robots_in_tournament.insert_last(robotp); // used by statistics
           }
         else
@@ -1211,7 +1211,7 @@ ArenaReplay::make_statistics_from_file()
             long int col = str2hex( (String)robot_colour );
             log_file >> ws;
             log_file.get( name, 200, '\n' );
-            Robot* robotp = new Robot( robot_id, col, (String)name );
+            Robot* robotp = new Robot( robot_id, col, string(name) );
             object_lists[ROBOT].insert_last(robotp); // array better?
             all_robots_in_tournament.insert_last(robotp); // used by statistics
           }

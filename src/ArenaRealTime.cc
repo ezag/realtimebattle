@@ -980,14 +980,14 @@ ArenaRealTime::start_sequence_follow_up()
         {      
           if( !robotp->set_and_get_has_competed() )
             print_to_logfile('L', robotp->get_id(), robotp->get_rgb_colour(), 
-                             robotp->get_robot_name().chars());
+                             robotp->get_robot_name().c_str());
           
           if( !robotp->is_name_given() )
             {
               robotp->send_message(WARNING, NAME_NOT_GIVEN, "");
               char msg[128];
               snprintf( msg, 127, _("Robot with filename %s has not given any name"),
-                        robotp->get_robot_filename().chars() );
+                        robotp->get_robot_filename().c_str() );
               print_message( "RealTimeBattle", string(msg) );
             }
 
@@ -1090,7 +1090,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
   for( robotfilename_list.first(li); li.ok(); li++ )
     {
       infop = li();
-      robotp = new Robot(infop->filename);
+      robotp = new Robot(string(infop->filename.chars()));
       all_robots_in_tournament.insert_last( robotp );
       number_of_robots++;
     }

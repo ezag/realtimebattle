@@ -35,7 +35,6 @@ using namespace std;
 
 #include "Structs.h"
 #include "MovingObject.h"
-#include "String.h"
 #include "List.h"
 
 #include "fdstream.h"
@@ -43,8 +42,8 @@ using namespace std;
 class Robot : public MovingObject
 {
 public:
-  Robot(const String& filename);
-  Robot(const int r_id, const long int col, const String& name);
+  Robot(const string& filename);
+  Robot(const int r_id, const long int col, const string& name);
   ~Robot();
 
   //arenaobject_t get_arenaobject_t() { return ROBOT; }
@@ -86,8 +85,8 @@ public:
   void live();
   void die();
 
-  String get_robot_name() { return robot_name; }
-  String get_robot_filename() { return robot_filename; }
+  string get_robot_name() { return robot_name; }
+  string get_robot_filename() { return robot_filename; }
   bool is_alive() { return alive; }
   double get_energy() { return energy; }
   pid_t get_pid() { return pid; }
@@ -166,11 +165,11 @@ private:
   List<stat_t> statistics;
 
   int robot_name_uniqueness_number;
-  class String plain_robot_name;      // Name given by robot
-  class String robot_name;            // plain_robot_name + uniqueness number
+  string plain_robot_name;      // Name given by robot
+  string robot_name;            // plain_robot_name + uniqueness number
 
-  class String robot_filename;        // Filename with path  
-  class String robot_plain_filename;  // Filename without path
+  string robot_filename;        // Filename with path  
+  string robot_plain_filename;  // Filename without path
 
   bool colour_given;
   bool name_given;
@@ -196,7 +195,7 @@ private:
   pid_t pid;    
 
   bool network_robot;
-  List<String> message_list;  // For use by a network robot
+  List<string> message_list;  // For use by a network robot
 
   ListIterator<stat_t> current_game_stats;
 

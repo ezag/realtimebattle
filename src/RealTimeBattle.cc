@@ -67,7 +67,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Options.h"
 #include "ArenaReplay.h"
 #include "ArenaController.h"
-#include "String.h"
 #include <string>
 #include "Various.h"
 //#include "Server.h"

@@ -26,6 +26,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <signal.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <math.h>
 
@@ -71,17 +72,17 @@ using namespace std;
 //  #include "Options.h"
 //  #include "Messagetypes.h"
 
-Robot::Robot(const String& filename)
+Robot::Robot(const string& filename)
 {
   velocity = Vector2D(0.0, 0.0);
   acceleration = 0.0;
   robot_filename = filename;
 
   int nr;
-  if( ( nr = robot_filename.find( '/', 0, true) ) == -1 )
+  if( ( nr = String(robot_filename.c_str()).find( '/', 0, true) ) == -1 )
     robot_plain_filename = robot_filename;
   else
-    robot_plain_filename = get_segment(robot_filename, nr+1, -1);
+    robot_plain_filename = string(get_segment(String(robot_filename.c_str()), nr+1, -1).chars());
 
 
   network_robot = false;
@@ -116,7 +117,7 @@ Robot::Robot(const String& filename)
 
 // Constructor used by ArenaReplay. No process needed.
 //
-Robot::Robot(const int r_id, const long int col, const String& name)
+Robot::Robot(const int r_id, const long int col, const string& name)
 {
   id = r_id;
   robot_name = name;
@@ -147,13 +148,13 @@ Robot::start_process()
 {
   int pipe_in[2], pipe_out[2];
   if (pipe (pipe_in))
-    Error(true, "Couldn't setup pipe_in for robot " + string(robot_filename.chars()), "Robot::start_process");
+    Error(true, "Couldn't setup pipe_in for robot " + robot_filename, "Robot::start_process");
 
   if (pipe (pipe_out))
-    Error(true, "Couldn't setup pipe_out for robot " + string(robot_filename.chars()), "Robot::start_process");
+    Error(true, "Couldn't setup pipe_out for robot " + robot_filename, "Robot::start_process");
 
   if( (pid = fork()) < 0 )
-    Error(true, "Couldn't fork childprocess for robot " + string(robot_filename.chars()), "Robot::start_process");
+    Error(true, "Couldn't fork childprocess for robot " + robot_filename, "Robot::start_process");
 
   if(pid == 0)   // Child process, to be the new robot
     {
@@ -171,51 +172,46 @@ Robot::start_process()
         {
           int pd_flags;
           if( (pd_flags = fcntl(pipe_out[0], F_GETFL, 0)) == -1 )
-            Error(true, "Couldn't get pd_flags for pipe_out in robot " + 
-                  string(robot_filename.chars()),
+            Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename,
                   "Robot::start_process, child");
           pd_flags |= O_NONBLOCK;
           if( fcntl(pipe_out[0], F_SETFL, pd_flags) == -1 )
-            Error(true, "Couldn't change pd_flags for pipe_out in robot " +
-                  string(robot_filename.chars()),
+            Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename,
                   "Robot::start_process, child");
 
 
           if( (pd_flags = fcntl(pipe_in[1], F_GETFL, 0)) == -1 )
-            Error(true, "Couldn't get pd_flags for pipe_in in robot " + 
-                  string(robot_filename.chars()),
+            Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename,
                   "Robot::start_process, child");
           pd_flags |= O_NONBLOCK;
           if( fcntl(pipe_in[1], F_SETFL, pd_flags) == -1 )
-            Error(true, "Couldn't change pd_flags for pipe_in in robot " + 
-                  string(robot_filename.chars()),
+            Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename,
                   "Robot::start_process, child");
         }
 
       // Check file attributes
 
       struct stat filestat;
-      if( 0 != stat( robot_filename.chars(), &filestat ) )
-        Error(true, "Couldn't get stats for robot " + string(robot_filename.chars()),
+      if( 0 != stat( robot_filename.c_str(), &filestat ) )
+        Error(true, "Couldn't get stats for robot " + robot_filename,
               "Robot::start_process, child");
       if( !S_ISREG( filestat.st_mode) )
-        Error(true, "Robot file isn't regular, error for robot " + string(robot_filename.chars()),
+        Error(true, "Robot file isn't regular, error for robot " + robot_filename,
               "Robot::start_process, child");
       if( !(filestat.st_mode & S_IXOTH) )
-        Error(true, "Robot file isn't executable for user, error for robot " +
-              string(robot_filename.chars()),
+        Error(true, "Robot file isn't executable for user, error for robot " + robot_filename,
               "Robot::start_process, child");
       if( (filestat.st_mode & S_ISUID) )
-        Error(true, "Set user ID is not allowed, error for robot " + string(robot_filename.chars()),
+        Error(true, "Set user ID is not allowed, error for robot " + robot_filename,
               "Robot::start_process, child");
 
       // Lower priority by one
       int old;
       if( (old = getpriority (PRIO_PROCESS, 0)) == -1 )
-        Error(true, "Couldn't get priority for robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't get priority for robot " + robot_filename,
               "Robot::start_process, child");
       if( setpriority (PRIO_PROCESS, 0, old + 1) == -1)
-        Error(true, "Couldn't set priority for robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't set priority for robot " + robot_filename,
               "Robot::start_process, child");
 
       // Close all pipes not belonging to the robot
@@ -262,12 +258,11 @@ Robot::start_process()
       //        }
 
       // Execute process. Should not return!
-      if( execl(robot_filename.chars(), robot_filename.chars(), NULL) == -1 )
-        Error(true, "Couldn't open robot " + string(robot_filename.chars()), 
+      if( execl(robot_filename.c_str(), robot_filename.c_str(), NULL) == -1 )
+        Error(true, "Couldn't open robot " + robot_filename, 
             "Robot::start_process, child");
 
-      Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " +
-            string(robot_filename.chars()),
+      Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + robot_filename,
             "Robot::start_process, child");
     }
   else
@@ -281,18 +276,18 @@ Robot::start_process()
       // Make the pipes non-blocking
       int pd_flags;
       if( (pd_flags = fcntl(pipe_in[0], F_GETFL, 0)) == -1 )
-        Error(true, "Couldn't get pd_flags for pipe_in in robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename,
               "Robot::start_process, parent");
       pd_flags |= O_NONBLOCK;
       if( fcntl(pipe_in[0], F_SETFL, pd_flags) == -1 )
-        Error(true, "Couldn't change pd_flags for pipe_in in robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename,
               "Robot::start_process, parent");
       if( (pd_flags = fcntl(pipe_out[1], F_GETFL, 0)) == -1 )
-        Error(true, "Couldn't get pd_flags for pipe_out in robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename,
               "Robot::start_process, parent");
       pd_flags |= O_NONBLOCK;
       if( fcntl(pipe_out[1], F_SETFL, pd_flags) == -1 )
-        Error(true, "Couldn't change pd_flags for pipe_out in robot " + string(robot_filename.chars()),
+        Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename,
               "Robot::start_process, parent");
 
 	// Der Schrott geht nimmer in libstdc++ v3
@@ -326,9 +321,10 @@ void
 Robot::update_cpu_time_used()
 {
   if( network_robot || !process_running ) return;
-
-  String procfilename = "/proc/" + String(pid) + "/stat";
-  ifstream procfile(procfilename.chars());
+  ostringstream number2string;
+  number2string << pid;
+  string procfilename = "/proc/" + number2string.str() + "/stat";
+  ifstream procfile(procfilename.c_str());
   if( !procfile ) return;
 
   char buf[64];
@@ -414,7 +410,9 @@ Robot::check_process()
         }
       else if( cpu_used > cpu_warning_limit && tot_time < cpu_timeout )
         {
-          send_message( WARNING, PROCESS_TIME_LOW, String(cpu_limit - cpu_used).chars());
+          ostringstream number2string;
+          number2string << (cpu_limit - cpu_used);
+          send_message( WARNING, PROCESS_TIME_LOW, number2string.str().c_str());
           cpu_warning_limit = cpu_limit; // No more warnings
         }
 }
@@ -614,8 +612,12 @@ Robot::check_name_uniqueness()
         }
     }
 
-  if( robot_name_uniqueness_number > 0 )
-    robot_name += ('(' + (String)robot_name_uniqueness_number + ')');
+  if( robot_name_uniqueness_number > 0 ) 
+  {
+    ostringstream number2string;
+    number2string << robot_name_uniqueness_number;
+    robot_name += ('(' + number2string.str() + ')');
+  }
 }
 
 double
@@ -903,7 +905,7 @@ Robot::set_values_at_process_start_up()
   else        // not first sequence !
     {
       send_message(INITIALIZE, 0);
-      send_message(YOUR_NAME, robot_name.chars());
+      send_message(YOUR_NAME, robot_name.c_str());
       int long col = rgb_colour;
       int long newcol = realtime_arena.find_free_colour(col, col, this);
       if( col != newcol ) set_colour( newcol );
@@ -1328,7 +1330,7 @@ Robot::get_messages()
           {
             instreamp->get(text, 160, '\n');
             realtime_arena.print_to_logfile('P', id, text);
-            the_arena.print_message( string(robot_name.chars()), text );
+            the_arena.print_message( robot_name, text );
           }
           break;
 
@@ -1338,7 +1340,7 @@ Robot::get_messages()
             if( realtime_arena.get_game_mode() == ArenaBase::DEBUG_MODE )
               {
                 realtime_arena.print_to_logfile('P', id, text);
-                the_arena.print_message( string(robot_name.chars()), text );
+                the_arena.print_message( robot_name, text );
               }
           }
           break;
@@ -1557,7 +1559,7 @@ bool
 Robot::get_default_non_blocking_state()
 {
   string filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
-    "/" + string(robot_plain_filename.chars());
+    "/" + robot_plain_filename;
 
   int fd;
   if( ( fd = open(filename.c_str(), O_RDONLY) ) != -1 )
@@ -1577,7 +1579,7 @@ Robot::set_non_blocking_state(const bool non_bl)
   if( non_bl == use_non_blocking ) return;
 
   string filename = the_opts.get_s( OPTION_TMP_RTB_DIR ) +
-    "/" + string(robot_plain_filename.chars());
+    "/" + robot_plain_filename;
 
   create_tmp_rtb_dir();
 

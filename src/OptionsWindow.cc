@@ -19,6 +19,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <gtk/gtk.h>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -32,7 +33,6 @@ using namespace std;
 #include "ScoreWindow.h"
 #include "StatisticsWindow.h"
 #include "Options.h"
-#include "String.h"
 #include "Various.h"
 
 extern class Options the_opts;
@@ -134,18 +134,20 @@ OptionsWindow::OptionsWindow( const int default_width,
               ( double_opts[opt].max_letters_in_entry );
 
             struct button_t buttons[] = {
-              { (String)_(" Min "), true, (GtkSignalFunc) OptionsWindow::double_min,
+              { string( _(" Min ") ), true, (GtkSignalFunc) OptionsWindow::double_min,
                 (gpointer) &double_opts[opt] },
-              { (String)_(" Def "), true, (GtkSignalFunc) OptionsWindow::double_def,
+              { string( _(" Def ") ), true, (GtkSignalFunc) OptionsWindow::double_def,
                 (gpointer) &double_opts[opt] },
-              { (String)_(" Max "), true, (GtkSignalFunc) OptionsWindow::double_max,
+              { string( _(" Max ") ), true, (GtkSignalFunc) OptionsWindow::double_max,
                 (gpointer) &double_opts[opt] } };
-
+            
+            ostringstream number2string;
+            number2string << double_opts[opt].value;
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, String(double_opts[opt].translated_label.c_str()),
+                                    row, string(double_opts[opt].translated_label),
                                     double_opts[opt].entry,
-                                    String( double_opts[opt].value ),
+                                    number2string.str(),
                                     info, buttons );
 
           }
@@ -158,11 +160,14 @@ OptionsWindow::OptionsWindow( const int default_width,
             if( long_opts[opt].min_value < 0.0 )
               sign = true;
 
-            String entry_text;
-            if( long_opts[opt].datatype == ENTRY_INT )
-              entry_text = String( long_opts[opt].value );
+            string entry_text;
+            if( long_opts[opt].datatype == ENTRY_INT ) {
+              ostringstream number2string;
+              number2string << long_opts[opt].value;
+              entry_text = number2string.str();
+            }
             else if( long_opts[opt].datatype == ENTRY_HEX )
-              entry_text = hex2str( long_opts[opt].value );
+              entry_text = string(hex2str( long_opts[opt].value ).chars());
 
             entry_t* info = new entry_t( long_opts[opt].datatype, sign );
 
@@ -171,16 +176,18 @@ OptionsWindow::OptionsWindow( const int default_width,
               ( long_opts[opt].max_letters_in_entry );
 
             struct button_t buttons[] = {
-              { (String)_(" Min "), true, (GtkSignalFunc) OptionsWindow::long_min,
+              { string( _(" Min ") ), true, (GtkSignalFunc) OptionsWindow::long_min,
                 (gpointer) &long_opts[opt] },
-              { (String)_(" Def "), true, (GtkSignalFunc) OptionsWindow::long_def,
+              { string( _(" Def ") ), true, (GtkSignalFunc) OptionsWindow::long_def,
                 (gpointer) &long_opts[opt] },
-              { (String)_(" Max "), true, (GtkSignalFunc) OptionsWindow::long_max,
+              { string( _(" Max ") ), true, (GtkSignalFunc) OptionsWindow::long_max,
                 (gpointer) &long_opts[opt] } };
 
+            ostringstream number2string;
+            number2string << long_opts[opt].translated_label;
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, String(long_opts[opt].translated_label.c_str()),
+                                    row, number2string.str(),
                                     long_opts[opt].entry,
                                     entry_text, info, buttons );
 
@@ -197,16 +204,16 @@ OptionsWindow::OptionsWindow( const int default_width,
               ( string_opts[opt].max_letters_in_entry );
 
             struct button_t buttons[] = {
-              { (String)"" , false, (GtkSignalFunc) NULL, (gpointer) NULL },
-              { (String)_(" Def "), true, (GtkSignalFunc) OptionsWindow::string_def,
+              { string(""), false, (GtkSignalFunc) NULL, (gpointer) NULL },
+              { string( _(" Def ") ), true, (GtkSignalFunc) OptionsWindow::string_def,
                 (gpointer) &string_opts[opt] },
-              { (String)"" , false, (GtkSignalFunc) NULL, (gpointer) NULL } };
+              { string("") , false, (GtkSignalFunc) NULL, (gpointer) NULL } };
 
             add_option_to_notebook( description_table,
                                     entry_table, button_table,
-                                    row, String(string_opts[opt].translated_label.c_str()),
+                                    row, string_opts[opt].translated_label,
                                     string_opts[opt].entry,
-                                    String(string_opts[opt].value.c_str()),
+                                    string_opts[opt].value,
                                     info, buttons );
 
           }
@@ -243,25 +250,25 @@ OptionsWindow::OptionsWindow( const int default_width,
   gtk_widget_show( hbox );
 
   struct button_t buttons[] = {
-    { (String)_(" Default "), true, (GtkSignalFunc) OptionsWindow::default_opts,
+    { string( _(" Default ") ), true, (GtkSignalFunc) OptionsWindow::default_opts,
       (gpointer) this },
-    { (String)_(" Load options "), true, (GtkSignalFunc) OptionsWindow::load,
+    { string( _(" Load options ") ), true, (GtkSignalFunc) OptionsWindow::load,
       (gpointer) this },
-    { (String)_(" Save options "), true, (GtkSignalFunc) OptionsWindow::save,
+    { string( _(" Save options ") ), true, (GtkSignalFunc) OptionsWindow::save,
       (gpointer) this },
-    { (String)_(" Save as default "), true, (GtkSignalFunc) OptionsWindow::save_def,
+    { string( _(" Save as default ") ), true, (GtkSignalFunc) OptionsWindow::save_def,
       (gpointer) this },
-    { (String)_(" Apply "), true, (GtkSignalFunc) OptionsWindow::apply,
+    { string( _(" Apply ") ), true, (GtkSignalFunc) OptionsWindow::apply,
       (gpointer) this },
-    { (String)_(" Ok "), true, (GtkSignalFunc) OptionsWindow::ok,
+    { string( _(" Ok ") ), true, (GtkSignalFunc) OptionsWindow::ok,
       (gpointer) this },
-    { (String)_(" Cancel "), true, (GtkSignalFunc) OptionsWindow::cancel,
+    { string( _(" Cancel ") ), true, (GtkSignalFunc) OptionsWindow::cancel,
       (gpointer) this } };
 
   for( int i=0; i<7; i++ )
     {
       GtkWidget* button_w =
-        gtk_button_new_with_label( buttons[i].label.chars() );
+        gtk_button_new_with_label( buttons[i].label.c_str() );
       gtk_signal_connect( GTK_OBJECT( button_w ), "clicked",
                           buttons[i].func, buttons[i].data );
       gtk_box_pack_start( GTK_BOX( hbox ), button_w, TRUE,TRUE, 0 );
@@ -281,21 +288,21 @@ void
 OptionsWindow::add_option_to_notebook( GtkWidget* description_table,
                                        GtkWidget* entry_table,
                                        GtkWidget* button_table,
-                                       int row, String description,
+                                       int row, string description,
                                        GtkWidget* entry,
-                                       String entry_text,
+                                       string entry_text,
                                        entry_t* info,
                                        button_t* buttons )
 {
   GtkWidget* label =
-    gtk_label_new( description.chars() );
+    gtk_label_new( description.c_str() );
   gtk_table_attach_defaults( GTK_TABLE( description_table ),
                              label, 0, 1, row, row + 1 );
   gtk_widget_show( label );
 
   gtk_signal_connect( GTK_OBJECT( entry ), "changed",
                       (GtkSignalFunc) entry_handler, info);
-  gtk_entry_set_text( GTK_ENTRY( entry ), entry_text.chars() );
+  gtk_entry_set_text( GTK_ENTRY( entry ), entry_text.c_str() );
   gtk_widget_set_usize( entry, 112, 22 );
   gtk_table_attach_defaults( GTK_TABLE( entry_table ),
                              entry, 0, 1, row, row + 1 );
@@ -305,7 +312,7 @@ OptionsWindow::add_option_to_notebook( GtkWidget* description_table,
   for( int i=0; i<3; i++ )
     if( buttons[i].used )
       {
-        button_w = gtk_button_new_with_label( buttons[i].label.chars() );
+        button_w = gtk_button_new_with_label( buttons[i].label.c_str() );
         gtk_signal_connect( GTK_OBJECT( button_w ), "clicked",
                             buttons[i].func, buttons[i].data );
         gtk_table_attach_defaults( GTK_TABLE( button_table ), button_w,
@@ -384,16 +391,22 @@ OptionsWindow::update_all_gtk_entries()
   option_info_t<string>* string_opts = the_opts.get_all_string_options();
 
   for(int i=0;i<LAST_DOUBLE_OPTION;i++)
-	  {
-    gtk_entry_set_text( GTK_ENTRY( double_opts[i].entry ),
-                        String(double_opts[i].value).chars() );
-  		}
+    {
+      ostringstream number2string;
+      number2string << double_opts[i].value;
+      gtk_entry_set_text( GTK_ENTRY( double_opts[i].entry ),
+                        number2string.str().c_str() );
+    }
   for(int i=0;i<LAST_LONG_OPTION;i++)
     {
-      if( long_opts[i].datatype == ENTRY_INT )
+      if( long_opts[i].datatype == ENTRY_INT ) 
+      {
+        ostringstream number2string;
+        number2string << long_opts[i].value;
         gtk_entry_set_text( GTK_ENTRY( long_opts[i].entry ),
-                            String( long_opts[i].value).chars() );
-      else if (long_opts[i].datatype == ENTRY_HEX)
+                            number2string.str().c_str() );
+      }
+      else if (long_opts[i].datatype == ENTRY_HEX) 
         gtk_entry_set_text( GTK_ENTRY( long_opts[i].entry ),
                             hex2str(long_opts[i].value).chars() );
     }
@@ -611,24 +624,30 @@ void
 OptionsWindow::double_min( GtkWidget* widget,
                            option_info_t<double>* option )
 {
+  ostringstream number2string;
+  number2string << option->min_value;
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                      String( option->min_value ).chars() );
+                      number2string.str().c_str() );
 }
 
 void
 OptionsWindow::double_def( GtkWidget* widget,
                            option_info_t<double>* option )
 {
+  ostringstream number2string;
+  number2string << option->default_value;
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                      String( option->default_value ).chars() );
+                      number2string.str().c_str() );
 }
 
 void
 OptionsWindow::double_max( GtkWidget* widget,
                            option_info_t<double>* option )
 {
+  ostringstream number2string;
+  number2string << option->max_value;
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                      String( option->max_value ).chars() );
+                      number2string.str().c_str() );
 }
 
 void
@@ -636,8 +655,12 @@ OptionsWindow::long_min( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
+  {
+    ostringstream number2string;
+    number2string << option->min_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        String( option->min_value).chars() );
+                        number2string.str().c_str() );
+  }
   else if( option->datatype == ENTRY_HEX )
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         hex2str( option->min_value).chars() );
@@ -648,8 +671,12 @@ OptionsWindow::long_def( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
+  {
+    ostringstream number2string;
+    number2string << option->default_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        String( option->default_value).chars() );
+                        number2string.str().c_str() );
+  }
   else if( option->datatype == ENTRY_HEX )
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         hex2str( option->default_value).chars() );
@@ -660,8 +687,12 @@ OptionsWindow::long_max( GtkWidget* widget,
                          option_info_t<long>* option )
 {
   if( option->datatype == ENTRY_INT )
+  {
+    ostringstream number2string;
+    number2string << option->max_value;
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                        String( option->max_value).chars() );
+                        number2string.str().c_str() );
+  }
   else if( option->datatype == ENTRY_HEX )
     gtk_entry_set_text( GTK_ENTRY( option->entry ),
                         hex2str( option->max_value).chars() );
@@ -669,8 +700,8 @@ OptionsWindow::long_max( GtkWidget* widget,
 
 void
 OptionsWindow::string_def( GtkWidget* widget,
-                           option_info_t<String>* option )
+                           option_info_t<string>* option )
 {
   gtk_entry_set_text( GTK_ENTRY( option->entry ),
-                      option->default_value.chars() );
+                      option->default_value.c_str() );
 }

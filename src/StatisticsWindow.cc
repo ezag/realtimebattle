@@ -27,6 +27,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Various.h"
 #include "Robot.h"
 
+#include <sstream>
+using namespace std;
+
 //extern class Gui the_gui;
 
 StatisticsWindow::StatisticsWindow( const int default_width,
@@ -73,27 +76,27 @@ StatisticsWindow::StatisticsWindow( const int default_width,
   gtk_widget_show( hbox );
 
   {
-    struct button_t { String label; GtkSignalFunc func; gpointer data; };
+    struct button_t { string label; GtkSignalFunc func; gpointer data; };
 
     struct button_t buttons[] = {
-      { (String)_(" Close "), (GtkSignalFunc) StatisticsWindow::exit,
+      { string( _(" Close ") ), (GtkSignalFunc) StatisticsWindow::exit,
         (gpointer) this },
-      { (String)_(" Save Statistics "), (GtkSignalFunc) StatisticsWindow::save,
+      { string( _(" Save Statistics ") ), (GtkSignalFunc) StatisticsWindow::save,
         (gpointer) this },
-      { (String)_(" Total "), (GtkSignalFunc) StatisticsWindow::change_table_type,
+      { string( _(" Total ") ), (GtkSignalFunc) StatisticsWindow::change_table_type,
         (gpointer) new change_type_data_t( STAT_TYPE_TOTAL, this ) },
-      { (String)_(" Sequence Total "), (GtkSignalFunc) StatisticsWindow::change_table_type,
+      { string( _(" Sequence Total ") ), (GtkSignalFunc) StatisticsWindow::change_table_type,
         (gpointer) new change_type_data_t( STAT_TYPE_SEQUENCE, this ) },
-      { (String)" " + (String)_("Game") + (String)" ",
+      { string( " " ) + string( _("Game") ) + string( " " ),
         (GtkSignalFunc) StatisticsWindow::change_table_type,
         (gpointer) new change_type_data_t( STAT_TYPE_GAME, this ) },
-      { (String)_(" Robot "), (GtkSignalFunc) StatisticsWindow::change_table_type,
+      { string( _(" Robot ") ), (GtkSignalFunc) StatisticsWindow::change_table_type,
         (gpointer) new change_type_data_t( STAT_TYPE_ROBOT, this ) } };
 
     GtkWidget* button_w;
     for( int i=0; i<6; i++ )
       {
-        button_w = gtk_button_new_with_label( buttons[i].label.chars() );
+        button_w = gtk_button_new_with_label( buttons[i].label.c_str() );
         gtk_signal_connect( GTK_OBJECT( button_w ), "clicked",
                             buttons[i].func, buttons[i].data );
         gtk_box_pack_start( GTK_BOX( hbox ), button_w, TRUE, TRUE, 0 );
@@ -475,14 +478,18 @@ StatisticsWindow::make_title_button()
   gtk_container_add( GTK_CONTAINER( title_button ), title_button_hbox );
   gtk_widget_show( title_button_hbox );
 
-  String title;
+  string title;
   switch( type )
     {
     case STAT_TYPE_TOTAL:
       title = _(" Grand Total ");
       break;
     case STAT_TYPE_SEQUENCE:
-      title = (String) _(" Sequence ") + String( looking_at_nr );
+      {
+        ostringstream number2string;
+        number2string << looking_at_nr;
+        title = string( _(" Sequence ") ) + number2string.str();
+      }
       break;
     case STAT_TYPE_GAME:
       {
@@ -494,8 +501,11 @@ StatisticsWindow::make_title_button()
             game = gps;
             sequence--;
           }
-        title = (String) _(" Sequence: ") + String( sequence ) + "  " +
-          _("Game") + ": " + String( game );
+        ostringstream sequence_str, game_str;
+        sequence_str << sequence;
+        game_str << game;
+        title = string( _(" Sequence: ") ) + sequence_str.str() + "  " +
+          _("Game") + ": " + game_str.str();
       }
       break;
     case STAT_TYPE_ROBOT:
@@ -524,7 +534,7 @@ StatisticsWindow::make_title_button()
       break;
     }
 
-  GtkWidget* label = gtk_label_new( title.chars() );
+  GtkWidget* label = gtk_label_new( title.c_str() );
   gtk_box_pack_start( GTK_BOX( title_button_hbox ), label, TRUE, TRUE, 0 );
   gtk_widget_show( label );
 }
@@ -553,19 +563,24 @@ StatisticsWindow::add_new_row( Robot* robot_p, stat_t average_stat,
       gtk_clist_set_pixmap( GTK_CLIST( clist ), row, 0,
                             colour_pixmap, bitmap_mask );
       gtk_clist_set_text( GTK_CLIST( clist ), row, 1,
-                          robot_p->get_robot_name().non_const_chars() );
+                          robot_p->get_robot_name().c_str()/*non_const_chars()*/ );
     }
 
   if( type == STAT_TYPE_ROBOT)
     {
+      ostringstream sequence_nr_str, game_nr_str;
+      sequence_nr_str << average_stat.sequence_nr;
+      game_nr_str << average_stat.game_nr;
       gtk_clist_set_text( GTK_CLIST( clist ), row, 0,
-                          String( average_stat.sequence_nr ).non_const_chars() );
+                          sequence_nr_str.str().c_str()/*non_const_chars()*/ );
       gtk_clist_set_text( GTK_CLIST( clist ), row, 1,
-                          String( average_stat.game_nr ).non_const_chars() );
+                          game_nr_str.str().c_str()/*non_const_chars()*/ );
     }
 
+  ostringstream position_str;
+  position_str << average_stat.position;
   gtk_clist_set_text( GTK_CLIST( clist ), row, 2,
-                      String( average_stat.position ).non_const_chars() );
+                      position_str.str().c_str()/*non_const_chars()*/ );
 
   String str;
   if( type == STAT_TYPE_SEQUENCE ||
@@ -578,17 +593,23 @@ StatisticsWindow::add_new_row( Robot* robot_p, stat_t average_stat,
 
   if( type == STAT_TYPE_TOTAL ||
       type == STAT_TYPE_SEQUENCE )
+  {
+      ostringstream games_played_str;
+      games_played_str << games_played;
       gtk_clist_set_text( GTK_CLIST( clist ), row, 4,
-                          String( games_played ).non_const_chars() );
+                          games_played_str.str().c_str()/*non_const_chars()*/ );
+  }
   else
       gtk_clist_set_text( GTK_CLIST( clist ), row, 4,
-                          String( "" ).non_const_chars() );
+                          string( "" ).c_str()/*non_const_chars()*/ );
 
   gtk_clist_set_text( GTK_CLIST( clist ), row, 5,
                       String( average_stat.time_survived, 2,
                               STRING_FIXED_FORM).non_const_chars() );
+  ostringstream total_points_str;
+  total_points_str << average_stat.total_points;
   gtk_clist_set_text( GTK_CLIST( clist ), row, 6,
-                      String( average_stat.total_points ).non_const_chars() );
+                      total_points_str.str().c_str()/*non_const_chars()*/ );
 }
 
 void
@@ -804,7 +825,7 @@ StatisticsWindow::row_selected( GtkWidget* clist, gint row,
       gchar* clist_text;
 
       gtk_clist_get_text( GTK_CLIST( clist ), row, column, &clist_text );
-      String robot_name;
+      string robot_name;
       if( clist_text != NULL )
         robot_name = clist_text;
 

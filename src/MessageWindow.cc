@@ -172,7 +172,7 @@ MessageWindow::set_window_title()
 {
   string title = string( _("Messages") );
   if( viewed_robot != NULL )
-    title += "  -  " + string(viewed_robot->get_robot_name().chars());
+    title += "  -  " + viewed_robot->get_robot_name();
   else
     title += "  -  " + string( _(" All ") );
 
@@ -186,14 +186,14 @@ MessageWindow::add_message( const string& name_of_messager,
   if( window_shown )
     {
       if( viewed_robot != NULL &&
-          viewed_robot->get_robot_name() != String(name_of_messager.c_str()) &&
+          viewed_robot->get_robot_name() != name_of_messager &&
           name_of_messager != "RealTimeBattle" )
         return;
       
-      char tmp_name_of_messager[name_of_messager.size()+1];
-      char tmp_message[message.size()+1];
-      strcpy(tmp_name_of_messager, name_of_messager.c_str());
-      strcpy(tmp_message, message.c_str());
+       char tmp_name_of_messager[name_of_messager.size()+1];
+       char tmp_message[message.size()+1];
+       strcpy(tmp_name_of_messager, name_of_messager.c_str());
+       strcpy(tmp_message, message.c_str());
       char* lst[2] = { tmp_name_of_messager/*.non_const_chars()*/,
                        g_utf8_normalize (tmp_message/*.non_const_chars()*/, -1, G_NORMALIZE_ALL) };
       

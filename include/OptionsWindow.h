@@ -26,8 +26,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #ifndef NO_GRAPHICS
 
-#include "String.h"
-
 struct _GtkWidget;
 typedef struct _GtkWidget GtkWidget;
 union _GdkEvent;
@@ -43,7 +41,7 @@ class OptionsWindow
 private:
   struct button_t
   {
-    String label;
+    string label;
     bool used;
     GtkSignalFunc func;
     gpointer data;
@@ -59,8 +57,8 @@ public:
   void add_option_to_notebook     ( GtkWidget* description_table,
                                     GtkWidget* entry_table,
                                     GtkWidget* button_table,
-                                    int row, String description,
-                                    GtkWidget* entry, String entry_text,
+                                    int row, string description,
+                                    GtkWidget* entry, string entry_text,
                                     entry_t* info, button_t* buttons );
   void update_all_gtk_entries     ();
   void set_all_options            ();
@@ -105,7 +103,7 @@ public:
   static void long_max            ( GtkWidget* widget,
                                     option_info_t<long>* option );
   static void string_def          ( GtkWidget* widget,
-                                    option_info_t<String>* option );
+                                    option_info_t<string>* option );
 
   GtkWidget* get_window_p         () { return window_p; }
 

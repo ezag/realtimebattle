@@ -26,6 +26,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "Robot.h"
 #include "Various.h"
 
+#include <sstream>
+using namespace std;
+
 extern class ControlWindow* controlwindow_p;
 
 //
@@ -133,17 +136,24 @@ ScoreWindow::~ScoreWindow()
 void
 ScoreWindow::set_window_title()
 {
-  String title = (String)
-    (String)_("Score") + "  " + 
-    (String)_(" Seq: ") + String( the_arena.get_sequence_nr() ) + 
-    " (" + String( the_arena.get_sequences_in_tournament() ) +
+  ostringstream sequence_nr_str, sequences_in_tournament_str, game_nr_str,
+                games_per_sequence_str, total_time_str;
+  sequence_nr_str << the_arena.get_sequence_nr();
+  sequences_in_tournament_str << the_arena.get_sequences_in_tournament();
+  game_nr_str << the_arena.get_game_nr();
+  games_per_sequence_str << the_arena.get_games_per_sequence();
+  total_time_str << (int)the_arena.get_total_time();
+  string title = 
+    string( _("Score") ) + "  " + 
+    string( _(" Seq: ") ) + sequence_nr_str.str() + 
+    " (" + sequences_in_tournament_str.str()  +
 
-    ")  " + (String)_("Game") + ": " + String( the_arena.get_game_nr() ) +
-    " (" + String( the_arena.get_games_per_sequence() ) +
+    ")  " + string( _("Game") ) + ": " + game_nr_str.str() +
+    " (" + games_per_sequence_str.str() +
 
-    ")  " + (String)_("Time") + ": " + String( (int)the_arena.get_total_time() );
+    ")  " + string( _("Time") ) + ": " + total_time_str.str();
 
-  gtk_window_set_title( GTK_WINDOW( window_p ), title.chars() );
+  gtk_window_set_title( GTK_WINDOW( window_p ), title.c_str() );
 }
 
 //
@@ -268,7 +278,7 @@ ScoreWindow::add_robots()
       gtk_clist_set_pixmap( GTK_CLIST( clist ), row, 0,
                             colour_pixmap, bitmap_mask );
       gtk_clist_set_text( GTK_CLIST( clist ), row, 1,
-                          robot_p->get_robot_name().non_const_chars() );
+                          robot_p->get_robot_name().c_str()/*.non_const_chars()*/ );
       gtk_clist_set_text( GTK_CLIST( clist ), row, 3, "" );
       robot_p->reset_last_displayed();
       robot_p->display_score();
