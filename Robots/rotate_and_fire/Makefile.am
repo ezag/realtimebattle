@@ -19,3 +19,7 @@ raf_DATA = $(rotate_and_fire_signal_robot_SOURCES) \
            $(rotate_and_fire_blocking_robot_SOURCES) \
            $(rotate_and_fire_select_robot_SOURCES) \
 	   Makefile.am
+
+if !NO_GRAPHICS
+LDADD = ${GTK_LIBS}
+endif
