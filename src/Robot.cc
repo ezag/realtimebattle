@@ -73,6 +73,7 @@ using namespace std;
 
 Robot::Robot(const string& filename)
 {
+  inteam=false;
   velocity = Vector2D(0.0, 0.0);
   acceleration = 0.0;
   robot_filename = filename;
@@ -127,6 +128,7 @@ Robot::Robot(const string& filename)
 //
 Robot::Robot(const int r_id, const long int col, const string& name)
 {
+  inteam=false;
   id = r_id;
   robot_name = name;
   set_colour( col );
@@ -773,8 +775,10 @@ Robot::update_radar_and_cannon(const double timestep)
   if( closest_arenaobject == ROBOT )
     {
       double lvls = (double)the_opts.get_l(OPTION_ROBOT_ENERGY_LEVELS);
-      double en = ((Robot*)col_obj)->get_energy();
-      send_message(ROBOT_INFO, rint( en / lvls ) * lvls, 0);
+      // Here teammate information is added
+      Robot* bot= (Robot*)col_obj;
+      double en = bot->get_energy();
+      send_message(ROBOT_INFO, rint( en / lvls ) * lvls, inteam && bot->inteam && (teamname == bot->teamname));
     }
 
   if( the_opts.get_l(OPTION_SEND_ROBOT_COORDINATES) == 1 ) // Relative starting pos
@@ -1158,6 +1162,13 @@ Robot::get_messages()
             {
               instreamp->get(text, 80, '\n');
               plain_robot_name = text;
+	      // Here I will insert the team code
+	      string::size_type position=plain_robot_name.rfind("Team: "); 
+	      if (position!=string::npos) {
+		      inteam=true;
+		      teamname=string(plain_robot_name,position+6);
+	      }
+				      
               check_name_uniqueness();
               name_given = true;
             }

@@ -207,6 +207,8 @@ private:
   int last_displayed_place;
   int last_displayed_last_place;
   long last_displayed_score;
+  string teamname;
+  bool inteam;
 
 #ifndef NO_GRAPHICS
   pixmap_t score_pixmap;

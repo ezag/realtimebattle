@@ -1,5 +1,5 @@
 /************************************************************************
-    $Id: bfclientbasicstate.cpp,v 1.2 2005/02/24 10:27:53 jonico Exp $
+    $Id: bfclientbasicstate.cpp,v 1.3 2005/04/12 14:06:27 jonico Exp $
     
     RTB - Team Framework: Framework for RealTime Battle robots to communicate efficiently in a team
     Copyright (C) 2004 The RTB- Team Framework Group: http://rtb-team.sourceforge.net
@@ -19,6 +19,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
     $Log: bfclientbasicstate.cpp,v $
+    Revision 1.3  2005/04/12 14:06:27  jonico
+    Added Team support
+
     Revision 1.2  2005/02/24 10:27:53  jonico
     Updated newest version of the framework
 
@@ -45,9 +48,9 @@ namespace Brotfrucht {
 	*/
 	void BFClientBasicState::reactOnServerTip (const string& tip) throw (StrategyException,bad_exception) {
 		if (tip=="STARTROTATION")
-			sendRTBMessageRotate(2,_go->ROBOT_CANNON_MAX_ROTATE);
+			sendRTBMessageRotate(6,_go->ROBOT_CANNON_MAX_ROTATE);
 		else if (tip=="STOPROTATION")
-			sendRTBMessageRotate(2,0.0);
+			sendRTBMessageRotate(6,0.0);
 			
 		else
 			_bfcsp->getLogger()->logMessage(100,"Unknown server tip in brotfrucht: "+tip);	
@@ -101,7 +104,9 @@ namespace Brotfrucht {
 	* @param energy The unexact energy level of the detected robot
 	* @param isTeamMate Defines whether the robot is a team mate (team mode is not yet implemented in RTB)
 	*/
-	void BFClientBasicState::receiveRTBMessageRobotInfo(double energy,bool isTeamMate) throw (StrategyException, bad_exception) {}
+	void BFClientBasicState::receiveRTBMessageRobotInfo(double energy,bool isTeamMate) throw (StrategyException, bad_exception) {
+		_bfcsp->getLogger()->logMessage(100,string("See a robot, friendly: ")+(isTeamMate?string("yes"):string("no")));
+	}
 
 	/**
 	* This method is called when the RTB message "RotationReached [what]" occurs. In our case, this message is sent, when a rotation initiated by "RotateTo" or "RotateAmount" has finished or the sweeping has changed direction.
