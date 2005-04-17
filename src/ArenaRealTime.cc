@@ -67,7 +67,6 @@ ArenaRealTime::ArenaRealTime()
                  the_arena_controller.tournament_filename,
                  the_arena_controller.message_filename,
                  the_arena_controller.option_filename );
-
   robots_in_sequence = NULL;
 }
 
@@ -413,9 +412,8 @@ ArenaRealTime::broadcast(const message_to_robot_type msg_type ...)
     }
   str += '\n';
 
- ListIterator<Shape> li;
- for( object_lists[ROBOT].first(li); li.ok(); li++ )
-    *(((Robot*)li())->get_outstreamp()) << str;
+ for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
+   *(((Robot*)(*li))->get_outstreamp()) << str;
 }
 
 void
@@ -577,7 +575,7 @@ ArenaRealTime::add_cookie()
   if( !found_space ) return;
 
   Cookie* cookiep = new Cookie(pos, en);
-  object_lists[COOKIE].insert_last( cookiep );
+  object_lists[COOKIE].push_back( cookiep );
 
   print_to_logfile('C', cookiep->get_id(), pos[0], pos[1]);
 }
@@ -601,7 +599,7 @@ ArenaRealTime::add_mine()
   if( !found_space )  return;
 
   Mine* minep = new Mine(pos, en);
-  object_lists[MINE].insert_last( minep );
+  object_lists[MINE].push_back( minep );
 
   print_to_logfile('M', minep->get_id(), pos[0], pos[1]);
 }
@@ -639,10 +637,9 @@ ArenaRealTime::update_robots()
 
   robots_killed_this_round = 0;
 
-  ListIterator<Shape> li;
-  for( object_lists[ROBOT].first(li); li.ok(); li++ )
+  for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
     {
-      robotp = (Robot*)li();
+      robotp = (Robot*)(*li);
       if( robotp->is_alive() )
         {
           robotp->update_radar_and_cannon(timestep);  
@@ -654,19 +651,19 @@ ArenaRealTime::update_robots()
     }
 
   // Check if robots have died and send energy level
-
-  for( object_lists[ROBOT].first(li); li.ok(); li++ )
+  for( list<Shape*>::iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end();)
     {
-      robotp = (Robot*)li();
+      robotp = (Robot*)(*li);
       if( !robotp->is_alive() ) 
         {
-          object_lists[ROBOT].remove(li);
+          li=object_lists[ROBOT].erase(li);
           robots_killed_this_round++;
         }
       else
         {
           double lvls = (double)the_opts.get_l(OPTION_ROBOT_ENERGY_LEVELS);
           robotp->send_message( ENERGY, rint( robotp->get_energy() / lvls ) * lvls );
+	  ++li;
         }
     }
 
@@ -674,9 +671,9 @@ ArenaRealTime::update_robots()
 
   if( robots_killed_this_round > 0 )
     {
-      for( object_lists[ROBOT].first(li); li.ok(); li++ )
+      for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
         {
-          robotp = (Robot*)li();
+          robotp = (Robot*)(*li);
           //          robotp->add_points(robots_killed_this_round);
 #ifndef NO_GRAPHICS
           if( robots_left < 15 && !no_graphics ) 
@@ -693,8 +690,8 @@ ArenaRealTime::update_robots()
     }
 
   
-  for( object_lists[ROBOT].first(li); li.ok(); li++ )
-    ((Robot*)li())->send_signal();
+  for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
+    ((Robot*)(*li))->send_signal();
 }
 
 
@@ -787,7 +784,6 @@ bool
 ArenaRealTime::start_game()
 {
   // put the arena together
-
   if( pause_after_next_game )
     {
       set_state( PAUSING_BETWEEN_GAMES );
@@ -865,7 +861,7 @@ ArenaRealTime::start_game()
       }
       angle = ((double)rand())*2.0*M_PI/RAND_MAX;
       robotp->set_values_before_game(pos, angle);
-      object_lists[ROBOT].insert_last(robotp);
+      object_lists[ROBOT].push_back(robotp);
       robots_left++;
       robotp->live();
     }
@@ -880,10 +876,9 @@ ArenaRealTime::start_game()
   update_count_for_logging = 0;
   print_to_logfile('T', 0.0);
 
-  ListIterator<Shape> li2;
-  for( object_lists[ROBOT].first(li2); li2.ok(); li2++ )
+  for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
     {
-      robotp = (Robot*)li2();
+      robotp = (Robot*)(*li);
       robotp->send_signal();
       robotp->move(0.0);  // To log current position
     }
@@ -952,9 +947,14 @@ ArenaRealTime::start_sequence()
 
   for(int i=0; i<robots_per_game; i++)
     {
+      list<Robot*>::const_iterator li(all_robots_in_tournament.begin());
+      for(int index(1); (li!=all_robots_in_tournament.end()) && (index<robots_in_sequence[sequence_nr][i]); ++li)
+        ++index;
+      if( li == all_robots_in_tournament.end() )
+        Error(true, "No such element", "ArenaRealTime::start_sequence");
+        
       all_robots_in_sequence.
-        insert_last( all_robots_in_tournament.
-                     get_nth(robots_in_sequence[sequence_nr][i]));
+        insert_last( *li);
     }
 
   // execute robot processes
@@ -1113,7 +1113,7 @@ start_tournament(const List<start_tournament_info_t>& robotfilename_list,
     {
       infop = li();
       robotp = new Robot(infop->filename);
-      all_robots_in_tournament.insert_last( robotp );
+      all_robots_in_tournament.push_back( robotp );
       number_of_robots++;
     }
 

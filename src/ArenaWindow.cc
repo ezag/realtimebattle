@@ -221,20 +221,20 @@ ArenaWindow::draw_everything()
           return;
         }
       
-      List<Shape>* object_lists;
+      list<Shape*>* object_lists;
 
       object_lists = the_arena.get_object_lists();
-      ListIterator<Shape> li;
+      list<Shape*>::iterator li;
 
       // Must begin with innercircles (they are destructive)
       for( int obj_type=WALL; obj_type < LAST_OBJECT_TYPE ; obj_type++) 
         {
-          for( object_lists[obj_type].first(li); li.ok(); li++ )
+          for( li = object_lists[obj_type].begin(); li != object_lists[obj_type].end(); ++li )
             {
               if( !( ( obj_type == MINE || obj_type == COOKIE ) &&
-                     !( (Extras*)li() )->is_alive() ) )
+                     !( (Extras*)(*li) )->is_alive() ) )
                 {
-                  li()->draw_shape( false );
+                  (*li)->draw_shape( false );
                 }
             }
         }
@@ -248,7 +248,7 @@ ArenaWindow::draw_moving_objects( const bool clear_objects_first )
 {
   if( window_shown )
     {
-      List<Shape>* object_lists = the_arena.get_object_lists();
+      list<Shape*>* object_lists = the_arena.get_object_lists();
       Robot* robotp;
 
       if( ( scrolled_window->allocation.width - 24 != scrolled_window_size[0]) ||
@@ -258,15 +258,15 @@ ArenaWindow::draw_moving_objects( const bool clear_objects_first )
           return;
         }
 
-      ListIterator<Shape> li;
-      for( object_lists[SHOT].first(li); li.ok(); li++ )
-        if( ((Shot*)li())->is_alive() )
-          ((Shot*)li())->draw_shape( clear_objects_first );
+      list<Shape*>::iterator li;
+      for( li = object_lists[SHOT].begin(); li != object_lists[SHOT].end(); ++li )
+        if( ((Shot*)(*li))->is_alive() )
+          ((Shot*)(*li))->draw_shape( clear_objects_first );
 
-      ListIterator<Shape> li2;
-      for( object_lists[ROBOT].first(li2); li2.ok(); li2++ )
+      list<Shape*>::iterator li2;
+      for( li2 = object_lists[ROBOT].begin(); li2 != object_lists[ROBOT].end(); ++li2 )
         {
-          robotp = (Robot*)li2();
+          robotp = (Robot*)(*li2);
 
           if( robotp->is_alive() )
             {

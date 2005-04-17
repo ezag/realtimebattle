@@ -205,10 +205,10 @@ ScoreWindow::new_robot_selected( GtkWidget * clist, gint row, gint column,
 
   Robot* robotp;
   
-  ListIterator<Shape> li;
-  for( the_arena.get_object_lists()[ROBOT].first(li); li.ok(); li++ )
+  list<Shape*>::iterator li;
+  for( li = the_arena.get_object_lists()[ROBOT].begin(); li != the_arena.get_object_lists()[ROBOT].end(); ++li )
     {
-      robotp = (Robot*)li();
+      robotp = (Robot*)(*li);
 
       if( row == robotp->get_row_in_score_clist() )
         scorewindow_p->set_selected_robot( robotp );
@@ -229,12 +229,12 @@ ScoreWindow::update_robots()
     }
 
   Robot* robot_p;
-  List<Shape>* object_lists = the_arena.get_object_lists();
-  ListIterator<Shape> li;
+  list<Shape*>* object_lists = the_arena.get_object_lists();
+  list<Shape*>::iterator li;
   
-  for( object_lists[ROBOT].first(li); li.ok(); li++ )
+  for( li = object_lists[ROBOT].begin(); li != object_lists[ROBOT].end(); ++li )
     {
-      robot_p = (Robot*)li();
+      robot_p = (Robot*)(*li);
       robot_p->reset_last_displayed();
       for( int i = 2; i <=5 ; i++ )
         gtk_clist_set_text( GTK_CLIST( clist ),
@@ -252,14 +252,14 @@ ScoreWindow::add_robots()
 {
   gtk_clist_clear( GTK_CLIST( clist ) );
   Robot* robot_p;
-  List<Shape>* object_lists = the_arena.get_object_lists();
-  ListIterator<Shape> li;
+  list<Shape*>* object_lists = the_arena.get_object_lists();
+  list<Shape*>::iterator li;
 
   bool found_robot = false;
 
-  for( object_lists[ROBOT].first(li); li.ok(); li++ )
+  for( li = object_lists[ROBOT].begin(); li != object_lists[ROBOT].end(); ++li )
     {
-      robot_p = (Robot*)li();
+      robot_p = (Robot*)(*li);
 
       char* empty_list[] = { "", "", "", "", "", "" };
       int row = gtk_clist_append( GTK_CLIST( clist ), empty_list );
@@ -292,9 +292,9 @@ ScoreWindow::add_robots()
     }
 
   if( !found_robot )
-    for( object_lists[ROBOT].first(li); li.ok(); li++ )
+    for( li = object_lists[ROBOT].begin(); li != object_lists[ROBOT].end(); ++li )
       {
-        robot_p = (Robot*)li();
+        robot_p = (Robot*)(*li);
         if( robot_p->get_row_in_score_clist() == 0 )
           {
             selected_robot = robot_p;

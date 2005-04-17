@@ -447,7 +447,7 @@ StatisticsWindow::change_stats_viewed( GtkWidget* widget,
         the_arena.get_games_per_sequence() + game;
       break;
     case STAT_TYPE_ROBOT:
-      max_nr = the_arena.get_all_robots_in_tournament()->number_of_elements();
+      max_nr = the_arena.get_all_robots_in_tournament()->size();
       break;
     }
 
@@ -513,11 +513,11 @@ StatisticsWindow::make_title_button()
         Robot* robot_p;
 
         int i=0;
-        ListIterator<Robot> li;
-        for( the_arena.get_all_robots_in_tournament()->first(li); li.ok(); li++ )
+        list<Robot*>::iterator li;
+        for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
           {
             i++;
-            robot_p = li();
+            robot_p = *li;
             if( looking_at_nr == i )
               {
                 GdkPixmap* col_pixmap;
@@ -619,7 +619,7 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
 {
   Robot* robot_p = NULL;
   stat_t* stat_p = NULL;
-  ListIterator<Robot> li;
+  list<Robot*>::iterator li;
   ListIterator<stat_t> stat_li;
 
   GtkWidget* clist = sw_p->get_clist();
@@ -630,6 +630,7 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
 
   gtk_clist_freeze( GTK_CLIST( clist ) );
   gtk_clist_clear( GTK_CLIST( clist ) );
+
 
   switch( sw_type )
     {
@@ -643,12 +644,12 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
 
         int robot_nr = -1;
 
-        for( the_arena.get_all_robots_in_tournament()->first(li);
-             li.ok(); li++ )
+        for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
           {
             robot_nr++;
-            robot_p = li();
+            robot_p = *li;
             points[robot_nr] = 0;
+	    robot_p->get_statistics()->first(stat_li);
             for(robot_p->get_statistics()->first(stat_li);
                 stat_li.ok(); stat_li++)
               {
@@ -670,11 +671,10 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
           }
 
         robot_nr = -1;
-        for( the_arena.get_all_robots_in_tournament()->first(li);
-             li.ok(); li++ )
+        for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
           {
             robot_nr++;
-            robot_p = li();
+            robot_p = *li;
             stat_t average_stat(0,0,0,0.0,0.0,0.0);
             int number_of_stat_found = 0;
             for(robot_p->get_statistics()->first(stat_li);
@@ -713,9 +713,9 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
             sequence--;
           }
 
-        for( the_arena.get_all_robots_in_tournament()->first(li); li.ok(); li++ )
+        for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
           {
-            robot_p = li();
+            robot_p = *li;
 
             for(robot_p->get_statistics()->first(stat_li); stat_li.ok(); stat_li++)
               {
@@ -731,10 +731,10 @@ StatisticsWindow::add_the_statistics_to_clist( GtkWidget* widget,
       {
         int i=0;
 
-        for( the_arena.get_all_robots_in_tournament()->first(li); li.ok(); li++ )
+        for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
           {
             i++;
-            robot_p = li();
+            robot_p = *li;
             if( i == number )
               for(robot_p->get_statistics()->first(stat_li); stat_li.ok(); stat_li++)
                 {
@@ -830,15 +830,15 @@ StatisticsWindow::row_selected( GtkWidget* clist, gint row,
       if( clist_text != NULL )
         robot_name = clist_text;
 
-      ListIterator<Robot> li;
+      list<Robot*>::iterator li;
       Robot* robot_p = NULL;
       int counter = 0;
       bool found_robot = false;
-      for( the_arena.get_all_robots_in_tournament()->first(li);
-           li.ok() && !found_robot; li++ )
+      for( li = the_arena.get_all_robots_in_tournament()->begin(); 
+        (li != the_arena.get_all_robots_in_tournament()->end()) && (!found_robot); ++li )
         {
           counter--;
-          robot_p = li();
+          robot_p = *li;
           if( robot_p->get_robot_name() == robot_name )
             {
               found_robot = true;

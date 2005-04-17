@@ -31,7 +31,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <iostream>
 #include <fstream>
-
+#include <list>
 using namespace std;
 
 #ifndef NO_GRAPHICS
@@ -112,9 +112,9 @@ public:
   void save_statistics_to_file(string filename);
 
 
-  List<Shape>* get_object_lists() { return object_lists; }
+  list<Shape*>* get_object_lists() { return object_lists; }
   List<Robot>* get_all_robots_in_sequence() { return &all_robots_in_sequence; }
-  List<Robot>* get_all_robots_in_tournament() { return &all_robots_in_tournament; }
+  list<Robot*>* get_all_robots_in_tournament() { return &all_robots_in_tournament; }
   string get_current_arena_filename() { return current_arena_filename; }
   int get_game_nr() { return game_nr; }
   int get_games_per_sequence() { return games_per_sequence; }
@@ -159,14 +159,16 @@ protected:
 
   void set_state( const state_t );
 
-  bool find_object_by_id(const List<Shape>& obj_list,
-                         ListIterator<Shape>& li, const int obj_id);
-  bool find_object_by_id(const List<Robot>& obj_list,
-                         ListIterator<Robot>& li, const int obj_id);
+  bool find_object_by_id(list<Shape*>& obj_list,
+                         list<Shape*>::iterator & li,
+                         const int obj_id);
+  bool find_object_by_id(list<Robot*>& obj_list,
+                         list<Robot*>::iterator & li,
+                         const int obj_id);
 
-  List<Shape> object_lists[LAST_OBJECT_TYPE];
+  list<Shape*> object_lists[LAST_OBJECT_TYPE];
 
-  List<Robot> all_robots_in_tournament;
+  list<Robot*> all_robots_in_tournament;
   List<Robot> all_robots_in_sequence;
   List<Vector2D> exclusion_points;
 

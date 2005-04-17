@@ -602,10 +602,10 @@ Robot::check_name_uniqueness()
 
   robot_name = plain_robot_name;
 
-  ListIterator<Robot> li;
-  for( the_arena.get_all_robots_in_tournament()->first(li); li.ok(); li++ )
+  list<Robot*>::iterator li;
+  for( li = the_arena.get_all_robots_in_tournament()->begin(); li != the_arena.get_all_robots_in_tournament()->end(); ++li )
     {
-      robotp = li();
+      robotp = *li;
       if( robotp != this && plain_robot_name == robotp->plain_robot_name )
         {
           if( robotp->robot_name_uniqueness_number == 0 )
@@ -1428,7 +1428,7 @@ Robot::get_messages()
               if( realtime_arena.space_available( shot_center, shot_radius*1.00001 ) )
                 {
                   Shot* shotp = new Shot( shot_center, shot_vel, en );
-                  realtime_arena.get_object_lists()[SHOT].insert_last( shotp );
+                  realtime_arena.get_object_lists()[SHOT].push_back( shotp );
 
                   realtime_arena.print_to_logfile('S', shotp->get_id(), shot_center[0], shot_center[1],
                                                   shot_vel[0], shot_vel[1]);

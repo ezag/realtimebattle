@@ -85,7 +85,7 @@ ArenaBase::ArenaBase()
 
   reset_timer();
 
-  object_lists[ROBOT].set_deletion_responsibility(false);
+  //object_lists[ROBOT].set_deletion_responsibility(false);
   all_robots_in_sequence.set_deletion_responsibility(false);
 
   debug_level = 0;
@@ -181,11 +181,10 @@ ArenaBase::save_statistics_to_file(string filename)
   stat_t* statp;
   Robot* robotp;
 
-  ListIterator<Robot> li;
   ListIterator<stat_t> stat_li;
-  for(all_robots_in_tournament.first(li); li.ok() ; li++ )
+  for(list<Robot*>::const_iterator li(all_robots_in_tournament.begin()); li!=all_robots_in_tournament.end() ; ++li )
     {
-      robotp = li();
+      robotp = *li;
       file << robotp->get_robot_name() << ": " << endl;
       for(robotp->get_statistics()->first(stat_li); stat_li.ok(); stat_li++)
         {
@@ -309,7 +308,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       file >> radius;
 
       wall_inner_circlep = new WallInnerCircle(scale*vec1, scale*radius, bounce_c, hardn);
-      object_lists[WALL].insert_first( wall_inner_circlep );
+      //object_lists[WALL].insert_first( wall_inner_circlep );
+      object_lists[WALL].push_front(wall_inner_circlep);
     }
   else if( strcmp(text, "circle" ) == 0 )
     {
@@ -325,7 +325,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       file >> vec1;
       file >> radius;
       wall_circlep = new WallCircle(scale*vec1, scale*radius, bounce_c, hardn);
-      object_lists[WALL].insert_last(wall_circlep);
+      //object_lists[WALL].insert_last(wall_circlep);
+      object_lists[WALL].push_back(wall_circlep);
     }
   else if( strcmp(text, "arc" ) == 0 )
     {
@@ -348,7 +349,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       wall_arcp = new WallArc(scale*center, scale*radius, scale*radius2,
                               angle1 * angle_factor, angle2 * angle_factor,
                               bounce_c, hardn);
-      object_lists[WALL].insert_last(wall_arcp);
+      //object_lists[WALL].insert_last(wall_arcp);
+      object_lists[WALL].push_back(wall_arcp);
     }
   else if( strcmp(text, "line" ) == 0 )
     {
@@ -376,7 +378,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
 
       wall_linep = new WallLine(scale*vec1, unit(vec2-vec1), scale*length(vec2-vec1),
                                 scale*thickness, bounce_c , hardn);
-      object_lists[WALL].insert_last( wall_linep );
+      //object_lists[WALL].insert_last( wall_linep );
+      object_lists[WALL].push_back(wall_linep);
     }
   else if( strcmp(text, "polygon" ) == 0 )
     {
@@ -394,7 +397,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       file >> vertices;   // number of vertices
       file >> vec1;      // first point
       wall_circlep = new WallCircle(scale*vec1, scale*thickness, bounce_c, hardn);
-      object_lists[WALL].insert_last( wall_circlep );
+      //object_lists[WALL].insert_last( wall_circlep );
+      object_lists[WALL].push_back(wall_circlep);
 
       for(int i=1; i<vertices; i++)
         {
@@ -411,9 +415,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
           wall_linep = new WallLine(scale*vec2, unit(vec1-vec2),
                                     scale*length(vec1-vec2),
                                     scale*thickness, bounce_c , hardn);
-          object_lists[WALL].insert_last( wall_linep );
+          //object_lists[WALL].insert_last( wall_linep );
+	  object_lists[WALL].push_back(wall_linep);
           wall_circlep = new WallCircle(scale*vec1, scale*thickness, bounce_c, hardn);
-          object_lists[WALL].insert_last( wall_circlep );
+          //object_lists[WALL].insert_last( wall_circlep );
+	  object_lists[WALL].push_back(wall_circlep);
         }
     }
   else if( strcmp(text, "closed_polygon" ) == 0 )
@@ -432,7 +438,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       file >> vertices;   // number of vertices
       file >> vec1;      // first point
       wall_circlep = new WallCircle(scale*vec1, scale*thickness, bounce_c, hardn);
-      object_lists[WALL].insert_last( wall_circlep );
+      //object_lists[WALL].insert_last( wall_circlep );
+      object_lists[WALL].push_back(wall_circlep);
       vec0 = vec1;
 
       for(int i=1; i<vertices; i++)
@@ -450,9 +457,11 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
           wall_linep = new WallLine(scale*vec2, unit(vec1-vec2),
                                     scale*length(vec1-vec2),
                                     scale*thickness, bounce_c , hardn);
-          object_lists[WALL].insert_last( wall_linep );
+          //object_lists[WALL].insert_last( wall_linep );
+	  object_lists[WALL].push_back(wall_linep);
           wall_circlep = new WallCircle(scale*vec1, scale*thickness, bounce_c, hardn);
-          object_lists[WALL].insert_last( wall_circlep );
+          //object_lists[WALL].insert_last( wall_circlep );
+	  object_lists[WALL].push_back(wall_circlep);
         }
 
       if( length(vec0-vec1) == 0.0 )
@@ -464,7 +473,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
 
       wall_linep = new WallLine(scale*vec1, unit(vec0-vec1), scale*length(vec0-vec1),
                                 scale*thickness, bounce_c , hardn);
-      object_lists[WALL].insert_last( wall_linep );
+      //object_lists[WALL].insert_last( wall_linep );
+      object_lists[WALL].push_back(wall_linep);
     }
 
   else if( strcmp(text, "poly_curve" ) == 0 )
@@ -484,7 +494,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
       Vector2D current_pos, direction;
       file >> current_pos;      // first point
       wall_circlep = new WallCircle(scale*current_pos, scale*thickness, bounce_c, hardn);
-      object_lists[WALL].insert_last( wall_circlep );
+      //object_lists[WALL].insert_last( wall_circlep );
+      object_lists[WALL].push_back(wall_circlep);
 
       file >> direction;      // start direction
 
@@ -519,12 +530,14 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
               wall_linep = new WallLine(scale*current_pos, direction,
                                         scale*len,
                                         scale*thickness, bounce_c , hardn);
-              object_lists[WALL].insert_last( wall_linep );
+              //object_lists[WALL].insert_last( wall_linep );
+	      object_lists[WALL].push_back(wall_linep);
 
               current_pos += len * direction;
               wall_circlep = new WallCircle(scale*current_pos, scale*thickness,
                                             bounce_c, hardn);
-              object_lists[WALL].insert_last( wall_circlep );
+              //object_lists[WALL].insert_last( wall_circlep );
+	      object_lists[WALL].push_back(wall_circlep);
 
               break;
             case 'A':  // Arc
@@ -545,14 +558,16 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
                                       start_angle, end_angle,
                                       bounce_c, hardn);
 
-              object_lists[WALL].insert_last(wall_arcp);
+              //object_lists[WALL].insert_last(wall_arcp);
+	      object_lists[WALL].push_back(wall_arcp);
 
 
               direction = rotate(direction, -angle);
 
               wall_circlep = new WallCircle(scale*current_pos, scale*thickness,
                                             bounce_c, hardn);
-              object_lists[WALL].insert_last( wall_circlep );
+              //object_lists[WALL].insert_last( wall_circlep );
+	      object_lists[WALL].push_back(wall_circlep);
               break;
 
             case 'T':  // Turn
@@ -572,7 +587,8 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
               wall_linep = new WallLine(scale*current_pos, unit(vec0-current_pos),
                                         scale*length(vec0-current_pos),
                                         scale*thickness, bounce_c , hardn);
-              object_lists[WALL].insert_last( wall_linep );
+              //object_lists[WALL].insert_last( wall_linep );
+	      object_lists[WALL].push_back(wall_linep);
 
               finish = true;
               break;
@@ -611,19 +627,17 @@ ArenaBase::get_shortest_distance(const Vector2D& pos, const Vector2D& dir,
   double d;
   closest_shape = NOOBJECT;
 
-  ListIterator<Shape> li;
-
   for( int obj_type = ROBOT; obj_type < LAST_OBJECT_TYPE; obj_type++ )
     {
-      for( object_lists[obj_type].first(li); li.ok(); li++)
+      for( list<Shape*>::const_iterator li(object_lists[obj_type].begin()); li!=object_lists[obj_type].end(); ++li)
         {
-          if( obj_type != ROBOT || (Robot*)(li()) != the_robot )
+          if( obj_type != ROBOT || (Robot*)(*li) != the_robot )
             {
-              d = li()->get_distance(pos, dir, size);
+              d = (*li)->get_distance(pos, dir, size);
               if( d < dist)
                 {
                   closest_shape = (object_type)obj_type;
-                  colliding_object = li();
+                  colliding_object = *li;
                   dist = d;
                 }
             }
@@ -640,8 +654,8 @@ ArenaBase::space_available(const Vector2D& pos, const double margin)
 
   for( int obj_type = ROBOT; obj_type < LAST_OBJECT_TYPE; obj_type++ )
     {
-      for( object_lists[obj_type].first(li); li.ok(); li++)
-        if( li()->within_distance(pos, margin) ) return false;
+      for( list<Shape*>::const_iterator li(object_lists[obj_type].begin()); li!=object_lists[obj_type].end(); ++li)
+        if( (*li)->within_distance(pos, margin) ) return false;
     }
 
   // Check if it is possible to see any exclusion_points
@@ -704,26 +718,25 @@ ArenaBase::move_shots(const double time_period)
 {
   Shot* shotp;
 
-  ListIterator<Shape> li;
-
-  for( object_lists[SHOT].first(li); li.ok(); li++)
+  for( list<Shape*>::iterator li(object_lists[SHOT].begin()); li!=object_lists[SHOT].end();)
     {
-      shotp = (Shot*)li();
+      shotp = (Shot*)(*li);
 
       if( shotp->is_alive() ) shotp->move(time_period);
 
-      if( !shotp->is_alive() ) object_lists[SHOT].remove(li);
+      if( !shotp->is_alive() ) 
+        li=object_lists[SHOT].erase(li);
+      else
+        ++li;        
     }
 }
 
 void
 ArenaBase::move_shots_no_check(const double time_period)
 {
-  ListIterator<Shape> li;
-
-  for( object_lists[SHOT].first(li); li.ok(); li++)
+  for( list<Shape*>::const_iterator li(object_lists[SHOT].begin()); li!=object_lists[SHOT].end(); ++li)
     {
-      ((Shot*)li())->move_no_check(time_period);
+      ((Shot*)(*li))->move_no_check(time_period);
     }
 }
 
@@ -791,7 +804,7 @@ ArenaBase::delete_lists(const bool kill_robots, const bool del_seq_list,
 
   for( int obj_type = ROBOT; obj_type < LAST_OBJECT_TYPE; obj_type++ )
     if( obj_type != ROBOT || del_robot_obj_list )
-      object_lists[obj_type].delete_list();
+      object_lists[obj_type].clear();
 
   exclusion_points.delete_list();
 
@@ -806,31 +819,35 @@ ArenaBase::delete_lists(const bool kill_robots, const bool del_seq_list,
       all_robots_in_sequence.delete_list();
     }
 
-  if( del_tourn_list )  all_robots_in_tournament.delete_list();
+  if( del_tourn_list ) {
+    for(list<Robot*>::iterator li(all_robots_in_tournament.begin()); li!=all_robots_in_tournament.end();++li)
+      delete *li;
+    all_robots_in_tournament.clear();
+  }
   if( del_arena_filename_list ) arena_filenames.delete_list();
 }
 
 bool
-ArenaBase::find_object_by_id( const List<Shape>& obj_list,
-                              ListIterator<Shape>& li,
+ArenaBase::find_object_by_id( list<Shape*>& obj_list,
+                              list<Shape*>::iterator & li,
                               const int obj_id )
 {
-  for( obj_list.first(li); li.ok(); li++)
+  for( li = obj_list.begin(); li != obj_list.end(); ++li)
     {
-      if( li()->get_id() == obj_id )
+      if( (*li)->get_id() == obj_id )
         return true;
     }
   return false;
 }
 
 bool
-ArenaBase::find_object_by_id( const List<Robot>& obj_list,
-                              ListIterator<Robot>& li,
+ArenaBase::find_object_by_id( list<Robot*>& obj_list,
+                              list<Robot*>::iterator & li,
                               const int obj_id )
 {
-  for( obj_list.first(li); li.ok(); li++)
+  for( li = obj_list.begin(); li != obj_list.end(); ++li)
     {
-      if( li()->get_id() == obj_id )
+      if( (*li)->get_id() == obj_id )
         return true;
     }
   return false;
