@@ -32,12 +32,12 @@ public:
 
   bool timeout_function();
   static void start_tournament_from_tournament_file
-  ( const List<start_tournament_info_t>& robotfilename_list, 
-    const List<start_tournament_info_t>& arenafilename_list, 
+  ( const list<start_tournament_info_t*>& robotfilename_list, 
+    const list<start_tournament_info_t*>& arenafilename_list, 
     const int robots_p_game, const int games_p_sequence, 
     const int n_o_sequences, ArenaRealTime* ar_p );
-  void start_tournament(const List<start_tournament_info_t>& robotfilename_list, 
-                        const List<start_tournament_info_t>& arenafilename_list, 
+  void start_tournament(const list<start_tournament_info_t*>& robotfilename_list, 
+                        const list<start_tournament_info_t*>& arenafilename_list, 
                         const int robots_p_game, 
                         const int games_p_sequence, 
                         const int n_o_sequences);
@@ -56,7 +56,7 @@ public:
   
   bool get_use_message_file() { return use_message_file; }
   Vector2D get_random_position();
-  List<string> get_arena_filenames() { return arena_filenames; }
+  vector<string> get_arena_filenames() { return arena_filenames; }
   int get_current_arena_nr() { return current_arena_nr; }
 
   int set_debug_level( const int new_level);

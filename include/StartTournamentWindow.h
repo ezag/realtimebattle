@@ -135,7 +135,7 @@ private:
   void remove_all_selected             ( const bool robots );
   start_tournament_info_t* find_row_in_clist
                                        ( const int row,
-                                         List<start_tournament_info_t>* info_list );
+                                         list<start_tournament_info_t*>* info_list );
   void load_tournament_file            ( const string& full_filename,
                                          bool display_fail_message );
   void save_tournament_file            ( const string& full_filename,
@@ -147,13 +147,13 @@ private:
   
   GtkWidget** get_entries              () { return entries; }
 
-  List<start_tournament_info_t>* get_selected_robot_tournament()
+  list<start_tournament_info_t*>* get_selected_robot_tournament()
     { return &selected_robot_tournament; };
-  List<start_tournament_info_t>* get_selected_robot_directory ()
+  list<start_tournament_info_t*>* get_selected_robot_directory ()
     { return &selected_robot_directory; };
-  List<start_tournament_info_t>* get_selected_arena_tournament()
+  list<start_tournament_info_t*>* get_selected_arena_tournament()
     { return &selected_arena_tournament; };
-  List<start_tournament_info_t>* get_selected_arena_directory ()
+  list<start_tournament_info_t*>* get_selected_arena_directory ()
     { return &selected_arena_directory; };
 
   GtkWidget* get_robots_in_tournament_clist()
@@ -175,10 +175,10 @@ private:
   GtkWidget* arenas_in_tournament_clist;
   GtkWidget* arenas_in_directory_clist;
 
-  List<start_tournament_info_t> selected_robot_tournament;
-  List<start_tournament_info_t> selected_robot_directory;
-  List<start_tournament_info_t> selected_arena_tournament;
-  List<start_tournament_info_t> selected_arena_directory;
+  list<start_tournament_info_t*> selected_robot_tournament;
+  list<start_tournament_info_t*> selected_robot_directory;
+  list<start_tournament_info_t*> selected_arena_tournament;
+  list<start_tournament_info_t*> selected_arena_directory;
 
   bool tournament_started_flag;
 };

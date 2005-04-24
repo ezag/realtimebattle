@@ -86,7 +86,7 @@ ArenaBase::ArenaBase()
   reset_timer();
 
   //object_lists[ROBOT].set_deletion_responsibility(false);
-  all_robots_in_sequence.set_deletion_responsibility(false);
+  //all_robots_in_sequence.set_deletion_responsibility(false);
 
   debug_level = 0;
 }
@@ -181,14 +181,14 @@ ArenaBase::save_statistics_to_file(string filename)
   stat_t* statp;
   Robot* robotp;
 
-  ListIterator<stat_t> stat_li;
+  list<stat_t*>::const_iterator stat_li;
   for(list<Robot*>::const_iterator li(all_robots_in_tournament.begin()); li!=all_robots_in_tournament.end() ; ++li )
     {
       robotp = *li;
       file << robotp->get_robot_name() << ": " << endl;
-      for(robotp->get_statistics()->first(stat_li); stat_li.ok(); stat_li++)
+      for(stat_li = robotp->get_statistics()->begin(); stat_li != robotp->get_statistics()->end(); ++stat_li)
         {
-          statp = stat_li();
+          statp = *stat_li;
           file << "Seq: " << statp->sequence_nr
                << "  Game: " << statp->game_nr
                << "  Pos: " << statp->position
@@ -291,7 +291,7 @@ ArenaBase::parse_arena_line(ifstream& file, double& scale, int& succession, doub
         return false;
       }
       file >> vec1;
-      exclusion_points.insert_last(new Vector2D(scale*vec1));
+      exclusion_points.push_back(Vector2D(scale*vec1));
     }
   else if( strcmp(text, "inner_circle" ) == 0 )
     {
@@ -665,11 +665,10 @@ ArenaBase::space_available(const Vector2D& pos, const double margin)
   object_type obj_t;
   Shape* shapep;
 
-  ListIterator<Vector2D> li_ex;
-
-  for( exclusion_points.first(li_ex); li_ex.ok(); li_ex++)
+  list<Vector2D>::const_iterator li_ex;
+  for( li_ex = exclusion_points.begin(); li_ex != exclusion_points.end(); ++li_ex)
     {
-      vec = *(li_ex());
+      vec = *li_ex;
       dist = length(vec - pos);
       if( dist <= margin ||
           dist <= get_shortest_distance(pos, unit(vec - pos), 0.0,
@@ -806,17 +805,17 @@ ArenaBase::delete_lists(const bool kill_robots, const bool del_seq_list,
     if( obj_type != ROBOT || del_robot_obj_list )
       object_lists[obj_type].clear();
 
-  exclusion_points.delete_list();
+  exclusion_points.clear();
 
   if( del_seq_list )
     {
       if( kill_robots )
         {
-          ListIterator<Robot> li;
-          for( all_robots_in_sequence.first(li); li.ok(); li++)
-            li()->kill_process_forcefully();
+          list<Robot*>::const_iterator li;
+          for( li = all_robots_in_sequence.begin(); li != all_robots_in_sequence.end(); ++li)
+            (*li)->kill_process_forcefully();
         }
-      all_robots_in_sequence.delete_list();
+      all_robots_in_sequence.clear();
     }
 
   if( del_tourn_list ) {
@@ -824,7 +823,7 @@ ArenaBase::delete_lists(const bool kill_robots, const bool del_seq_list,
       delete *li;
     all_robots_in_tournament.clear();
   }
-  if( del_arena_filename_list ) arena_filenames.delete_list();
+  if( del_arena_filename_list ) arena_filenames.clear();
 }
 
 bool

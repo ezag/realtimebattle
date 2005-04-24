@@ -78,7 +78,10 @@ ArenaReplay::~ArenaReplay()
 
   if( time_position_in_log != NULL )
     delete [] time_position_in_log;
-
+    
+  list<object_pos_info_t*>::const_iterator li;
+  for(li = object_positions_in_log.begin(); li != object_positions_in_log.end(); ++li)
+    delete *li;
 }
 
 bool
@@ -1006,10 +1009,10 @@ ArenaReplay::recreate_lists()
             }
       }
 
-    ListIterator<object_pos_info_t> li;
-    for( object_positions_in_log.first(li); li.ok(); li++ )
+    list<object_pos_info_t*>::const_iterator li;
+    for( li = object_positions_in_log.begin(); li != object_positions_in_log.end(); ++li )
       {
-        object_pos_info_t* info = li();
+        object_pos_info_t* info = *li;
         if( current_replay_time > info->start_time &&
             current_replay_time < info->end_time )
           {
@@ -1288,7 +1291,11 @@ ArenaReplay::get_time_positions_in_game()
   if( time_position_in_log != NULL ) delete [] time_position_in_log;
 
   time_position_in_log = new time_pos_info_t[max_time_infos];
-  object_positions_in_log.delete_list();
+  
+  list<object_pos_info_t*>::const_iterator li;
+  for(li = object_positions_in_log.begin(); li != object_positions_in_log.end(); ++li)
+    delete *li;
+  object_positions_in_log.clear();
 
   for(int i=0; i<max_time_infos; i++)
     {
@@ -1322,7 +1329,7 @@ ArenaReplay::get_time_positions_in_game()
             int shot_id;
             double x, y, dx, dy;
             log_file >> shot_id >> x >> y >> dx >> dy;
-            object_positions_in_log.insert_last
+            object_positions_in_log.push_back
               ( new object_pos_info_t( SHOT, shot_id, Vector2D( x,y ),
                                        cur_time, the_opts.get_d( OPTION_TIMEOUT ),
                                        Vector2D( dx,dy ) ) );
@@ -1334,7 +1341,7 @@ ArenaReplay::get_time_positions_in_game()
             int mine_id;
             double x, y;
             log_file >> mine_id >> x >> y;
-            object_positions_in_log.insert_last
+            object_positions_in_log.push_back
               ( new object_pos_info_t( MINE, mine_id, Vector2D( x,y ),
                                        cur_time, the_opts.get_d( OPTION_TIMEOUT ) ) );
           }
@@ -1345,7 +1352,7 @@ ArenaReplay::get_time_positions_in_game()
             double x, y;
             log_file >> cookie_id >> x >> y;
 
-            object_positions_in_log.insert_last
+            object_positions_in_log.push_back
               ( new object_pos_info_t( COOKIE, cookie_id, Vector2D( x,y ),
                                        cur_time, the_opts.get_d( OPTION_TIMEOUT ) ) );
           }
@@ -1359,7 +1366,7 @@ ArenaReplay::get_time_positions_in_game()
 
             if( NULL == ( find_object_in_log( ROBOT, robot_id ) ) )
               {
-                object_positions_in_log.insert_last
+                object_positions_in_log.push_back
                   ( new object_pos_info_t( ROBOT, robot_id, Vector2D( x,y ),
                                            0, the_opts.get_d( OPTION_TIMEOUT ) ) );
                 list<Robot*>::iterator li;
@@ -1474,11 +1481,11 @@ ArenaReplay::get_length_of_current_game()
 ArenaReplay::object_pos_info_t*
 ArenaReplay::find_object_in_log( object_type obj, int id )
 {
-  ListIterator<object_pos_info_t> li;
-  for( object_positions_in_log.first(li); li.ok(); li++ )
+  list<object_pos_info_t*>::const_iterator li;
+  for( li = object_positions_in_log.begin(); li != object_positions_in_log.end(); ++li )
     {
-      if( obj == li()->obj && id == li()->id )
-        return li();
+      if( obj == (*li)->obj && id == (*li)->id )
+        return *li;
     }
 
   return NULL;

@@ -108,8 +108,8 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
 
   for( int j = 0; j < 2; j++ )
     {
-      List<start_tournament_info_t>* tour_list;
-      List<start_tournament_info_t>* dir_list;
+      list<start_tournament_info_t*>* tour_list;
+      list<start_tournament_info_t*>* dir_list;
       GtkWidget* tour_clist;
       GtkWidget* dir_clist;
       char** tour_title;
@@ -219,7 +219,7 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
                         ( row, false,
                           entry->d_name,
                           current_dir->c_str() );
-                      dir_list->insert_last( info );
+                      dir_list->push_back( info );
                     }
                 }
               closedir( dir );
@@ -414,6 +414,15 @@ StartTournamentWindow::StartTournamentWindow( const int default_width,
 StartTournamentWindow::~StartTournamentWindow()
 {
   gtk_widget_destroy( window_p );
+  list<start_tournament_info_t*>::const_iterator li;
+  for(li = selected_robot_tournament.begin(); li != selected_robot_tournament.end(); ++li)
+    delete *li;
+  for(li = selected_robot_directory.begin(); li != selected_robot_directory.end(); ++li)
+    delete *li;
+  for(li = selected_arena_tournament.begin(); li != selected_arena_tournament.end(); ++li)
+    delete *li;
+  for(li = selected_arena_directory.begin(); li != selected_arena_directory.end(); ++li)
+    delete *li;
 }
 
 void
@@ -598,7 +607,7 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
   for( int i = 0; i<2; i++ )
     {
       GtkWidget* tour_clist;
-      List<start_tournament_info_t>* tour_list;
+      list<start_tournament_info_t*>* tour_list;
       bool robot;
       if( i == 0 )
         {
@@ -614,13 +623,16 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
         }
 
       gtk_clist_clear( GTK_CLIST( tour_clist ) );
-      tour_list->delete_list();
+      list<start_tournament_info_t*>::const_iterator li2;
+      for(li2 = tour_list->begin(); li2 != tour_list->end(); ++li2)
+        delete *li2;
+      tour_list->clear();
 
       ListIterator<start_tournament_info_t> li;
       for( ( robot ? robotfilename_list.first(li) : arenafilename_list.first(li) );
              li.ok(); li++ )
         {
-          start_tournament_info_t* info = li();
+         start_tournament_info_t* info = li();
 
           char* lst[] = { "" };
 
@@ -638,7 +650,7 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
                               row, 0, fname.c_str() );
           info->selected = false;
           info->row = row;
-          tour_list->insert_last( new start_tournament_info_t
+          tour_list->push_back( new start_tournament_info_t
                                   ( info->row, false, info->filename, info->directory ) );
         }
     }
@@ -662,7 +674,7 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
                                              bool display_tour_fail_message )
 {
   int value[3];
-  int robot_number = get_selected_robot_tournament()->number_of_elements();
+  int robot_number = get_selected_robot_tournament()->size();
   istringstream string2number;
 
   for( int i = 0; i < 3; i++ )
@@ -693,16 +705,16 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
 
   ofstream file(full_filename.c_str(), ios::out);
   if( robot_number > 1 && file &&
-      !( selected_arena_tournament.is_empty() ) )
+      !( selected_arena_tournament.empty() ) )
     {
       file << "Robots: " << endl;
-      ListIterator<start_tournament_info_t> li;
-      for( selected_robot_tournament.first(li); li.ok(); li++ )
-        file << li()->filename << " " << endl;
+      list<start_tournament_info_t*>::const_iterator li;
+      for( li = selected_robot_tournament.begin(); li != selected_robot_tournament.end(); ++li )
+        file << (*li)->filename << " " << endl;
 
       file << "Arenas: " << endl;
-      for( selected_arena_tournament.first(li); li.ok(); li++ )
-        file << li()->filename << " " << endl;
+      for( li = selected_arena_tournament.begin(); li != selected_arena_tournament.end(); ++li )
+        file << (*li)->filename << " " << endl;
 
       file << "Robots/Sequence: " << value[1] << endl;
       file << "Games/Sequence: " << value[0] << endl;
@@ -715,7 +727,7 @@ StartTournamentWindow::save_tournament_file( const string& full_filename,
         {
           if( robot_number <= 1 )
             error_msg += string(1, '\n') + _("There are too few robots in the tournament.");
-          if( selected_arena_tournament.is_empty() )
+          if( selected_arena_tournament.empty() )
             error_msg += string(1, '\n') + _("There are no arenas in the tournament.");
         }
       if( display_file_fail_message && !file )
@@ -753,7 +765,7 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
         else
           {
             int number_of_robots = mmf_p->stw_p->
-              get_selected_robot_tournament()->number_of_elements();
+              get_selected_robot_tournament()->size();
             if( number_of_robots > the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ) )
               number_of_robots = the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED );
             ostringstream number_of_robots_str;
@@ -767,7 +779,7 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
     case MMF_FULL_ROUND:
       {
         int number_of_robots = mmf_p->stw_p->
-          get_selected_robot_tournament()->number_of_elements();
+          get_selected_robot_tournament()->size();
 
         istringstream string2number(gtk_entry_get_text
                    ( GTK_ENTRY( mmf_p->stw_p->get_entries()[1] ) ));
@@ -791,7 +803,7 @@ StartTournamentWindow::set_entry( GtkWidget* widget,
     case MMF_ALL_ARENAS:
       {
         int number_of_arenas = mmf_p->stw_p->
-          get_selected_arena_tournament()->number_of_elements();
+          get_selected_arena_tournament()->size();
 
         if( number_of_arenas > the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED ) )
           number_of_arenas = the_opts.get_l( OPTION_MAX_ROBOTS_ALLOWED );
@@ -819,7 +831,7 @@ StartTournamentWindow::start( GtkWidget* widget,
       return;
 
   int value[3];
-  int robot_number = stw_p->get_selected_robot_tournament()->number_of_elements();
+  int robot_number = stw_p->get_selected_robot_tournament()->size();
   istringstream string2number;
 
   for( int i = 0; i < 3; i++ )
@@ -848,7 +860,7 @@ StartTournamentWindow::start( GtkWidget* widget,
       value[i] = max_rtb( min_value, value[i] );
     }
   if( robot_number > 1 &&
-      !( stw_p->get_selected_arena_tournament()->is_empty() ) )
+      !( stw_p->get_selected_arena_tournament()->empty() ) )
     {
       stw_p->set_tournament_started_flag( true );
       the_arena_controller.start_realtime_arena();
@@ -869,7 +881,7 @@ StartTournamentWindow::start( GtkWidget* widget,
       string error_msg( "" );
       if( robot_number <= 1 )
         error_msg += string(1,'\n') + _("There must be at least two robots in the tournament.");
-      if( stw_p->selected_arena_tournament.is_empty() )
+      if( stw_p->selected_arena_tournament.empty() )
         error_msg += string(1,'\n') + _("There are no arenas in the tournament.");
 
       if( error_msg != "" )
@@ -915,8 +927,8 @@ StartTournamentWindow::change_all_selection( const bool robots,
                                              const bool dir,
                                              const bool all )
 {
-  ListIterator<start_tournament_info_t> li;
-  List<start_tournament_info_t>* info_list = NULL;
+  list<start_tournament_info_t*>::const_iterator li;
+  list<start_tournament_info_t*>* info_list = NULL;
   GtkWidget * clist = NULL;
 
 
@@ -940,9 +952,9 @@ StartTournamentWindow::change_all_selection( const bool robots,
       info_list = get_selected_arena_tournament();
       clist = get_arenas_in_tournament_clist();
     }
-  for( info_list->first(li); li.ok() ; li++ )
+  for( li = info_list->begin(); li != info_list->end(); ++li )
     {
-      start_tournament_info_t* info_p = li();
+      start_tournament_info_t* info_p = *li;
       if( all )
         {
           info_p->selected = true;
@@ -959,9 +971,9 @@ StartTournamentWindow::change_all_selection( const bool robots,
 void
 StartTournamentWindow::add_all_selected( const bool robots )
 {
-  ListIterator<start_tournament_info_t> li;
-  List<start_tournament_info_t>* info_dir_list;
-  List<start_tournament_info_t>* info_tourn_list;
+  list<start_tournament_info_t*>::const_iterator li;
+  list<start_tournament_info_t*>* info_dir_list;
+  list<start_tournament_info_t*>* info_tourn_list;
   GtkWidget * clist_tourn;
 
   if(robots)
@@ -977,9 +989,9 @@ StartTournamentWindow::add_all_selected( const bool robots )
       clist_tourn = get_arenas_in_tournament_clist();
     }
 
-  for( info_dir_list->first(li) ; li.ok() ; li++ )
+  for( li = info_dir_list->begin(); li != info_dir_list->end() ; ++li )
     {
-      start_tournament_info_t* info_dir_p = li();
+      start_tournament_info_t* info_dir_p = *li;
       if( info_dir_p->selected )
         {
           char * list[] = { "" };
@@ -1003,7 +1015,7 @@ StartTournamentWindow::add_all_selected( const bool robots )
 
           info_tourn_p = new start_tournament_info_t
             ( row, false, full_filename.c_str(), info_dir_p->directory );
-          info_tourn_list->insert_last( info_tourn_p );
+          info_tourn_list->push_back( info_tourn_p );
         }
     }
 }
@@ -1011,9 +1023,9 @@ StartTournamentWindow::add_all_selected( const bool robots )
 void
 StartTournamentWindow::remove_all_selected( const bool robots )
 {
-  ListIterator<start_tournament_info_t> li;
-  ListIterator<start_tournament_info_t> li2;
-  List<start_tournament_info_t>* info_dir_list;
+  list<start_tournament_info_t*>::iterator li;
+  list<start_tournament_info_t*>::const_iterator li2;
+  list<start_tournament_info_t*>* info_dir_list;
   GtkWidget * clist_tourn;
 
   if(robots)
@@ -1027,22 +1039,25 @@ StartTournamentWindow::remove_all_selected( const bool robots )
       clist_tourn = get_arenas_in_tournament_clist();
     }
 
-  for( info_dir_list->first(li) ; li.ok(); li++ )
+  for( li = info_dir_list->begin() ; li != info_dir_list->end(); )
     {
-      start_tournament_info_t* info_p = li();
+      start_tournament_info_t* info_p = *li;
 
       if( info_p->selected )
         {
           gtk_clist_remove(GTK_CLIST(clist_tourn), info_p->row);
           
-          for( info_dir_list->first(li2); li2.ok(); li2++ )
+          for( li = info_dir_list->begin(); li != info_dir_list->end(); ++li2 )
             {
-              start_tournament_info_t* info2_p = li2();
+              start_tournament_info_t* info2_p = *li2;
               if(info2_p->row > info_p->row)
                 info2_p->row = info2_p->row - 1;
             }
-          info_dir_list->remove(li);
+          delete *li;
+          li = info_dir_list->erase(li);
         }
+      else
+        ++li;
     }
 }
 
@@ -1054,7 +1069,7 @@ StartTournamentWindow::selection_made( GtkWidget* clist, gint row,
   if( event == NULL )
     return;
 
-  List<start_tournament_info_t>* info_list = NULL;
+  list<start_tournament_info_t*>* info_list = NULL;
 
   if(clist == stw_p->get_robots_in_tournament_clist() )
     info_list = stw_p->get_selected_robot_tournament();
@@ -1075,12 +1090,12 @@ StartTournamentWindow::selection_made( GtkWidget* clist, gint row,
 
 start_tournament_info_t*
 StartTournamentWindow::find_row_in_clist( const int row,
-                                          List<start_tournament_info_t>* info_list )
+                                          list<start_tournament_info_t*>* info_list )
 {
-  ListIterator<start_tournament_info_t> li;
-  for( info_list->first(li); li.ok() ; li++ )
+  list<start_tournament_info_t*>::const_iterator li;
+  for( li = info_list->begin(); li != info_list->end() ; ++li )
     {
-      start_tournament_info_t* info_p = li();
+      start_tournament_info_t* info_p = *li;
       if( info_p->row == row )
         return info_p;
     }

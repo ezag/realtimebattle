@@ -106,7 +106,7 @@ private:
     float time;
   };
 
-  List<object_pos_info_t> object_positions_in_log;
+  list<object_pos_info_t*> object_positions_in_log;
   time_pos_info_t* time_position_in_log;
   int last_time_info;
 

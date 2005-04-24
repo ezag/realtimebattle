@@ -27,7 +27,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <fstream>
 #include <sys/types.h>
 #include <unistd.h>
-
+#include <list>
 using namespace std;
 
 
@@ -90,7 +90,7 @@ public:
   bool is_alive() { return alive; }
   double get_energy() { return energy; }
   pid_t get_pid() { return pid; }
-  List<stat_t>* get_statistics() { return &statistics; }
+  list<stat_t*>* get_statistics() { return &statistics; }
   boost::fdostream* get_outstreamp() { return outstreamp; }  
   int get_position_this_game() { return position_this_game; }
   double get_total_points();
@@ -103,7 +103,7 @@ public:
   bool is_name_given() { return name_given; }
   
 
-  ListIterator<stat_t> get_current_game_stats();
+  list<stat_t*>::const_iterator get_current_game_stats();
   
 
   rotation_t get_robot_angle() { return robot_angle; }
@@ -162,7 +162,7 @@ private:
   double last_drawn_radar_angle;
   double last_drawn_cannon_angle;
 
-  List<stat_t> statistics;
+  list<stat_t*> statistics;
 
   int robot_name_uniqueness_number;
   string plain_robot_name;      // Name given by robot
@@ -195,9 +195,9 @@ private:
   pid_t pid;    
 
   bool network_robot;
-  List<string> message_list;  // For use by a network robot
+  list<string> message_list;  // For use by a network robot
 
-  ListIterator<stat_t> current_game_stats;
+  list<stat_t*>::const_iterator current_game_stats;
 
   bool use_non_blocking;
 

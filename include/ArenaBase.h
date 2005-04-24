@@ -32,6 +32,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <iostream>
 #include <fstream>
 #include <list>
+#include <vector>
 using namespace std;
 
 #ifndef NO_GRAPHICS
@@ -113,7 +114,7 @@ public:
 
 
   list<Shape*>* get_object_lists() { return object_lists; }
-  List<Robot>* get_all_robots_in_sequence() { return &all_robots_in_sequence; }
+  list<Robot*>* get_all_robots_in_sequence() { return &all_robots_in_sequence; }
   list<Robot*>* get_all_robots_in_tournament() { return &all_robots_in_tournament; }
   string get_current_arena_filename() { return current_arena_filename; }
   int get_game_nr() { return game_nr; }
@@ -169,11 +170,11 @@ protected:
   list<Shape*> object_lists[LAST_OBJECT_TYPE];
 
   list<Robot*> all_robots_in_tournament;
-  List<Robot> all_robots_in_sequence;
-  List<Vector2D> exclusion_points;
+  list<Robot*> all_robots_in_sequence;
+  list<Vector2D> exclusion_points;
 
   string current_arena_filename;
-  List<string> arena_filenames;               // list of Strings
+  vector<string> arena_filenames;               // list of Strings
 
   string statistics_file_name;
   string option_file_name;
