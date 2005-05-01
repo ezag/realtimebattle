@@ -154,9 +154,9 @@ Gui::open_starttournamentwindow()
           {
             string info_text( _("This action will kill the current tournament.\n"
                                  "Do you want to do that?"));
-            List<string> string_list;
-            string_list.insert_last( new string( "Yes" ) );
-            string_list.insert_last( new string( "No"  ) );
+            list<string> string_list;
+            string_list.push_back( string( "Yes" ) );
+            string_list.push_back( string( "No"  ) );
             Dialog( info_text, string_list,
                     (DialogFunction) Gui::kill_and_start_new_tournament );
           }

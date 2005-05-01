@@ -77,8 +77,8 @@ Error(const bool fatal, const string& error_msg, const string& function_name)
   string info_text = "Error in " + function_name + ":\n\n" + error_msg + "\n";
   if( fatal )
     info_text += "\nFatal Error - program will terminate!";
-  List<string> string_list;
-  string_list.insert_last( new string( _("Ok") ) );
+  list<string> string_list;
+  string_list.push_back( string( _("Ok") ) );
   Dialog( info_text, string_list,
           (DialogFunction) ok_click,
           "Error" );
@@ -192,33 +192,33 @@ gdk2hex_colour(const GdkColor& col)
 #endif
 
 void
-read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs)
+read_dirs_from_system(list<string>& robotdirs, list<string>& arenadirs)
 {
   string dirs;
 
-  robotdirs.delete_list();
-  arenadirs.delete_list();
+  robotdirs.clear();
+  arenadirs.clear();
 
   dirs = the_opts.get_s(OPTION_ROBOT_SEARCH_PATH);
   split_colonseparated_dirs(dirs, robotdirs);
 
 #ifdef ROBOTDIR
-  string * str = new string(ROBOTDIR "/");
-  robotdirs.insert_last( str );
+  string str(ROBOTDIR "/");
+  robotdirs.push_back( str );
 #endif
 
   dirs = the_opts.get_s(OPTION_ARENA_SEARCH_PATH);
   split_colonseparated_dirs(dirs, arenadirs);
 
 #ifdef ARENADIR
-  str = new string(ARENADIR "/");
-  arenadirs.insert_last( str );
+  str = string(ARENADIR "/");
+  arenadirs.push_back( str );
 #endif
 }
 
 // This function splits a string of colonseparated directories into a glist
 void
-split_colonseparated_dirs(string& dirs, List<string>& str_list)
+split_colonseparated_dirs(string& dirs, list<string>& str_list)
 {
   string current_dir = dirs;
   int pos, lastpos = 0;
@@ -230,8 +230,8 @@ split_colonseparated_dirs(string& dirs, List<string>& str_list)
         if(current_dir.at(current_dir.size() - 1) != '/')
           current_dir += '/';
 
-        string* str = new string(current_dir);
-        str_list.insert_last( str );
+        string str(current_dir);
+        str_list.push_back( str );
 
         lastpos = pos+1;
       }
@@ -242,8 +242,8 @@ split_colonseparated_dirs(string& dirs, List<string>& str_list)
         if(current_dir.at(current_dir.size() - 1) != '/')
           current_dir += '/';
 
-        string* str = new string(current_dir);
-        str_list.insert_last( str );
+        string str(current_dir);
+        str_list.push_back( str );
       }
   }
   catch(exception& e)
@@ -383,7 +383,7 @@ check_logfile( string& fname )
 void
 check_for_robots_and_arenas( string& word,
                              List<start_tournament_info_t>& tour_list,
-                             List<string>& dir_list,
+                             list<string>& dir_list,
                              const bool check_robots )
 {
   bool found = false;
@@ -405,9 +405,9 @@ check_for_robots_and_arenas( string& word,
   if( word.size() == 1 && word[0] == '*' )
     {
 
-      ListIterator<string> li;
-      for( dir_list.first(li); li.ok(); li++ )
-        search_directories( *li(), tour_list, check_robots );
+      list<string>::const_iterator li;
+      for( li = dir_list.begin(); li != dir_list.end(); ++li )
+        search_directories( *li, tour_list, check_robots );
       return;
     }
   if( word.find('/') != -1 )
@@ -422,10 +422,10 @@ check_for_robots_and_arenas( string& word,
 //  if( !found && !err_in_file )
   if( !found )
     {
-      ListIterator<string> li;
-      for( dir_list.first(li); li.ok(); li++ )
+      list<string>::const_iterator li;
+      for( li = dir_list.begin(); li != dir_list.end(); ++li )
         {
-          string temp_name = *li() + word;
+          string temp_name = *li + word;
 
           if((check_robots && check_if_filename_is_robot( temp_name, &err_in_file )) ||
              (!check_robots && check_if_filename_is_arena( temp_name, &err_in_file )))
@@ -484,8 +484,8 @@ bool
 parse_tournament_file( const string& fname, const StartTournamentFunction function,
                        void* data, bool fatal_error_on_file_failure )
 {
-  List<string> robotdirs;
-  List<string> arenadirs;
+  list<string> robotdirs;
+  list<string> arenadirs;
 
   read_dirs_from_system(robotdirs, arenadirs);
 

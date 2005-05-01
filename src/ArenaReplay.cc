@@ -225,7 +225,6 @@ ArenaReplay::parse_this_time_index()
     {
       robots_left -= robots_killed_this_round;
 
-      ListIterator<Shape> li;
       Robot* robotp;
       for( list<Shape*>::const_iterator li(object_lists[ROBOT].begin()); li!=object_lists[ROBOT].end(); ++li)
         {
@@ -1078,13 +1077,13 @@ ArenaReplay::search_forward( const string& search_letters )
 // of strings (string lengths between 1 and 16) to serach for.
 // Returns the string found, or the empty string if none found.
 string
-ArenaReplay::search_forward( const List<string>& search_strings )
+ArenaReplay::search_forward( const list<string>& search_strings )
 {
   if( log_from_stdin ) return "";
 
   bool found = false;
   char buffer[400];
-  ListIterator<string> li;
+  list<string>::const_iterator li;
   int i;
   int read_letters;
   char letter[16];
@@ -1095,20 +1094,20 @@ ArenaReplay::search_forward( const List<string>& search_strings )
       log_file.clear();
 
       read_letters = 0;
-      for( search_strings.first(li); li.ok() && !found; li++ )
+      for( li = search_strings.begin(); li != search_strings.end() && !found; ++li )
         {
           found = true;
-          for( i=0; i < li()->size() && found; i++ )
+          for( i=0; i < li->size() && found; i++ )
             {
               if( read_letters < i+1 )
                 {
                   log_file >> letter[read_letters];
                   read_letters++;
                 }
-              if( (*li())[i] != letter[i] ) found = false;
+              if( (*li)[i] != letter[i] ) found = false;
             }
 
-          if( found ) return *li();
+          if( found ) return *li;
         }
 
       log_file.get( buffer, 400, '\n' );  // go to next line
@@ -1184,12 +1183,12 @@ ArenaReplay::beginning_of_current_line()
 void
 ArenaReplay::make_statistics_from_file()
 {
-  List<string> str_list;
-  str_list.insert_last( new string("DR") );
-  str_list.insert_last( new string("L") );
-  str_list.insert_last( new string("G") );
-  str_list.insert_last( new string("T") );
-  str_list.insert_last( new string("H") );
+  list<string> str_list;
+  str_list.push_back( string("DR") );
+  str_list.push_back( string("L") );
+  str_list.push_back( string("G") );
+  str_list.push_back( string("T") );
+  str_list.push_back( string("H") );
 
   list<Shape*>::iterator li;
   double points_received;

@@ -60,7 +60,7 @@ public:
   void   change_replay_time     ( const double time );
 
   char   search_forward         ( const string& search_letters );
-  string search_forward         ( const List<string>& search_strings );
+  string search_forward         ( const list<string>& search_strings );
   string search_backwards       ( const string& search_letters );
 
   double get_current_replay_time() { return current_replay_time; }

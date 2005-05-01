@@ -650,8 +650,6 @@ ArenaBase::get_shortest_distance(const Vector2D& pos, const Vector2D& dir,
 bool
 ArenaBase::space_available(const Vector2D& pos, const double margin)
 {
-  ListIterator<Shape> li;
-
   for( int obj_type = ROBOT; obj_type < LAST_OBJECT_TYPE; obj_type++ )
     {
       for( list<Shape*>::const_iterator li(object_lists[obj_type].begin()); li!=object_lists[obj_type].end(); ++li)

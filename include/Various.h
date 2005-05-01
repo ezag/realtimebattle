@@ -67,8 +67,8 @@ int binomial(const int n, const int k);
 
 void reorder_pointer_array(void** array, int size);
 
-void read_dirs_from_system(List<string>& robotdirs, List<string>& arenadirs);
-void split_colonseparated_dirs(string& dirs, List<string>& arenadirs);
+void read_dirs_from_system(list<string>& robotdirs, list<string>& arenadirs);
+void split_colonseparated_dirs(string& dirs, list<string>& arenadirs);
 
 bool check_if_filename_is_robot( string& fname, bool* err_in_file );
 bool check_if_filename_is_arena( string& fname, bool* err_in_file );
