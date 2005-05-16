@@ -1050,7 +1050,7 @@ StartTournamentWindow::remove_all_selected( const bool robots )
         {
           gtk_clist_remove(GTK_CLIST(clist_tourn), info_p->row);
           
-          for( li = info_dir_list->begin(); li != info_dir_list->end(); ++li2 )
+          for( li2 = info_dir_list->begin(); li2 != info_dir_list->end(); ++li2 )
             {
               start_tournament_info_t* info2_p = *li2;
               if(info2_p->row > info_p->row)
