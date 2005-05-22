@@ -50,7 +50,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ArenaRealTime.h"
 #include "StartTournamentWindow.h"
 #include "Various.h"
-#include "List.h"
 #include "Dialog.h"
 #include "Options.h"
 
@@ -588,8 +587,8 @@ StartTournamentWindow::load_tournament_file( const string& full_filename,
 
 void
 StartTournamentWindow::new_tournament_from_tournament_file
-( const List<start_tournament_info_t>& robotfilename_list, 
-  const List<start_tournament_info_t>& arenafilename_list, 
+( const list<start_tournament_info_t*>& robotfilename_list, 
+  const list<start_tournament_info_t*>& arenafilename_list, 
   const int robots_p_game, const int games_p_sequence, const int n_o_sequences,
   StartTournamentWindow* stw_p )
 {
@@ -599,8 +598,8 @@ StartTournamentWindow::new_tournament_from_tournament_file
 
 void
 StartTournamentWindow::
-new_tournament( const List<start_tournament_info_t>& robotfilename_list, 
-                const List<start_tournament_info_t>& arenafilename_list, 
+new_tournament( const list<start_tournament_info_t*>& robotfilename_list, 
+                const list<start_tournament_info_t*>& arenafilename_list, 
                 const int robots_p_game, 
                 const int games_p_sequence, 
                 const int n_o_sequences )
@@ -631,11 +630,10 @@ new_tournament( const List<start_tournament_info_t>& robotfilename_list,
         delete *li2;
       tour_list->clear();
 
-      ListIterator<start_tournament_info_t> li;
-      for( ( robot ? robotfilename_list.first(li) : arenafilename_list.first(li) );
-             li.ok(); li++ )
+      list<start_tournament_info_t*>::const_iterator li;
+      for( robot ? li = robotfilename_list.begin() : li = arenafilename_list.begin(); (!robot || li != robotfilename_list.end()) && (robot || li != arenafilename_list.end()); ++li)
         {
-         start_tournament_info_t* info = li();
+          start_tournament_info_t* info = *li;
 
           char* lst[] = { "" };
 

@@ -43,7 +43,6 @@ using namespace std;
 #include "Messagetypes.h"
 #include "Structs.h"
 #include "Timer.h"
-#include "List.h"
 #include "Shape.h"
 
 class ArenaController;

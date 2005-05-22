@@ -382,7 +382,7 @@ check_logfile( string& fname )
 
 void
 check_for_robots_and_arenas( string& word,
-                             List<start_tournament_info_t>& tour_list,
+                             list<start_tournament_info_t*>& tour_list,
                              list<string>& dir_list,
                              const bool check_robots )
 {
@@ -440,7 +440,7 @@ check_for_robots_and_arenas( string& word,
     {
       start_tournament_info_t* info;
       info = new start_tournament_info_t(0, false, full_file_name, "");
-      tour_list.insert_last( info );
+      tour_list.push_back( info );
     }
   else if(!err_in_file)
     {
@@ -453,7 +453,7 @@ check_for_robots_and_arenas( string& word,
 
 void
 search_directories( string directory,
-                    List<start_tournament_info_t>& tour_list,
+                    list<start_tournament_info_t*>& tour_list,
                     const bool check_robots )
 {
   bool err_in_file = false;
@@ -473,7 +473,7 @@ search_directories( string directory,
             {
               start_tournament_info_t* info;
               info = new start_tournament_info_t(0, false, full_file_name, "");
-              tour_list.insert_last( info );
+              tour_list.push_back( info );
             }
         }
       closedir(dir);
@@ -505,8 +505,8 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
   int looking_for = 0; // 0 = keyword, 1 = robot, 2 = arena
   istringstream string2number;
 
-  List<start_tournament_info_t> robot_list;
-  List<start_tournament_info_t> arena_list;
+  list<start_tournament_info_t*> robot_list;
+  list<start_tournament_info_t*> arena_list;
 
   for(;;)
     {
@@ -514,8 +514,8 @@ parse_tournament_file( const string& fname, const StartTournamentFunction functi
       if ((file >> buffer).eof()){
 
 
-          int robots_counted = robot_list.number_of_elements();
-          int arenas_counted = arena_list.number_of_elements();
+          int robots_counted = robot_list.size();
+          int arenas_counted = arena_list.size();
 
           if (games_p_s == -1)
             games_p_s = arenas_counted;

@@ -24,8 +24,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <config.h>
 #endif
 
-#include "List.h"
-
 #ifndef NO_GRAPHICS
 
 struct _GtkWidget;
@@ -108,13 +106,13 @@ public:
                                          class StartTournamentWindow* stw_p );
 
   static void new_tournament_from_tournament_file
-  ( const List<start_tournament_info_t>& robotfilename_list, 
-    const List<start_tournament_info_t>& arenafilename_list, 
+  ( const list<start_tournament_info_t*>& robotfilename_list, 
+    const list<start_tournament_info_t*>& arenafilename_list, 
     const int robots_p_game, const int games_p_sequence, const int n_o_sequences,
     StartTournamentWindow* stw_p );
 
-  void new_tournament       ( const List<start_tournament_info_t>& robotfilename_list, 
-                              const List<start_tournament_info_t>& arenafilename_list, 
+  void new_tournament       ( const list<start_tournament_info_t*>& robotfilename_list, 
+                              const list<start_tournament_info_t*>& arenafilename_list, 
                               const int robots_p_game, 
                               const int games_p_sequence, 
                               const int n_o_sequences );

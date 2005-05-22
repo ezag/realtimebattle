@@ -27,13 +27,12 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <gtk/gtkwidget.h>
 #endif 
 
-#include "List.h"
 #include "Dialog.h"
 
 struct start_tournament_info_t;
 
-typedef void (*StartTournamentFunction)( const List<start_tournament_info_t>&,
-                                         const List<start_tournament_info_t>&,
+typedef void (*StartTournamentFunction)( const list<start_tournament_info_t*>&,
+                                         const list<start_tournament_info_t*>&,
                                          const int, const int, const int, void* );
 
 #define min_rtb(a,b) ((a) < (b) ? (a) : (b))
@@ -74,10 +73,10 @@ bool check_if_filename_is_robot( string& fname, bool* err_in_file );
 bool check_if_filename_is_arena( string& fname, bool* err_in_file );
 bool check_logfile( string& fname );
 void check_for_robots_and_arenas( string& word, 
-                                  List<start_tournament_info_t>& tour_list,
-                                  List<string>& dir_list, 
+                                  list<start_tournament_info_t*>& tour_list,
+                                  list<string>& dir_list, 
                                   const bool check_robots );
-void search_directories( string directory, List<start_tournament_info_t>& tour_list,
+void search_directories( string directory, list<start_tournament_info_t*>& tour_list,
                          const bool check_robots );
 bool parse_tournament_file( const string& fname,
                             const StartTournamentFunction function,

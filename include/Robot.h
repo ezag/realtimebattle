@@ -35,7 +35,6 @@ using namespace std;
 
 #include "Structs.h"
 #include "MovingObject.h"
-#include "List.h"
 
 #include "fdstream.h"
 
