@@ -1,4 +1,4 @@
-2004-11-12 Johannes Nicolai <johannes_nicolai@tiscalinet.de>
+2004-11-12 Johannes Nicolai <jonico@users.sourceforge.net>
 	* Created working autoconf / automake / autoheader structure
 	* Imported some configuration data out of older versions and modified
 	them so thatyou can install RealTime Battle on a modern system
