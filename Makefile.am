@@ -1,4 +1,4 @@
-SUBDIRS =  m4 intl include po src Packages Robots Arenas $(subdirs) Documentation
+SUBDIRS =  m4 intl include po src Packages Arenas Robots $(subdirs) Documentation
 
 rtbextradir = $(RTB_DIR)
 rtbextra_DATA = RealTimeBattle.xpm tournament.txt rtblogo1024.jpg  rtblogo1600.jpg  rtb_logo.jpg
@@ -11,4 +11,4 @@ packages:
 	cd Packages && $(MAKE) packages
 
 ACLOCAL_AMFLAGS = -I m4 -I config
-
+AUTOMAKE_OPTIONS=dist-bzip2 subdir-objects

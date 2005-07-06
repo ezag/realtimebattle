@@ -86,24 +86,24 @@
   Features include:
 
 
-  ·  Game progresses in real time, with the robot programs running as
+  +o  Game progresses in real time, with the robot programs running as
      child processes to RealTimeBattle.
 
-  ·  The robots communicate with the main program using the standard
+  +o  The robots communicate with the main program using the standard
      input and output.
 
-  ·  Robots can be constructed in almost any programming language.
+  +o  Robots can be constructed in almost any programming language.
 
-  ·  Up to 120 robots can compete simultaneously.
+  +o  Up to 120 robots can compete simultaneously.
 
-  ·  A simple messaging language is used for communication, which makes
+  +o  A simple messaging language is used for communication, which makes
      easy to start constructing robots.
 
-  ·  Robots behave like real physical object.
+  +o  Robots behave like real physical object.
 
-  ·  You can create your own arenas.
+  +o  You can create your own arenas.
 
-  ·  Highly configurable.
+  +o  Highly configurable.
 
 
   [1m1.1.  More information[0m
@@ -258,6 +258,17 @@
 
 
 
+     |___________________________|_____________________________________|___
+     |Mode                      |  Debug     Normal     Competition  |
+     |___________________________|_____________________________________|___
+     |Debug command available   |   Yes        No           No       |
+     |Pause in game             |   Yes       Yes           No       |
+     |Step through game         |   Yes        No           No       |
+     |Robot CPU time unlimited  |   Yes       Yes           No       |
+     |___________________________|_____________________________________|___
+
+
+
   [1m2.2.  Control window[0m
 
 
@@ -376,6 +387,7 @@
   the front direction.
 
 
+
   [1m2.6.  Score window[0m
 
   In this window the robots playing in the current sequence are listed.
@@ -387,7 +399,6 @@
   displayed. The most recent messages are displayed at the top. You can
   clean the window and choose to only see new messages from a particular
   robot.
-
 
 
   [1m2.8.  Options window[0m
@@ -409,13 +420,13 @@
   different ways. You can either display
 
 
-  ·  statistics on individual [1mRobot[22ms,
+  +o  statistics on individual [1mRobot[22ms,
 
-  ·  the result of a [1mgame[22m,
+  +o  the result of a [1mgame[22m,
 
-  ·  the [1msequence total [22mor
+  +o  the [1msequence total [22mor
 
-  ·  the [1mtotal [22mof the tournament.
+  +o  the [1mtotal [22mof the tournament.
 
      Pressing the arrowed buttons will move you to the first, back one,
      forward one or to the last element respectively. The middle bar
@@ -508,6 +519,7 @@
         Example: Arena: *
 
 
+
      [1mOne specific directory:[0m
         This searches the specified directory and takes all files found.
 
@@ -521,6 +533,7 @@
   Example tournament file:
 
   R: * Arenas: Circle.arena Square.arena G/S: 2 r/s: 3 Sequences: *
+
 
   [1m2.12.  Log files[0m
 
@@ -572,26 +585,27 @@
         received] [position])
 
 
+
   [1m2.13.  Replaying[0m
 
   You can replay a game from its ``log file'' either by giving the
   ``command line option'' "-r" or from the ``control window''.  Note
   that if the log is coming from standard input (command line option
-  "-r-"), you cannot do much but watch the game, but otherwise you can
+  "-r -"), you cannot do much but watch the game, but otherwise you can
   influence the flow of the game:
 
 
-  ·  The slidebar at the top shows how far the current game has
+  +o  The slidebar at the top shows how far the current game has
      progressed. You can jump wherever you want in the game by dragging
      the handle.
 
-  ·  Fast forward and rewind work as expected. You can alter the speed
+  +o  Fast forward and rewind work as expected. You can alter the speed
      by changing the option ``fast forward factor''.
 
-  ·  Step forward and step backward can be used to study what happens in
+  +o  Step forward and step backward can be used to study what happens in
      detail. First, however, the game should be ``paused''.
 
-  ·  With the four bottom buttons you can jump between games and
+  +o  With the four bottom buttons you can jump between games and
      sequences.
 
 
@@ -642,16 +656,17 @@
   The robot health is measured by its energy. There are several ways for
   the robot to lose energy, it can
 
-  ·  be hit by a shot,
+  +o  be hit by a shot,
 
-  ·  collide with another robot or a wall,
+  +o  collide with another robot or a wall,
 
-  ·  spring a mine or
+  +o  spring a mine or
 
-  ·  fire a shot.
+  +o  fire a shot.
 
   However, there is only one possibility to gain energy: to eat a
   cookie.
+
 
   [1m3.3.  The radar[0m
 
@@ -768,9 +783,6 @@
 
   Thereafter a ``number of games'' are played and finally the robot
   processes are killed.
-
-
-
   [1m3.11.  A tournament[0m
 
   A tournament is a collection of sequences.
@@ -836,7 +848,6 @@
 
         To choose the select method, send the following robot option [4mas[0m
         [4msoon[24m [4mas[24m [4mthe[24m [4mprogram[24m [4mis[24m [4mstarted[24m:
-
         cout << "RobotOption " << USE_NON_BLOCKING << " " << 1 << endl;
 
 
@@ -978,6 +989,8 @@
         will be given in the same manner as your own energy (see below).
         The second argument is only interesting in team-mode (which
         current isn't implemented), 1 means a teammate and 0 an enemy.
+
+
      [1mRotationReached [what has reached(int)][0m
         When the robot option ``SEND_ROTATION_REACHED'' is set
         appropriately, this message is sent when a rotation (with
@@ -1041,7 +1054,6 @@
      [1mDead[0m
         Robot died. Do not try to send more messages to the server until
         the end of the game, the server doesn't read them.
-
 
 
      [1mGameFinishes[0m
@@ -1108,6 +1120,9 @@
         radar or to a sum of these to rotate more objects at the same
         time. The angular velocity is given in radians per second and is
         limited by ``Robot (cannon/radar) max rotate speed''.
+
+
+
      [1mRotateTo [what to rotate (int)] [angular velocity (double)] [end[0m
         [1mangle (double)][0m
         As [1mRotate[22m, but will rotate to a given angle. Note that radar and
@@ -1159,6 +1174,7 @@
         polar coordinates relative to the robot.
 
 
+
      [1mDebugCircle [center angle (double)] [center radius (double)] [cir-[0m
         [1mcle radius (double)][0m
         Similar to DebugLine above, but draws a circle.  The first two
@@ -1205,11 +1221,11 @@
         Determines how coordinates are send to the robots. The following
         options are available:
 
-        ·  0 - don't send any coordinates (default)
+        +o  0 - don't send any coordinates (default)
 
-        ·  1 - send the coordinates relative the starting position
+        +o  1 - send the coordinates relative the starting position
 
-        ·  2 - send absolute coordinates
+        +o  2 - send absolute coordinates
 
 
 
@@ -1223,8 +1239,6 @@
 
      [1mRobot min acceleration:[0m
         ... slower than this.
-
-
      [1mRobot radius:[0m
         Determines the size of the robot.
 
@@ -1237,6 +1251,7 @@
         Affects how well the robots will bounce. If zero the robots will
         cling together when colliding, if the value is one they will act
         like perfect billiard balls.
+
 
      [1mRobot hardness coefficient:[0m
         Determines how seriously damaged the robots will be when
@@ -1289,7 +1304,6 @@
 
      [1mRobot radar max rotate speed:[0m
         Maximum radar rotate speed.  See note above.
-
 
      [1mRobot energy levels:[0m
         The robot will only know its energy approximately. This will
@@ -1357,7 +1371,6 @@
         The mine energy is a random number between mine max energy and
         mine min energy.
 
-
      [1mMine min energy:[0m
         See above.
 
@@ -1424,7 +1437,6 @@
         beginning of a sequence a robot will get this amount of CPU time
         to spend.
 
-
      [1mExtra CPU time:[0m
         When the start CPU time is spent, the robot will get this amount
         of extra CPU time.
@@ -1433,7 +1445,6 @@
      [1mExtra CPU period:[0m
         The extra CPU time must last an entire CPU period, otherwise the
         robot will die in the current game.
-
 
 
      [1mCPU warning percentage:[0m
@@ -1491,7 +1502,6 @@
 
      [1mColour for RTB messages:[0m
         Colour for the text when RTB sends messages.
-
 
      [1mRobot search path:[0m
         This is a colon-separated list of directories which will be
@@ -1555,6 +1565,7 @@
         if it exists, the very first in the file, default is 1.0.
 
 
+
      [1mangle_unit [unit][0m
         Switches to the selected angle unit, which can be either of
         degrees or radians. Default is radians.
@@ -1565,6 +1576,8 @@
         mines are placed. It also determines the visible area in the
         ``arena window''. This command is required and may only be
         preceded by scale.
+
+
      [1minner_circle [bounce] [hardness] [center_x] [center_y] [radius][0m
         Robots are limited to the inside of this circle.
 
@@ -1619,12 +1632,12 @@
         [1mQ  [22mQuit.
 
 
-
      [1mexclusion_point [position_x] [position_y][0m
         When the arena inside the boundary consists of several separated
         areas, you should exclude all but one by inserting exclusion
         points. All points from which you can draw a straight line to an
         exclusion point without crossing a wall, are considered to be
         outside the arena.
+
 
 
