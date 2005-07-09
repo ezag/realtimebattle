@@ -1189,6 +1189,7 @@ Robot::get_messages()
 
               // TODO: check if colour is already allocated!
               set_colour( realtime_arena.find_free_colour(home_colour, away_colour, this) );
+	      std::cout << "Colours: " << std::hex << rgb_colour << endl;
               colour_given = true;
             }
           break;

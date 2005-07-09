@@ -789,10 +789,10 @@ ArenaRealTime::start_game()
       return true;
     }  
   
-  current_arena_nr = current_arena_nr % number_of_arenas;
+  current_arena_nr = current_arena_nr % number_of_arenas+1;
   string filename;
   try {
-    filename = arena_filenames.at(current_arena_nr);
+    filename = arena_filenames.at(current_arena_nr-1);
   }
   catch(...) {
     Error(true, "No such element", "ArenaRealTime::start_game" );
