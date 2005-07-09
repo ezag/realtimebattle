@@ -73,6 +73,7 @@ using namespace std;
 
 Robot::Robot(const string& filename)
 {
+  current_game_stats_set=false;
   inteam=false;
   velocity = Vector2D(0.0, 0.0);
   acceleration = 0.0;
@@ -127,7 +128,8 @@ Robot::Robot(const string& filename)
 // Constructor used by ArenaReplay. No process needed.
 //
 Robot::Robot(const int r_id, const long int col, const string& name)
-{
+{ 
+  current_game_stats_set=false;
   inteam=false;
   id = r_id;
   robot_name = name;
@@ -706,7 +708,7 @@ Robot::get_last_position()
 list<stat_t*>::const_iterator
 Robot::get_current_game_stats()
 {
-  if( (*current_game_stats)->sequence_nr != the_arena.get_sequence_nr() ||
+  if( !current_game_stats_set || (*current_game_stats)->sequence_nr != the_arena.get_sequence_nr() ||
       (*current_game_stats)->game_nr != the_arena.get_game_nr() )
     {
       list<stat_t*>::const_iterator li;
@@ -716,6 +718,7 @@ Robot::get_current_game_stats()
               (*li)->game_nr == the_arena.get_game_nr() )
             {
               current_game_stats = li;
+	      current_game_stats_set=true;
               return current_game_stats;
             }
         }
@@ -1186,10 +1189,11 @@ Robot::get_messages()
               long home_colour, away_colour;
 
               *instreamp >> std::hex >> home_colour >> away_colour >> std::dec;
+	      std::cout << "Colours: " << std::hex << home_colour << std::hex << " " << away_colour << std::endl;
 
               // TODO: check if colour is already allocated!
               set_colour( realtime_arena.find_free_colour(home_colour, away_colour, this) );
-	      std::cout << "Colours: " << std::hex << rgb_colour << endl;
+	      std::cout << "Chosen colours " << std::hex << rgb_colour << endl;
               colour_given = true;
             }
           break;

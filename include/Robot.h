@@ -172,6 +172,7 @@ private:
 
   bool colour_given;
   bool name_given;
+ 
   
 
   //class String robot_dir;
@@ -197,6 +198,7 @@ private:
   list<string> message_list;  // For use by a network robot
 
   list<stat_t*>::const_iterator current_game_stats;
+  bool current_game_stats_set;
 
   bool use_non_blocking;
 
