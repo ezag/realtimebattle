@@ -316,7 +316,7 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
       {
         LOG_FILE << va_arg(args, int  ) << " ";  // robot id
         hex2string << std::hex << va_arg(args, long );
-        LOG_FILE << hex2string.str();
+        LOG_FILE << hex2string.str() << " ";
        
         string name = va_arg(args, char*);   // robot name
         if( name == "" ) name = "Anonymous";
