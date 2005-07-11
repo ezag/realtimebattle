@@ -110,6 +110,9 @@ public:
   bool set_and_get_has_competed() 
     { if( has_competed ) return true; else { has_competed = true; return false; } }
 
+  bool isRobotInTeam() const;
+  const string& getTeamName() const;
+
 #ifndef NO_GRAPHICS
 
   int get_row_in_score_clist() { return row_in_score_clist; }

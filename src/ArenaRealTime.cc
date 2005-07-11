@@ -746,6 +746,18 @@ ArenaRealTime::find_free_colour(const long int home_colour,
                                  const long int away_colour, 
                                  const Robot* robotp, const bool random_colours)
 {  
+  // first check, if Robot is in a team
+  if (robotp->isRobotInTeam()) {
+	  // robot will get the same color as its team mates
+	  list<Robot*>::const_iterator li;
+	  for( li = all_robots_in_sequence.begin(); li != all_robots_in_sequence.end(); ++li )
+	    {
+		if (*li!=robotp && (*li)->is_colour_given() && (*li)->isRobotInTeam() && (*li)->getTeamName()==robotp->getTeamName())
+			return (*li)->get_rgb_colour();
+	    }
+	  
+  }
+
   long int tmp_colour;
 
   for(double min_dist = 0.1; min_dist > 0.01 ; min_dist *= 0.8)

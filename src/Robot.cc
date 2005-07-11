@@ -73,6 +73,7 @@ using namespace std;
 
 Robot::Robot(const string& filename)
 {
+  teamname="no team";
   current_game_stats_set=false;
   inteam=false;
   velocity = Vector2D(0.0, 0.0);
@@ -129,6 +130,7 @@ Robot::Robot(const string& filename)
 //
 Robot::Robot(const int r_id, const long int col, const string& name)
 { 
+  teamname="no team";
   current_game_stats_set=false;
   inteam=false;
   id = r_id;
@@ -157,6 +159,16 @@ Robot::~Robot()
   list<stat_t*>::const_iterator li;
   for(li = statistics.begin(); li != statistics.end(); ++li)
     delete *li;
+}
+
+bool Robot::isRobotInTeam() const
+{
+	return inteam;
+}
+
+const string& Robot::getTeamName() const
+{
+	return teamname;
 }
 
 void
@@ -1189,11 +1201,9 @@ Robot::get_messages()
               long home_colour, away_colour;
 
               *instreamp >> std::hex >> home_colour >> away_colour >> std::dec;
-	      std::cout << "Colours: " << std::hex << home_colour << std::hex << " " << away_colour << std::endl;
 
               // TODO: check if colour is already allocated!
               set_colour( realtime_arena.find_free_colour(home_colour, away_colour, this) );
-	      std::cout << "Chosen colours " << std::hex << rgb_colour << endl;
               colour_given = true;
             }
           break;
