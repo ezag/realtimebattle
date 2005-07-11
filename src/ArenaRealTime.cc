@@ -126,7 +126,7 @@ ArenaRealTime::set_filenames( string& log_fname,
       use_log_file = true;
       if( !LOG_FILE )
         {
-          Error( false, "Couldn't open log file. Contuing without log file",
+          Error( false, "Couldn't open log file. Continueing without log file",
                  "ArenaRealTime::set_filenames" );
           use_log_file = false;
         }

@@ -72,7 +72,13 @@ extern bool no_graphics;
 void
 Error(const bool fatal, const string& error_msg, const string& function_name)
 {
-#ifndef NO_GRAPHICS
+// This code is disabled due to the following reasons:
+// First, if a fatal error occurs, you won't see the error message at all
+// Second: The error function in rtb is called many times even in cases of "warnings", a dialog distracts the user too much
+// Perhaps, we can reenable it again, when point one is saved in a satisfiable manner
+// Note: Making the dialog modal is not an option, because we have timers in the background that will trigger in any case
+
+/*#ifndef NO_GRAPHICS
 
   string info_text = "Error in " + function_name + ":\n\n" + error_msg + "\n";
   if( fatal )
@@ -82,14 +88,16 @@ Error(const bool fatal, const string& error_msg, const string& function_name)
   Dialog( info_text, string_list,
           (DialogFunction) ok_click,
           "Error" );
+	  
 
 #else
+*/
 
   cerr << "RealTimeBattle: " << _("Error in") << " "
        << function_name << ": " << error_msg << endl;
   //  perror("RealTimeBattle: errno message");
 
-#endif
+//#endif
 
   if( fatal == true )
     {
