@@ -1216,7 +1216,7 @@ Robot::get_messages()
 
               double rot_sign = sgn_rtb(rot_speed);
               rot_speed = fabs(rot_speed);
-              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_MAX_ROTATE) );
               if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
               if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
               rot_speed *= rot_sign;
@@ -1282,7 +1282,7 @@ Robot::get_messages()
               *instreamp >> bits >> rot_speed >> rot_amount;
 
               rot_speed = fabs(rot_speed);
-              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
+              if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_MAX_ROTATE) );
               if( bits & 2 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_CANNON_MAX_ROTATE) );
               if( bits & 4 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_RADAR_MAX_ROTATE) );
 
