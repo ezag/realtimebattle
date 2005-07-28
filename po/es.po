@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTime Battle\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-06-29 17:49+0200\n"
+"POT-Creation-Date: 2005-07-28 11:04+0200\n"
 "PO-Revision-Date: 2004-11-2004 20:09+0100\n"
 "Last-Translator: Mc_Tr <mc_tr@email.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -138,12 +138,12 @@ msgstr "* Saliendo *"
 msgid "*Finished*"
 msgstr "* Terminado *"
 
-#: src/ArenaRealTime.cc:826
+#: src/ArenaRealTime.cc:838
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "Ha comenzado la partida %d de la secuencia %d."
 
-#: src/ArenaRealTime.cc:1014
+#: src/ArenaRealTime.cc:1026
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "El Robot con el nombre de fichero %s no ha dado nombre."
@@ -815,11 +815,7 @@ msgstr " Secuencia "
 msgid " Sequence: "
 msgstr " Secuencia: "
 
-#: src/Various.cc:81
-msgid "Ok"
-msgstr ""
-
-#: src/Various.cc:88
+#: src/Various.cc:96
 msgid "Error in"
 msgstr "Error en"
 

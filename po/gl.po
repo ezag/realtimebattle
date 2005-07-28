@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 1.0.2\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-06-29 17:49+0200\n"
+"POT-Creation-Date: 2005-07-28 11:04+0200\n"
 "PO-Revision-Date: 2000-02-09 22:17+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
@@ -146,12 +146,12 @@ msgstr "*Saíndo*"
 msgid "*Finished*"
 msgstr "*Rematado*"
 
-#: src/ArenaRealTime.cc:826
+#: src/ArenaRealTime.cc:838
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "Xogo %d da secuencia %d comeza na area"
 
-#: src/ArenaRealTime.cc:1014
+#: src/ArenaRealTime.cc:1026
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "O robot co nome de ficheiro %s non deu ningún nome"
@@ -822,12 +822,7 @@ msgstr " Secuencia "
 msgid " Sequence: "
 msgstr " Secuencia: "
 
-#: src/Various.cc:81
-#, fuzzy
-msgid "Ok"
-msgstr " Ok "
-
-#: src/Various.cc:88
+#: src/Various.cc:96
 msgid "Error in"
 msgstr "Erro en"
 
@@ -894,6 +889,10 @@ msgstr "Escolla un ficheiro de opcións para cargar"
 #: src/OptionsWindow.cc:481
 msgid "Choose an options file to save"
 msgstr "Escolla un ficheiro de opcións para gardar"
+
+#, fuzzy
+#~ msgid "Ok"
+#~ msgstr " Ok "
 
 #~ msgid "Brakes locked: Robot found and at distance"
 #~ msgstr "Freos bloqueados: Robot avistado e ó alcance"

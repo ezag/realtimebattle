@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.11\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-06-29 17:49+0200\n"
+"POT-Creation-Date: 2005-07-28 11:04+0200\n"
 "PO-Revision-Date: 2004-11-12 20:10 +0100\n"
 "Last-Translator: Minatsu Tukisima <minatsu@shiratori.riec.tohoku.ac.jp>\n"
 "Language-Team: Minatsu Tukisima\n"
@@ -139,12 +139,12 @@ msgstr "*終了中*"
 msgid "*Finished*"
 msgstr "*終了*"
 
-#: src/ArenaRealTime.cc:826
+#: src/ArenaRealTime.cc:838
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "第%dシーケンス 第%dゲーム スタート アリーナは"
 
-#: src/ArenaRealTime.cc:1014
+#: src/ArenaRealTime.cc:1026
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "ファイル名 %s のロボットが名前を通知していません"
@@ -816,12 +816,7 @@ msgstr " シーケンス "
 msgid " Sequence: "
 msgstr " シーケンス: "
 
-#: src/Various.cc:81
-#, fuzzy
-msgid "Ok"
-msgstr " Ok "
-
-#: src/Various.cc:88
+#: src/Various.cc:96
 msgid "Error in"
 msgstr "エラー発生"
 
@@ -888,6 +883,10 @@ msgstr "読み込むオプションファイルを選んで下さい"
 #: src/OptionsWindow.cc:481
 msgid "Choose an options file to save"
 msgstr "保存するオプションファイルを選んで下さい"
+
+#, fuzzy
+#~ msgid "Ok"
+#~ msgstr " Ok "
 
 #~ msgid "Brakes locked: Robot found and at distance"
 #~ msgstr "ブレーキロック：ロボット発見、距離"

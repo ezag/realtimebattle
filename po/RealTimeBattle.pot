@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-06-29 17:49+0200\n"
+"POT-Creation-Date: 2005-07-28 11:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,12 +121,12 @@ msgstr ""
 msgid "*Finished*"
 msgstr ""
 
-#: src/ArenaRealTime.cc:826
+#: src/ArenaRealTime.cc:838
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr ""
 
-#: src/ArenaRealTime.cc:1014
+#: src/ArenaRealTime.cc:1026
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr ""
@@ -795,11 +795,7 @@ msgstr ""
 msgid " Sequence: "
 msgstr ""
 
-#: src/Various.cc:81
-msgid "Ok"
-msgstr ""
-
-#: src/Various.cc:88
+#: src/Various.cc:96
 msgid "Error in"
 msgstr ""
 

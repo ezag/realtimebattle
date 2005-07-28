@@ -16,7 +16,6 @@ src/Dialog.cc
 src/Extras.cc
 src/GeometricalObjects.cc
 src/Gui.cc
-src/List.cc
 src/MessageWindow.cc
 src/Options.cc
 src/Robot.cc
@@ -25,7 +24,6 @@ src/Shape.cc
 src/Shot.cc
 src/StartTournamentWindow.cc
 src/StatisticsWindow.cc
-src/String.cc
 src/Structs.cc
 src/Timer.cc
 src/Various.cc

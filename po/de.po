@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.11\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-06-29 17:49+0200\n"
+"POT-Creation-Date: 2005-07-28 11:04+0200\n"
 "PO-Revision-Date: 1999-10-10 18:08+0200\n"
 "Last-Translator: Uwe Hermann <uh1763@bingo-ev.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -139,12 +139,12 @@ msgstr "*Verlasse Programm*"
 msgid "*Finished*"
 msgstr "*Beendet*"
 
-#: src/ArenaRealTime.cc:826
+#: src/ArenaRealTime.cc:838
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "Spiel %d von Sequenz %d beginnt in der Arena"
 
-#: src/ArenaRealTime.cc:1014
+#: src/ArenaRealTime.cc:1026
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "Roboter mit Dateinamen %s hat keinen Namen angegeben"
@@ -761,7 +761,7 @@ msgstr "Statistiken"
 
 #: src/StatisticsWindow.cc:82
 msgid " Close "
-msgstr " Schliessen "
+msgstr " Schlieﬂen "
 
 #: src/StatisticsWindow.cc:84
 msgid " Save Statistics "
@@ -815,12 +815,7 @@ msgstr " Sequenz "
 msgid " Sequence: "
 msgstr " Sequenz: "
 
-#: src/Various.cc:81
-#, fuzzy
-msgid "Ok"
-msgstr " Ok "
-
-#: src/Various.cc:88
+#: src/Various.cc:96
 msgid "Error in"
 msgstr "Fehler in"
 
@@ -887,6 +882,10 @@ msgstr "W‰hle eine Options-Datei zum laden"
 #: src/OptionsWindow.cc:481
 msgid "Choose an options file to save"
 msgstr "W‰hle eine Options-Datei zum speichern"
+
+#, fuzzy
+#~ msgid "Ok"
+#~ msgstr " Ok "
 
 #~ msgid "Brakes locked: Robot found and at distance"
 #~ msgstr "Bremsen blockiert: Roboter auf Distanz entdeckt"
