@@ -17,12 +17,10 @@ realtimebattle_SOURCES = \
 	ArenaReplay.cc\
 	Extras.cc\
 	GeometricalObjects.cc\
-	List.cc\
 	Options.cc\
 	Robot.cc\
 	Shape.cc\
 	Shot.cc\
-	String.cc\
 	Timer.cc\
 	Various.cc\
 	Vector2D.cc

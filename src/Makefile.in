@@ -89,11 +89,11 @@ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am__realtimebattle_SOURCES_DIST = RealTimeBattle.cc ArenaBase.cc \
 	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
-	GeometricalObjects.cc List.cc Options.cc Robot.cc Shape.cc \
-	Shot.cc String.cc Timer.cc Various.cc Vector2D.cc getopt.c \
-	Gui.cc ArenaWindow.cc ControlWindow.cc Dialog.cc \
-	MessageWindow.cc OptionsWindow.cc StatisticsWindow.cc \
-	StartTournamentWindow.cc Structs.cc ScoreWindow.cc
+	GeometricalObjects.cc Options.cc Robot.cc Shape.cc Shot.cc \
+	Timer.cc Various.cc Vector2D.cc getopt.c Gui.cc ArenaWindow.cc \
+	ControlWindow.cc Dialog.cc MessageWindow.cc OptionsWindow.cc \
+	StatisticsWindow.cc StartTournamentWindow.cc Structs.cc \
+	ScoreWindow.cc
 @NO_GETOPT_LONG_TRUE@am__objects_1 = getopt.$(OBJEXT)
 @NO_GRAPHICS_FALSE@am__objects_2 = realtimebattle-Gui.$(OBJEXT) \
 @NO_GRAPHICS_FALSE@	realtimebattle-ArenaWindow.$(OBJEXT) \
@@ -112,10 +112,9 @@ am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-ArenaReplay.$(OBJEXT) \
 	realtimebattle-Extras.$(OBJEXT) \
 	realtimebattle-GeometricalObjects.$(OBJEXT) \
-	realtimebattle-List.$(OBJEXT) realtimebattle-Options.$(OBJEXT) \
+	realtimebattle-Options.$(OBJEXT) \
 	realtimebattle-Robot.$(OBJEXT) realtimebattle-Shape.$(OBJEXT) \
-	realtimebattle-Shot.$(OBJEXT) realtimebattle-String.$(OBJEXT) \
-	realtimebattle-Timer.$(OBJEXT) \
+	realtimebattle-Shot.$(OBJEXT) realtimebattle-Timer.$(OBJEXT) \
 	realtimebattle-Various.$(OBJEXT) \
 	realtimebattle-Vector2D.$(OBJEXT) $(am__objects_1) \
 	$(am__objects_2)
@@ -318,9 +317,9 @@ realtimebattle_CXXFLAGS = $(am__append_2)
 realtimebattle_LDFLAGS = 
 realtimebattle_SOURCES = RealTimeBattle.cc ArenaBase.cc \
 	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
-	GeometricalObjects.cc List.cc Options.cc Robot.cc Shape.cc \
-	Shot.cc String.cc Timer.cc Various.cc Vector2D.cc \
-	$(am__append_1) $(am__append_3)
+	GeometricalObjects.cc Options.cc Robot.cc Shape.cc Shot.cc \
+	Timer.cc Various.cc Vector2D.cc $(am__append_1) \
+	$(am__append_3)
 all: all-am
 
 .SUFFIXES:
@@ -398,7 +397,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Extras.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-GeometricalObjects.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Gui.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-List.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-MessageWindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-OptionsWindow.Po@am__quote@
@@ -409,7 +407,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Shot.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-StartTournamentWindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-StatisticsWindow.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-String.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Structs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Various.Po@am__quote@
@@ -541,20 +538,6 @@ realtimebattle-GeometricalObjects.obj: GeometricalObjects.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-GeometricalObjects.obj `if test -f 'GeometricalObjects.cc'; then $(CYGPATH_W) 'GeometricalObjects.cc'; else $(CYGPATH_W) '$(srcdir)/GeometricalObjects.cc'; fi`
 
-realtimebattle-List.o: List.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-List.o -MD -MP -MF "$(DEPDIR)/realtimebattle-List.Tpo" -c -o realtimebattle-List.o `test -f 'List.cc' || echo '$(srcdir)/'`List.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-List.Tpo" "$(DEPDIR)/realtimebattle-List.Po"; else rm -f "$(DEPDIR)/realtimebattle-List.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='List.cc' object='realtimebattle-List.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-List.o `test -f 'List.cc' || echo '$(srcdir)/'`List.cc
-
-realtimebattle-List.obj: List.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-List.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-List.Tpo" -c -o realtimebattle-List.obj `if test -f 'List.cc'; then $(CYGPATH_W) 'List.cc'; else $(CYGPATH_W) '$(srcdir)/List.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-List.Tpo" "$(DEPDIR)/realtimebattle-List.Po"; else rm -f "$(DEPDIR)/realtimebattle-List.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='List.cc' object='realtimebattle-List.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-List.obj `if test -f 'List.cc'; then $(CYGPATH_W) 'List.cc'; else $(CYGPATH_W) '$(srcdir)/List.cc'; fi`
-
 realtimebattle-Options.o: Options.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Options.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Options.Tpo" -c -o realtimebattle-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc; \
 @am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Options.Tpo" "$(DEPDIR)/realtimebattle-Options.Po"; else rm -f "$(DEPDIR)/realtimebattle-Options.Tpo"; exit 1; fi
@@ -610,20 +593,6 @@ realtimebattle-Shot.obj: Shot.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Shot.cc' object='realtimebattle-Shot.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Shot.obj `if test -f 'Shot.cc'; then $(CYGPATH_W) 'Shot.cc'; else $(CYGPATH_W) '$(srcdir)/Shot.cc'; fi`
-
-realtimebattle-String.o: String.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-String.o -MD -MP -MF "$(DEPDIR)/realtimebattle-String.Tpo" -c -o realtimebattle-String.o `test -f 'String.cc' || echo '$(srcdir)/'`String.cc; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-String.Tpo" "$(DEPDIR)/realtimebattle-String.Po"; else rm -f "$(DEPDIR)/realtimebattle-String.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='String.cc' object='realtimebattle-String.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-String.o `test -f 'String.cc' || echo '$(srcdir)/'`String.cc
-
-realtimebattle-String.obj: String.cc
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-String.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-String.Tpo" -c -o realtimebattle-String.obj `if test -f 'String.cc'; then $(CYGPATH_W) 'String.cc'; else $(CYGPATH_W) '$(srcdir)/String.cc'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-String.Tpo" "$(DEPDIR)/realtimebattle-String.Po"; else rm -f "$(DEPDIR)/realtimebattle-String.Tpo"; exit 1; fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='String.cc' object='realtimebattle-String.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-String.obj `if test -f 'String.cc'; then $(CYGPATH_W) 'String.cc'; else $(CYGPATH_W) '$(srcdir)/String.cc'; fi`
 
 realtimebattle-Timer.o: Timer.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Timer.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Timer.Tpo" -c -o realtimebattle-Timer.o `test -f 'Timer.cc' || echo '$(srcdir)/'`Timer.cc; \

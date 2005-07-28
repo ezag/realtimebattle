@@ -12,8 +12,6 @@ EXTRA_DIST = \
 	IntlDefs.h\
 	Options.h\
 	Various.h\
-	String.h\
-	List.h\
 	ArenaRealTime.h\
 	ArenaReplay.h\
 	ArenaController.h\
