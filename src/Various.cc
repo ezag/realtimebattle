@@ -261,7 +261,7 @@ split_colonseparated_dirs(string& dirs, list<string>& str_list)
 }
 
 bool
-check_if_filename_is_robot( string& fname, bool* err_in_file ) // err_in_file not currently used
+check_if_filename_is_robot(const string& fname, bool* err_in_file ) // err_in_file not currently used
 {
   struct stat filestat;
   if( stat( fname.c_str(), &filestat ) != 0 )
