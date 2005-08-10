@@ -24,6 +24,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <gdk/gdk.h>
 #endif
 
+#include <sstream>
 #include <fstream>
 #include <sys/types.h>
 #include <unistd.h>
@@ -212,6 +213,9 @@ private:
   int last_displayed_last_place;
   long last_displayed_score;
   string teamname;
+  string bufferstreamstring;
+  istringstream bufferstream;
+  char streambuffer [4097];
   bool inteam;
 
 #ifndef NO_GRAPHICS

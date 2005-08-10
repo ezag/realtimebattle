@@ -25,9 +25,6 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <unistd.h>
 #include <signal.h>
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
 #include <math.h>
 
 using namespace std;
@@ -1100,46 +1097,57 @@ Robot::get_messages()
   char msg_name[81];
   message_from_robot_type msg_t;
 
-  *instreamp >> ws;
+  // input stream is set to good status again
   instreamp->clear();
   instreamp->peek();
+  if (!instreamp->good())
+  	return;
+	 
+  // we read 4k at maximum at a turn to avoid the situation where a robot do not stop sending junk 
+  // in order to stop other robot messages from beeing processed
+  instreamp->read(streambuffer,4096);
+  bufferstreamstring.assign(streambuffer,instreamp->gcount());
+  bufferstream.clear();
+  bufferstream.str(bufferstreamstring);
+  bufferstream >> ws;
 
-
-
-  while( !(*instreamp >> msg_name).eof() )
+// super buffer overflow possibility
+//  while( !(*instreamp >> msg_name).eof() )
+while( bufferstream.peek()!=istringstream::traits_type::eof())
     {
+	bufferstream.get(msg_name,80,' ');    
 
 
-      //*instreamp >> msg_name;
+      //bufferstream >> msg_name;
       msg_t = name2msg_from_robot_type(msg_name);
-      //      cerr << "Got message: " << msg_name << endl;
+      // cerr << "Got message: " << msg_name << endl;
 
 
 
-      *instreamp >> ws;
+      bufferstream >> ws;
 
       switch(msg_t)
         {
         case UNKNOWN_MESSAGE_FROM_ROBOT:
           //cout << "Server: Warning sent for message: " << msg_name << endl;
           send_message(WARNING, UNKNOWN_MESSAGE, msg_name);
-          instreamp->get(buffer, 80, '\n');
+          bufferstream.get(buffer, 80, '\n');
           break;
         case ROBOT_OPTION:
           if( check_state_for_message(msg_t, STARTING_ROBOTS) )
             {
               int opt_nr, val;
-              *instreamp >> opt_nr;
+              bufferstream >> opt_nr;
               switch(opt_nr)
                 {
                 case SEND_SIGNAL:
-                  *instreamp >> val;
+                  bufferstream >> val;
                   send_usr_signal = (val == true);
                   signal_to_send = SIGUSR1;
                   send_signal();
                   break;
                 case SIGNAL:
-                  *instreamp >> val;
+                  bufferstream >> val;
                   if( val > 0 && val < NSIG )
                     {
                       signal_to_send = val;
@@ -1156,14 +1164,14 @@ Robot::get_messages()
                   break;
 
                 case SEND_ROTATION_REACHED:
-                  *instreamp >> val;
+                  bufferstream >> val;
                   if( val < 0 ) val = 0;
                   if( val > 2 ) val = 2;
                   send_rotation_reached = val;
                   break;
 
                 case USE_NON_BLOCKING:
-                  *instreamp >> val;
+                  bufferstream >> val;
                   if( network_robot )
                     {
                       *outstreamp << '@' << ( val ? 'N' : 'B' ) << endl;
@@ -1182,7 +1190,7 @@ Robot::get_messages()
         case NAME:
           if( check_state_for_message(msg_t, STARTING_ROBOTS) )
             {
-              instreamp->get(text, 80, '\n');
+              bufferstream.get(text, 80, '\n');
               plain_robot_name = text;
 	      // Here I will insert the team code
 	      string::size_type position=plain_robot_name.rfind("Team: "); 
@@ -1200,7 +1208,7 @@ Robot::get_messages()
             {
               long home_colour, away_colour;
 
-              *instreamp >> std::hex >> home_colour >> away_colour >> std::dec;
+              bufferstream >> std::hex >> home_colour >> away_colour >> std::dec;
 
               // TODO: check if colour is already allocated!
               set_colour( realtime_arena.find_free_colour(home_colour, away_colour, this) );
@@ -1212,7 +1220,7 @@ Robot::get_messages()
             {
               int bits;
               double rot_speed;
-              *instreamp >> bits >> rot_speed;
+              bufferstream >> bits >> rot_speed;
 
               double rot_sign = sgn_rtb(rot_speed);
               rot_speed = fabs(rot_speed);
@@ -1238,7 +1246,7 @@ Robot::get_messages()
             {
               int bits;
               double rot_speed, rot_end_angle, rot_amount;
-              *instreamp >> bits >> rot_speed >> rot_end_angle;
+              bufferstream >> bits >> rot_speed >> rot_end_angle;
               rot_end_angle = max_rtb(min_rtb(rot_end_angle, infinity_rtb), -infinity_rtb);
 
               rot_speed = fabs(rot_speed);
@@ -1279,7 +1287,7 @@ Robot::get_messages()
             {
               int bits;
               double rot_speed, rot_amount;
-              *instreamp >> bits >> rot_speed >> rot_amount;
+              bufferstream >> bits >> rot_speed >> rot_amount;
 
               rot_speed = fabs(rot_speed);
               if( bits & 1 ) rot_speed = min_rtb( rot_speed, the_opts.get_d(OPTION_ROBOT_MAX_ROTATE) );
@@ -1326,7 +1334,7 @@ Robot::get_messages()
             {
               int bits;
               double rot_speed, sweep_left, sweep_right;
-              *instreamp >> bits >> rot_speed >> sweep_left >> sweep_right;
+              bufferstream >> bits >> rot_speed >> sweep_left >> sweep_right;
               sweep_left = max_rtb(min_rtb(sweep_left, infinity_rtb), -infinity_rtb);
               sweep_right = max_rtb(min_rtb(sweep_right, infinity_rtb), -infinity_rtb);
               rotation_mode_t rot_dir;
@@ -1369,7 +1377,7 @@ Robot::get_messages()
           break;
         case PRINT:
           {
-            instreamp->get(text, 160, '\n');
+            bufferstream.get(text, 160, '\n');
             realtime_arena.print_to_logfile('P', id, text);
             the_arena.print_message( robot_name, text );
           }
@@ -1377,7 +1385,7 @@ Robot::get_messages()
 
         case DEBUG:
           {
-            instreamp->get(text, 160, '\n');
+            bufferstream.get(text, 160, '\n');
             if( realtime_arena.get_game_mode() == ArenaBase::DEBUG_MODE )
               {
                 realtime_arena.print_to_logfile('P', id, text);
@@ -1398,7 +1406,7 @@ Robot::get_messages()
               else if( !no_graphics )
                 {
                   double a1, d1, a2, d2;
-                  *instreamp >> a1 >> d1 >> a2 >> d2;
+                  bufferstream >> a1 >> d1 >> a2 >> d2;
 
                   Vector2D start = d1 * angle2vec(a1 + robot_angle.pos);
                   Vector2D direction = d2 * angle2vec(a2 + robot_angle.pos) - start;
@@ -1422,7 +1430,7 @@ Robot::get_messages()
               else if( !no_graphics )
                 {
                   double a, d, r;
-                  *instreamp >> a >> d >> r;
+                  bufferstream >> a >> d >> r;
 
                   Vector2D c = d * angle2vec(a + robot_angle.pos) + center;
 
@@ -1437,7 +1445,7 @@ Robot::get_messages()
           if( check_state_for_message(msg_t, GAME_IN_PROGRESS) )
             {
               double en;
-              *instreamp >> en;
+              bufferstream >> en;
               en = min_rtb(en, shot_energy);
               if( en < the_opts.get_d(OPTION_SHOT_MIN_ENERGY) ) break;
               shot_energy -= en;
@@ -1508,7 +1516,7 @@ Robot::get_messages()
           if( check_state_for_message(msg_t, GAME_IN_PROGRESS) )
             {
               double acc;
-              *instreamp >> acc;
+              bufferstream >> acc;
               acc = max_rtb( acc, the_opts.get_d(OPTION_ROBOT_MIN_ACCELERATION) );
               acc = min_rtb( acc, the_opts.get_d(OPTION_ROBOT_MAX_ACCELERATION) );
               acceleration = acc;
@@ -1520,7 +1528,7 @@ Robot::get_messages()
           if( check_state_for_message(msg_t, GAME_IN_PROGRESS) )
             {
               double brk;
-              *instreamp >> brk;
+              bufferstream >> brk;
               brk = max_rtb( brk, 0.0);
               brk = min_rtb( brk, 1.0);
               brake_percent = brk;
@@ -1530,7 +1538,7 @@ Robot::get_messages()
           //            if( check_state_for_message(msg_t, STARTING_ROBOTS) )
           //              {
           //                bool bin;
-          //                *instreamp >> bin;
+          //                bufferstream >> bin;
           //                load_data(bin);
           //              }
           //            break;
@@ -1559,9 +1567,7 @@ Robot::get_messages()
           Error(true, "Message_type not implemented, " + string(msg_name), "Robot::get_messages");
         }
 
-      *instreamp >> ws;
-      instreamp->clear();
-      instreamp->peek();
+      bufferstream >> ws;
     }
 
 
