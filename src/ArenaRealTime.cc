@@ -49,6 +49,8 @@ using namespace std;
 #include "Options.h"
 #include "Wall.h"
 #include "Robot.h"
+#include "Broadcast.h"
+
 #ifndef NO_GRAPHICS
 # include "ScoreWindow.h"
 # include "ControlWindow.h"
@@ -57,6 +59,10 @@ using namespace std;
 
 #ifndef NO_GRAPHICS
 extern class ControlWindow* controlwindow_p;
+#endif
+
+#ifndef NO_NETWORK
+    #include "ClientInterface.h"
 #endif
 
 ArenaRealTime::ArenaRealTime()
@@ -78,7 +84,12 @@ ArenaRealTime::~ArenaRealTime()
   if( robots_in_sequence != NULL )
     delete robots_in_sequence;
 
-  if( use_log_file && LOG_FILE ) LOG_FILE.close();
+  try{
+    Broadcast::Instance()->finalize();
+  }catch(const bad_exception &e){
+    cerr<< e.what() << endl;
+  }
+
   if( use_message_file && message_file ) message_file.close();
 }
 
@@ -106,31 +117,18 @@ ArenaRealTime::set_filenames( string& log_fname,
 {
   bool log_stdout = false;
 
-  if( log_fname.empty() )
-    {
-      use_log_file = false;
+  if( !log_fname.empty() ){
+	if( log_fname=="-" || log_fname=="STDOUT" ){
+		log_stdout = true;
+	}
+
+    try{
+      Broadcast::Instance()->set_logfile(log_fname);
+    }catch(const bad_exception &e){
+      cerr<< e.what() << endl;
     }
-  else if( log_fname.empty() || log_fname == "STDOUT" )  // use stdout as log_file
-    {
-      //cout << "Currently writing logs to standard out is not possible " << endl;
-      use_log_file = false;
-      LOG_FILE.ios::rdbuf(cout.rdbuf());
-      use_log_file = true;
-      log_stdout = true;
-    }
-  else
-    {
-       //LOG_FILE.open(log_fname.chars(), ios::out, S_IRUSR | S_IWUSR);
-		LOG_FILE.open(log_fname.c_str(), ios::out);
-		
-      use_log_file = true;
-      if( !LOG_FILE )
-        {
-          Error( false, "Couldn't open log file. Continueing without log file",
-                 "ArenaRealTime::set_filenames" );
-          use_log_file = false;
-        }
-    }
+  }
+	
   if( message_fname.empty() )
     {
       use_message_file = false;
@@ -197,9 +195,9 @@ ArenaRealTime::parse_arena_file(string& filename)
 
   file.close();
 
-  
-  if( use_log_file )      // copy the arena file to the log file
-    {
+
+    try{
+      if(Broadcast::Instance()->is_active()){
       char buffer[500];
       
       ifstream file(filename.c_str());
@@ -218,15 +216,24 @@ ArenaRealTime::parse_arena_file(string& filename)
         } 
       while( buffer[0] != '\0' );
       
+      }
+
+    }catch(const bad_exception &e){
+      cerr<< e.what() << endl;
     }
+
   return true;
 }
 
 void
 ArenaRealTime::print_to_logfile(char first_letter ... )
 {
-  if( !use_log_file ) return;
+  try{
+  
+  if(Broadcast::Instance()->is_active()==false) return; // broadcast is inactive
 
+  ostream& bcast = *Broadcast::Instance();
+    
   va_list args;
   va_start(args, first_letter);
 
@@ -237,117 +244,117 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
       return;
     }
 
-  LOG_FILE << first_letter;
+  bcast << first_letter;
 
   int prec = 2;
-  LOG_FILE << setiosflags(ios::fixed) << setprecision(prec);
+  bcast << setiosflags(ios::fixed) << setprecision(prec);
   ostringstream hex2string;
 
   switch(first_letter)
     {
     case 'R': // Robot position info
-      LOG_FILE << va_arg(args, int   ) << " ";     // robot id;
-      LOG_FILE << va_arg(args, double) << " ";  // x
-      LOG_FILE << va_arg(args, double) << " ";  // y
-      LOG_FILE << va_arg(args, double) << " ";  // robot angle
-      LOG_FILE << va_arg(args, double) << " ";  // cannon angle
-      LOG_FILE << va_arg(args, double) << " ";  // radar angle
-      LOG_FILE << va_arg(args, double);         // energy
+      bcast << va_arg(args, int   ) << " ";     // robot id;
+      bcast << va_arg(args, double) << " ";  // x
+      bcast << va_arg(args, double) << " ";  // y
+      bcast << va_arg(args, double) << " ";  // robot angle
+      bcast << va_arg(args, double) << " ";  // cannon angle
+      bcast << va_arg(args, double) << " ";  // radar angle
+      bcast << va_arg(args, double);         // energy
       break;
 
     case 'T': // Time
-      LOG_FILE << setprecision(prec+1) << va_arg(args, double);  // time elapsed
+      bcast << setprecision(prec+1) << va_arg(args, double);  // time elapsed
       break;
 
     case 'P': // Print a robot message
-      LOG_FILE << va_arg(args, int   ) << " ";  // robot id
-      LOG_FILE << va_arg(args, char* );         // message to print
+      bcast << va_arg(args, int   ) << " ";  // robot id
+      bcast << va_arg(args, char* );         // message to print
       break;
 
     case 'C': // Cookie
-      LOG_FILE << va_arg(args, int   ) << " ";  // cookie id
-      LOG_FILE << va_arg(args, double) << " ";  // x
-      LOG_FILE << va_arg(args, double);         // y
+      bcast << va_arg(args, int   ) << " ";  // cookie id
+      bcast << va_arg(args, double) << " ";  // x
+      bcast << va_arg(args, double);         // y
       break;
 
     case 'M': // Mine
-      LOG_FILE << va_arg(args, int   ) << " ";  // mine id
-      LOG_FILE << va_arg(args, double) << " ";  // x
-      LOG_FILE << va_arg(args, double);         // y
+      bcast << va_arg(args, int   ) << " ";  // mine id
+      bcast << va_arg(args, double) << " ";  // x
+      bcast << va_arg(args, double);         // y
       break;
 
     case 'S': // Shot
-      LOG_FILE << va_arg(args, int   ) << " ";  // shot id
-      LOG_FILE << va_arg(args, double) << " ";  // x
-      LOG_FILE << va_arg(args, double) << " ";  // y
-      LOG_FILE << setprecision(prec+1) << va_arg(args, double) << " ";  // dx/dt
-      LOG_FILE << setprecision(prec+1) << va_arg(args, double);         // dy/dt
+      bcast << va_arg(args, int   ) << " ";  // shot id
+      bcast << va_arg(args, double) << " ";  // x
+      bcast << va_arg(args, double) << " ";  // y
+      bcast << setprecision(prec+1) << va_arg(args, double) << " ";  // dx/dt
+      bcast << setprecision(prec+1) << va_arg(args, double);         // dy/dt
       break;
       
     case 'D': // Die
       {
         int obj_type = va_arg(args, int  );
-        LOG_FILE << (char)obj_type    << " ";  // object type to kill
-        LOG_FILE << va_arg(args, int) << " ";  // object id
+        bcast << (char)obj_type    << " ";  // object type to kill
+        bcast << va_arg(args, int) << " ";  // object id
         if( obj_type == 'R' )
           {
-            LOG_FILE << setprecision(1) 
+            bcast << setprecision(1) 
                      <<  va_arg(args, double) << " "; // robot points received
-            LOG_FILE << va_arg(args, int);            // position this game
+            bcast << va_arg(args, int);            // position this game
           }
       }
       break;
 
     case 'G': // Game begins
-      LOG_FILE << va_arg(args, int  ) << " ";  // sequence number
-      LOG_FILE << va_arg(args, int  ) << " ";  // game number
+      bcast << va_arg(args, int  ) << " ";  // sequence number
+      bcast << va_arg(args, int  ) << " ";  // game number
       //      LOG_FILE << va_arg(args, char*);         // arena filename
       break;
 
     case 'H': // Header
-      LOG_FILE << va_arg(args, int  ) << " ";  // number of games per sequence
-      LOG_FILE << va_arg(args, int  ) << " ";  // number of robots per sequence
-      LOG_FILE << va_arg(args, int  ) << " ";  // number of sequences
-      LOG_FILE << va_arg(args, int  ) << " ";  // number of robots
+      bcast << va_arg(args, int  ) << " ";  // number of games per sequence
+      bcast << va_arg(args, int  ) << " ";  // number of robots per sequence
+      bcast << va_arg(args, int  ) << " ";  // number of sequences
+      bcast << va_arg(args, int  ) << " ";  // number of robots
       //      LOG_FILE << va_arg(args, char*);         // name of optionfile
       break;
 
     case 'L': // List of robot properties
       {
-        LOG_FILE << va_arg(args, int  ) << " ";  // robot id
+        bcast << va_arg(args, int  ) << " ";  // robot id
         hex2string << std::hex << va_arg(args, long );
-        LOG_FILE << hex2string.str() << " ";
+        bcast << hex2string.str() << " ";
        
         string name = va_arg(args, char*);   // robot name
         if( name == "" ) name = "Anonymous";
-        LOG_FILE << name;
+        bcast << name;
       }
       break;
 
     case 'A': // Arena file line
-      LOG_FILE << va_arg(args, char*);  // line of arena file
+      bcast << va_arg(args, char*);  // line of arena file
       break;
 
     case 'O':
       {
         char option_type = (char)va_arg(args, int);
-        LOG_FILE << va_arg(args, char*);                        // Option label
+        bcast << va_arg(args, char*);                        // Option label
         switch( option_type )
           {
           case 'D':
-            LOG_FILE << va_arg(args, double) ; // Option value
+            bcast << va_arg(args, double) ; // Option value
             break;
           case 'L':
-            LOG_FILE << va_arg(args, long);   // Option value
+            bcast << va_arg(args, long);   // Option value
             break;
           case 'H':
             {
               hex2string << std::hex << va_arg(args, long);
-              LOG_FILE << hex2string.str();   // Option value
+              bcast << hex2string.str();   // Option value
             }
             break;
           case 'S':
-            LOG_FILE << va_arg(args, char*);   // Option value
+            bcast << va_arg(args, char*);   // Option value
             break;
           }
       }
@@ -358,8 +365,12 @@ ArenaRealTime::print_to_logfile(char first_letter ... )
       break;
     }
 
-  LOG_FILE << endl;
+  bcast << endl;
   va_end(args);
+    
+  }catch(const bad_exception &e){
+    cerr<< e.what() << endl;
+  }   
 }
 
 Vector2D
@@ -1223,10 +1234,17 @@ start_tournament(const list<start_tournament_info_t*>& robotfilename_list,
     }
 
   // set random seed
-
-
   srand(timer.get_random_seed());
 
+  #ifndef NO_NETWORK
+  // set ClientInterface to not accept new connection
+  try{
+    ClientInterface::Instance()->set_accepting(false);
+  }catch(const bad_exception &e){
+      cerr<< e.what() << endl;
+  }
+  #endif   
+	
   // start first sequence
 
   print_to_logfile('H', games_per_sequence, robots_per_game, 

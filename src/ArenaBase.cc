@@ -70,6 +70,10 @@ using namespace std;
 extern class ControlWindow* controlwindow_p;
 #endif
 
+#ifndef NO_NETWORK
+    #include "ClientInterface.h"
+#endif
+
 ArenaBase::ArenaBase()
 {
   state = NOT_STARTED;
@@ -136,9 +140,17 @@ ArenaBase::set_state( const state_t st )
           break;
         case FINISHED:
           infotext = "RealTimeBattle  " + string( _("*Finished*") );
-          break;
-
-        default:
+		  #ifndef NO_NETWORK
+          // set ClientInterface to accept new connection
+          try{
+            ClientInterface::Instance()->set_accepting(true);
+          }catch(const bad_exception &e){
+            cerr<< e.what() << endl;
+          }
+          #endif   
+          break;	
+	
+	  default:
           Error(true, "Unknown state", "ArenaBase::set_state");
         }
 

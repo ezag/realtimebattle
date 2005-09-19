@@ -15,6 +15,7 @@ realtimebattle_SOURCES = \
 	ArenaController.cc\
 	ArenaRealTime.cc\
 	ArenaReplay.cc\
+	Broadcast.cc\
 	Extras.cc\
 	GeometricalObjects.cc\
 	Options.cc\
@@ -50,5 +51,13 @@ INCLUDES += \
 	
 realtimebattle_LDADD +=  \
 	$(GTK_LIBS)
+endif
+
+if NO_NETWORK
+realtimebattle_CXXFLAGS += \
+	-DNO_NETWORK
+else
+realtimebattle_SOURCES += \
+	ClientInterface.cc
 endif
 

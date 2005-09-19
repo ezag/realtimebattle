@@ -62,6 +62,10 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "ControlWindow.h"
 #endif 
 
+#ifndef NO_NETWORK
+#include "ClientInterface.h"
+#endif
+
 #include "ArenaRealTime.h"
 #include "IntlDefs.h"
 #include "Options.h"
@@ -137,6 +141,10 @@ update_function(gpointer data)
   if( the_arena_controller.is_started() )
     res = (gint)the_arena.timeout_function();
 
+  #ifndef NO_NETWORK
+    ClientInterface::Instance()->loop();
+  #endif
+  
   return res;
 }
 #else 
@@ -155,6 +163,10 @@ update_function(const long int interval_usec)
       select(FD_SETSIZE, NULL, NULL, NULL, &timeout);
       if( the_arena_controller.is_started() )
         res = the_arena.timeout_function();
+	  
+        #ifndef NO_NETWORK
+        ClientInterface::Instance()->loop();
+        #endif
     } 
   while( res );
 

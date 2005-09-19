@@ -35,5 +35,6 @@ EXTRA_DIST = \
 	StatisticsWindow.h\
 	Dialog.h\
 	StartTournamentWindow.h\
-	getopt.h
-	
+	getopt.h\
+	Broadcast.h\
+	ClientInterface.h
