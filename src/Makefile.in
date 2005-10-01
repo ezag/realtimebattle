@@ -61,6 +61,13 @@ bin_PROGRAMS = realtimebattle$(EXEEXT)
 @NO_GRAPHICS_FALSE@am__append_5 = \
 @NO_GRAPHICS_FALSE@	$(GTK_LIBS)
 
+@NO_NETWORK_TRUE@am__append_6 = \
+@NO_NETWORK_TRUE@	-DNO_NETWORK
+
+@NO_NETWORK_FALSE@am__append_7 = \
+@NO_NETWORK_FALSE@	ClientInterface.cc
+
+@NO_NETWORK_FALSE@am__append_8 = @ETR_SOCKET_LIBS@
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -88,12 +95,13 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am__realtimebattle_SOURCES_DIST = RealTimeBattle.cc ArenaBase.cc \
-	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
-	GeometricalObjects.cc Options.cc Robot.cc Shape.cc Shot.cc \
-	Timer.cc Various.cc Vector2D.cc getopt.c Gui.cc ArenaWindow.cc \
-	ControlWindow.cc Dialog.cc MessageWindow.cc OptionsWindow.cc \
-	StatisticsWindow.cc StartTournamentWindow.cc Structs.cc \
-	ScoreWindow.cc
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
+	Broadcast.cc Extras.cc GeometricalObjects.cc Options.cc \
+	Robot.cc Shape.cc Shot.cc Timer.cc Various.cc Vector2D.cc \
+	getopt.c Gui.cc ArenaWindow.cc ControlWindow.cc Dialog.cc \
+	MessageWindow.cc OptionsWindow.cc StatisticsWindow.cc \
+	StartTournamentWindow.cc Structs.cc ScoreWindow.cc \
+	ClientInterface.cc
 @NO_GETOPT_LONG_TRUE@am__objects_1 = getopt.$(OBJEXT)
 @NO_GRAPHICS_FALSE@am__objects_2 = realtimebattle-Gui.$(OBJEXT) \
 @NO_GRAPHICS_FALSE@	realtimebattle-ArenaWindow.$(OBJEXT) \
@@ -105,11 +113,14 @@ am__realtimebattle_SOURCES_DIST = RealTimeBattle.cc ArenaBase.cc \
 @NO_GRAPHICS_FALSE@	realtimebattle-StartTournamentWindow.$(OBJEXT) \
 @NO_GRAPHICS_FALSE@	realtimebattle-Structs.$(OBJEXT) \
 @NO_GRAPHICS_FALSE@	realtimebattle-ScoreWindow.$(OBJEXT)
+@NO_NETWORK_FALSE@am__objects_3 =  \
+@NO_NETWORK_FALSE@	realtimebattle-ClientInterface.$(OBJEXT)
 am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-ArenaBase.$(OBJEXT) \
 	realtimebattle-ArenaController.$(OBJEXT) \
 	realtimebattle-ArenaRealTime.$(OBJEXT) \
 	realtimebattle-ArenaReplay.$(OBJEXT) \
+	realtimebattle-Broadcast.$(OBJEXT) \
 	realtimebattle-Extras.$(OBJEXT) \
 	realtimebattle-GeometricalObjects.$(OBJEXT) \
 	realtimebattle-Options.$(OBJEXT) \
@@ -117,12 +128,12 @@ am_realtimebattle_OBJECTS = realtimebattle-RealTimeBattle.$(OBJEXT) \
 	realtimebattle-Shot.$(OBJEXT) realtimebattle-Timer.$(OBJEXT) \
 	realtimebattle-Various.$(OBJEXT) \
 	realtimebattle-Vector2D.$(OBJEXT) $(am__objects_1) \
-	$(am__objects_2)
+	$(am__objects_2) $(am__objects_3)
 realtimebattle_OBJECTS = $(am_realtimebattle_OBJECTS)
 am__DEPENDENCIES_1 =
 @NO_GRAPHICS_FALSE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
 realtimebattle_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -171,6 +182,7 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 ENABLE_RPM_FALSE = @ENABLE_RPM_FALSE@
 ENABLE_RPM_TRUE = @ENABLE_RPM_TRUE@
+ETR_SOCKET_LIBS = @ETR_SOCKET_LIBS@
 EXEEXT = @EXEEXT@
 GENCAT = @GENCAT@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
@@ -210,6 +222,8 @@ NO_GETOPT_LONG_FALSE = @NO_GETOPT_LONG_FALSE@
 NO_GETOPT_LONG_TRUE = @NO_GETOPT_LONG_TRUE@
 NO_GRAPHICS_FALSE = @NO_GRAPHICS_FALSE@
 NO_GRAPHICS_TRUE = @NO_GRAPHICS_TRUE@
+NO_NETWORK_FALSE = @NO_NETWORK_FALSE@
+NO_NETWORK_TRUE = @NO_NETWORK_TRUE@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -312,14 +326,14 @@ target_alias = @target_alias@
 uudecode = @uudecode@
 INCLUDES = -I$(top_srcdir)/include -I$(top_srcdir)/intl \
 	$(am__append_4)
-realtimebattle_LDADD = $(LIBINTL) $(am__append_5)
-realtimebattle_CXXFLAGS = $(am__append_2)
+realtimebattle_LDADD = $(LIBINTL) $(am__append_5) $(am__append_8)
+realtimebattle_CXXFLAGS = $(am__append_2) $(am__append_6)
 realtimebattle_LDFLAGS = 
 realtimebattle_SOURCES = RealTimeBattle.cc ArenaBase.cc \
-	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc Extras.cc \
-	GeometricalObjects.cc Options.cc Robot.cc Shape.cc Shot.cc \
-	Timer.cc Various.cc Vector2D.cc $(am__append_1) \
-	$(am__append_3)
+	ArenaController.cc ArenaRealTime.cc ArenaReplay.cc \
+	Broadcast.cc Extras.cc GeometricalObjects.cc Options.cc \
+	Robot.cc Shape.cc Shot.cc Timer.cc Various.cc Vector2D.cc \
+	$(am__append_1) $(am__append_3) $(am__append_7)
 all: all-am
 
 .SUFFIXES:
@@ -392,6 +406,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaRealTime.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaReplay.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ArenaWindow.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Broadcast.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ClientInterface.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-ControlWindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/realtimebattle-Extras.Po@am__quote@
@@ -509,6 +525,20 @@ realtimebattle-ArenaReplay.obj: ArenaReplay.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ArenaReplay.cc' object='realtimebattle-ArenaReplay.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ArenaReplay.obj `if test -f 'ArenaReplay.cc'; then $(CYGPATH_W) 'ArenaReplay.cc'; else $(CYGPATH_W) '$(srcdir)/ArenaReplay.cc'; fi`
+
+realtimebattle-Broadcast.o: Broadcast.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Broadcast.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Broadcast.Tpo" -c -o realtimebattle-Broadcast.o `test -f 'Broadcast.cc' || echo '$(srcdir)/'`Broadcast.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Broadcast.Tpo" "$(DEPDIR)/realtimebattle-Broadcast.Po"; else rm -f "$(DEPDIR)/realtimebattle-Broadcast.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Broadcast.cc' object='realtimebattle-Broadcast.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Broadcast.o `test -f 'Broadcast.cc' || echo '$(srcdir)/'`Broadcast.cc
+
+realtimebattle-Broadcast.obj: Broadcast.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Broadcast.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-Broadcast.Tpo" -c -o realtimebattle-Broadcast.obj `if test -f 'Broadcast.cc'; then $(CYGPATH_W) 'Broadcast.cc'; else $(CYGPATH_W) '$(srcdir)/Broadcast.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-Broadcast.Tpo" "$(DEPDIR)/realtimebattle-Broadcast.Po"; else rm -f "$(DEPDIR)/realtimebattle-Broadcast.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Broadcast.cc' object='realtimebattle-Broadcast.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-Broadcast.obj `if test -f 'Broadcast.cc'; then $(CYGPATH_W) 'Broadcast.cc'; else $(CYGPATH_W) '$(srcdir)/Broadcast.cc'; fi`
 
 realtimebattle-Extras.o: Extras.cc
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-Extras.o -MD -MP -MF "$(DEPDIR)/realtimebattle-Extras.Tpo" -c -o realtimebattle-Extras.o `test -f 'Extras.cc' || echo '$(srcdir)/'`Extras.cc; \
@@ -775,6 +805,20 @@ realtimebattle-ScoreWindow.obj: ScoreWindow.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ScoreWindow.cc' object='realtimebattle-ScoreWindow.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ScoreWindow.obj `if test -f 'ScoreWindow.cc'; then $(CYGPATH_W) 'ScoreWindow.cc'; else $(CYGPATH_W) '$(srcdir)/ScoreWindow.cc'; fi`
+
+realtimebattle-ClientInterface.o: ClientInterface.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ClientInterface.o -MD -MP -MF "$(DEPDIR)/realtimebattle-ClientInterface.Tpo" -c -o realtimebattle-ClientInterface.o `test -f 'ClientInterface.cc' || echo '$(srcdir)/'`ClientInterface.cc; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ClientInterface.Tpo" "$(DEPDIR)/realtimebattle-ClientInterface.Po"; else rm -f "$(DEPDIR)/realtimebattle-ClientInterface.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ClientInterface.cc' object='realtimebattle-ClientInterface.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ClientInterface.o `test -f 'ClientInterface.cc' || echo '$(srcdir)/'`ClientInterface.cc
+
+realtimebattle-ClientInterface.obj: ClientInterface.cc
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -MT realtimebattle-ClientInterface.obj -MD -MP -MF "$(DEPDIR)/realtimebattle-ClientInterface.Tpo" -c -o realtimebattle-ClientInterface.obj `if test -f 'ClientInterface.cc'; then $(CYGPATH_W) 'ClientInterface.cc'; else $(CYGPATH_W) '$(srcdir)/ClientInterface.cc'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/realtimebattle-ClientInterface.Tpo" "$(DEPDIR)/realtimebattle-ClientInterface.Po"; else rm -f "$(DEPDIR)/realtimebattle-ClientInterface.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ClientInterface.cc' object='realtimebattle-ClientInterface.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(realtimebattle_CXXFLAGS) $(CXXFLAGS) -c -o realtimebattle-ClientInterface.obj `if test -f 'ClientInterface.cc'; then $(CYGPATH_W) 'ClientInterface.cc'; else $(CYGPATH_W) '$(srcdir)/ClientInterface.cc'; fi`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)

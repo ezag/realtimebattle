@@ -29,7 +29,6 @@ realtimebattle_SOURCES = \
 if NO_GETOPT_LONG
 realtimebattle_SOURCES += getopt.c
 endif
-
 if NO_GRAPHICS
 realtimebattle_CXXFLAGS += \
 	-DNO_GRAPHICS
@@ -59,5 +58,6 @@ realtimebattle_CXXFLAGS += \
 else
 realtimebattle_SOURCES += \
 	ClientInterface.cc
+realtimebattle_LDADD += @ETR_SOCKET_LIBS@
 endif
 

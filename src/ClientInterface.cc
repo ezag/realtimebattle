@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
+
 #include "ClientInterface.h"
 
 #include "ArenaController.h"
@@ -40,23 +40,23 @@
  * This is a dirty hack and should be removed with a real
  * authentification system in the future. 
  */
-static bool has_master=false;
+static bool has_master = false;
 
 
-ClientConnection::ClientConnection(int sd)
- : _socket(sd),
-   _initialized(false),
-   _master(false)
+ClientConnection::ClientConnection(int sd):_socket(sd),
+_initialized(false), _master(false)
 {
-	//we only need to set the socket nonblocking
-	int opts = fcntl(_socket, F_GETFL);
-    if(opts < 0){
-       cerr << "ClientConnection: Unable to get flags for stream -> " << strerror(errno) << endl;
+    //we only need to set the socket nonblocking
+    int opts = fcntl(_socket, F_GETFL);
+    if (opts < 0) {
+	cerr << "ClientConnection: Unable to get flags for stream -> " <<
+	    strerror(errno) << endl;
     }
-	
+
     opts = (opts | O_NONBLOCK);
-    if(fcntl(_socket, F_SETFL, opts) < 0){
-       cerr << "ClientConnection: Unable to set flags for stream -> " << strerror(errno) << endl;
+    if (fcntl(_socket, F_SETFL, opts) < 0) {
+	cerr << "ClientConnection: Unable to set flags for stream -> " <<
+	    strerror(errno) << endl;
     }
 }
 
@@ -65,7 +65,7 @@ ClientConnection::ClientConnection(int sd)
  */
 ClientConnection::~ClientConnection()
 {
-    write(_socket,"Cexiting\n",10);
+    write(_socket, "Cexiting\n", 10);
     close(_socket);
 }
 
@@ -74,44 +74,45 @@ ClientConnection::~ClientConnection()
  * Check for messages from the client
  * Returns false if client connection is broken
  */
-bool
-ClientConnection::loop()
+bool ClientConnection::loop()
 {
     int rc;
-    
-    while((rc = read(_socket, _buffer, 256))>0){
-        char* pos=_buffer;
-        for(int i=0; i<256; i++){
-            if(i==rc){
-				_line = pos;
-                break;
-			}else if(_buffer[i]=='\n'){
-                _buffer[i]='\0';
-                _line+=pos;
-                
-                if(!parse_line(_line)){
-                    //client talks not our language
-                    return false;
-                }
 
-                _line.erase();
-                pos=_buffer+i;
-            }else if(_buffer[i]=='\0'){
-                _line = pos;
-                break;
-            }
-        }
+    while ((rc = read(_socket, _buffer, 256)) > 0) {
+	char *pos = _buffer;
+	for (int i = 0; i < 256; i++) {
+	    if (i == rc) {
+		_line = pos;
+		break;
+	    } else if (_buffer[i] == '\n') {
+		_buffer[i] = '\0';
+		_line += pos;
+
+		if (!parse_line(_line)) {
+		    //client talks not our language
+		    return false;
+		}
+
+		_line.erase();
+		pos = _buffer + i;
+	    } else if (_buffer[i] == '\0') {
+		_line = pos;
+		break;
+	    }
+	}
     }
 
-    if(rc==0){
-        //connection closed
-        if(!_line.empty()){
-            parse_line(_line);
-        }
-        return false;
-    }else if(errno!=EAGAIN){
-        cerr << "ClientConnection::Loop() -- Error receiving data from client -> " << strerror(errno) << endl;
-        return false;
+    if (rc == 0) {
+	//connection closed
+	if (!_line.empty()) {
+	    parse_line(_line);
+	}
+	return false;
+    } else if (errno != EAGAIN) {
+	cerr <<
+	    "ClientConnection::Loop() -- Error receiving data from client -> "
+	    << strerror(errno) << endl;
+	return false;
     }
     return true;
 }
@@ -119,117 +120,114 @@ ClientConnection::loop()
 /**
  * Send message to client
  */
-int
-ClientConnection::send(const char* message, int len)
-{   
-    return ::send(_socket,message,len,0);
+int ClientConnection::send(const char *message, int len)
+{
+    return::send(_socket, message, len, 0);
 }
 
 /**
  * Parse line received from clients
  */
-bool
-ClientConnection::parse_line(string &message)
+bool ClientConnection::parse_line(string & message)
 {
-    if(_initialized){
-        switch(_line[0]){
-            case 'C':
-                if(_master){
-					if(_line.length()>1){
-                    	parse_command(_line[1],message.substr(3));
-					}else{
-						cerr << "Received Command with no argument from client" << endl;
-					}
-                }                
-                break;
-            default:
-                cerr << "Unknown message from client" << endl;
-        }
-    }else{
-        //performing handshake with client if possible
-		if(message=="OLA CHICA"){
-            if(!has_master){
-                write(_socket,"SIT ON MY FACE AND SING THE LABAMBA\n",37);
-                cout << "register client as master" << endl;
-                has_master = true;
-                _master=true;
-            }else{
-                write(_socket,"WELCOME OBSERVER\n",18);
-                cout << "register client as observer" << endl;
-            }
-            _initialized = true;
-        }else{
-            cerr << "Cannot understand client: " << message << endl;
-            return false;
-        }
+    if (_initialized) {
+	switch (_line[0]) {
+	case 'C':
+	    if (_master) {
+		if (_line.length() > 1) {
+		    parse_command(_line[1], message.substr(3));
+		} else {
+		    cerr << "Received Command with no argument from client"
+			<< endl;
+		}
+	    }
+	    break;
+	default:
+	    cerr << "Unknown message from client" << endl;
+	}
+    } else {
+	//performing handshake with client if possible
+	if (message == "OLA CHICA") {
+	    if (!has_master) {
+		write(_socket, "SIT ON MY FACE AND SING THE LABAMBA\n",
+		      37);
+		cout << "register client as master" << endl;
+		has_master = true;
+		_master = true;
+	    } else {
+		write(_socket, "WELCOME OBSERVER\n", 18);
+		cout << "register client as observer" << endl;
+	    }
+	    _initialized = true;
+	} else {
+	    cerr << "Cannot understand client: " << message << endl;
+	    return false;
+	}
     }
     return true;
-}    
+}
 
 /**
  * Parse command received from clients
  */
-void
-ClientConnection::parse_command(const char command, string data)
+void ClientConnection::parse_command(const char command, string data)
 {
-    switch(command){
-        case 'N':
-            cout << "Start new game: " << data << endl;
-            the_arena_controller.start_realtime_arena();
-            parse_tournament_file(data,
-                    (StartTournamentFunction)
-                        ArenaRealTime::start_tournament_from_tournament_file,
-                        &realtime_arena );
-            break;
-        default:
-            cerr << "Unknown command from client" << endl;
-    }  
+    switch (command) {
+    case 'N':
+	cout << "Start new game: " << data << endl;
+	the_arena_controller.start_realtime_arena();
+	parse_tournament_file(data, (StartTournamentFunction)
+			      ArenaRealTime::
+			      start_tournament_from_tournament_file,
+			      &realtime_arena);
+	break;
+    default:
+	cerr << "Unknown command from client" << endl;
+    }
 }
 
 
-auto_ptr<ClientInterface> ClientInterface::_instance(0);
+auto_ptr < ClientInterface > ClientInterface::_instance(0);
 
-ClientInterface::ClientInterface()
- : _is_accepting(true)
+ClientInterface::ClientInterface():_is_accepting(true)
 {
     struct sockaddr_in servAddr;
 
     //todo: add port to the options and optain it from there
-    int port=32134;
-    
-    
+    int port = 32134;
+
+
     // create socket
     _sd = socket(AF_INET, SOCK_STREAM, 0);
-    if(_sd<0){
-        cerr << "cannot open socket: " << strerror(errno) << endl;
-        return;
+    if (_sd < 0) {
+	cerr << "cannot open socket: " << strerror(errno) << endl;
+	return;
     }
-    
     // set socket nonblocking
     {
-        int opts;
-        opts = fcntl(_sd, F_GETFL);
-        if(opts < 0){
-           cerr << "fcntl(F_GETFL): " << strerror(errno) << endl;
-        }
+	int opts;
+	opts = fcntl(_sd, F_GETFL);
+	if (opts < 0) {
+	    cerr << "fcntl(F_GETFL): " << strerror(errno) << endl;
+	}
 
-        opts = (opts | O_NONBLOCK);
-        if(fcntl(_sd, F_SETFL, opts) < 0){
-            cerr << "fcntl(F_SETFL): " << strerror(errno) << endl;
-        }
+	opts = (opts | O_NONBLOCK);
+	if (fcntl(_sd, F_SETFL, opts) < 0) {
+	    cerr << "fcntl(F_SETFL): " << strerror(errno) << endl;
+	}
     }
 
     // bind server port
     servAddr.sin_family = AF_INET;
     servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servAddr.sin_port = htons(port);
-  
-    if(bind(_sd, (struct sockaddr *) &servAddr, sizeof(servAddr))<0){
-        cerr << "cannot bind port: " << strerror(errno) << endl;
-        return;
+
+    if (bind(_sd, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0) {
+	cerr << "cannot bind port: " << strerror(errno) << endl;
+	return;
     }
 
-    listen(_sd,5);
+    listen(_sd, 5);
 }
 
 /**
@@ -238,11 +236,11 @@ ClientInterface::ClientInterface()
  */
 ClientInterface::~ClientInterface()
 {
-    list<ClientConnection*>::iterator it;
+    list < ClientConnection * >::iterator it=_clients.begin();
 
-    for(it=_clients.begin(); it!=_clients.end(); it++){
-        delete (*it);
-        it=_clients.erase(it);
+    while (it!= _clients.end()) {
+	delete(*it);
+	it = _clients.erase(it);
     }
 
     close(_sd);
@@ -251,11 +249,11 @@ ClientInterface::~ClientInterface()
 /**
  * Return pointer to the instance
  */
-ClientInterface* ClientInterface::Instance () throw(bad_exception)
+ClientInterface *ClientInterface::Instance() throw(bad_exception)
 {
-    ClientInterface* iface(ClientInterface::_instance.get());
-    if (iface==0) {
-        ClientInterface::_instance.reset(iface=new ClientInterface());
+    ClientInterface *iface(ClientInterface::_instance.get());
+    if (iface == 0) {
+	ClientInterface::_instance.reset(iface = new ClientInterface());
     }
     return iface;
 }
@@ -263,56 +261,54 @@ ClientInterface* ClientInterface::Instance () throw(bad_exception)
 /**
  * Chechs for new connections and messages from the client
  */
-void
-ClientInterface::loop()
+void ClientInterface::loop()
 {
     int newSd;
 
     struct sockaddr_in cliAddr;
-    static size_t cliLen=sizeof(cliAddr);
+    static size_t cliLen = sizeof(cliAddr);
 
-    if(_is_accepting){   
-		#ifndef NDEBUG
-        cout << "a" << flush;
-		#endif
-        //check for new connections
-		while((newSd = accept(_sd, (struct sockaddr *) &cliAddr, &cliLen))>0){                 
-            _clients.push_back(new ClientConnection(newSd));
-        }
-    }else{
-		#ifndef NDEBUG
-        cout << "." << flush;
-		#endif
+    if (_is_accepting) {
+#ifndef NDEBUG
+	cout << "a" << flush;
+#endif
+	//check for new connections
+	while ((newSd =
+		accept(_sd, (struct sockaddr *) &cliAddr, &cliLen)) > 0) {
+	    _clients.push_back(new ClientConnection(newSd));
+	}
+    } else {
+#ifndef NDEBUG
+	cout << "." << flush;
+#endif
     }
 
-	// check for client messages
-    list<ClientConnection*>::iterator it;
-    for(it=_clients.begin(); it!=_clients.end(); it++){
-        if( !(*it)->loop() ){
-            cout << "client disconnected" << endl;
-            delete (*it);
-            it=_clients.erase(it);
-        }
+    // check for client messages
+    list < ClientConnection * >::iterator it;
+    for (it = _clients.begin(); it != _clients.end(); it++) {
+	if (!(*it)->loop()) {
+	    cout << "client disconnected" << endl;
+	    delete(*it);
+	    it = _clients.erase(it);
+	}
     }
 }
 
 /**
  * Send messages to all connected clients
  */
-int
-ClientInterface::send(const char* message, int len)
+int ClientInterface::send(const char *message, int len)
 {
-    list<ClientConnection*>::iterator it;
-    for(it=_clients.begin(); it!=_clients.end(); it++){
-        (*it)->send(message,len);
-    } 
+    list < ClientConnection * >::iterator it;
+    for (it = _clients.begin(); it != _clients.end(); it++) {
+	(*it)->send(message, len);
+    }
 }
 
 /**
  * Set whether the server should listen to new connections
  */
-void
-ClientInterface::set_accepting(bool state)
+void ClientInterface::set_accepting(bool state)
 {
-    _is_accepting=state;   
+    _is_accepting = state;
 }
