@@ -78,12 +78,17 @@ bool ClientConnection::loop()
 {
     int rc;
 
-    while ((rc = read(_socket, _buffer, 256)) > 0) {
+    // read only once per 'tick' to minimize denial of service attacks
+    if ((rc = read(_socket, _buffer,4096)) > 0) {
 	char *pos = _buffer;
-	for (int i = 0; i < 256; i++) {
+	for (int i = 0; i < 4096; ++i) {
+	    // received last byte, but no valid line was constructed at this moment
+	    // => wait until we get the next part of the message
 	    if (i == rc) {
-		_line = pos;
+		_buffer[i]='\0';
+		_line += pos;
 		break;
+	    // got a newline, now we can append the received data to the already received data in the previous ticks
 	    } else if (_buffer[i] == '\n') {
 		_buffer[i] = '\0';
 		_line += pos;
@@ -92,18 +97,22 @@ bool ClientConnection::loop()
 		    //client talks not our language
 		    return false;
 		}
-
-		_line.erase();
-		pos = _buffer + i;
+		// now we clean the line
+		_line.clear();
+		pos = _buffer+i+1;
+	    // string termination should only appear after a newline
 	    } else if (_buffer[i] == '\0') {
-		_line = pos;
-		break;
+		    // just ignore
+		    pos= _buffer+i+1;
+		    continue;
 	    }
 	}
+	// we have received some data, so client is still alive
+	return true;
     }
 
     if (rc == 0) {
-	//connection closed
+	// EOF
 	if (!_line.empty()) {
 	    parse_line(_line);
 	}
@@ -134,7 +143,7 @@ bool ClientConnection::parse_line(string & message)
 	switch (_line[0]) {
 	case 'C':
 	    if (_master) {
-		if (_line.length() > 1) {
+		if (_line.length() > 4) {
 		    parse_command(_line[1], message.substr(3));
 		} else {
 		    cerr << "Received Command with no argument from client"
@@ -147,10 +156,10 @@ bool ClientConnection::parse_line(string & message)
 	}
     } else {
 	//performing handshake with client if possible
-	if (message == "OLA CHICA") {
+	if (message == "WELCOME SERVER") {
 	    if (!has_master) {
-		write(_socket, "SIT ON MY FACE AND SING THE LABAMBA\n",
-		      37);
+		write(_socket, "WELCOME MASTER\n",
+		      16);
 		cout << "register client as master" << endl;
 		has_master = true;
 		_master = true;
@@ -170,7 +179,7 @@ bool ClientConnection::parse_line(string & message)
 /**
  * Parse command received from clients
  */
-void ClientConnection::parse_command(const char command, string data)
+void ClientConnection::parse_command(const char command,const string& data)
 {
     switch (command) {
     case 'N':
@@ -188,14 +197,16 @@ void ClientConnection::parse_command(const char command, string data)
 
 
 auto_ptr < ClientInterface > ClientInterface::_instance(0);
+int ClientInterface::port(32134);
+
+void ClientInterface::set_port(int portnumber) {
+	ClientInterface::port=portnumber;
+}
+
 
 ClientInterface::ClientInterface():_is_accepting(true)
 {
     struct sockaddr_in servAddr;
-
-    //todo: add port to the options and optain it from there
-    int port = 32134;
-
 
     // create socket
     _sd = socket(AF_INET, SOCK_STREAM, 0);
@@ -220,7 +231,7 @@ ClientInterface::ClientInterface():_is_accepting(true)
     // bind server port
     servAddr.sin_family = AF_INET;
     servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servAddr.sin_port = htons(port);
+    servAddr.sin_port = htons(ClientInterface::port);
 
     if (bind(_sd, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0) {
 	cerr << "cannot bind port: " << strerror(errno) << endl;
@@ -284,13 +295,15 @@ void ClientInterface::loop()
     }
 
     // check for client messages
-    list < ClientConnection * >::iterator it;
-    for (it = _clients.begin(); it != _clients.end(); it++) {
+    list < ClientConnection * >::iterator it(_clients.begin());
+    while (it != _clients.end()) {
 	if (!(*it)->loop()) {
-	    cout << "client disconnected" << endl;
+	    cerr << "client disconnected" << endl;
 	    delete(*it);
 	    it = _clients.erase(it);
 	}
+	else
+		++it;
     }
 }
 

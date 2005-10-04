@@ -49,19 +49,20 @@ using namespace std;
 Options::Options()
 {
 
-#ifdef ENABLE_NLS
 #ifdef HAVE_LOCALE_H
-  setlocale( LC_MESSAGES, "" );
-  setlocale( LC_NUMERIC, "POSIX" );
+setlocale( LC_MESSAGES, "" );
+setlocale( LC_NUMERIC, "POSIX" );
 #endif
+
+#ifdef ENABLE_NLS
 // allow german umlauts
-  bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
+bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
 #ifdef RTB_LOCALEDIR
-  bindtextdomain( "RealTimeBattle", RTB_LOCALEDIR );
+bindtextdomain( "RealTimeBattle", RTB_LOCALEDIR );
 #else
-  bindtextdomain( "RealTimeBattle", "/usr/local/share/locale" );
+bindtextdomain( "RealTimeBattle", "/usr/local/share/locale" );
 #endif
-  textdomain( "RealTimeBattle" );
+textdomain( "RealTimeBattle" );
 #endif
 
 

@@ -129,6 +129,9 @@ print_help_message()
   cout << endl;
   cout << _("    --help,                      -h   prints this message") << endl;
   cout << _("    --version,                   -v   prints the version number") << endl;
+#ifndef NO_NETWORK
+  cout << _("    --port_number                -p   specifies the port to listen on (default 32134)") << endl;
+#endif
   cout << endl;
 }
 
@@ -204,7 +207,7 @@ sigfpe_handler(int signum)
 void
 parse_command_line(int argc, char **argv)
 {
-  int version_flag=false, help_flag=false, graphics_flag=true;
+  int version_flag=false, help_flag=false, graphics_flag=true;int port=32134;
   int c;
   istringstream string2number;
 
@@ -232,16 +235,22 @@ parse_command_line(int argc, char **argv)
     {"replay", 1, 0, 0},
 
     {"no_graphics", 0, &graphics_flag, false},
-
+#ifndef NO_NETWORK
+    {"port_number",1,0,0},
+#endif
     {0, 0, 0, 0}
   };
 
   for(;;)
     {
       int option_index = 0;
-     
+#ifndef NO_NETWORK 
+      c = getopt_long( argc, argv, "dncD:vho:l:s:t:m:r:gp:",
+                       long_options, &option_index );
+#else
       c = getopt_long( argc, argv, "dncD:vho:l:s:t:m:r:g",
                        long_options, &option_index );
+#endif
 
       // Detect the end of the options.
       if (c == -1)
@@ -286,6 +295,21 @@ parse_command_line(int argc, char **argv)
             case 11:
               the_arena_controller.replay_filename = string(optarg);
               break;
+#ifndef NO_NETWORK
+	     case 13: {
+                string2number.clear();
+                string2number.str(optarg);
+		int optarg_num(-1);
+                string2number >> optarg_num;
+		if (optarg_num<1||optarg_num>65535) {
+              		Error( true, "Illegal port number",
+                     "RealTimeBattle.cc:parse_command_line" );
+	              exit( EXIT_FAILURE );
+		}
+		else port=optarg_num;
+		break;
+	     }
+#endif
             default:
               Error( true, "Bad error, this shouldn't happen",
                      "RealTimeBattle.cc:parse_command_line" );
@@ -333,6 +357,22 @@ parse_command_line(int argc, char **argv)
           the_arena_controller.log_filename = string(optarg);
           break;
 
+#ifndef NO_NETWORK
+     case 'p': {
+	string2number.clear();
+	string2number.str(optarg);
+	int optarg_num(-1);
+	string2number >> optarg_num;
+	if (optarg_num<1||optarg_num>65535) {
+		Error( true, "Illegal port number",
+	     "RealTimeBattle.cc:parse_command_line" );
+	      exit( EXIT_FAILURE );
+	}
+	else port=optarg_num;
+	break;
+     }
+#endif
+
         case 's':
           the_arena_controller.statistics_filename = string(optarg);
           break;
@@ -360,6 +400,10 @@ parse_command_line(int argc, char **argv)
         }
     }
 
+#ifndef NO_NETWORK
+    ClientInterface::set_port(port);
+#endif
+  
   if( the_arena_controller.debug_level > max_debug_level )
     the_arena_controller.debug_level = 5;
   if( the_arena_controller.debug_level < 0 )
@@ -418,32 +462,23 @@ main ( int argc, char* argv[] )
   //fpsetmask ( ~ (FP_X_INV | FP_X_DZ | FP_X_IMP) );
 #endif
 
-#ifndef NO_GRAPHICS
+#ifdef HAVE_LOCALE_H
+  setlocale( LC_MESSAGES, "" );
+  setlocale( LC_NUMERIC, "POSIX" );
+#endif
 
-	
 #ifdef ENABLE_NLS
   bindtextdomain ("RealTimeBattle", RTB_LOCALEDIR);
   // allow german umlauts
   bind_textdomain_codeset ("RealTimeBattle", "UTF-8");
   textdomain ("RealTimeBattle");
 #endif
-
-  gtk_set_locale ();
-
+  
+#ifndef NO_GRAPHICS
   gtk_init (&argc, &argv);
 #endif 
-/*
-#ifdef HAVE_LOCALE_H
-  setlocale( LC_MESSAGES, "" );
-  setlocale( LC_NUMERIC, "POSIX" );
-#endif
-#ifdef RTB_LOCALEDIR
-  bindtextdomain( "RealTimeBattle", RTB_LOCALEDIR );
-#else
-  bindtextdomain( "RealTimeBattle", "/usr/local/share/locale" );
-#endif
-  textdomain( "RealTimeBattle" );
-*/
+  
+  
   parse_command_line(argc, argv);
 
   if( !the_arena_controller.tournament_filename.empty() )
