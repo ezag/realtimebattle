@@ -48,7 +48,7 @@ public:
 protected:
     int _socket;
 
-    char _buffer[256];
+    char _buffer[4097]; // this is the standard size of a piped connection
 
     bool _initialized;
     bool _master;
@@ -56,7 +56,7 @@ protected:
     string _line;
 
     bool parse_line(string &message);
-    void parse_command(const char command, string data);
+    void parse_command(const char command,const string& data);
 };
 
 /**
@@ -72,6 +72,7 @@ public:
 
     void loop();
     int send(const char* message, int len);
+    static void set_port(int port);
 
     void set_accepting(bool state=true);
 
@@ -79,6 +80,7 @@ protected:
     ClientInterface();
 
     int _sd;
+    static int port;
     bool _is_accepting;
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-07-28 11:04+0200\n"
+"POT-Creation-Date: 2005-10-01 16:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,61 +16,61 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/RealTimeBattle.cc:98
+#: src/RealTimeBattle.cc:102
 msgid " Usage: RealTimeBattle [options] "
 msgstr ""
 
-#: src/RealTimeBattle.cc:99
+#: src/RealTimeBattle.cc:103
 msgid " Options:"
 msgstr ""
 
-#: src/RealTimeBattle.cc:100
+#: src/RealTimeBattle.cc:104
 msgid "    --debug_mode,                -d   debug mode"
 msgstr ""
 
-#: src/RealTimeBattle.cc:101
+#: src/RealTimeBattle.cc:105
 msgid ""
 "    --debug_level [0-5],         -D   sets the initial debug level. Implies -"
 "d"
 msgstr ""
 
-#: src/RealTimeBattle.cc:102
+#: src/RealTimeBattle.cc:106
 msgid "    --normal_mode,               -n   normal mode (default)"
 msgstr ""
 
-#: src/RealTimeBattle.cc:103
+#: src/RealTimeBattle.cc:107
 msgid "    --competition_mode,          -c   competition mode"
 msgstr ""
 
-#: src/RealTimeBattle.cc:105
+#: src/RealTimeBattle.cc:109
 msgid "    --no_graphics,               -g   no graphics will be displayed"
 msgstr ""
 
-#: src/RealTimeBattle.cc:106
+#: src/RealTimeBattle.cc:110
 msgid ""
 "    --option_file [file],        -o   selects option-file (default: $HOME/."
 "rtbrc)"
 msgstr ""
 
-#: src/RealTimeBattle.cc:108
+#: src/RealTimeBattle.cc:112
 msgid ""
 "    --log_file [file],           -l   make log file, if 'file' is '-'\n"
 "                                      the log is sent to STDOUT"
 msgstr ""
 
-#: src/RealTimeBattle.cc:111
+#: src/RealTimeBattle.cc:115
 msgid ""
 "    --tournament_file [file],    -t   specify a tournament file to\n"
 "                                      autostart a tournament"
 msgstr ""
 
-#: src/RealTimeBattle.cc:114
+#: src/RealTimeBattle.cc:118
 msgid ""
 "    --statistics_file [file],    -s   file to print the statistics to\n"
 "                                       when autostarting"
 msgstr ""
 
-#: src/RealTimeBattle.cc:117
+#: src/RealTimeBattle.cc:121
 msgid ""
 "    --message_file [file],       -m   redirect messages to 'file'.\n"
 "                                      With '-' as 'file', STDOUT is used.\n"
@@ -78,55 +78,61 @@ msgid ""
 "                                      to STDOUT, '-m' will be ignored"
 msgstr ""
 
-#: src/RealTimeBattle.cc:122
+#: src/RealTimeBattle.cc:126
 msgid ""
 "    --replay [file]              -r   a log file to replay.\n"
 "                                      if '-' is specified as file,\n"
 "                                      input is taken from STDIN"
 msgstr ""
 
-#: src/RealTimeBattle.cc:126
+#: src/RealTimeBattle.cc:130
 msgid "    --help,                      -h   prints this message"
 msgstr ""
 
-#: src/RealTimeBattle.cc:127
+#: src/RealTimeBattle.cc:131
 msgid "    --version,                   -v   prints the version number"
 msgstr ""
 
-#: src/ArenaBase.cc:119
+#: src/RealTimeBattle.cc:133
+msgid ""
+"    --port_number                -p   specifies the port to listen on "
+"(default 32134)"
+msgstr ""
+
+#: src/ArenaBase.cc:123
 msgid "*Starting robots*"
 msgstr ""
 
-#: src/ArenaBase.cc:122
+#: src/ArenaBase.cc:126
 msgid "*Shutting down robots*"
 msgstr ""
 
-#: src/ArenaBase.cc:126
+#: src/ArenaBase.cc:130
 msgid "*Running*"
 msgstr ""
 
-#: src/ArenaBase.cc:128
+#: src/ArenaBase.cc:132
 msgid "*Pausing after game*"
 msgstr ""
 
-#: src/ArenaBase.cc:132
+#: src/ArenaBase.cc:136
 msgid "*Paused*"
 msgstr ""
 
-#: src/ArenaBase.cc:135
+#: src/ArenaBase.cc:139
 msgid "*Exiting*"
 msgstr ""
 
-#: src/ArenaBase.cc:138
+#: src/ArenaBase.cc:142
 msgid "*Finished*"
 msgstr ""
 
-#: src/ArenaRealTime.cc:838
+#: src/ArenaRealTime.cc:849
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr ""
 
-#: src/ArenaRealTime.cc:1026
+#: src/ArenaRealTime.cc:1037
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr ""

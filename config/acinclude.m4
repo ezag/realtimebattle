@@ -30,7 +30,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_CHECK_CLASS],[
 AC_REQUIRE([AC_PROG_JAVA])
@@ -134,7 +134,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_CHECK_CLASSPATH],[
 if test "x$CLASSPATH" = x; then
@@ -175,7 +175,7 @@ dnl     echo "exec @JUNIT@ my.package.name.AllJunitTests" >> $@
 dnl     chmod +x $@
 dnl
 dnl @author Luc Maisonobe
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_CHECK_JUNIT],[
 AC_CACHE_VAL(ac_cv_prog_JUNIT,[
@@ -213,7 +213,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 
 AC_DEFUN([AC_CHECK_RQRD_CLASS],[
@@ -237,7 +237,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Devin Weaver <ktohg@tritarget.com>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_JAVA_OPTIONS],[
 AC_ARG_WITH(java-prefix,
@@ -279,7 +279,7 @@ dnl The general documentation of those macros, as well as the sample
 dnl configure.in, is included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Egon Willighagen <egonw@sci.kun.nl>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAR],[
 AC_REQUIRE([AC_EXEEXT])dnl
@@ -326,7 +326,7 @@ dnl   JAVAC_OPTS        := @JAVA_CC_OPTS@
 dnl   JAR_TOOL          := @jar_tool@
 dnl
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl @author Nic Ferrier <nferrier@tapsellferrier.co.uk>
 dnl
 # AC_PROG_JAVA_CC([COMPILER ...])
@@ -387,7 +387,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVAC],[
 AC_REQUIRE([AC_EXEEXT])dnl
@@ -413,7 +413,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVAC_WORKS],[
 AC_CACHE_CHECK([if $JAVAC works], ac_cv_prog_javac_works, [
@@ -459,7 +459,7 @@ dnl The general documentation of those macros, as well as the sample
 dnl configure.in, is included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Egon Willighagen <egonw@sci.kun.nl>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVADOC],[
 AC_REQUIRE([AC_EXEEXT])dnl
@@ -479,7 +479,7 @@ dnl and looks for the jni.h header file. If available, JAVAH is set to
 dnl the full path of javah and CPPFLAGS is updated accordingly.
 dnl
 dnl @author Luc Maisonobe
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVAH],[
 AC_REQUIRE([AC_CANONICAL_SYSTEM])dnl
@@ -562,7 +562,7 @@ dnl
 dnl    AC_OUTPUT(Makefile)
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVA],[
 AC_REQUIRE([AC_EXEEXT])dnl
@@ -588,7 +588,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Stephane Bortzmeyer <bortzmeyer@pasteur.fr>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_PROG_JAVA_WORKS], [
 AC_CHECK_PROG(uudecode, uudecode$EXEEXT, yes)
@@ -688,7 +688,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Devin Weaver <ktohg@tritarget.com>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_TRY_COMPILE_JAVA],[
 AC_REQUIRE([AC_PROG_JAVAC])dnl
@@ -727,7 +727,7 @@ dnl The general documentation, as well as the sample configure.in, is
 dnl included in the AC_PROG_JAVA macro.
 dnl
 dnl @author Devin Weaver <ktohg@tritarget.com>
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl
 AC_DEFUN([AC_TRY_RUN_JAVA],[
 AC_REQUIRE([AC_PROG_JAVAC])dnl
@@ -787,7 +787,7 @@ dnl
 dnl Acknowledgement: this macro was inspired in part by <ac_prog_perl_version>
 dnl authored by Dean Povey, see the AC-Archive (ac-archive.sf.net).
 dnl
-dnl @version $Id: acinclude.m4,v 1.1 2005/01/10 18:35:23 jonico Exp $
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
 dnl @author Soren Andersen <somian *AT* pobox |DOT| com>
 dnl
 AC_DEFUN([AX_SYS_PERLSHARPBANG],[dnl
@@ -866,4 +866,142 @@ dnl Outer loop checked for user override term here
   fi dnl
 
 ])dnl EOMACRO DEF
+dnl @synopsis ETR_SOCKET_NSL
+dnl
+dnl This macro figures out what libraries are required on this platform
+dnl to link sockets programs.  It's usually -lsocket and/or -lnsl or
+dnl neither.  We test for all three combinations.
+dnl
+dnl @version $Id: acinclude.m4,v 1.2 2005/10/04 15:21:36 jonico Exp $
+dnl @author Warren Young <warren@etr-usa.com>
+dnl
+AC_DEFUN([ETR_SOCKET_NSL],
+[
+AC_CACHE_CHECK(for libraries containing socket functions,
+ac_cv_socket_libs, [
+        oCFLAGS=$CFLAGS
 
+        AC_TRY_LINK([
+                        #include <sys/types.h>
+                        #include <sys/socket.h>
+                        #include <netinet/in.h>
+                        #include <arpa/inet.h>
+                ],
+                [
+                        struct in_addr add;
+                        int sd = socket(AF_INET, SOCK_STREAM, 0);
+                        inet_ntoa(add);
+                ],
+                ac_cv_socket_libs=-lc, ac_cv_socket_libs=no)
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket"
+                AC_TRY_LINK([
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+                        ],
+                        [
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+                        ],
+                        ac_cv_socket_libs=-lsocket, ac_cv_socket_libs=no)
+        fi
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket -lnsl"
+                AC_TRY_LINK([
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+                        ],
+                        [
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+                        ],
+                        ac_cv_socket_libs="-lsocket -lnsl", ac_cv_socket_libs=no)
+        fi
+
+        CFLAGS=$oCFLAGS
+])
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                AC_MSG_ERROR([Cannot find socket libraries])
+        elif test x"$ac_cv_socket_libs" = "x-lc"
+        then
+                ETR_SOCKET_LIBS=""
+        else
+                ETR_SOCKET_LIBS="$ac_cv_socket_libs"
+        fi
+
+        AC_SUBST(ETR_SOCKET_LIBS)
+]) dnl ETR_SOCKET_NSL
+dnl @synopsis AX_WITH_PYTHON([minimum-version], [value-if-not-found], [path])
+dnl
+dnl Locates an installed Python binary, placing the result in the
+dnl precious variable $PYTHON. Accepts a present $PYTHON, then
+dnl --with-python, and failing that searches for python in the given
+dnl path (which defaults to the system path). If python is found,
+dnl $PYTHON is set to the full path of the binary; if it is not found,
+dnl $PYTHON is set to VALUE-IF-NOT-FOUND, which defaults to 'python'.
+dnl
+dnl Example:
+dnl
+dnl   AX_WITH_PYTHON(2.2, missing)
+dnl
+dnl @category InstalledPackages
+dnl @author Dustin Mitchell <dustin@cs.uchicago.edu>
+dnl @version 2005-01-22
+dnl @license GPLWithACException
+
+AC_DEFUN([AX_WITH_PYTHON],
+[
+  AC_ARG_VAR([PYTHON])
+
+  dnl unless PYTHON was supplied to us (as a precious variable)
+  if test -z "$PYTHON"
+  then
+    AC_MSG_CHECKING(for --with-python)
+    AC_ARG_WITH(python,
+                AC_HELP_STRING([--with-python=PYTHON],
+                               [absolute path name of Python executable]),
+                [ if test "$withval" != "yes"
+                  then
+                    PYTHON="$withval"
+                    AC_MSG_RESULT($withval)
+                  else
+                    AC_MSG_RESULT(no)
+                  fi
+                ],
+                [ AC_MSG_RESULT(no)
+                ])
+  fi
+
+  dnl if it's still not found, check the paths, or use the fallback
+  if test -z "$PYTHON"
+  then
+    AC_PATH_PROG([PYTHON], python, m4_ifval([$2],[$2],[python]), $3)
+  fi
+
+  dnl check version if required
+  m4_ifvaln([$1], [
+    dnl do this only if we didn't fall back
+    if test "$PYTHON" != "m4_ifval([$2],[$2],[python])"
+    then
+      AC_MSG_CHECKING($PYTHON version >= $1)
+      if test `$PYTHON -c ["import sys; print sys.version[:3] >= \"$1\" and \"OK\" or \"OLD\""]` = "OK"
+      then
+        AC_MSG_RESULT(ok)
+      else
+        AC_MSG_RESULT(no)
+        PYTHON="$2"
+      fi
+    fi])
+])

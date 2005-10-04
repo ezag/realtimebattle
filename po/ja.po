@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.11\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-07-28 11:04+0200\n"
+"POT-Creation-Date: 2005-10-01 16:53+0200\n"
 "PO-Revision-Date: 2004-11-12 20:10 +0100\n"
 "Last-Translator: Minatsu Tukisima <minatsu@shiratori.riec.tohoku.ac.jp>\n"
 "Language-Team: Minatsu Tukisima\n"
@@ -14,19 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/RealTimeBattle.cc:98
+#: src/RealTimeBattle.cc:102
 msgid " Usage: RealTimeBattle [options] "
 msgstr " 使い方: RealTimeBattle [オプション] "
 
-#: src/RealTimeBattle.cc:99
+#: src/RealTimeBattle.cc:103
 msgid " Options:"
 msgstr " オプション:"
 
-#: src/RealTimeBattle.cc:100
+#: src/RealTimeBattle.cc:104
 msgid "    --debug_mode,                -d   debug mode"
 msgstr "    --debug_mode,                -d   デバッグモード"
 
-#: src/RealTimeBattle.cc:101
+#: src/RealTimeBattle.cc:105
 msgid ""
 "    --debug_level [0-5],         -D   sets the initial debug level. Implies -"
 "d"
@@ -35,19 +35,19 @@ msgstr ""
 "た\n"
 "                                      ことになります"
 
-#: src/RealTimeBattle.cc:102
+#: src/RealTimeBattle.cc:106
 msgid "    --normal_mode,               -n   normal mode (default)"
 msgstr "    --normal_mode,               -n   ノーマルモード (デフォルト)"
 
-#: src/RealTimeBattle.cc:103
+#: src/RealTimeBattle.cc:107
 msgid "    --competition_mode,          -c   competition mode"
 msgstr "    --competition_mode,          -c   コンペティションモード"
 
-#: src/RealTimeBattle.cc:105
+#: src/RealTimeBattle.cc:109
 msgid "    --no_graphics,               -g   no graphics will be displayed"
 msgstr "    --no_graphics,               -g   グラフィック非表示"
 
-#: src/RealTimeBattle.cc:106
+#: src/RealTimeBattle.cc:110
 msgid ""
 "    --option_file [file],        -o   selects option-file (default: $HOME/."
 "rtbrc)"
@@ -55,7 +55,7 @@ msgstr ""
 "    --option_file [file],        -o   オプションファイルの指定(デフォルト: \n"
 "                                      $HOME/.rtbrc)"
 
-#: src/RealTimeBattle.cc:108
+#: src/RealTimeBattle.cc:112
 msgid ""
 "    --log_file [file],           -l   make log file, if 'file' is '-'\n"
 "                                      the log is sent to STDOUT"
@@ -63,7 +63,7 @@ msgstr ""
 "    --log_file [file],           -l   ログファイルの作成, 'file' に '-'が\n"
 "                                      指定された場合、標準出力に出力します"
 
-#: src/RealTimeBattle.cc:111
+#: src/RealTimeBattle.cc:115
 msgid ""
 "    --tournament_file [file],    -t   specify a tournament file to\n"
 "                                      autostart a tournament"
@@ -72,7 +72,7 @@ msgstr ""
 "ル\n"
 "                                      を指定します"
 
-#: src/RealTimeBattle.cc:114
+#: src/RealTimeBattle.cc:118
 msgid ""
 "    --statistics_file [file],    -s   file to print the statistics to\n"
 "                                       when autostarting"
@@ -80,7 +80,7 @@ msgstr ""
 "    --statistics_file [file],    -s   自動スタート時、統計情報を出力する\n"
 "                                      ファイルを指定します"
 
-#: src/RealTimeBattle.cc:117
+#: src/RealTimeBattle.cc:121
 msgid ""
 "    --message_file [file],       -m   redirect messages to 'file'.\n"
 "                                      With '-' as 'file', STDOUT is used.\n"
@@ -93,7 +93,7 @@ msgstr ""
 "                                      ログとメッセージ両方が標準出力に\n"
 "                                      出力される場合、-m は無視されます"
 
-#: src/RealTimeBattle.cc:122
+#: src/RealTimeBattle.cc:126
 msgid ""
 "    --replay [file]              -r   a log file to replay.\n"
 "                                      if '-' is specified as file,\n"
@@ -103,48 +103,55 @@ msgstr ""
 "                                      'file' に '-' が指定された場合\n"
 "                                       標準入力から入力されます"
 
-#: src/RealTimeBattle.cc:126
+#: src/RealTimeBattle.cc:130
 msgid "    --help,                      -h   prints this message"
 msgstr "    --help,                      -h   このメッセージを表示します"
 
-#: src/RealTimeBattle.cc:127
+#: src/RealTimeBattle.cc:131
 msgid "    --version,                   -v   prints the version number"
 msgstr "    --version,                   -v   バージョンを表示します"
 
-#: src/ArenaBase.cc:119
+#: src/RealTimeBattle.cc:133
+#, fuzzy
+msgid ""
+"    --port_number                -p   specifies the port to listen on "
+"(default 32134)"
+msgstr "    --normal_mode,               -n   ノーマルモード (デフォルト)"
+
+#: src/ArenaBase.cc:123
 msgid "*Starting robots*"
 msgstr "*ロボットスタート*"
 
-#: src/ArenaBase.cc:122
+#: src/ArenaBase.cc:126
 msgid "*Shutting down robots*"
 msgstr "*ロボットシャットダウン*"
 
-#: src/ArenaBase.cc:126
+#: src/ArenaBase.cc:130
 msgid "*Running*"
 msgstr "*実行中*"
 
-#: src/ArenaBase.cc:128
+#: src/ArenaBase.cc:132
 msgid "*Pausing after game*"
 msgstr "*ゲーム後ポーズ中*"
 
-#: src/ArenaBase.cc:132
+#: src/ArenaBase.cc:136
 msgid "*Paused*"
 msgstr "*ポーズ*"
 
-#: src/ArenaBase.cc:135
+#: src/ArenaBase.cc:139
 msgid "*Exiting*"
 msgstr "*終了中*"
 
-#: src/ArenaBase.cc:138
+#: src/ArenaBase.cc:142
 msgid "*Finished*"
 msgstr "*終了*"
 
-#: src/ArenaRealTime.cc:838
+#: src/ArenaRealTime.cc:849
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "第%dシーケンス 第%dゲーム スタート アリーナは"
 
-#: src/ArenaRealTime.cc:1026
+#: src/ArenaRealTime.cc:1037
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "ファイル名 %s のロボットが名前を通知していません"

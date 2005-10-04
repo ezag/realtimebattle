@@ -311,7 +311,7 @@ ac_includes_default="\
 #endif"
 
 ac_subdirs_all="$ac_subdirs_all rtb-team-framework"
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS RTB_MAJOR_VERSION RTB_MINOR_VERSION RTB_MICRO_VERSION RTB_RPM_RELEASE RTB_RPM_VERSION RTB_VERSION PACKAGE VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar install_info sgml2html SGML2HTML_TRUE SGML2HTML_FALSE sgml2latex SGML2LATEX_TRUE SGML2LATEX_FALSE sgml2info SGML2INFO_TRUE SGML2INFO_FALSE sgml2txt SGML2TXT_TRUE SGML2TXT_FALSE sgml2lyx SGML2LYX_TRUE SGML2LYX_FALSE sgml2rtf SGML2RTF_TRUE SGML2RTF_FALSE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CC CFLAGS ac_ct_CC CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXCPP EGREP NO_GRAPHICS_TRUE NO_GRAPHICS_FALSE PKG_CONFIG GTK_CFLAGS GTK_LIBS ENABLE_RPM_TRUE ENABLE_RPM_FALSE RTB_DIR DOCS_DIR INSTALL_INFO ROBOTDIR ARENADIR RTB_LOCALEDIR STDCXX_LIBS NO_GETOPT_LONG_TRUE NO_GETOPT_LONG_FALSE MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE build build_cpu build_vendor build_os host host_cpu host_vendor host_os RANLIB ac_ct_RANLIB ALLOCA GLIBC21 HAVE_POSIX_PRINTF HAVE_ASPRINTF HAVE_SNPRINTF HAVE_WPRINTF LIBICONV LTLIBICONV INTLBISON BUILD_INCLUDED_LIBINTL USE_INCLUDED_LIBINTL CATOBJEXT DATADIRNAME INSTOBJEXT GENCAT INTLOBJS INTL_LIBTOOL_SUFFIX_PREFIX INTLLIBS LIBINTL LTLIBINTL POSUB GETTEXT_PACKAGE linuxjoystickavailable_TRUE linuxjoystickavailable_FALSE JAVAC javacavailable_TRUE javacavailable_FALSE JAVA uudecode javaavailable_TRUE javaavailable_FALSE PERLINTERP PERL_SHEBANG perlavailable_TRUE perlavailable_FALSE subdirs LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS RTB_MAJOR_VERSION RTB_MINOR_VERSION RTB_MICRO_VERSION RTB_RPM_RELEASE RTB_RPM_VERSION RTB_VERSION PACKAGE VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar install_info sgml2html SGML2HTML_TRUE SGML2HTML_FALSE sgml2latex SGML2LATEX_TRUE SGML2LATEX_FALSE sgml2info SGML2INFO_TRUE SGML2INFO_FALSE sgml2txt SGML2TXT_TRUE SGML2TXT_FALSE sgml2lyx SGML2LYX_TRUE SGML2LYX_FALSE sgml2rtf SGML2RTF_TRUE SGML2RTF_FALSE CXX CXXFLAGS LDFLAGS CPPFLAGS ac_ct_CXX EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CC CFLAGS ac_ct_CC CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXCPP EGREP NO_NETWORK_TRUE NO_NETWORK_FALSE NO_GRAPHICS_TRUE NO_GRAPHICS_FALSE ETR_SOCKET_LIBS PKG_CONFIG GTK_CFLAGS GTK_LIBS ENABLE_RPM_TRUE ENABLE_RPM_FALSE RTB_DIR DOCS_DIR INSTALL_INFO ROBOTDIR ARENADIR RTB_LOCALEDIR STDCXX_LIBS NO_GETOPT_LONG_TRUE NO_GETOPT_LONG_FALSE MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE build build_cpu build_vendor build_os host host_cpu host_vendor host_os RANLIB ac_ct_RANLIB ALLOCA GLIBC21 HAVE_POSIX_PRINTF HAVE_ASPRINTF HAVE_SNPRINTF HAVE_WPRINTF LIBICONV LTLIBICONV INTLBISON BUILD_INCLUDED_LIBINTL USE_INCLUDED_LIBINTL CATOBJEXT DATADIRNAME INSTOBJEXT GENCAT INTLOBJS INTL_LIBTOOL_SUFFIX_PREFIX INTLLIBS LIBINTL LTLIBINTL POSUB GETTEXT_PACKAGE linuxjoystickavailable_TRUE linuxjoystickavailable_FALSE JAVAC javacavailable_TRUE javacavailable_FALSE JAVA uudecode javaavailable_TRUE javaavailable_FALSE PERLINTERP PERL_SHEBANG perlavailable_TRUE perlavailable_FALSE PYTHON pythonavailable_TRUE pythonavailable_FALSE subdirs LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -780,6 +780,10 @@ ac_env_CXXCPP_set=${CXXCPP+set}
 ac_env_CXXCPP_value=$CXXCPP
 ac_cv_env_CXXCPP_set=${CXXCPP+set}
 ac_cv_env_CXXCPP_value=$CXXCPP
+ac_env_PYTHON_set=${PYTHON+set}
+ac_env_PYTHON_value=$PYTHON
+ac_cv_env_PYTHON_set=${PYTHON+set}
+ac_cv_env_PYTHON_value=$PYTHON
 
 #
 # Report the --help message.
@@ -861,6 +865,7 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-network      make a version with network support
   --disable-graphics      make a version without a GUI
 
 RealTimeBattle options:
@@ -887,6 +892,7 @@ Optional Packages:
   --without-libintl-prefix     don't search for libintl in includedir and libdir
   --with-perl-shebang     override what perl thinks is the way for the kernel
                           to start it (seldom needed)
+  --with-python=PYTHON    absolute path name of Python executable
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -898,6 +904,7 @@ Some influential environment variables:
   CC          C compiler command
   CFLAGS      C compiler flags
   CXXCPP      C++ preprocessor
+  PYTHON
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -4959,6 +4966,26 @@ fi
 rm -f conftest*
 
 
+# network support
+
+# Check whether --enable-network or --disable-network was given.
+if test "${enable_network+set}" = set; then
+  enableval="$enable_network"
+  enable_network=yes
+else
+  enable_network=no
+fi;
+
+
+if test x$enable_network = xno; then
+  NO_NETWORK_TRUE=
+  NO_NETWORK_FALSE='#'
+else
+  NO_NETWORK_TRUE='#'
+  NO_NETWORK_FALSE=
+fi
+
+
 
 # graphics / GTK
 
@@ -4979,6 +5006,210 @@ else
   NO_GRAPHICS_FALSE=
 fi
 
+if test x$enable_graphics = "xyes"; then
+
+echo "$as_me:$LINENO: checking for libraries containing socket functions" >&5
+echo $ECHO_N "checking for libraries containing socket functions... $ECHO_C" >&6
+if test "${ac_cv_socket_libs+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        oCFLAGS=$CFLAGS
+
+        cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+                        #include <sys/types.h>
+                        #include <sys/socket.h>
+                        #include <netinet/in.h>
+                        #include <arpa/inet.h>
+
+int
+main ()
+{
+
+                        struct in_addr add;
+                        int sd = socket(AF_INET, SOCK_STREAM, 0);
+                        inet_ntoa(add);
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_socket_libs=-lc
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_socket_libs=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket"
+                cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+
+int
+main ()
+{
+
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_socket_libs=-lsocket
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_socket_libs=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+        fi
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                CFLAGS="$oCFLAGS -lsocket -lnsl"
+                cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+                                #include <sys/types.h>
+                                #include <sys/socket.h>
+                                #include <netinet/in.h>
+                                #include <arpa/inet.h>
+
+int
+main ()
+{
+
+                                struct in_addr add;
+                                int sd = socket(AF_INET, SOCK_STREAM, 0);
+                                inet_ntoa(add);
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_socket_libs="-lsocket -lnsl"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_socket_libs=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+        fi
+
+        CFLAGS=$oCFLAGS
+
+fi
+echo "$as_me:$LINENO: result: $ac_cv_socket_libs" >&5
+echo "${ECHO_T}$ac_cv_socket_libs" >&6
+
+        if test x"$ac_cv_socket_libs" = "xno"
+        then
+                { { echo "$as_me:$LINENO: error: Cannot find socket libraries" >&5
+echo "$as_me: error: Cannot find socket libraries" >&2;}
+   { (exit 1); exit 1; }; }
+        elif test x"$ac_cv_socket_libs" = "x-lc"
+        then
+                ETR_SOCKET_LIBS=""
+        else
+                ETR_SOCKET_LIBS="$ac_cv_socket_libs"
+        fi
+
+
+
+fi
 
 # Check for GTK+.
 
@@ -12529,7 +12760,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12532 "configure" */
+/* #line 12763 "configure" */
 public class Test {
 }
 EOF
@@ -12707,7 +12938,7 @@ EOF
 if uudecode$EXEEXT Test.uue; then
         ac_cv_prog_uudecode_base64=yes
 else
-        echo "configure: 12710: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
+        echo "configure: 12941: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
         echo "configure: failed file was:" >&5
         cat Test.uue >&5
         ac_cv_prog_uudecode_base64=no
@@ -12823,7 +13054,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12826 "configure" */
+/* #line 13057 "configure" */
 public class Test {
 }
 EOF
@@ -12859,7 +13090,7 @@ JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 TEST=Test
 cat << \EOF > $JAVA_TEST
-/* [#]line 12862 "configure" */
+/* [#]line 13093 "configure" */
 public class Test {
 public static void main (String args[]) {
         System.exit (0);
@@ -13042,6 +13273,107 @@ else
 fi
 
 
+
+
+
+    if test -z "$PYTHON"
+  then
+    echo "$as_me:$LINENO: checking for --with-python" >&5
+echo $ECHO_N "checking for --with-python... $ECHO_C" >&6
+
+# Check whether --with-python or --without-python was given.
+if test "${with_python+set}" = set; then
+  withval="$with_python"
+   if test "$withval" != "yes"
+                  then
+                    PYTHON="$withval"
+                    echo "$as_me:$LINENO: result: $withval" >&5
+echo "${ECHO_T}$withval" >&6
+                  else
+                    echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+                  fi
+
+else
+   echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+
+fi;
+  fi
+
+    if test -z "$PYTHON"
+  then
+    # Extract the first word of "python", so it can be a program name with args.
+set dummy python; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_PYTHON+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_PYTHON" && ac_cv_path_PYTHON="missing"
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+
+if test -n "$PYTHON"; then
+  echo "$as_me:$LINENO: result: $PYTHON" >&5
+echo "${ECHO_T}$PYTHON" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+  fi
+
+
+        if test "$PYTHON" != "missing"
+    then
+      echo "$as_me:$LINENO: checking $PYTHON version >= 2.2" >&5
+echo $ECHO_N "checking $PYTHON version >= 2.2... $ECHO_C" >&6
+      if test `$PYTHON -c "import sys; print sys.version[:3] >= \"2.2\" and \"OK\" or \"OLD\""` = "OK"
+      then
+        echo "$as_me:$LINENO: result: ok" >&5
+echo "${ECHO_T}ok" >&6
+      else
+        echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+        PYTHON="missing"
+      fi
+    fi
+
+
+
+
+if test "x$PYTHON" != "xmissing"; then
+  pythonavailable_TRUE=
+  pythonavailable_FALSE='#'
+else
+  pythonavailable_TRUE='#'
+  pythonavailable_FALSE=
+fi
+
+
+
 if test -d "$srcdir/rtb-team-framework"; then
 
 
@@ -13062,7 +13394,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
           ac_config_commands="$ac_config_commands default-2"
 
 
-                                                                                                                                                                                                                                                                                        ac_config_files="$ac_config_files m4/Makefile intl/Makefile Makefile po/Makefile.in Arenas/Makefile Packages/Makefile Packages/rpm/Makefile Packages/debian/Makefile Packages/freebsd/Makefile Documentation/Makefile Documentation/German/Makefile Documentation/Spanish/Makefile Documentation/French/Makefile src/Makefile Robots/Makefile Robots/seek_and_destroy/Makefile Robots/rotate_and_fire/Makefile Robots/empty/Makefile Robots/xt-bot/Makefile Robots/thomas2/Makefile Robots/joypad_robot/Makefile Robots/jBot/Makefile Robots/jBot/jBot.robot Robots/perl-Skeleton/perl-Skeleton.robot Robots/perl-Skeleton/Makefile Robots/perl/perl.robot Robots/perl/Makefile include/Makefile"
+                                                                                                                                                                                                                                                                                                            ac_config_files="$ac_config_files m4/Makefile intl/Makefile Makefile po/Makefile.in Arenas/Makefile Packages/Makefile Packages/rpm/Makefile Packages/debian/Makefile Packages/freebsd/Makefile Documentation/Makefile Documentation/German/Makefile Documentation/Spanish/Makefile Documentation/French/Makefile src/Makefile Robots/Makefile Robots/seek_and_destroy/Makefile Robots/rotate_and_fire/Makefile Robots/empty/Makefile Robots/xt-bot/Makefile Robots/thomas2/Makefile Robots/joypad_robot/Makefile Robots/jBot/Makefile Robots/jBot/jBot.robot Robots/perl-Skeleton/perl-Skeleton.robot Robots/perl-Skeleton/Makefile Robots/perl/perl.robot Robots/perl/Makefile Robots/raziel/raziel.py.robot Robots/raziel/Makefile include/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -13217,6 +13549,13 @@ echo "$as_me: error: conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
+if test -z "${NO_NETWORK_TRUE}" && test -z "${NO_NETWORK_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"NO_NETWORK\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"NO_NETWORK\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
 if test -z "${NO_GRAPHICS_TRUE}" && test -z "${NO_GRAPHICS_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"NO_GRAPHICS\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -13263,6 +13602,13 @@ if test -z "${perlavailable_TRUE}" && test -z "${perlavailable_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"perlavailable\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"perlavailable\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${pythonavailable_TRUE}" && test -z "${pythonavailable_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"pythonavailable\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"pythonavailable\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -13745,6 +14091,8 @@ do
   "Robots/perl-Skeleton/Makefile" ) CONFIG_FILES="$CONFIG_FILES Robots/perl-Skeleton/Makefile" ;;
   "Robots/perl/perl.robot" ) CONFIG_FILES="$CONFIG_FILES Robots/perl/perl.robot" ;;
   "Robots/perl/Makefile" ) CONFIG_FILES="$CONFIG_FILES Robots/perl/Makefile" ;;
+  "Robots/raziel/raziel.py.robot" ) CONFIG_FILES="$CONFIG_FILES Robots/raziel/raziel.py.robot" ;;
+  "Robots/raziel/Makefile" ) CONFIG_FILES="$CONFIG_FILES Robots/raziel/Makefile" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
@@ -13906,8 +14254,11 @@ s,@am__fastdepCC_TRUE@,$am__fastdepCC_TRUE,;t t
 s,@am__fastdepCC_FALSE@,$am__fastdepCC_FALSE,;t t
 s,@CXXCPP@,$CXXCPP,;t t
 s,@EGREP@,$EGREP,;t t
+s,@NO_NETWORK_TRUE@,$NO_NETWORK_TRUE,;t t
+s,@NO_NETWORK_FALSE@,$NO_NETWORK_FALSE,;t t
 s,@NO_GRAPHICS_TRUE@,$NO_GRAPHICS_TRUE,;t t
 s,@NO_GRAPHICS_FALSE@,$NO_GRAPHICS_FALSE,;t t
+s,@ETR_SOCKET_LIBS@,$ETR_SOCKET_LIBS,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@GTK_CFLAGS@,$GTK_CFLAGS,;t t
 s,@GTK_LIBS@,$GTK_LIBS,;t t
@@ -13973,6 +14324,9 @@ s,@PERLINTERP@,$PERLINTERP,;t t
 s,@PERL_SHEBANG@,$PERL_SHEBANG,;t t
 s,@perlavailable_TRUE@,$perlavailable_TRUE,;t t
 s,@perlavailable_FALSE@,$perlavailable_FALSE,;t t
+s,@PYTHON@,$PYTHON,;t t
+s,@pythonavailable_TRUE@,$pythonavailable_TRUE,;t t
+s,@pythonavailable_FALSE@,$pythonavailable_FALSE,;t t
 s,@subdirs@,$subdirs,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t

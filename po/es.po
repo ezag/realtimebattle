@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTime Battle\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-07-28 11:04+0200\n"
+"POT-Creation-Date: 2005-10-01 16:53+0200\n"
 "PO-Revision-Date: 2004-11-2004 20:09+0100\n"
 "Last-Translator: Mc_Tr <mc_tr@email.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -15,38 +15,38 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/RealTimeBattle.cc:98
+#: src/RealTimeBattle.cc:102
 msgid " Usage: RealTimeBattle [options] "
 msgstr " Uso: RealTimeBattle [opciones] "
 
-#: src/RealTimeBattle.cc:99
+#: src/RealTimeBattle.cc:103
 msgid " Options:"
 msgstr " Opciones: "
 
-#: src/RealTimeBattle.cc:100
+#: src/RealTimeBattle.cc:104
 msgid "    --debug_mode,                -d   debug mode"
 msgstr "    --debug_mode,                -d   modo debug"
 
-#: src/RealTimeBattle.cc:101
+#: src/RealTimeBattle.cc:105
 msgid ""
 "    --debug_level [0-5],         -D   sets the initial debug level. Implies -"
 "d"
 msgstr ""
 "    --debug_level [0-5],         -D   Nivel de debug inicial. necesario -d"
 
-#: src/RealTimeBattle.cc:102
+#: src/RealTimeBattle.cc:106
 msgid "    --normal_mode,               -n   normal mode (default)"
 msgstr "    --normal_mode,               -n   modo normal (predeterminado)"
 
-#: src/RealTimeBattle.cc:103
+#: src/RealTimeBattle.cc:107
 msgid "    --competition_mode,          -c   competition mode"
 msgstr "    --competition_mode,          -c   modo competición"
 
-#: src/RealTimeBattle.cc:105
+#: src/RealTimeBattle.cc:109
 msgid "    --no_graphics,               -g   no graphics will be displayed"
 msgstr "    --no_graphics,               -g   sin gráficos"
 
-#: src/RealTimeBattle.cc:106
+#: src/RealTimeBattle.cc:110
 msgid ""
 "    --option_file [file],        -o   selects option-file (default: $HOME/."
 "rtbrc)"
@@ -54,7 +54,7 @@ msgstr ""
 "    --option_file [archivo],        -o   fichero de opciones "
 "(predeterminado: $HOME/.rtbrc)"
 
-#: src/RealTimeBattle.cc:108
+#: src/RealTimeBattle.cc:112
 msgid ""
 "    --log_file [file],           -l   make log file, if 'file' is '-'\n"
 "                                      the log is sent to STDOUT"
@@ -62,7 +62,7 @@ msgstr ""
 "    --log_file [archivo],           -l   archivo de log, si es '-'\n"
 "                                      el log se envia a STDOUT"
 
-#: src/RealTimeBattle.cc:111
+#: src/RealTimeBattle.cc:115
 msgid ""
 "    --tournament_file [file],    -t   specify a tournament file to\n"
 "                                      autostart a tournament"
@@ -70,7 +70,7 @@ msgstr ""
 "    --tournament_file [archivo],    -t   archivo de torneo que se\n"
 "                                      iniciará automáticamente"
 
-#: src/RealTimeBattle.cc:114
+#: src/RealTimeBattle.cc:118
 msgid ""
 "    --statistics_file [file],    -s   file to print the statistics to\n"
 "                                       when autostarting"
@@ -78,7 +78,7 @@ msgstr ""
 "    --statistics_file [archivo],    -s   archivo donde se volcarán \n"
 "                                       las estadisticas"
 
-#: src/RealTimeBattle.cc:117
+#: src/RealTimeBattle.cc:121
 msgid ""
 "    --message_file [file],       -m   redirect messages to 'file'.\n"
 "                                      With '-' as 'file', STDOUT is used.\n"
@@ -92,7 +92,7 @@ msgstr ""
 "mensajes\n"
 "                                      a STDOUT, '-m' no se tendrá en cuenta."
 
-#: src/RealTimeBattle.cc:122
+#: src/RealTimeBattle.cc:126
 msgid ""
 "    --replay [file]              -r   a log file to replay.\n"
 "                                      if '-' is specified as file,\n"
@@ -102,48 +102,55 @@ msgstr ""
 "                                      si se indica '-' como archivo,\n"
 "                                      la entrada se coge de STDIN"
 
-#: src/RealTimeBattle.cc:126
+#: src/RealTimeBattle.cc:130
 msgid "    --help,                      -h   prints this message"
 msgstr "    --help,                      -h   muestra este mensaje"
 
-#: src/RealTimeBattle.cc:127
+#: src/RealTimeBattle.cc:131
 msgid "    --version,                   -v   prints the version number"
 msgstr "    --version,                   -v   muestra la verión"
 
-#: src/ArenaBase.cc:119
+#: src/RealTimeBattle.cc:133
+#, fuzzy
+msgid ""
+"    --port_number                -p   specifies the port to listen on "
+"(default 32134)"
+msgstr "    --normal_mode,               -n   modo normal (predeterminado)"
+
+#: src/ArenaBase.cc:123
 msgid "*Starting robots*"
 msgstr "* Iniciando Robots *"
 
-#: src/ArenaBase.cc:122
+#: src/ArenaBase.cc:126
 msgid "*Shutting down robots*"
 msgstr "* Finalizando Robots *"
 
-#: src/ArenaBase.cc:126
+#: src/ArenaBase.cc:130
 msgid "*Running*"
 msgstr "* Ejecutando ... *"
 
-#: src/ArenaBase.cc:128
+#: src/ArenaBase.cc:132
 msgid "*Pausing after game*"
 msgstr "* Pausar despues del juego *"
 
-#: src/ArenaBase.cc:132
+#: src/ArenaBase.cc:136
 msgid "*Paused*"
 msgstr "* Pausado *"
 
-#: src/ArenaBase.cc:135
+#: src/ArenaBase.cc:139
 msgid "*Exiting*"
 msgstr "* Saliendo *"
 
-#: src/ArenaBase.cc:138
+#: src/ArenaBase.cc:142
 msgid "*Finished*"
 msgstr "* Terminado *"
 
-#: src/ArenaRealTime.cc:838
+#: src/ArenaRealTime.cc:849
 #, c-format
 msgid "Game %d of sequence %d begins on arena"
 msgstr "Ha comenzado la partida %d de la secuencia %d."
 
-#: src/ArenaRealTime.cc:1026
+#: src/ArenaRealTime.cc:1037
 #, c-format
 msgid "Robot with filename %s has not given any name"
 msgstr "El Robot con el nombre de fichero %s no ha dado nombre."

@@ -24,3 +24,5 @@ It can be started only ONCE.
 jBot.robot: You will need java and a startup time in RealTimeBattle of about half and a second to let this robot work.
 
 perl.robot, perl-Skeleton.robot: As the name says, you will nedd perl in order to start these robots. perl.robot will create a log file located at /tmp/perl.robot.log
+
+raziel.py.robot: You will need python in order to run this robot.

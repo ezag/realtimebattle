@@ -90,6 +90,10 @@ AM_CONDITIONAL(NO_NETWORK, test x$enable_network = xno)
 
 AC_ARG_ENABLE(graphics, [  --disable-graphics      make a version without a GUI], enable_graphics=no, enable_graphics=yes)
 AM_CONDITIONAL(NO_GRAPHICS, test x$enable_graphics = xno)
+if test x$enable_graphics = "xyes"; then
+dnl Here we test whether we have to link against lsocket and lnsl
+ETR_SOCKET_NSL
+fi
 
 # Check for GTK+.
 
@@ -237,6 +241,11 @@ dnl now configure perl
 AX_SYS_PERLSHARPBANG
 AM_CONDITIONAL([perlavailable],[test "x$PERL_SHEBANG" != x ])
 
+dnl now configure python
+AX_WITH_PYTHON(2.2, missing)
+AM_CONDITIONAL([pythonavailable],[test "x$PYTHON" != "xmissing"]) 
+AC_SUBST(PYTHON)
+
 dnl now configure the RealTimeBattle Team Framework with the Brotfrucht strategy
 if test -d "$srcdir/rtb-team-framework"; then
 	AC_CONFIG_SUBDIRS([rtb-team-framework])
@@ -291,6 +300,8 @@ Robots/perl-Skeleton/perl-Skeleton.robot
 Robots/perl-Skeleton/Makefile
 Robots/perl/perl.robot
 Robots/perl/Makefile
+Robots/raziel/raziel.py.robot
+Robots/raziel/Makefile
 include/Makefile
 ])
 
