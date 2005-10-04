@@ -37,9 +37,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = Robots/perl
+subdir = Robots/raziel
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/perl.robot.in
+	$(srcdir)/raziel.py.robot.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/acinclude.m4 \
 	$(top_srcdir)/m4/codeset.m4 $(top_srcdir)/m4/gettext.m4 \
@@ -60,9 +60,9 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = perl.robot
+CONFIG_CLEAN_FILES = raziel.py.robot
 am__installdirs = "$(DESTDIR)$(robotexecdir)" \
-	"$(DESTDIR)$(perlrobotdir)"
+	"$(DESTDIR)$(razielrobotdir)"
 robotexecSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(robotexec_SCRIPTS)
 SOURCES =
@@ -73,8 +73,8 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-perlrobotDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(perlrobot_DATA)
+razielrobotDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(razielrobot_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
@@ -252,11 +252,11 @@ subdirs = @subdirs@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 uudecode = @uudecode@
-perlrobotdir = $(RTB_DIR)/Robots/perl
-perlrobot_DATA = perl.robot.in
-EXTRA_DIST = $(perlrobot_DATA)
-@perlavailable_TRUE@robotexecdir = $(RTB_DIR)/Robots
-@perlavailable_TRUE@robotexec_SCRIPTS = perl.robot
+razielrobotdir = $(RTB_DIR)/Robots/raziel
+razielrobot_DATA = raziel.py.robot.in
+EXTRA_DIST = $(razielrobot_DATA)
+@pythonavailable_TRUE@robotexecdir = $(RTB_DIR)/Robots
+@pythonavailable_TRUE@robotexec_SCRIPTS = raziel.py.robot
 all: all-am
 
 .SUFFIXES:
@@ -269,9 +269,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  Robots/perl/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  Robots/raziel/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  Robots/perl/Makefile
+	  $(AUTOMAKE) --gnu  Robots/raziel/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -289,7 +289,7 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-perl.robot: $(top_builddir)/config.status $(srcdir)/perl.robot.in
+raziel.py.robot: $(top_builddir)/config.status $(srcdir)/raziel.py.robot.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-robotexecSCRIPTS: $(robotexec_SCRIPTS)
 	@$(NORMAL_INSTALL)
@@ -311,22 +311,22 @@ uninstall-robotexecSCRIPTS:
 	  rm -f "$(DESTDIR)$(robotexecdir)/$$f"; \
 	done
 uninstall-info-am:
-install-perlrobotDATA: $(perlrobot_DATA)
+install-razielrobotDATA: $(razielrobot_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(perlrobotdir)" || $(mkdir_p) "$(DESTDIR)$(perlrobotdir)"
-	@list='$(perlrobot_DATA)'; for p in $$list; do \
+	test -z "$(razielrobotdir)" || $(mkdir_p) "$(DESTDIR)$(razielrobotdir)"
+	@list='$(razielrobot_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
-	  echo " $(perlrobotDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(perlrobotdir)/$$f'"; \
-	  $(perlrobotDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(perlrobotdir)/$$f"; \
+	  echo " $(razielrobotDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(razielrobotdir)/$$f'"; \
+	  $(razielrobotDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(razielrobotdir)/$$f"; \
 	done
 
-uninstall-perlrobotDATA:
+uninstall-razielrobotDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(perlrobot_DATA)'; for p in $$list; do \
+	@list='$(razielrobot_DATA)'; for p in $$list; do \
 	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(perlrobotdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(perlrobotdir)/$$f"; \
+	  echo " rm -f '$(DESTDIR)$(razielrobotdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(razielrobotdir)/$$f"; \
 	done
 tags: TAGS
 TAGS:
@@ -366,7 +366,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(SCRIPTS) $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(robotexecdir)" "$(DESTDIR)$(perlrobotdir)"; do \
+	for dir in "$(DESTDIR)$(robotexecdir)" "$(DESTDIR)$(razielrobotdir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -411,7 +411,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-perlrobotDATA
+install-data-am: install-razielrobotDATA
 
 install-exec-am: install-robotexecSCRIPTS
 
@@ -437,18 +437,18 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am uninstall-perlrobotDATA \
+uninstall-am: uninstall-info-am uninstall-razielrobotDATA \
 	uninstall-robotexecSCRIPTS
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-exec \
 	install-exec-am install-info install-info-am install-man \
-	install-perlrobotDATA install-robotexecSCRIPTS install-strip \
+	install-razielrobotDATA install-robotexecSCRIPTS install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am uninstall uninstall-am uninstall-info-am \
-	uninstall-perlrobotDATA uninstall-robotexecSCRIPTS
+	uninstall-razielrobotDATA uninstall-robotexecSCRIPTS
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
