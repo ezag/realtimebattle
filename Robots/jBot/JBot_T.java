@@ -301,6 +301,11 @@ class JBot_T extends JBot {
 		    case YOUR_COLOUR:
 			break;
 
+		    // the coordinate treatment was added by Johannes Nicolai
+		    // we do not need any coordinate information
+		    case COORDINATES:
+			break;
+
 		    case UNKNOWN_MESSAGE_TO_ROBOT:
 			s = msg2robotString + " with " + numberPars + " parameters";
 			echo("*** Unknown Message ***: " + s);

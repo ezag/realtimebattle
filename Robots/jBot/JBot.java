@@ -117,6 +117,8 @@ class JBot extends Thread {
 	DEAD = 1014,
 	GAME_FINISHES = 1015,
 	EXIT_ROBOT = 1016,
+	// this line was added by Johannes Nicolai
+	COORDINATES=1017,
 	UNKNOWN_MESSAGE_TO_ROBOT = -1;
 
 
@@ -155,6 +157,8 @@ class JBot extends Thread {
 	if (s.equals("ExitRobot"))  return EXIT_ROBOT;
 	if (s.equals("YourName"))  return YOUR_NAME;
 	if (s.equals("YourColour"))  return YOUR_COLOUR;
+	// this line was added by Johannes Nicolai 
+	if (s.equals("Coordinates"))  return COORDINATES;
 	return UNKNOWN_MESSAGE_TO_ROBOT;
     }
 
