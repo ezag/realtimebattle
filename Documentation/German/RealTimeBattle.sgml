@@ -21,10 +21,10 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 <article>
 <titlepag>
-<title>RealTimeBattle Benutzer-Handbuch, Version 1.0.7
-<author>Erik Ouchterlony and Ragnar Ouchterlony, <htmlurl name="rtb@users.sourceforge.net" url="mailto:rtb@users.sourceforge.net">
-<date> 23. November 2004
-<abstract>Deutsche Übersetzung von Uwe Hermann und Falko Menge</abstract>
+<title>RealTimeBattle Benutzer-Handbuch, Version 1.0.8
+<author>Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai (<htmlurl name="jonico@users.sourceforge.net" url="mailto:jonico@users.sourceforge.net">)
+<date> 4. Oktober 2005
+<abstract>Deutsche Übersetzung von Uwe Hermann, Falko Menge und Johannes Nicolai</abstract>
 
 </titlepag>
 
@@ -72,11 +72,15 @@ die es einfach macht neue Roboter zu schreiben.</item>
 
 <item>Viele Konfigurationsmöglichkeiten.</item>
 
+<item>Externe Clients können das Spielgeschehen anzeigen.</item>
+
+<item>Rudimentärer Team-Support ist direkt im Spiel eingebaut, Team Frameworks erlauben weitere Koordination der Roboter.</item>
+
 </itemize>
 
 <sect1>Weitere Informationen<label id="More information">
 <p>
-Mehr Informationen gibt's in den Dateien <tt>INSTALL</tt>, <tt>BUGS</tt>, <tt>TODO</tt>, 
+Mehr Informationen gibt's in den Dateien <tt>INSTALL</tt>, <tt>AUTHORS</tt>, <tt>BUGS</tt>, <tt>TODO</tt>, 
 <tt>README</tt>, <tt>FAQ</tt> und <tt>ChangeLog</tt>
 . Aktuellere Informationen kann man auf der
 <url name="RealTimeBattle Homepage" url="http://realtimebattle.sourceforge.net/">
@@ -129,7 +133,7 @@ RealTimeBattle unterliegt, ganz im Sinne Linux-Philosophie, der
 Offizielle Versionen von RealTimeBattle werden von den Autoren
 freigegeben werden.
 
-Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony
+Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony, weitere Entwickler sind in der <tt>AUTHORS</tt> Datei zu finden.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -149,14 +153,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 <p>
 Wenn du etwas in diesem Softwarepaket findest, das nicht funktioniert, nicht
 <tt>richtig</tt> 
-funktioniert, fehlt, falsch geschrieben, oder einfach nur
-verwirrend ist, zögere nicht eine eMail an
-<url name="die Autoren" url="mailto:rtb@users.sourceforge.net">
-zu schicken.
-Aber schau bitte zuerst in der Datei <tt>BUGS</tt>
-, oder auf der
-<url name="RealTimeBattle Homepage" url="http://sourceforge.net/bugs/?group_id=561"> nach,
-ob der Fehler nicht schon gemeldet und/oder schon behoben wurde.
+funktioniert, fehlt, falsch geschrieben, oder einfach nur verwirrend ist, schicke einen Bug Report an
+<url name="RealTimeBattle Homepage" url="http://sourceforge.net/bugs/?group_id=561">.
 
 <sect1>Deutsche Übersetzung<label id="German Translation">
 <p>
@@ -164,7 +162,7 @@ Diese Übersetzung unterliegt der GNU General Public License. Nähere
 Infomationen gibt es unter
 <url url="http://www.fsf.org/copyleft/gpl.html" name="http://www.fsf.org/copyleft/gpl.html">
 rtb-docs.de -- german translation of the RTB documentation
-Copyright (C) 1999,2000  Uwe Hermann 
+Copyright (C) 1999-2005  Uwe Hermann, Falko Menge, Johannes Nicolai 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -198,6 +196,13 @@ Die neueste Version der Übersetzung ist unter
 Changelog:
 
 <itemize>
+	<item>4. Oktober 2005 (von Johannes Nicolai):
+		<itemize>
+			<item>Anpassung an Version 1.0.8</item>
+			<item>Aktuellere Links eingefügt</item>
+			<item>weitere kleinere Verbesserungen</item>
+		</itemize>
+	</item>
 	<item>23. November 2004 (von Falko Menge):
 		<itemize>
 			<item>Anpassung an Version 1.0.7</item>
@@ -301,8 +306,11 @@ welchem Spielmodus das Programm laufen wird:
 
     --help,			 -h   zeigt diese Informationen
     --version,			 -v   gibt die Versionsnummer aus
+    --port_number                -p   legt den Port fest, an denen externe Clients sich
+				      verbinden können (Standard: 32134)	    
 </code>
 
+Die port_number Option ist nur dann verfügbar, wenn RealTimeBattle mit der --enable-network Option compiliert wurde (siehe Datei <tt>INSTALL</tt>).
 Die Unterschiede zwischen den drei Comepetition-Modi sind in folgender Tabelle zusammengefasst.
 
 <#if table="char" >
@@ -974,6 +982,7 @@ ihn nur ändern, wenn man <tt>sehr</tt> gute Gründe dafür hat.
 <label id="YourColour">
 <tag>YourColour [Farbe (hex)]</tag> Die momentane Farbe des Roboters; wenn
 sie einem nicht gefällt, kann man sie ändern.
+Alle Roboter in einem Team haben dieselbe Farbe.
 
 <tag>GameOption [Optionsnummer (int)] [value (double)]</tag> Am Anfang jedes
 Spieles werden dem Roboter einige Einstellungen mitgeteilt, die dem Roboter
@@ -1017,8 +1026,8 @@ Wenn dein Roboter einen anderen Roboter mittels des Radars entdeckt, wird
 diese Nachricht an deinen Roboter gesendet. Sie gibt verschiedene Informationen
 über den feindlichen Roboter. Die Energie des anderen Roboters wird auf die
 gleiche Art und Weise angegeben, wie die Energie deines eigenen
-Roboters(siehe unten). Der zweite Parameter ist nur im Team-Mode interessant
-(der momentan jedoch noch nicht implementiert ist), 1 heisst Team-Mitglied,
+Roboters(siehe unten). Der zweite Parameter ist nur im Team-Mode interessant, 
+1 heisst Team-Mitglied,
 0 steht für einen Gegner.
 
 <label id="RotationReached">
@@ -1135,7 +1144,10 @@ Default-Wert.
 <tag>Name [Name (string)]</tag> Wenn man die
 <ref id="Initialize" name="Initialize">-Nachricht mit 1 als Argument erhält,
 die anzeigt dass dies die erste Sequenz ist, sollte der Roboter seinen Namen
-und seine Farbe senden.
+und seine Farbe senden. Im Namen kann die Teamzugehörigkeit mitgeteilt werden.
+Lautet der Name <tt>foo Team: bar</tt>, so heißt der Roboter <tt>foo</tt> und spielt im Team <tt>bar</tt>.
+Teammitglieder bekommen dieselbe Farbe und erkennen sich als Freund bei der RobotInfo Nachricht.
+Ausgefeilteren Team-Support bietet das <url name="RealTimeBattle Team FrameWork" url="http://rtb-team.sf.net">.
 
 <tag>Colour [home colour (hex)] [away colour (hex)]</tag>
 Siehe oben. Die Farben sind wie normale Fußballtrikots. Die

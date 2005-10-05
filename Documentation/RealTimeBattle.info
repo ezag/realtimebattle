@@ -1,16 +1,16 @@
 Dies ist RealTimeBattle.info, hergestellt von Makeinfo Version 4.7 aus
-/tmp/linuxdoc-dir-25671/sgmltmp.RealTimeBattle.info.2.
+/tmp/linuxdoc-dir-20850/sgmltmp.RealTimeBattle.info.2.
 
    \input texinfo
 
 
 File: RealTimeBattle.info,  Node: Top,  Next: Introduction,  Up: (dir)
 
-RealTimeBattle User Manual, version 1.0.7
+RealTimeBattle User Manual, version 1.0.8
 *****************************************
 
-     Erik Ouchterlony and Ragnar Ouchterlony, rtb@users.sourceforge.net
-     23 November 2004
+     Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai (jonico@users.sourceforge.net)
+     4 October 2005
 
 * Menu:
 
@@ -63,6 +63,11 @@ algorithms, as well as just a game to play and enjoy.
 
    *  Highly configurable.
 
+   *  Possibility to plug in external clients.
+
+   *  Basic team support directly integrated in the game, sophisticated
+     team play available due to team frameworks.
+
 * Menu:
 
 * More information::
@@ -77,11 +82,11 @@ File: RealTimeBattle.info,  Node: More information,  Next: Requirements,  Up: In
 1.1 More information
 ====================
 
-More information can be found in the `INSTALL', `BUGS', `TODO',
-`README', `FAQ' and `ChangeLog' files in the distribution. More updated
-information is available on the RealTimeBattle homepage
-(http://www.lysator.liu.se/realtimebattle/), where you can also find
-robots, news on tournaments as well as this manual in different formats.
+More information can be found in the `INSTALL', `AUTHORS', `BUGS',
+`TODO', `README', `FAQ' and `ChangeLog' files in the distribution. More
+updated information is available on the RealTimeBattle homepage
+(http://realtimebattle.sf.net), where you can also find robots, news on
+tournaments as well as this manual in different formats.
 
 
 File: RealTimeBattle.info,  Node: Requirements,  Next: Background,  Prev: More information,  Up: Introduction
@@ -133,7 +138,8 @@ RealTimeBattle is distributed under the GNU General Public License
 community. Official versions of RealTimeBattle will be released by the
 authors.
 
-   Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony
+   Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony,
+see the `AUTHORS' file for further developers.
 
    This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -157,10 +163,8 @@ File: RealTimeBattle.info,  Node: Bug reports,  Prev: License,  Up: Introduction
 
 If you find anything in this package which doesn't work, appears
 strange, is missing, is spellt wrong or is just confusing, don't
-hesitate to send in a bug report to the authors
-(mailto:rtb@users.sourceforge.net). But please check first the included
-bug list and the bug list on the homepage
-(http://www.lysator.liu.se/realtimebattle/Documentation/BUGS.html).
+hesitate to send in a bug report to the Sourceforge Bug Tracker
+(http://sourceforge.net/tracker/?group_id=561=100561).
 
 
 File: RealTimeBattle.info,  Node: Usage,  Next: Structure,  Prev: Introduction,  Up: Top
@@ -235,9 +239,12 @@ can also select in which game-mode the program will run: `debug',
 
          --help,                      -h   prints this message
          --version,                   -v   prints the version number
+         --port_number                -p   specifies the port for remote clients (default is 32134)
 
-   The differences between the three competition modes are shown in the
-following table
+   The port_number option is only available, if you chose to compile
+RealTimeBattle with the -enable-network option.  See the `INSTALL' file
+for more information.  The differences between the three competition
+modes are shown in the following table
 
      +----------------------------------+-------+--------+-------------+
      | Mode                             | Debug | Normal | Competition |
@@ -987,7 +994,8 @@ File: RealTimeBattle.info,  Node: Messages to robots,  Next: Messages from robot
      good reasons.
 
 `YourColour [colour (hex)]'
-     Current colour of the robot, change it if you find it ugly.
+     Current colour of the robot, change it if you find it ugly.  All
+     robots in a team will have the same colour.
 
 `GameOption [optionnr (int)] [value (double)]'
      At the beginning of each game the robots will be sent a number of
@@ -1025,8 +1033,8 @@ File: RealTimeBattle.info,  Node: Messages to robots,  Next: Messages from robot
      If you detect a robot with your radar, this message will follow,
      giving some information on the robot. The opponents energy level
      will be given in the same manner as your own energy (see below).
-     The second argument is only interesting in team-mode (which
-     current isn't implemented), 1 means a teammate and 0 an enemy.
+     The second argument is only interesting in team-mode, 1 means a
+     teammate and 0 an enemy.
 
 `RotationReached [what has reached(int)]'
      When the robot option *Note Messages from robots::  is set
@@ -1134,7 +1142,13 @@ parts and may report an unknown message.
 `Name [name (string)]'
      When receiving the *Note Messages to robots::  message with
      argument 1, indicating that this is the first sequence, you should
-     send both your name and your colour.
+     send both your name and your colour. If your name ends with the
+     string `Team: teamname', you will be in the team `teamname'.  For
+     example "Name foo Team: bar" will assign you to the team `bar' and
+     your name will be `foo'.  All robots in a team will have the same
+     colour and will recognize them over the RobotInfo message.  For a
+     more sophisticated possibilities, please take a look onto the
+     RealTimeBattle Team Framework (http://rtb-team.sf.net).
 
 `Colour [home colour (hex)] [away colour (hex)]'
      See above. The colours are like normal football shirts, the home
@@ -1626,54 +1640,54 @@ whitespace. Be sure to give the right number of arguments!
 
 Tag Table:
 Node: Top146
-Node: Introduction509
-Node: More information2021
-Node: Requirements2493
-Node: Background3431
-Node: License4150
-Node: Bug reports5249
-Node: Usage5727
-Node: Command line options6561
-Node: Control window9233
-Node: Start new tournament window11349
-Node: Robots and arena directories12564
-Node: Arena window13250
-Node: Score window13692
-Node: Message window13904
-Node: Options window14272
-Node: Statistics window14879
-Node: Running without graphics15660
-Node: Tournament files16610
-Node: Log files19175
-Node: Replaying20505
-Node: Statistics files21488
-Node: Structure21865
-Node: Robot motion22349
-Node: Energy23634
-Node: The radar24050
-Node: The robots position24749
-Node: Shooting25214
-Node: Collisions26537
-Node: Cookies and Mines27080
-Node: Time27519
-Node: A game28467
-Node: A sequence29286
-Node: A tournament29849
-Node: Robot construction30345
-Node: Reading messages30894
-Node: Messagetypes-h34101
-Node: Cheating34528
-Node: Messages to robots35967
-Node: Messages from robots41376
-Node: Options45692
-Node: Environmental options46270
-Node: Robot options47142
-Node: Shot options49229
-Node: Extras options50261
-Node: Time options51059
-Node: Window sizes53472
-Node: Miscellaneous options53883
-Node: Arena construction55126
-Node: Arena commands56825
+Node: Introduction529
+Node: More information2211
+Node: Requirements2681
+Node: Background3619
+Node: License4338
+Node: Bug reports5485
+Node: Usage5852
+Node: Command line options6686
+Node: Control window9619
+Node: Start new tournament window11735
+Node: Robots and arena directories12950
+Node: Arena window13636
+Node: Score window14078
+Node: Message window14290
+Node: Options window14658
+Node: Statistics window15265
+Node: Running without graphics16046
+Node: Tournament files16996
+Node: Log files19561
+Node: Replaying20891
+Node: Statistics files21874
+Node: Structure22251
+Node: Robot motion22735
+Node: Energy24020
+Node: The radar24436
+Node: The robots position25135
+Node: Shooting25600
+Node: Collisions26923
+Node: Cookies and Mines27466
+Node: Time27905
+Node: A game28853
+Node: A sequence29672
+Node: A tournament30235
+Node: Robot construction30731
+Node: Reading messages31280
+Node: Messagetypes-h34487
+Node: Cheating34914
+Node: Messages to robots36353
+Node: Messages from robots41782
+Node: Options46538
+Node: Environmental options47116
+Node: Robot options47988
+Node: Shot options50075
+Node: Extras options51107
+Node: Time options51905
+Node: Window sizes54318
+Node: Miscellaneous options54729
+Node: Arena construction55972
+Node: Arena commands57671
 
 End Tag Table

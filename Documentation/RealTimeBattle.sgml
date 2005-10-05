@@ -21,9 +21,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 <article>
 <titlepag>
-<title>RealTimeBattle User Manual, version 1.0.7
-<author>Erik Ouchterlony and Ragnar Ouchterlony, <htmlurl name="rtb@users.sourceforge.net" url="mailto:rtb@users.sourceforge.net">
-<date> 23 November 2004
+<title>RealTimeBattle User Manual, version 1.0.8
+<author>Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai (<htmlurl name="jonico@users.sourceforge.net" url="mailto:jonico@users.sourceforge.net">)
+<date> 4 October 2005
 
 <!-- <abstract> -->
 
@@ -72,14 +72,18 @@ makes easy to start constructing robots.
 
 <item> Highly configurable.
 
+<item> Possibility to plug in external clients.
+
+<item> Basic team support directly integrated in the game, sophisticated team play available due to team frameworks.
+
 </itemize>
 
 <sect1>More information<label id="More information">
 <p>
-More information can be found in the <tt>INSTALL</tt>, <tt>BUGS</tt>, <tt>TODO</tt>,
+More information can be found in the <tt>INSTALL</tt>, <tt>AUTHORS</tt>, <tt>BUGS</tt>, <tt>TODO</tt>,
 <tt>README</tt>, <tt>FAQ</tt> and <tt>ChangeLog</tt> files in the 
 distribution. More updated information is available on the 
-<url name="RealTimeBattle homepage" url="http://www.lysator.liu.se/realtimebattle/">, where 
+<url name="RealTimeBattle homepage" url="http://realtimebattle.sf.net">, where 
 you can also find robots, news on tournaments as well as this manual in different formats.
 
 <sect1>Requirements<label id="Requirements">
@@ -120,7 +124,8 @@ RealTimeBattle is distributed under the
 the spirit of the Linux community. Official versions of
 RealTimeBattle will be released by the authors.
 
-Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony
+Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony,
+see the <tt>AUTHORS</tt> file for further developers.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -139,10 +144,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 <sect1>Bug reports<label id="BugReports">
 <p>
 If you find anything in this package which doesn't work, appears strange, is missing, is
-spellt wrong or is just confusing, don't hesitate to send in a bug report to the 
-<url name="authors" url="mailto:rtb@users.sourceforge.net">. But please check first the
-included bug list and the 
-<url name="bug list on the homepage" url="http://www.lysator.liu.se/realtimebattle/Documentation/BUGS.html">.
+spellt wrong or is just confusing, don't hesitate to send in a bug report to the <url name="Sourceforge Bug Tracker" url="http://sourceforge.net/tracker/?group_id=561&atid=100561">. 
 
 
 <!--   ################         Usage          ##################   -->
@@ -196,8 +198,11 @@ will run: <tt>debug</tt>, <tt>normal</tt> or <tt>competition</tt> mode.
 
     --help,                      -h   prints this message
     --version,                   -v   prints the version number
+    --port_number                -p   specifies the port for remote clients (default is 32134)  
 </code>
 
+The port_number option is only available, if you chose to compile RealTimeBattle with the --enable-network option.
+See the <tt>INSTALL</tt> file for more information.
 The differences between the three competition modes are shown in the following
 table
 
@@ -789,9 +794,11 @@ wait for YourName and YourColour messages (see below).
 <tag>YourName [name (string)]</tag> Current name of the robot, don't
 change it if you don't have very good reasons.
 
+
 <label id="YourColour">
 <tag>YourColour [colour (hex)]</tag> Current colour of the robot,
 change it if you find it ugly.
+All robots in a team will have the same colour.
 
 <tag>GameOption [optionnr (int)] [value (double)]</tag> At the beginning of each game the
 robots will be sent a number of settings, which can be useful for the robot. For a
@@ -830,7 +837,7 @@ has moved since.
 detect a robot with your radar, this message will follow, giving some
 information on the robot. The opponents energy level will be given in
 the same manner as your own energy (see below). The second argument is
-only interesting in team-mode (which current isn't implemented), 1
+only interesting in team-mode, 1
 means a teammate and 0 an enemy.
 
 <label id="RotationReached">
@@ -936,7 +943,10 @@ starts. Since it should always be given, there is no default value.
 <label id="NameAndColour">
 <tag>Name [name (string)]</tag> When receiving the <ref id="Initialize" name="Initialize"> message
 with argument 1, indicating that this is the first sequence, you should send both your name and your
-colour.
+colour. If your name ends with the string <tt>Team: teamname</tt>, you will be in the team <tt>teamname</tt>.
+For example "Name foo Team: bar" will assign you to the team <tt>bar</tt> and your name will be <tt>foo</tt>.
+All robots in a team will have the same colour and will recognize them over the RobotInfo message.
+For a more sophisticated possibilities, please take a look onto the <url name="RealTimeBattle Team Framework" url="http://rtb-team.sf.net">.
 
 <tag>Colour [home colour (hex)] [away colour (hex)]</tag> See above. The colours are like
 normal football shirts, the home colour is used unless it is already used. Otherwise the

@@ -2,7 +2,7 @@
 <HTML>
 <HEAD>
  <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>RealTimeBattle User Manual, version 1.0.7: Robot construction</TITLE>
+ <TITLE>RealTimeBattle User Manual, version 1.0.8: Robot construction</TITLE>
  <LINK HREF="RealTimeBattle-5.html" REL=next>
  <LINK HREF="RealTimeBattle-3.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc4" REL=contents>
@@ -140,10 +140,12 @@ wait for YourName and YourColour messages (see below).</P>
 <A NAME="YourName"></A> </P>
 <DT><B>YourName [name (string)]</B><DD><P>Current name of the robot, don't
 change it if you don't have very good reasons.</P>
+
 <P>
 <A NAME="YourColour"></A> </P>
 <DT><B>YourColour [colour (hex)]</B><DD><P>Current colour of the robot,
-change it if you find it ugly.</P>
+change it if you find it ugly.
+All robots in a team will have the same colour.</P>
 
 <DT><B>GameOption [optionnr (int)] [value (double)]</B><DD><P>At the beginning of each game the
 robots will be sent a number of settings, which can be useful for the robot. For a
@@ -183,7 +185,7 @@ has moved since.</P>
 detect a robot with your radar, this message will follow, giving some
 information on the robot. The opponents energy level will be given in
 the same manner as your own energy (see below). The second argument is
-only interesting in team-mode (which current isn't implemented), 1
+only interesting in team-mode, 1
 means a teammate and 0 an enemy.</P>
 <P>
 <A NAME="RotationReached"></A> </P>
@@ -283,7 +285,11 @@ starts. Since it should always be given, there is no default value.</P>
 <DT><B>Name [name (string)]</B><DD><P>When receiving the 
 <A HREF="#Initialize">Initialize</A> message
 with argument 1, indicating that this is the first sequence, you should send both your name and your
-colour.</P>
+colour. If your name ends with the string <CODE>Team: teamname</CODE>, you will be in the team <CODE>teamname</CODE>.
+For example "Name foo Team: bar" will assign you to the team <CODE>bar</CODE> and your name will be <CODE>foo</CODE>.
+All robots in a team will have the same colour and will recognize them over the RobotInfo message.
+For a more sophisticated possibilities, please take a look onto the 
+<A HREF="http://rtb-team.sf.net">RealTimeBattle Team Framework</A>.</P>
 
 <DT><B>Colour [home colour (hex)] [away colour (hex)]</B><DD><P>See above. The colours are like
 normal football shirts, the home colour is used unless it is already used. Otherwise the

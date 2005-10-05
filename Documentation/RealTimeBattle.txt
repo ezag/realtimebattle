@@ -1,7 +1,7 @@
-  RealTimeBattle User Manual, version 1.0.7
-  Erik Ouchterlony and Ragnar Ouchterlony,
-  rtb@users.sourceforge.net
-  23 November 2004
+  RealTimeBattle User Manual, version 1.0.8
+  Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai
+  (jonico@users.sourceforge.net)
+  4 October 2005
   ____________________________________________________________
 
   Table of Contents
@@ -86,34 +86,38 @@
   Features include:
 
 
-  +o  Game progresses in real time, with the robot programs running as
+  ·  Game progresses in real time, with the robot programs running as
      child processes to RealTimeBattle.
 
-  +o  The robots communicate with the main program using the standard
+  ·  The robots communicate with the main program using the standard
      input and output.
 
-  +o  Robots can be constructed in almost any programming language.
+  ·  Robots can be constructed in almost any programming language.
 
-  +o  Up to 120 robots can compete simultaneously.
+  ·  Up to 120 robots can compete simultaneously.
 
-  +o  A simple messaging language is used for communication, which makes
+  ·  A simple messaging language is used for communication, which makes
      easy to start constructing robots.
 
-  +o  Robots behave like real physical object.
+  ·  Robots behave like real physical object.
 
-  +o  You can create your own arenas.
+  ·  You can create your own arenas.
 
-  +o  Highly configurable.
+  ·  Highly configurable.
+
+  ·  Possibility to plug in external clients.
+
+  ·  Basic team support directly integrated in the game, sophisticated
+     team play available due to team frameworks.
 
 
   [1m1.1.  More information[0m
 
-  More information can be found in the INSTALL, BUGS, TODO, README, FAQ
-  and ChangeLog files in the distribution. More updated information is
-  available on the RealTimeBattle homepage
-  <http://www.lysator.liu.se/realtimebattle/>, where you can also find
-  robots, news on tournaments as well as this manual in different
-  formats.
+  More information can be found in the INSTALL, AUTHORS, BUGS, TODO,
+  README, FAQ and ChangeLog files in the distribution. More updated
+  information is available on the RealTimeBattle homepage
+  <http://realtimebattle.sf.net>, where you can also find robots, news
+  on tournaments as well as this manual in different formats.
 
 
   [1m1.2.  Requirements[0m
@@ -125,11 +129,13 @@
   simultaneously; running 120 advanced robots is certainly demanding for
   any personal computer.
 
+
   RealTimeBattle is only available on Unix.  It is developed on a Linux-
   machine, but it should compile on other Unix dialects too. Running in
   ``competition-mode'' is currently only possible on Linux with the
   '/proc'-directory enabled, because of the need to get the cpu usage of
   child processes.
+
   The only software requirement is gtk+ <http://www.gtk.org>, which is
   used for the graphical user interface.
 
@@ -156,7 +162,8 @@
   community. Official versions of RealTimeBattle will be released by the
   authors.
 
-  Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony
+  Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony, see
+  the AUTHORS file for further developers.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -178,10 +185,8 @@
 
   If you find anything in this package which doesn't work, appears
   strange, is missing, is spellt wrong or is just confusing, don't
-  hesitate to send in a bug report to the authors
-  <mailto:rtb@users.sourceforge.net>. But please check first the
-  included bug list and the bug list on the homepage
-  <http://www.lysator.liu.se/realtimebattle/Documentation/BUGS.html>.
+  hesitate to send in a bug report to the Sourceforge Bug Tracker
+  <http://sourceforge.net/tracker/?group_id=561=100561>.
 
 
 
@@ -193,6 +198,7 @@
   interface. It is, however, a good idea to read the short section on
   ``command line options'' below. Note also that there is no built-in
   help in the program - here is where you should search for help.
+
 
 
   [1m2.1.  Command line options[0m
@@ -236,12 +242,15 @@
 
       --help,                      -h   prints this message
       --version,                   -v   prints the version number
+      --port_number                -p   specifies the port for remote clients (default is 32134)
   ______________________________________________________________________
 
 
 
-  The differences between the three competition modes are shown in the
-  following table
+  The port_number option is only available, if you chose to compile
+  RealTimeBattle with the --enable-network option.  See the INSTALL file
+  for more information.  The differences between the three competition
+  modes are shown in the following table
 
 
 
@@ -255,17 +264,6 @@
   | Robot CPU time unlimited         |  Yes  |  Yes   |      No     |
   +----------------------------------+-------+--------+-------------+
   ______________________________________________________________________
-
-
-
-     |___________________________|_____________________________________|___
-     |Mode                      |  Debug     Normal     Competition  |
-     |___________________________|_____________________________________|___
-     |Debug command available   |   Yes        No           No       |
-     |Pause in game             |   Yes       Yes           No       |
-     |Step through game         |   Yes        No           No       |
-     |Robot CPU time unlimited  |   Yes       Yes           No       |
-     |___________________________|_____________________________________|___
 
 
 
@@ -307,7 +305,6 @@
 
      [1mQuit:[0m
         Terminates the program.
-
 
   In ``debug-mode'' there is another set of buttons available. They are
   intended to help with debugging of robots. Note that you can debug a
@@ -387,7 +384,6 @@
   the front direction.
 
 
-
   [1m2.6.  Score window[0m
 
   In this window the robots playing in the current sequence are listed.
@@ -420,13 +416,13 @@
   different ways. You can either display
 
 
-  +o  statistics on individual [1mRobot[22ms,
+  ·  statistics on individual [1mRobot[22ms,
 
-  +o  the result of a [1mgame[22m,
+  ·  the result of a [1mgame[22m,
 
-  +o  the [1msequence total [22mor
+  ·  the [1msequence total [22mor
 
-  +o  the [1mtotal [22mof the tournament.
+  ·  the [1mtotal [22mof the tournament.
 
      Pressing the arrowed buttons will move you to the first, back one,
      forward one or to the last element respectively. The middle bar
@@ -508,7 +504,6 @@
 
      [1mFull path to the file:[0m
         This takes the given file
-
         Example: Arena:
         /usr/local/games/RealTimeBattle/Arenas/Circle.arena
 
@@ -517,7 +512,6 @@
         This searches the whole path and takes all files found.
 
         Example: Arena: *
-
 
 
      [1mOne specific directory:[0m
@@ -576,7 +570,6 @@
 
      [1mMine:[0m
         M [mine id] [x] [y]
-
      [1mShot:[0m
         S [shot id] [x] [y] [dx/dt] [dy/dt]
 
@@ -585,27 +578,26 @@
         received] [position])
 
 
-
   [1m2.13.  Replaying[0m
 
   You can replay a game from its ``log file'' either by giving the
   ``command line option'' "-r" or from the ``control window''.  Note
   that if the log is coming from standard input (command line option
-  "-r -"), you cannot do much but watch the game, but otherwise you can
+  "-r-"), you cannot do much but watch the game, but otherwise you can
   influence the flow of the game:
 
 
-  +o  The slidebar at the top shows how far the current game has
+  ·  The slidebar at the top shows how far the current game has
      progressed. You can jump wherever you want in the game by dragging
      the handle.
 
-  +o  Fast forward and rewind work as expected. You can alter the speed
+  ·  Fast forward and rewind work as expected. You can alter the speed
      by changing the option ``fast forward factor''.
 
-  +o  Step forward and step backward can be used to study what happens in
+  ·  Step forward and step backward can be used to study what happens in
      detail. First, however, the game should be ``paused''.
 
-  +o  With the four bottom buttons you can jump between games and
+  ·  With the four bottom buttons you can jump between games and
      sequences.
 
 
@@ -656,13 +648,13 @@
   The robot health is measured by its energy. There are several ways for
   the robot to lose energy, it can
 
-  +o  be hit by a shot,
+  ·  be hit by a shot,
 
-  +o  collide with another robot or a wall,
+  ·  collide with another robot or a wall,
 
-  +o  spring a mine or
+  ·  spring a mine or
 
-  +o  fire a shot.
+  ·  fire a shot.
 
   However, there is only one possibility to gain energy: to eat a
   cookie.
@@ -783,6 +775,9 @@
 
   Thereafter a ``number of games'' are played and finally the robot
   processes are killed.
+
+
+
   [1m3.11.  A tournament[0m
 
   A tournament is a collection of sequences.
@@ -848,6 +843,7 @@
 
         To choose the select method, send the following robot option [4mas[0m
         [4msoon[24m [4mas[24m [4mthe[24m [4mprogram[24m [4mis[24m [4mstarted[24m:
+
         cout << "RobotOption " << USE_NON_BLOCKING << " " << 1 << endl;
 
 
@@ -940,8 +936,10 @@
         very good reasons.
 
 
+
      [1mYourColour [colour (hex)][0m
-        Current colour of the robot, change it if you find it ugly.
+        Current colour of the robot, change it if you find it ugly.  All
+        robots in a team will have the same colour.
 
 
      [1mGameOption [optionnr (int)] [value (double)][0m
@@ -963,9 +961,6 @@
         This message gives information from the radar each turn.
         Remember that the radar-angle is relative to the robot front; it
         is given in radians.
-
-
-
      [1mInfo [time (double)] [speed (double)] [cannon angle (double)][0m
         The [1mInfo [22mmessage does always follow the [1mRadar [22mmessage. It gives
         more general information on the state of the robot.  The time is
@@ -987,8 +982,8 @@
         If you detect a robot with your radar, this message will follow,
         giving some information on the robot. The opponents energy level
         will be given in the same manner as your own energy (see below).
-        The second argument is only interesting in team-mode (which
-        current isn't implemented), 1 means a teammate and 0 an enemy.
+        The second argument is only interesting in team-mode, 1 means a
+        teammate and 0 an enemy.
 
 
      [1mRotationReached [what has reached(int)][0m
@@ -1104,7 +1099,13 @@
      [1mName [name (string)][0m
         When receiving the ``Initialize'' message with argument 1,
         indicating that this is the first sequence, you should send both
-        your name and your colour.
+        your name and your colour. If your name ends with the string
+        Team: teamname, you will be in the team teamname.  For example
+        "Name foo Team: bar" will assign you to the team bar and your
+        name will be foo.  All robots in a team will have the same
+        colour and will recognize them over the RobotInfo message.  For
+        a more sophisticated possibilities, please take a look onto the
+        RealTimeBattle Team Framework <http://rtb-team.sf.net>.
 
 
      [1mColour [home colour (hex)] [away colour (hex)][0m
@@ -1156,8 +1157,6 @@
      [1mShoot [shot energy (double)][0m
         Shoot with the given energy.  ``The shot options'' give more
         information.
-
-
      [1mPrint [message (string)][0m
         Print message on the ``message window''.
 
@@ -1172,7 +1171,6 @@
         highest debug level(5), otherwise a ``warning message'' is sent.
         The arguments are the start and end point of the line given in
         polar coordinates relative to the robot.
-
 
 
      [1mDebugCircle [center angle (double)] [center radius (double)] [cir-[0m
@@ -1221,11 +1219,11 @@
         Determines how coordinates are send to the robots. The following
         options are available:
 
-        +o  0 - don't send any coordinates (default)
+        ·  0 - don't send any coordinates (default)
 
-        +o  1 - send the coordinates relative the starting position
+        ·  1 - send the coordinates relative the starting position
 
-        +o  2 - send absolute coordinates
+        ·  2 - send absolute coordinates
 
 
 
@@ -1239,6 +1237,8 @@
 
      [1mRobot min acceleration:[0m
         ... slower than this.
+
+
      [1mRobot radius:[0m
         Determines the size of the robot.
 
@@ -1304,6 +1304,7 @@
 
      [1mRobot radar max rotate speed:[0m
         Maximum radar rotate speed.  See note above.
+
 
      [1mRobot energy levels:[0m
         The robot will only know its energy approximately. This will
@@ -1371,6 +1372,7 @@
         The mine energy is a random number between mine max energy and
         mine min energy.
 
+
      [1mMine min energy:[0m
         See above.
 
@@ -1416,6 +1418,7 @@
         you have a fast computer you may want to speed the game up.
 
 
+
      [1mUpdate interval:[0m
         This option determines the time between robot updates, i.e., how
         often the robot states are changed. It is not influenced by the
@@ -1436,6 +1439,7 @@
         In ``competition-mode'' a robot's CPU usage is limited. At the
         beginning of a sequence a robot will get this amount of CPU time
         to spend.
+
 
      [1mExtra CPU time:[0m
         When the start CPU time is spent, the robot will get this amount
@@ -1503,6 +1507,7 @@
      [1mColour for RTB messages:[0m
         Colour for the text when RTB sends messages.
 
+
      [1mRobot search path:[0m
         This is a colon-separated list of directories which will be
         searched for robots when a ``new tournament'' is started. The
@@ -1563,7 +1568,6 @@
         This value times the ``arena scale'' will give the scale factor,
         by which all coordinates are multiplied. This command must be,
         if it exists, the very first in the file, default is 1.0.
-
 
 
      [1mangle_unit [unit][0m
@@ -1630,6 +1634,7 @@
         [1mC  [22mFinish by connecting with the starting point.
 
         [1mQ  [22mQuit.
+
 
 
      [1mexclusion_point [position_x] [position_y][0m

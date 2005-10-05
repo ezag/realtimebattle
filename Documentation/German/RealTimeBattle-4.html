@@ -2,7 +2,7 @@
 <HTML>
 <HEAD>
  <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>RealTimeBattle Benutzer-Handbuch, Version 1.0.7: Roboter-Programmierung</TITLE>
+ <TITLE>RealTimeBattle Benutzer-Handbuch, Version 1.0.8: Roboter-Programmierung</TITLE>
  <LINK HREF="RealTimeBattle-5.html" REL=next>
  <LINK HREF="RealTimeBattle-3.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc4" REL=contents>
@@ -152,7 +152,8 @@ ihn nur &auml;ndern, wenn man <CODE>sehr</CODE> gute Gr&uuml;nde daf&uuml;r hat.
 <P>
 <A NAME="YourColour"></A> </P>
 <DT><B>YourColour [Farbe (hex)]</B><DD><P>Die momentane Farbe des Roboters; wenn
-sie einem nicht gef&auml;llt, kann man sie &auml;ndern.</P>
+sie einem nicht gef&auml;llt, kann man sie &auml;ndern.
+Alle Roboter in einem Team haben dieselbe Farbe.</P>
 
 <DT><B>GameOption [Optionsnummer (int)] [value (double)]</B><DD><P>Am Anfang jedes
 Spieles werden dem Roboter einige Einstellungen mitgeteilt, die dem Roboter
@@ -193,8 +194,8 @@ gestartet ist sondern nur wohin er sich seitdem bewegt hat.</P>
 diese Nachricht an deinen Roboter gesendet. Sie gibt verschiedene Informationen
 &uuml;ber den feindlichen Roboter. Die Energie des anderen Roboters wird auf die
 gleiche Art und Weise angegeben, wie die Energie deines eigenen
-Roboters(siehe unten). Der zweite Parameter ist nur im Team-Mode interessant
-(der momentan jedoch noch nicht implementiert ist), 1 heisst Team-Mitglied,
+Roboters(siehe unten). Der zweite Parameter ist nur im Team-Mode interessant, 
+1 heisst Team-Mitglied,
 0 steht f&uuml;r einen Gegner.</P>
 <P>
 <A NAME="RotationReached"></A> </P>
@@ -303,7 +304,11 @@ Default-Wert.</P>
 <DT><B>Name [Name (string)]</B><DD><P>Wenn man die
 <A HREF="#Initialize">Initialize</A>-Nachricht mit 1 als Argument erh&auml;lt,
 die anzeigt dass dies die erste Sequenz ist, sollte der Roboter seinen Namen
-und seine Farbe senden.</P>
+und seine Farbe senden. Im Namen kann die Teamzugeh&ouml;rigkeit mitgeteilt werden.
+Lautet der Name <CODE>foo Team: bar</CODE>, so hei&szlig;t der Roboter <CODE>foo</CODE> und spielt im Team <CODE>bar</CODE>.
+Teammitglieder bekommen dieselbe Farbe und erkennen sich als Freund bei der RobotInfo Nachricht.
+Ausgefeilteren Team-Support bietet das 
+<A HREF="http://rtb-team.sf.net">RealTimeBattle Team FrameWork</A>.</P>
 
 <DT><B>Colour [home colour (hex)] [away colour (hex)]</B><DD><P>Siehe oben. Die Farben sind wie normale Fu&szlig;balltrikots. Die
 "home colour" wird verwendet falls sie nicht schon vergeben ist.

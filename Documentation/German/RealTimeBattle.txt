@@ -1,9 +1,9 @@
-  RealTimeBattle Benutzer-Handbuch, Version 1.0.7
-  Erik Ouchterlony and Ragnar Ouchterlony,
-  rtb@users.sourceforge.net
-  23. November 2004
+  RealTimeBattle Benutzer-Handbuch, Version 1.0.8
+  Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai
+  (jonico@users.sourceforge.net)
+  4. Oktober 2005
 
-  Deutsche Übersetzung von Uwe Hermann und Falko Menge
+  Deutsche Übersetzung von Uwe Hermann, Falko Menge und Johannes Nicolai
   ______________________________________________________________________
 
   Table of Contents
@@ -111,11 +111,16 @@
 
   ·  Viele Konfigurationsmöglichkeiten.
 
+  ·  Externe Clients können das Spielgeschehen anzeigen.
+
+  ·  Rudimentärer Team-Support ist direkt im Spiel eingebaut, Team
+     Frameworks erlauben weitere Koordination der Roboter.
+
 
   [1m1.1.  Weitere Informationen[0m
 
-  Mehr Informationen gibt's in den Dateien INSTALL, BUGS, TODO, README,
-  FAQ und ChangeLog . Aktuellere Informationen kann man auf der
+  Mehr Informationen gibt's in den Dateien INSTALL, AUTHORS, BUGS, TODO,
+  README, FAQ und ChangeLog . Aktuellere Informationen kann man auf der
   RealTimeBattle Homepage <http://realtimebattle.sourceforge.net/>
   finden, wo es auch verschiedene Roboter, Neuigkeiten zu diversen
   Wettkämpfen, sowie dieses Handbuch in mehreren Dateiformaten gibt.
@@ -137,9 +142,9 @@
   verfügbar, wenn man unter Linux das /proc-Verzeichnis aktiviert hat,
   daRealTimeBattle Informationen über die momentane CPU-Last erhalten
   muss.
-
   Die einzige benötigte Software ist gtk+ <http://www.gtk.org>, das für
   die grafische Benutzeroberfläche verwendet wird.
+
 
 
   [1m1.3.  Hintergrundinformationen[0m
@@ -171,7 +176,8 @@
   Offizielle Versionen von RealTimeBattle werden von den Autoren
   freigegeben werden.
 
-  Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony
+  Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony,
+  weitere Entwickler sind in der AUTHORS Datei zu finden.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -193,11 +199,8 @@
 
   Wenn du etwas in diesem Softwarepaket findest, das nicht funktioniert,
   nicht richtig funktioniert, fehlt, falsch geschrieben, oder einfach
-  nur verwirrend ist, zögere nicht eine eMail an die Autoren
-  <mailto:rtb@users.sourceforge.net> zu schicken.  Aber schau bitte
-  zuerst in der Datei BUGS , oder auf der RealTimeBattle Homepage
-  <http://sourceforge.net/bugs/?group_id=561> nach, ob der Fehler nicht
-  schon gemeldet und/oder schon behoben wurde.
+  nur verwirrend ist, schicke einen Bug Report an RealTimeBattle
+  Homepage <http://sourceforge.net/bugs/?group_id=561>.
 
 
   [1m1.6.  Deutsche Übersetzung[0m
@@ -205,18 +208,18 @@
   Diese Übersetzung unterliegt der GNU General Public License. Nähere
   Infomationen gibt es unter http://www.fsf.org/copyleft/gpl.html
   <http://www.fsf.org/copyleft/gpl.html> rtb-docs.de -- german
-  translation of the RTB documentation Copyright (C) 1999,2000  Uwe
-  Hermann This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License as
-  published by the Free Software Foundation; either version 2 of the
-  License, or (at your option) any later version.  This program is
-  distributed in the hope that it will be useful, but WITHOUT ANY
-  WARRANTY; without even the implied warranty of MERCHANTABILITY or
-  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-  for more details.  You should have received a copy of the GNU General
-  Public License along with this program; if not, write to the Free
-  Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-  02111-1307, USA.
+  translation of the RTB documentation Copyright (C) 1999-2005  Uwe
+  Hermann, Falko Menge, Johannes Nicolai This program is free software;
+  you can redistribute it and/or modify it under the terms of the GNU
+  General Public License as published by the Free Software Foundation;
+  either version 2 of the License, or (at your option) any later
+  version.  This program is distributed in the hope that it will be
+  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.  You should have received a
+  copy of the GNU General Public License along with this program; if
+  not, write to the Free Software Foundation, Inc., 59 Temple Place -
+  Suite 330, Boston, MA 02111-1307, USA.
 
 
   Die deutsche Übersetzung(für RTB-Version 0.9.7) wurde von Uwe Hermann
@@ -237,6 +240,14 @@
 
   Changelog:
 
+
+  ·  4. Oktober 2005 (von Johannes Nicolai):
+
+     ·  Anpassung an Version 1.0.8
+
+     ·  Aktuellere Links eingefügt
+
+     ·  weitere kleinere Verbesserungen
 
   ·  23. November 2004 (von Falko Menge):
 
@@ -262,6 +273,7 @@
 
      ·  Tippfehler ausgebessert
 
+
   ·  7. September 1999:
 
      ·  Anpassung an Version 0.9.11(und dadurch natürlich auch an
@@ -272,7 +284,6 @@
      ·  kleinere Verbesserungen.
 
      ·  Übersetzung an Version 0.9.8 und dann 0.9.9 angepasst.
-
 
   ·  21. Mai 1999:
 
@@ -342,10 +353,14 @@
 
       --help,                      -h   zeigt diese Informationen
       --version,                   -v   gibt die Versionsnummer aus
+      --port_number                -p   legt den Port fest, an denen externe Clients sich
+                                        verbinden können (Standard: 32134)
   ______________________________________________________________________
 
 
 
+  Die port_number Option ist nur dann verfügbar, wenn RealTimeBattle mit
+  der --enable-network Option compiliert wurde (siehe Datei INSTALL).
   Die Unterschiede zwischen den drei Comepetition-Modi sind in folgender
   Tabelle zusammengefasst.
 
@@ -1086,7 +1101,8 @@
 
      [1mYourColour [Farbe (hex)][0m
         Die momentane Farbe des Roboters; wenn sie einem nicht gefällt,
-        kann man sie ändern.
+        kann man sie ändern.  Alle Roboter in einem Team haben dieselbe
+        Farbe.
 
 
      [1mGameOption [Optionsnummer (int)] [value (double)][0m
@@ -1137,9 +1153,8 @@
         gibt verschiedene Informationen über den feindlichen Roboter.
         Die Energie des anderen Roboters wird auf die gleiche Art und
         Weise angegeben, wie die Energie deines eigenen Roboters(siehe
-        unten). Der zweite Parameter ist nur im Team-Mode interessant
-        (der momentan jedoch noch nicht implementiert ist), 1 heisst
-        Team-Mitglied, 0 steht für einen Gegner.
+        unten). Der zweite Parameter ist nur im Team-Mode interessant, 1
+        heisst Team-Mitglied, 0 steht für einen Gegner.
 
 
      [1mRotationReached [Was hat seine Rotation beendet?(int)][0m
@@ -1264,7 +1279,13 @@
      [1mName [Name (string)][0m
         Wenn man die ``Initialize''-Nachricht mit 1 als Argument erhält,
         die anzeigt dass dies die erste Sequenz ist, sollte der Roboter
-        seinen Namen und seine Farbe senden.
+        seinen Namen und seine Farbe senden. Im Namen kann die
+        Teamzugehörigkeit mitgeteilt werden.  Lautet der Name foo Team:
+        bar, so heißt der Roboter foo und spielt im Team bar.
+        Teammitglieder bekommen dieselbe Farbe und erkennen sich als
+        Freund bei der RobotInfo Nachricht.  Ausgefeilteren Team-Support
+        bietet das RealTimeBattle Team FrameWork <http://rtb-
+        team.sf.net>.
 
 
      [1mColour [home colour (hex)] [away colour (hex)][0m
@@ -1274,6 +1295,7 @@
         zufällig gewählte, freie Farbe benutzt.
 
 
+
      [1mRotate [Was soll rotieren (int)] [angular velocity (double)][0m
         Setzt die "angular velocity" für den Roboter, die Kanone und den
         Radar.  Setze 'Was soll rotieren' auf 1 für den Roboter, 2 für
@@ -1281,6 +1303,8 @@
         um mehrere Objekte gleichzeitig zu rotieren. Die "angular
         velocity" wird in "Radians" pro Sekunde angegeben und wird von
         ``Robot (cannon/radar) max rotate speed'' begrenzt.
+
+
      [1mRotateTo [Was soll rotieren (int)] [angular velocity (double)][0m
         [1m[End-Winkel (double)][0m
         Genau wie [1mRotate[22m, allerdings wird nur um einen bestimmten Winkel
@@ -1410,7 +1434,6 @@
         Gibt die Größe des Roboters an.
 
 
-
      [1mRobot mass:[0m
         Robotergewicht. Ein grosses Robotergewicht erhöht die
         Auswirkungen eines Zusammenpralls.
@@ -1477,6 +1500,7 @@
         Maximale Radar-Rotationsigeschwindigkeit. Siehe auch obige
         Bemerkung.
 
+
      [1mRobot energy levels:[0m
         Der Roboter wird seine Energie nur ungefähr wissen. Diese Option
         entscheidet wieviele unterschiedliche Energie-Stufen es im Spiel
@@ -1533,6 +1557,7 @@
         Siehe oben.
 
 
+
      [1mCookie frequency:[0m
         Die Zahl der Kekse pro Sekunde, die durchschnittlich auftauchen
         werden.
@@ -1540,7 +1565,6 @@
 
      [1mCookie radius:[0m
         Größe der Kekse.
-
 
 
      [1mMine max energy:[0m
@@ -1666,8 +1690,6 @@
      [1mFast forward factor:[0m
         Legt die Geschwindigkeit fest mit der das Spiel mittels fast
         forward oder rewind abläuft(siehe auch ``Replay'').
-
-
      [1mMax. Anzahl von Robotern, die gleichzeitig erlaubt sind:[0m
         Erlaubt dem User die maximal erlaubte Anzahl an Robotern in
         einer Sequenz zu verändern. Wenn es zu viele sind, kann sich das
@@ -1738,7 +1760,6 @@
   kollidierende Roboter mehr, und ein höherer Bounce-Koeffizient brigt
   sie dazu, besser abzuprallen.
 
-
   Du solltest dir auch mal die Arenas die mit RTB mitgeliefert werden
   ansehen und von den Beispielen lernen.
 
@@ -1801,7 +1822,6 @@
         Dieses Kommando wird eine Menge Kreise erzeugen, die durch
         Linien verbunden sind, und dadurch ein Polygon-ähnliches Gebilde
         schaffen.
-
 
 
      [1mclosed_polygon [Bounce] [Härte] [Dicke] [Anzahl der Seiten] ([Mit-[0m
