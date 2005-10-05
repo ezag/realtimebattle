@@ -90,7 +90,7 @@ textdomain( "RealTimeBattle" );
                           _("Slide/brake friction") );
 
   all_long_options[OPTION_SEND_ROBOT_COORDINATES] =
-    option_info_t<long>(ENTRY_INT, PAGE_ENVIRONMENT, 0, 0, 2, 4,
+    option_info_t<long>(ENTRY_INT, PAGE_ENVIRONMENT, 2, 0, 2, 4,
                         true, true, "Send robot coordinates", 
                         _("Send robot coordinates") );
 
@@ -292,7 +292,7 @@ textdomain( "RealTimeBattle" );
                           _("Update interval [s]") );
 
   all_double_options[OPTION_ROBOT_STARTUP_TIME] = 
-    option_info_t<double>(ENTRY_DOUBLE, PAGE_TIME, 1.0, 0.050, 1000000.0, 12,
+    option_info_t<double>(ENTRY_DOUBLE, PAGE_TIME, 2.0, 0.050, 1000000.0, 12,
                           false, false, "Robot startup time [s]",
                           _("Robot startup time [s]") );
 
