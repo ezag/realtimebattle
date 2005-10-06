@@ -332,8 +332,14 @@ textdomain( "RealTimeBattle" );
     option_info_t<string>(ENTRY_CHAR, PAGE_MISC, "", "", "", 1000,
                           false, false, "Arena search path", _("Arena search path") );
 
+  char* home_dir;
+  string tmp_dir="/rtb";
+  if( NULL == ( home_dir = getenv("HOME") ) ) 
+	  tmp_dir="/tmp"+tmp_dir;
+  else tmp_dir=home_dir+tmp_dir;
+  	  
   all_string_options[OPTION_TMP_RTB_DIR] =
-    option_info_t<string>(ENTRY_CHAR, PAGE_MISC, "/tmp/rtb", "", "", 1000,
+    option_info_t<string>(ENTRY_CHAR, PAGE_MISC, tmp_dir, "", "", 1000,
                           false, false, "Directory for temporary files",
                           _("Directory for temporary files") );
 

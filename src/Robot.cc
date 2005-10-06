@@ -144,6 +144,8 @@ Robot::Robot(const int r_id, const long int col, const string& name)
   radius = the_opts.get_d(OPTION_ROBOT_RADIUS);
 }
 
+// attribute is set to true in the parent processs
+bool Robot::kill_robots(true);
 
 Robot::~Robot()
 {
@@ -183,6 +185,8 @@ Robot::start_process()
 
   if(pid == 0)   // Child process, to be the new robot
     {
+      // we are the child process, so if we die before execution of another image, we should not kill the other robots
+      kill_robots=false;
       // Make pipe_out the standard input for the robot
       close(pipe_out[1]);
       dup2(pipe_out[0], STDIN_FILENO);
@@ -284,6 +288,7 @@ Robot::start_process()
 
       // Execute process. Should not return!
       if( execl(robot_filename.c_str(), robot_filename.c_str(), NULL) == -1 )
+	// we are in another process so exiting does not solve the problem
         Error(true, "Couldn't open robot " + robot_filename, 
             "Robot::start_process, child");
 
@@ -465,13 +470,16 @@ Robot::send_signal()
 void
 Robot::kill_process_forcefully()
 {
-  if( network_robot )
-    *outstreamp << "@K" << endl;
-  else if( pid > 0 )
-    kill(pid, SIGKILL);
+  // only kill robots if we are the parent process
+  if (kill_robots) {
+	  if( network_robot )
+	    *outstreamp << "@K" << endl;
+	  else if( pid > 0 )
+	    kill(pid, SIGKILL);
 
-  delete_pipes();
-  process_running = false;
+	  delete_pipes();
+	  process_running = false;
+  }
 }
 
 void
