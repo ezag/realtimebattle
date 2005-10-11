@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.11\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-01 16:53+0200\n"
+"POT-Creation-Date: 2005-10-08 16:22+0200\n"
 "PO-Revision-Date: 2004-11-12 20:10 +0100\n"
 "Last-Translator: Minatsu Tukisima <minatsu@shiratori.riec.tohoku.ac.jp>\n"
 "Language-Team: Minatsu Tukisima\n"
@@ -305,299 +305,299 @@ msgstr "メッセージ"
 msgid " All "
 msgstr " 全て "
 
-#: src/Options.cc:76
+#: src/Options.cc:77
 msgid "Gravitational Constant"
 msgstr "重力定数"
 
-#: src/Options.cc:80
+#: src/Options.cc:81
 msgid "Air resistance"
 msgstr "空気抵抗"
 
-#: src/Options.cc:84
+#: src/Options.cc:85
 msgid "Roll friction"
 msgstr "回転摩擦"
 
-#: src/Options.cc:89
+#: src/Options.cc:90
 msgid "Slide/brake friction"
 msgstr "すべり/ブレーキ摩擦"
 
-#: src/Options.cc:94
+#: src/Options.cc:95
 msgid "Send robot coordinates"
 msgstr ""
 
-#: src/Options.cc:99
+#: src/Options.cc:100
 msgid "Robot max acceleration"
 msgstr "最大ロボット加速度"
 
-#: src/Options.cc:104
+#: src/Options.cc:105
 msgid "Robot min acceleration"
 msgstr "最小ロボット加速度"
 
-#: src/Options.cc:108
+#: src/Options.cc:109
 msgid "Robot radius"
 msgstr "ロボットの半径"
 
-#: src/Options.cc:112
+#: src/Options.cc:113
 msgid "Robot mass"
 msgstr "ロボットの質量"
 
-#: src/Options.cc:117
+#: src/Options.cc:118
 msgid "Robot bounce coefficient"
 msgstr "ロボットの反射係数"
 
-#: src/Options.cc:122
+#: src/Options.cc:123
 msgid "Robot hardness coefficient"
 msgstr "ロボットの硬度係数"
 
-#: src/Options.cc:127
+#: src/Options.cc:128
 msgid "Robot protection coefficient"
 msgstr "ロボットの防護係数"
 
-#: src/Options.cc:132
+#: src/Options.cc:133
 msgid "Robot frontsize [radians]"
 msgstr "ロボットの前方サイズ [rad]"
 
-#: src/Options.cc:137
+#: src/Options.cc:138
 msgid "Robot front bounce coefficient"
 msgstr "ロボットの前方反射係数"
 
-#: src/Options.cc:142
+#: src/Options.cc:143
 msgid "Robot front hardness coefficient"
 msgstr "ロボットの前方硬度係数"
 
-#: src/Options.cc:147
+#: src/Options.cc:148
 msgid "Robot front protection coefficient"
 msgstr "ロボットの前方防護係数"
 
-#: src/Options.cc:152
+#: src/Options.cc:153
 msgid "Robot start energy"
 msgstr "初期ロボットエネルギー"
 
-#: src/Options.cc:157
+#: src/Options.cc:158
 msgid "Robot max energy"
 msgstr "最大ロボットエネルギー"
 
-#: src/Options.cc:163
+#: src/Options.cc:164
 msgid "Robot max rotate speed [rad/s]"
 msgstr "最大ロボット回転速度 [rad/s]"
 
-#: src/Options.cc:169
+#: src/Options.cc:170
 msgid "Robot cannon max rotate speed [rad/s]"
 msgstr "最大キャノン回転速度 [rad/s]"
 
-#: src/Options.cc:175
+#: src/Options.cc:176
 msgid "Robot radar max rotate speed [rad/s]"
 msgstr "最大レーダー回転速度 [rad/s]"
 
-#: src/Options.cc:180
+#: src/Options.cc:181
 msgid "Process check interval"
 msgstr "プロセスチェック間隔"
 
-#: src/Options.cc:184
+#: src/Options.cc:185
 msgid "Robot energy levels"
 msgstr "ロボットエネルギーレベル"
 
-#: src/Options.cc:188
+#: src/Options.cc:189
 msgid "Shot radius"
 msgstr "ショット半径"
 
-#: src/Options.cc:192
+#: src/Options.cc:193
 msgid "Shot speed"
 msgstr "ショットスピード"
 
-#: src/Options.cc:197
+#: src/Options.cc:198
 msgid "Shooting penalty (times shot energy)"
 msgstr "ショットペナルティ(×ショットエネルギー)"
 
-#: src/Options.cc:201
+#: src/Options.cc:202
 msgid "Shot min energy"
 msgstr "最小ショットエネルギー"
 
-#: src/Options.cc:205
+#: src/Options.cc:206
 msgid "Shot max energy"
 msgstr "最大ショットエネルギー"
 
-#: src/Options.cc:210
+#: src/Options.cc:211
 msgid "Shot energy increase speed [energy/s]"
 msgstr "ショットエネルギー増加速度 [エネルギー/秒]"
 
-#: src/Options.cc:214
+#: src/Options.cc:215
 msgid "Background colour"
 msgstr "バックグラウンドカラー"
 
-#: src/Options.cc:218
+#: src/Options.cc:219
 msgid "Foreground colour"
 msgstr "フォアグラウンドカラー"
 
-#: src/Options.cc:223
+#: src/Options.cc:224
 msgid "Colour for RTB messages"
 msgstr "RTBメッセージの色"
 
-#: src/Options.cc:227
+#: src/Options.cc:228
 msgid "Cookie max energy"
 msgstr "最大クッキーエネルギー"
 
-#: src/Options.cc:231
+#: src/Options.cc:232
 msgid "Cookie min energy"
 msgstr "最小クッキーエネルギー"
 
-#: src/Options.cc:236
+#: src/Options.cc:237
 msgid "Cookie frequency [cookies per second]"
 msgstr "クッキー出現頻度 [個/秒]"
 
-#: src/Options.cc:240
+#: src/Options.cc:241
 msgid "Cookie radius"
 msgstr "クッキー半径"
 
-#: src/Options.cc:244
+#: src/Options.cc:245
 msgid "Cookie colour"
 msgstr "クッキーの色"
 
-#: src/Options.cc:248
+#: src/Options.cc:249
 msgid "Mine max energy"
 msgstr "最大地雷エネルギー"
 
-#: src/Options.cc:252
+#: src/Options.cc:253
 msgid "Mine min energy"
 msgstr "最小地雷エネルギー"
 
-#: src/Options.cc:257
+#: src/Options.cc:258
 msgid "Mine frequency [mines per second]"
 msgstr "地雷出現頻度 [個/秒]"
 
-#: src/Options.cc:261
+#: src/Options.cc:262
 msgid "Mine radius"
 msgstr "地雷半径"
 
-#: src/Options.cc:265
+#: src/Options.cc:266
 msgid "Mine colour"
 msgstr "地雷の色"
 
-#: src/Options.cc:269
+#: src/Options.cc:270
 msgid "Arena scale"
 msgstr "アリーナスケール"
 
-#: src/Options.cc:274
+#: src/Options.cc:275
 msgid "Fast forward factor"
 msgstr "早送り速度"
 
-#: src/Options.cc:278
+#: src/Options.cc:279
 msgid "Timeout [s]"
 msgstr "タイムアウト [s]"
 
-#: src/Options.cc:282
+#: src/Options.cc:283
 msgid "Max timestep"
 msgstr "最大タイムステップ"
 
-#: src/Options.cc:286
+#: src/Options.cc:287
 msgid "Timescale"
 msgstr "タイムスケール"
 
-#: src/Options.cc:291
+#: src/Options.cc:292
 msgid "Update interval [s]"
 msgstr "更新間隔 [s]"
 
-#: src/Options.cc:296
+#: src/Options.cc:297
 msgid "Robot startup time [s]"
 msgstr "ロボットスタートアップタイム [s]"
 
-#: src/Options.cc:300
+#: src/Options.cc:301
 msgid "Start CPU time [s]"
 msgstr "初期CPUタイム [s]"
 
-#: src/Options.cc:304
+#: src/Options.cc:305
 msgid "Extra CPU time [s]"
 msgstr "エクストラCPUタイム [s]"
 
-#: src/Options.cc:309
+#: src/Options.cc:310
 msgid "Extra CPU period [s]"
 msgstr "エクストラCPU期間 [s]"
 
-#: src/Options.cc:314
+#: src/Options.cc:315
 msgid "CPU time warning percentage"
 msgstr "CPUタイムワーニングパーセンテージ"
 
-#: src/Options.cc:319
+#: src/Options.cc:320
 msgid "Logging frequency [Each n:th update interval]"
 msgstr "ロギング頻度 [更新間隔n回毎]"
 
-#: src/Options.cc:324
+#: src/Options.cc:325
 msgid "Max robots allowed simultaneously"
 msgstr "最大同時稼働ロボット数"
 
-#: src/Options.cc:328
+#: src/Options.cc:329
 msgid "Robot search path"
 msgstr "ロボット検索パス"
 
-#: src/Options.cc:332
+#: src/Options.cc:333
 msgid "Arena search path"
 msgstr "アリーナ検索パス"
 
-#: src/Options.cc:337
+#: src/Options.cc:344
 msgid "Directory for temporary files"
 msgstr "テンポラリディレクトリ"
 
-#: src/Options.cc:342
+#: src/Options.cc:349
 msgid "Initial Arena window width"
 msgstr "初期アリーナウィンドウ幅"
 
-#: src/Options.cc:347
+#: src/Options.cc:354
 msgid "Initial Arena window height"
 msgstr "初期アリーナウィンドウ高さ"
 
-#: src/Options.cc:352
+#: src/Options.cc:359
 msgid "Initial Arena window x position"
 msgstr "初期アリーナウィンドウx座標"
 
-#: src/Options.cc:357
+#: src/Options.cc:364
 msgid "Initial Arena window y position"
 msgstr "初期アリーナウィンドウy座標"
 
-#: src/Options.cc:362
+#: src/Options.cc:369
 msgid "Initial Control window x position"
 msgstr "初期コントロールウィンドウx座標"
 
-#: src/Options.cc:367
+#: src/Options.cc:374
 msgid "Initial Control window y position"
 msgstr "初期コントロールウィンドウy座標"
 
-#: src/Options.cc:372
+#: src/Options.cc:379
 msgid "Initial Message window width"
 msgstr "初期メッセージウィンドウ幅"
 
-#: src/Options.cc:377
+#: src/Options.cc:384
 msgid "Initial Message window height"
 msgstr "初期メッセージウィンドウ高さ"
 
-#: src/Options.cc:382
+#: src/Options.cc:389
 msgid "Initial Message window x position"
 msgstr "初期メッセージウィンドウx座標"
 
-#: src/Options.cc:387
+#: src/Options.cc:394
 msgid "Initial Message window y position"
 msgstr "初期メッセージウィンドウy座標"
 
-#: src/Options.cc:392
+#: src/Options.cc:399
 msgid "Initial Score window width"
 msgstr "初期スコアウィンドウ幅"
 
-#: src/Options.cc:397
+#: src/Options.cc:404
 msgid "Initial Score window height"
 msgstr "初期スコアウィンドウ高さ"
 
-#: src/Options.cc:402
+#: src/Options.cc:409
 msgid "Initial Score window x position"
 msgstr "初期スコアウィンドウx座標"
 
-#: src/Options.cc:407
+#: src/Options.cc:414
 msgid "Initial Score window y position"
 msgstr "初期スコアウィンドウy座標"
 
-#: src/Options.cc:412
+#: src/Options.cc:419
 msgid "Initial Statistics window width"
 msgstr "初期統計情報ウィンドウ幅"
 
-#: src/Options.cc:417
+#: src/Options.cc:424
 msgid "Initial Statistics window height"
 msgstr "初期統計情報ウィンドウ高さ"
 

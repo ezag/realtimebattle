@@ -222,6 +222,9 @@ private:
   pixmap_t score_pixmap;
   pixmap_t stat_pixmap;
 #endif
+
+  // way to determine whether we can kill the robots
+  static bool kill_robots;
 };
 
 #endif

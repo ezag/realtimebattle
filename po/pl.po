@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.10\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-01 16:53+0200\n"
+"POT-Creation-Date: 2005-10-08 16:22+0200\n"
 "PO-Revision-Date: 1999-08-24 22:22+0200\n"
 "Last-Translator: GNOME PL Team\n"
 "Language-Team: Polish <gnomepl@pandora.info.bielsko.pl>\n"
@@ -300,299 +300,299 @@ msgstr "Komunikaty"
 msgid " All "
 msgstr " Wszystkie "
 
-#: src/Options.cc:76
+#: src/Options.cc:77
 msgid "Gravitational Constant"
 msgstr "Sta³± grawitacji"
 
-#: src/Options.cc:80
+#: src/Options.cc:81
 msgid "Air resistance"
 msgstr "Opór powietrza"
 
-#: src/Options.cc:84
+#: src/Options.cc:85
 msgid "Roll friction"
 msgstr "Tarcie przy obrocie"
 
-#: src/Options.cc:89
+#: src/Options.cc:90
 msgid "Slide/brake friction"
 msgstr "Tarcie przy po¶lizgu/hamowaniu"
 
-#: src/Options.cc:94
+#: src/Options.cc:95
 msgid "Send robot coordinates"
 msgstr ""
 
-#: src/Options.cc:99
+#: src/Options.cc:100
 msgid "Robot max acceleration"
 msgstr "Maks. przy¶pieszenie robota"
 
-#: src/Options.cc:104
+#: src/Options.cc:105
 msgid "Robot min acceleration"
 msgstr "Min. przy¶pieszenie robota"
 
-#: src/Options.cc:108
+#: src/Options.cc:109
 msgid "Robot radius"
 msgstr "Promieñ robota"
 
-#: src/Options.cc:112
+#: src/Options.cc:113
 msgid "Robot mass"
 msgstr "Masa robota"
 
-#: src/Options.cc:117
+#: src/Options.cc:118
 msgid "Robot bounce coefficient"
 msgstr "Wspó³czynnik odbicia robota"
 
-#: src/Options.cc:122
+#: src/Options.cc:123
 msgid "Robot hardness coefficient"
 msgstr "Wspó³czynnik twardo¶ci robota"
 
-#: src/Options.cc:127
+#: src/Options.cc:128
 msgid "Robot protection coefficient"
 msgstr "Wspó³czynnik ochrony robota"
 
-#: src/Options.cc:132
+#: src/Options.cc:133
 msgid "Robot frontsize [radians]"
 msgstr "Rozmiar przodu robota [radiany]"
 
-#: src/Options.cc:137
+#: src/Options.cc:138
 msgid "Robot front bounce coefficient"
 msgstr "Wspó³czynnik odbicia przodu robota"
 
-#: src/Options.cc:142
+#: src/Options.cc:143
 msgid "Robot front hardness coefficient"
 msgstr "Wspó³czynnik twardo¶ci przodu robota"
 
-#: src/Options.cc:147
+#: src/Options.cc:148
 msgid "Robot front protection coefficient"
 msgstr "Wspó³czynnik ochrony przodu robota"
 
-#: src/Options.cc:152
+#: src/Options.cc:153
 msgid "Robot start energy"
 msgstr "Energia pocz±tkowa robota"
 
-#: src/Options.cc:157
+#: src/Options.cc:158
 msgid "Robot max energy"
 msgstr "Maksymalna energia robota"
 
-#: src/Options.cc:163
+#: src/Options.cc:164
 msgid "Robot max rotate speed [rad/s]"
 msgstr "Maks. szybko¶æ obrotu robota [rad/s]"
 
-#: src/Options.cc:169
+#: src/Options.cc:170
 msgid "Robot cannon max rotate speed [rad/s]"
 msgstr "Maks. szybko¶æ obrotu dzia³ka robota [rad/s]"
 
-#: src/Options.cc:175
+#: src/Options.cc:176
 msgid "Robot radar max rotate speed [rad/s]"
 msgstr "Maks. szybko¶æ obrotu radaru robota [rad/s]"
 
-#: src/Options.cc:180
+#: src/Options.cc:181
 msgid "Process check interval"
 msgstr "Okres sprawdzania procesu"
 
-#: src/Options.cc:184
+#: src/Options.cc:185
 msgid "Robot energy levels"
 msgstr "Poziomy energii robota"
 
-#: src/Options.cc:188
+#: src/Options.cc:189
 msgid "Shot radius"
 msgstr "Promieñ strza³u"
 
-#: src/Options.cc:192
+#: src/Options.cc:193
 msgid "Shot speed"
 msgstr "Szybko¶æ strza³u"
 
-#: src/Options.cc:197
+#: src/Options.cc:198
 msgid "Shooting penalty (times shot energy)"
 msgstr "Ubytek energii od strza³u (* energia strza³u)"
 
-#: src/Options.cc:201
+#: src/Options.cc:202
 msgid "Shot min energy"
 msgstr "Min. energia strza³u"
 
-#: src/Options.cc:205
+#: src/Options.cc:206
 msgid "Shot max energy"
 msgstr "Maks. energia strza³u"
 
-#: src/Options.cc:210
+#: src/Options.cc:211
 msgid "Shot energy increase speed [energy/s]"
 msgstr "Szybko¶æ narastania energii strza³u [energ./s]"
 
-#: src/Options.cc:214
+#: src/Options.cc:215
 msgid "Background colour"
 msgstr "Kolor t³a"
 
-#: src/Options.cc:218
+#: src/Options.cc:219
 msgid "Foreground colour"
 msgstr "Kolor obiektów"
 
-#: src/Options.cc:223
+#: src/Options.cc:224
 msgid "Colour for RTB messages"
 msgstr "Kolor komunikatór RTB"
 
-#: src/Options.cc:227
+#: src/Options.cc:228
 msgid "Cookie max energy"
 msgstr "Maks. energia ciasteczka"
 
-#: src/Options.cc:231
+#: src/Options.cc:232
 msgid "Cookie min energy"
 msgstr "Min. energia ciasteczka"
 
-#: src/Options.cc:236
+#: src/Options.cc:237
 msgid "Cookie frequency [cookies per second]"
 msgstr "Czêstotliwo¶æ pojawiania siê ciasteczek [1/s]"
 
-#: src/Options.cc:240
+#: src/Options.cc:241
 msgid "Cookie radius"
 msgstr "Promieñ ciasteczka"
 
-#: src/Options.cc:244
+#: src/Options.cc:245
 msgid "Cookie colour"
 msgstr "Kolor ciasteczka"
 
-#: src/Options.cc:248
+#: src/Options.cc:249
 msgid "Mine max energy"
 msgstr "Maks. energia miny"
 
-#: src/Options.cc:252
+#: src/Options.cc:253
 msgid "Mine min energy"
 msgstr "Min. energia miny"
 
-#: src/Options.cc:257
+#: src/Options.cc:258
 msgid "Mine frequency [mines per second]"
 msgstr "Czêstotliwo¶æ pojawiania siê min [1/s]"
 
-#: src/Options.cc:261
+#: src/Options.cc:262
 msgid "Mine radius"
 msgstr "Promieñ miny"
 
-#: src/Options.cc:265
+#: src/Options.cc:266
 msgid "Mine colour"
 msgstr "Kolor miny"
 
-#: src/Options.cc:269
+#: src/Options.cc:270
 msgid "Arena scale"
 msgstr "Skala areny"
 
-#: src/Options.cc:274
+#: src/Options.cc:275
 msgid "Fast forward factor"
 msgstr "Wspó³czynnik szybkego ruchu"
 
-#: src/Options.cc:278
+#: src/Options.cc:279
 msgid "Timeout [s]"
 msgstr "Czas oczekiwania [s]"
 
-#: src/Options.cc:282
+#: src/Options.cc:283
 msgid "Max timestep"
 msgstr "Maks odstêp czasu"
 
-#: src/Options.cc:286
+#: src/Options.cc:287
 msgid "Timescale"
 msgstr "Skala czasu"
 
-#: src/Options.cc:291
+#: src/Options.cc:292
 msgid "Update interval [s]"
 msgstr "Okres od¶wie¿ania [s]"
 
-#: src/Options.cc:296
+#: src/Options.cc:297
 msgid "Robot startup time [s]"
 msgstr "Czas uruchamiania robota [s]"
 
-#: src/Options.cc:300
+#: src/Options.cc:301
 msgid "Start CPU time [s]"
 msgstr "Pocz±tkowy czas CPU [s]"
 
-#: src/Options.cc:304
+#: src/Options.cc:305
 msgid "Extra CPU time [s]"
 msgstr "Dodatkowy czas CPU [s]"
 
-#: src/Options.cc:309
+#: src/Options.cc:310
 msgid "Extra CPU period [s]"
 msgstr "Dodatkowy czas CPU [s]"
 
-#: src/Options.cc:314
+#: src/Options.cc:315
 msgid "CPU time warning percentage"
 msgstr "Próg czasu CPU przy ostrze¿eniu [%]"
 
-#: src/Options.cc:319
+#: src/Options.cc:320
 msgid "Logging frequency [Each n:th update interval]"
 msgstr "Czêstotliwo¶æ zapisu dziennika [co które od¶wie¿enie]"
 
-#: src/Options.cc:324
+#: src/Options.cc:325
 msgid "Max robots allowed simultaneously"
 msgstr ""
 
-#: src/Options.cc:328
+#: src/Options.cc:329
 msgid "Robot search path"
 msgstr "¦cie¿ka poszukiwania robota"
 
-#: src/Options.cc:332
+#: src/Options.cc:333
 msgid "Arena search path"
 msgstr "¦cie¿ka poszukiwania areny"
 
-#: src/Options.cc:337
+#: src/Options.cc:344
 msgid "Directory for temporary files"
 msgstr "Katalog na pliki tymczasowe"
 
-#: src/Options.cc:342
+#: src/Options.cc:349
 msgid "Initial Arena window width"
 msgstr "Pocz±tkowa szeroko¶æ okna areny"
 
-#: src/Options.cc:347
+#: src/Options.cc:354
 msgid "Initial Arena window height"
 msgstr "Pocz±tkowa wysoko¶æ okna areny"
 
-#: src/Options.cc:352
+#: src/Options.cc:359
 msgid "Initial Arena window x position"
 msgstr "Pocz±tkowa pozycja pozioma okna areny"
 
-#: src/Options.cc:357
+#: src/Options.cc:364
 msgid "Initial Arena window y position"
 msgstr "Pocz±tkowa pozycja pionowa okna areny"
 
-#: src/Options.cc:362
+#: src/Options.cc:369
 msgid "Initial Control window x position"
 msgstr "Pocz±tkowa pozycja pozioma okna kontrolnego"
 
-#: src/Options.cc:367
+#: src/Options.cc:374
 msgid "Initial Control window y position"
 msgstr "Pocz±tkowa pozycja pionowa okna kontrolnego"
 
-#: src/Options.cc:372
+#: src/Options.cc:379
 msgid "Initial Message window width"
 msgstr "Pocz±tkowa szeroko¶æ okna komunikatów"
 
-#: src/Options.cc:377
+#: src/Options.cc:384
 msgid "Initial Message window height"
 msgstr "Pocz±tkowa wysoko¶æ okna komunikatów"
 
-#: src/Options.cc:382
+#: src/Options.cc:389
 msgid "Initial Message window x position"
 msgstr "Pocz±tkowa pozioma pozycja okna komunikatów"
 
-#: src/Options.cc:387
+#: src/Options.cc:394
 msgid "Initial Message window y position"
 msgstr "Pocz±tkowa pionowa pozycja okna komunikatów"
 
-#: src/Options.cc:392
+#: src/Options.cc:399
 msgid "Initial Score window width"
 msgstr "Pocz±tkowa szeroko¶æ okna punktacji"
 
-#: src/Options.cc:397
+#: src/Options.cc:404
 msgid "Initial Score window height"
 msgstr "Pocz±tkowa wysoko¶æ okna punktacji"
 
-#: src/Options.cc:402
+#: src/Options.cc:409
 msgid "Initial Score window x position"
 msgstr "Pocz±tkowa pozioma pozycja okna punktacji"
 
-#: src/Options.cc:407
+#: src/Options.cc:414
 msgid "Initial Score window y position"
 msgstr "Pocz±tkowa pionowa pozycja okna punktacji"
 
-#: src/Options.cc:412
+#: src/Options.cc:419
 msgid "Initial Statistics window width"
 msgstr "Pocz±tkowa szeroko¶æ okna statystyk"
 
-#: src/Options.cc:417
+#: src/Options.cc:424
 msgid "Initial Statistics window height"
 msgstr "Pocz±tkowa wysoko¶æ okna statystyk"
 
