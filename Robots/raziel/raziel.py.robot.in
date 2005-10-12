@@ -1,4 +1,4 @@
-@PYTHON@
+#! @PYTHON@
 print 'RobotOption 3 0'
 print 'RobotOption 1 1\n'
 print 'Name razziel'

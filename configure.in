@@ -215,8 +215,7 @@ AM_CONDITIONAL(NO_GETOPT_LONG, test x$getopt = xyes)
 AC_CHECK_LIB(xpg4, setlocale)
 
 
-dnl Languages which your application supports
-ALL_LINGUAS="de es gl ja pl pt sv"
+dnl Initialize localization support
 AM_GNU_GETTEXT
 AM_GNU_GETTEXT_VERSION(0.14.1)
 

@@ -626,6 +626,7 @@ uninstall-hook:
 		--info-dir=$(rtbinfodir) $(rtbinfodir)/RealTimeBattle.info.gz; \
 	fi || echo -e "\n\n** Info uninstallation failed, please remove the entry from dir by hand **\n\n"; \
 	rm -f $(rtbinfodir)/RealTimeBattle.info.gz; \
+	rmdir $(rtbinfodir); \
 	rmdir $(DOCS_DIR) || true
 
 all: docs

@@ -6346,7 +6346,6 @@ fi
 
 
 
-ALL_LINGUAS="de es gl ja pl pt sv"
 
         MKINSTALLDIRS=
   if test -n "$ac_aux_dir"; then
@@ -12760,7 +12759,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12763 "configure" */
+/* #line 12762 "configure" */
 public class Test {
 }
 EOF
@@ -12938,7 +12937,7 @@ EOF
 if uudecode$EXEEXT Test.uue; then
         ac_cv_prog_uudecode_base64=yes
 else
-        echo "configure: 12941: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
+        echo "configure: 12940: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
         echo "configure: failed file was:" >&5
         cat Test.uue >&5
         ac_cv_prog_uudecode_base64=no
@@ -13054,7 +13053,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 13057 "configure" */
+/* #line 13056 "configure" */
 public class Test {
 }
 EOF
@@ -13090,7 +13089,7 @@ JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 TEST=Test
 cat << \EOF > $JAVA_TEST
-/* [#]line 13093 "configure" */
+/* [#]line 13092 "configure" */
 public class Test {
 public static void main (String args[]) {
         System.exit (0);
