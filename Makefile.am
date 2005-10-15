@@ -11,4 +11,4 @@ packages:
 	cd Packages && $(MAKE) packages
 
 ACLOCAL_AMFLAGS = -I m4 -I config
-AUTOMAKE_OPTIONS=dist-bzip2 subdir-objects
+AUTOMAKE_OPTIONS=dist-bzip2 dist-zip subdir-objects
