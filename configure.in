@@ -99,7 +99,7 @@ fi
 
 if test "x$enable_graphics" = "xyes"; then
 dnl Checks for libraries.
-PKG_CHECK_MODULES([GTK], [gtk+-2.0 gdk-2.0],,[exit])
+PKG_CHECK_MODULES([GTK], [gtk+-2.0 gdk-2.0],,[ AC_MSG_ERROR("Could not find gtk libs: $GTK_PKG_ERRORS")])
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 fi

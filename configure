@@ -5307,7 +5307,9 @@ echo "${ECHO_T}$GTK_LIBS" >&6
   if test $succeeded = yes; then
      :
   else
-     exit
+      { { echo "$as_me:$LINENO: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&5
+echo "$as_me: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&2;}
+   { (exit 1); exit 1; }; }
   fi
 
 
@@ -12759,7 +12761,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 12762 "configure" */
+/* #line 12764 "configure" */
 public class Test {
 }
 EOF
@@ -12937,7 +12939,7 @@ EOF
 if uudecode$EXEEXT Test.uue; then
         ac_cv_prog_uudecode_base64=yes
 else
-        echo "configure: 12940: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
+        echo "configure: 12942: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
         echo "configure: failed file was:" >&5
         cat Test.uue >&5
         ac_cv_prog_uudecode_base64=no
@@ -13053,7 +13055,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 13056 "configure" */
+/* #line 13058 "configure" */
 public class Test {
 }
 EOF
@@ -13089,7 +13091,7 @@ JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 TEST=Test
 cat << \EOF > $JAVA_TEST
-/* [#]line 13092 "configure" */
+/* [#]line 13094 "configure" */
 public class Test {
 public static void main (String args[]) {
         System.exit (0);
