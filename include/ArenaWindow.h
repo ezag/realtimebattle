@@ -53,11 +53,16 @@ public:
 
   void set_window_title            ();
 
-  static gboolean hide_window          ( GtkWidget* widget, GdkEvent* event,
+  static gboolean hide_window      ( GtkWidget* widget, GdkEvent* event,
                                      class ArenaWindow* arenawindow_p );
   static void show_window          ( GtkWidget* widget,
                                      class ArenaWindow* arenawindow_p );
+  static gboolean hide_fs_controls ( class ArenaWindow* arenawindow_p );
+  static gboolean show_fs_controls ( GtkWidget* widget, GdkEvent* event,
+                                     class ArenaWindow* arenawindow_p );   
   static void no_zoom              ( GtkWidget* widget,
+                                     class ArenaWindow* arenawindow_p );
+  static void toggle_fullscreen    ( GtkWidget* widget,
                                      class ArenaWindow* arenawindow_p );
   static void zoom_in              ( GtkWidget* widget,
                                      class ArenaWindow* arenawindow_p );
@@ -99,7 +104,9 @@ public:
                                      const Vector2D& end,
                                      GdkColor& colour,
                                      const bool filled );
-
+  
+  void hide_cursor( GtkWidget* widget );
+  void unhide_cursor( GtkWidget* widget );
   GtkWidget* get_drawing_area      () { return drawing_area; }
   GtkWidget* get_scrolled_window   () { return scrolled_window; }
   GtkWidget* get_window_p          () { return window_p; }
@@ -112,14 +119,19 @@ public:
 private:
 
   GtkWidget* window_p;
+  GtkWidget* button_table;
   GtkWidget* scrolled_window;
   GtkWidget* drawing_area;
+  GtkWidget* fs_controls;
 
   Vector2D scrolled_window_size;
   int zoom; // The zoom when pressed on one of the zoombuttons
   double drawing_area_scale;
 
   bool window_shown;
+  bool fs_controls_shown;
+  bool fullscreen;
+  static const guint fs_popup_timeout_ms = 3 * 1000;
 };
 
 #include "ArenaController.h"

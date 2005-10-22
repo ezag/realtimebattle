@@ -43,9 +43,11 @@ ArenaWindow::ArenaWindow( const int default_width,
                           const int default_y_pos )
 {
   // The window widget
+  fullscreen = 0;
+  fs_controls_shown = 0;
   window_p = gtk_window_new( GTK_WINDOW_TOPLEVEL );
   gtk_widget_set_name( window_p, "RTB Arena" );
-
+  
   set_window_title();
 
   gtk_container_border_width( GTK_CONTAINER( window_p ), 12 );
@@ -79,12 +81,15 @@ ArenaWindow::ArenaWindow( const int default_width,
     { string( _(" Zoom In ") ) + string("[+] "),
       (GtkSignalFunc) ArenaWindow::zoom_in  },
     { string( _(" Zoom Out ") ) + string("[-] "),
-      (GtkSignalFunc) ArenaWindow::zoom_out } };
+      (GtkSignalFunc) ArenaWindow::zoom_out },
+    { string( _(" Toggle Fullscreen ") ) + string("[F] "),
+      (GtkSignalFunc) ArenaWindow::toggle_fullscreen }};
 
-  GtkWidget* button_table = gtk_table_new( 1, 3, TRUE );
+  button_table = gtk_table_new( 1, 4, TRUE );
   gtk_box_pack_start( GTK_BOX( vbox ), button_table, FALSE, FALSE, 0 );
-
-  for( int i=0; i < 3; i++ )
+  
+  
+  for( int i=0; i < 4; i++ )
     {
       GtkWidget* button =
         gtk_button_new_with_label( buttons[i].label.c_str() );
@@ -113,9 +118,18 @@ ArenaWindow::ArenaWindow( const int default_width,
                          default_width - 48, default_height - 80 );
   gtk_signal_connect( GTK_OBJECT( drawing_area ), "expose_event",
                       (GtkSignalFunc) ArenaWindow::redraw, (gpointer) this );
-
-  gtk_widget_set_events( drawing_area, GDK_EXPOSURE_MASK );
-
+  g_signal_connect( G_OBJECT (window_p), "motion-notify-event",
+		     G_CALLBACK (ArenaWindow::show_fs_controls), 
+		     (gpointer) this );
+  g_signal_connect( G_OBJECT (window_p), "button-press-event",
+		    G_CALLBACK (ArenaWindow::show_fs_controls), 
+		    (gpointer) this );
+  
+  gtk_widget_set_events( drawing_area, 
+			 GDK_EXPOSURE_MASK | 
+			 GDK_POINTER_MOTION_MASK | 
+			 GDK_BUTTON_PRESS_MASK );
+  
   gtk_scrolled_window_add_with_viewport
     ( GTK_SCROLLED_WINDOW( scrolled_window ), drawing_area );
   gtk_widget_show( drawing_area );
@@ -140,6 +154,8 @@ ArenaWindow::ArenaWindow( const int default_width,
 
 ArenaWindow::~ArenaWindow()
 {
+  if ( fullscreen )
+    gtk_widget_destroy( fs_controls );
   gtk_widget_destroy( window_p );
 }
 
@@ -159,8 +175,8 @@ ArenaWindow::set_window_shown( bool win_shown )
 
 // Warning: event can be NULL, do not use event!
 gboolean
-ArenaWindow::hide_window( GtkWidget* widget, GdkEvent* event,
-                          class ArenaWindow* arenawindow_p )
+ArenaWindow::hide_window ( GtkWidget* widget, GdkEvent* event,
+			   class ArenaWindow* arenawindow_p )
 {
   if( arenawindow_p->is_window_shown() )
     {
@@ -171,6 +187,8 @@ ArenaWindow::hide_window( GtkWidget* widget, GdkEvent* event,
           GtkWidget* menu_item = controlwindow_p->get_show_arena_menu_item();
           gtk_check_menu_item_set_active( GTK_CHECK_MENU_ITEM( menu_item ), FALSE );
         }
+      if ( arenawindow_p->fullscreen )
+	toggle_fullscreen( NULL, arenawindow_p );
     }
 	return true;
 }
@@ -185,6 +203,89 @@ ArenaWindow::show_window( GtkWidget* widget,
       arenawindow_p->set_window_shown( true );
       arenawindow_p->draw_everything();
     }
+}
+
+
+void 
+ArenaWindow::unhide_cursor( GtkWidget* widget )
+{
+  gdk_window_set_cursor( widget->window , NULL);
+}
+
+void 
+ArenaWindow::hide_cursor( GtkWidget* widget )
+{
+  gchar bits[] = { 0 };
+  GdkColor color = { 0, 0, 0, 0 };
+  GdkPixmap *pixmap;
+  GdkCursor *cursor;
+  
+  pixmap = gdk_bitmap_create_from_data( NULL, bits, 1, 1 );
+  cursor = gdk_cursor_new_from_pixmap( pixmap, pixmap, &color, &color, 0, 0 );
+  gdk_window_set_cursor( widget->window , cursor );
+}
+
+gboolean 
+ArenaWindow::show_fs_controls ( GtkWidget* widget, GdkEvent* event,
+				class ArenaWindow* arenawindow_p ) 
+{
+  static guint popup_timeout_tag;
+  int controls_width, controls_height;
+  GdkScreen *screen;
+  GdkRectangle fullscreen_rect;
+
+  if( !arenawindow_p->fullscreen )
+    return FALSE;
+  if( arenawindow_p->fs_controls_shown )
+    {
+      // restart the timer
+      g_source_remove( popup_timeout_tag );
+      popup_timeout_tag = 
+	g_timeout_add( arenawindow_p->fs_popup_timeout_ms,
+		       (GSourceFunc) ArenaWindow::hide_fs_controls, 
+		       (gpointer) arenawindow_p);
+      return FALSE;
+    } 
+  arenawindow_p->fs_controls_shown = 1;
+  // position popup controls
+  screen = gtk_window_get_screen( GTK_WINDOW ( arenawindow_p->window_p ) );
+  gdk_screen_get_monitor_geometry( screen,
+				   gdk_screen_get_monitor_at_window
+				   ( screen, arenawindow_p->window_p->window ),
+				   &fullscreen_rect );
+  gtk_window_get_size ( GTK_WINDOW ( arenawindow_p->fs_controls ),
+			&controls_width, &controls_height );
+  gtk_window_set_screen( GTK_WINDOW ( arenawindow_p->fs_controls ),  screen );
+  gtk_window_resize( GTK_WINDOW ( arenawindow_p->fs_controls ),
+		      fullscreen_rect.width,
+		      controls_height );
+  gtk_window_move( GTK_WINDOW ( arenawindow_p->fs_controls ),
+		   fullscreen_rect.x,
+		   fullscreen_rect.y );
+
+  arenawindow_p->unhide_cursor( arenawindow_p->drawing_area );
+
+  gtk_widget_show( arenawindow_p->fs_controls );
+  // popup hiding timer
+  popup_timeout_tag = 
+    g_timeout_add( arenawindow_p->fs_popup_timeout_ms,
+		   (GSourceFunc) ArenaWindow::hide_fs_controls, 
+		   (gpointer) arenawindow_p );
+  
+  return FALSE;
+}
+
+gboolean
+ArenaWindow::hide_fs_controls( class ArenaWindow* arenawindow_p )
+{
+  if( !arenawindow_p->fullscreen )
+    return FALSE;
+  if( !arenawindow_p->fs_controls_shown )
+    return FALSE;
+  arenawindow_p->fs_controls_shown = 0;
+  arenawindow_p->hide_cursor ( arenawindow_p->drawing_area );
+  gtk_widget_hide( arenawindow_p->fs_controls );
+  return FALSE;
 }
 
 void
@@ -520,6 +621,58 @@ ArenaWindow::zoom_out( GtkWidget* widget, class ArenaWindow* arenawindow_p )
   arenawindow_p->drawing_area_scale_changed( true );
 }
 
+// Warning! Do not use widget, may be NULL or undefined
+void
+ArenaWindow::toggle_fullscreen( GtkWidget* widget, class ArenaWindow* arenawindow_p )
+{
+  // FIXME: center drawing area?
+  static GtkWidget *old_bt_vbox;
+  static gulong handler_id;
+  GtkWidget *scrolled_window = arenawindow_p->scrolled_window;
+  GtkWidget *window_p = arenawindow_p->get_window_p();
+  GtkWidget *button_table = arenawindow_p->button_table;
+  GtkWidget *drawing_area = arenawindow_p->drawing_area;
+  GtkWidget *fs_controls;
+  if( !arenawindow_p->fullscreen )
+    {
+      // change window style
+      gtk_container_set_border_width( GTK_CONTAINER( window_p ), 0 );
+      // create fs control popup window
+      fs_controls = gtk_window_new( GTK_WINDOW_POPUP );
+      arenawindow_p->fs_controls = fs_controls;
+      // move button table to the popupwindow
+      old_bt_vbox = gtk_widget_get_parent( button_table );
+      gtk_widget_ref ( button_table );
+      gtk_container_remove( GTK_CONTAINER( old_bt_vbox ), button_table );
+      gtk_container_add( GTK_CONTAINER( fs_controls ), button_table );
+      gtk_widget_unref( button_table );
+
+      arenawindow_p->hide_cursor( drawing_area );
+
+      gtk_window_fullscreen( GTK_WINDOW( window_p ) );
+    }
+  else
+    {      
+      fs_controls = arenawindow_p->fs_controls;
+      arenawindow_p->unhide_cursor ( arenawindow_p->drawing_area );
+      // restore button table
+      gtk_widget_ref( button_table );
+      gtk_container_remove( GTK_CONTAINER( fs_controls ), button_table );
+      gtk_box_pack_start( GTK_BOX( old_bt_vbox ), 
+			  button_table, FALSE, FALSE, 0 );
+      gtk_widget_unref( button_table );
+      gtk_box_reorder_child( GTK_BOX( old_bt_vbox ), button_table, 0 );
+      // destroy fs control popup window
+      arenawindow_p->fs_controls_shown = 0;
+      gtk_widget_destroy( fs_controls );
+      // restore window style
+      gtk_container_set_border_width( GTK_CONTAINER( window_p ), 12 );
+      
+      gtk_window_unfullscreen( GTK_WINDOW( window_p ) );
+    }
+  arenawindow_p->fullscreen = !arenawindow_p->fullscreen;
+}
+
 gint
 ArenaWindow::keyboard_handler( GtkWidget* widget, GdkEventKey *event,
                                class ArenaWindow* arenawindow_p )
@@ -541,7 +694,12 @@ ArenaWindow::keyboard_handler( GtkWidget* widget, GdkEventKey *event,
     case GDK_KP_Insert:
       no_zoom( NULL, arenawindow_p );
       break;
-
+      
+    case GDK_f:
+    case GDK_F:
+      toggle_fullscreen( NULL, arenawindow_p );
+      break;
+      
     default:
       return FALSE;
     }
