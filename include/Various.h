@@ -27,6 +27,8 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 # include <gtk/gtkwidget.h>
 #endif 
 
+#include <list>
+using namespace std;
 #include "Dialog.h"
 
 struct start_tournament_info_t;
