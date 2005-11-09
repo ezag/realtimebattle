@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-08 16:22+0200\n"
+"POT-Creation-Date: 2005-10-27 11:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,19 +142,23 @@ msgstr ""
 msgid "Game %d of sequence %d"
 msgstr ""
 
-#: src/ArenaWindow.cc:77
+#: src/ArenaWindow.cc:79
 msgid " No Zoom "
 msgstr ""
 
-#: src/ArenaWindow.cc:79
+#: src/ArenaWindow.cc:81
 msgid " Zoom In "
 msgstr ""
 
-#: src/ArenaWindow.cc:81
+#: src/ArenaWindow.cc:83
 msgid " Zoom Out "
 msgstr ""
 
-#: src/ArenaWindow.cc:149
+#: src/ArenaWindow.cc:85
+msgid " Toggle Fullscreen "
+msgstr ""
+
+#: src/ArenaWindow.cc:165
 msgid "Arena"
 msgstr ""
 

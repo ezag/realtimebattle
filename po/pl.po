@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTimeBattle 0.9.10\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-08 16:22+0200\n"
+"POT-Creation-Date: 2005-10-27 11:23+0200\n"
 "PO-Revision-Date: 1999-08-24 22:22+0200\n"
 "Last-Translator: GNOME PL Team\n"
 "Language-Team: Polish <gnomepl@pandora.info.bielsko.pl>\n"
@@ -156,19 +156,23 @@ msgstr ""
 msgid "Game %d of sequence %d"
 msgstr "Gra %d w sekwencji %d"
 
-#: src/ArenaWindow.cc:77
+#: src/ArenaWindow.cc:79
 msgid " No Zoom "
 msgstr " Bez powiêkszenia "
 
-#: src/ArenaWindow.cc:79
+#: src/ArenaWindow.cc:81
 msgid " Zoom In "
 msgstr " Powiêksz "
 
-#: src/ArenaWindow.cc:81
+#: src/ArenaWindow.cc:83
 msgid " Zoom Out "
 msgstr " Pomniejsz "
 
-#: src/ArenaWindow.cc:149
+#: src/ArenaWindow.cc:85
+msgid " Toggle Fullscreen "
+msgstr ""
+
+#: src/ArenaWindow.cc:165
 msgid "Arena"
 msgstr "Arena"
 

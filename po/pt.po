@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RealTime Battle\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-08 16:22+0200\n"
+"POT-Creation-Date: 2005-10-27 11:23+0200\n"
 "PO-Revision-Date: 2004-11-12 20:10+0100\n"
 "Last-Translator: Rui Sousa <rsousa@grad.physics.sunysb.edu>\n"
 "Language-Team: Rui Sousa\n"
@@ -165,19 +165,23 @@ msgstr "Robot com nome de ficheiro %s no deu nenhum nome"
 msgid "Game %d of sequence %d"
 msgstr "Jogo %d da sequncia %d"
 
-#: src/ArenaWindow.cc:77
+#: src/ArenaWindow.cc:79
 msgid " No Zoom "
 msgstr " Normal "
 
-#: src/ArenaWindow.cc:79
+#: src/ArenaWindow.cc:81
 msgid " Zoom In "
 msgstr " Aproximar "
 
-#: src/ArenaWindow.cc:81
+#: src/ArenaWindow.cc:83
 msgid " Zoom Out "
 msgstr " Afastar "
 
-#: src/ArenaWindow.cc:149
+#: src/ArenaWindow.cc:85
+msgid " Toggle Fullscreen "
+msgstr ""
+
+#: src/ArenaWindow.cc:165
 msgid "Arena"
 msgstr "Arena"
 

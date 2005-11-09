@@ -20,6 +20,8 @@ Robots in the Robots directory with some special issues:
 
 joypad_robot: This robot needs a joystick on /dev/js0 or /dev/input/js0 and a working linux joystick api to let it work.
 It can be started only ONCE.
+joypad_robot_analog: This robot needs a joystick on /dev/js0 or /dev/input/js0 and a working linux joystick api to let it work.
+It can be started only ONCE.
 
 jBot.robot: You will need java and a startup time in RealTimeBattle of about half and a second to let this robot work.
 

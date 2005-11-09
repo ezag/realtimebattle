@@ -1,7 +1,9 @@
 # translation of de.po to 
+# translation of de.po to
 # Internationalization of RealTimeBattle - german
 # Copyright (C) 1999 Uwe Hermann <uh1763@bingo-ev.de>
 # Copyright (C) 1999 Jan Suhr <jan.suhr@usa.net>
+# , 2005.
 # , 2005.
 # , 2005.
 #
@@ -9,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: jonico@users.sourceforge.net\n"
-"POT-Creation-Date: 2005-10-08 16:22+0200\n"
-"PO-Revision-Date: 2005-10-01 17:20+0200\n"
+"POT-Creation-Date: 2005-10-27 11:23+0200\n"
+"PO-Revision-Date: 2005-10-27 11:25+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,8 +50,7 @@ msgstr "    --competition_mode,          -c   Wettkampf Modus"
 
 #: src/RealTimeBattle.cc:109
 msgid "    --no_graphics,               -g   no graphics will be displayed"
-msgstr ""
-"    --no_graphics,               -g   es werden keine Grafiken angezeigt"
+msgstr "    --no_graphics,               -g   es werden keine Grafiken angezeigt"
 
 #: src/RealTimeBattle.cc:110
 msgid ""
@@ -164,19 +165,23 @@ msgstr "Roboter mit Dateinamen %s hat keinen Namen angegeben"
 msgid "Game %d of sequence %d"
 msgstr "Spiel %d von Sequenz %d"
 
-#: src/ArenaWindow.cc:77
+#: src/ArenaWindow.cc:79
 msgid " No Zoom "
 msgstr " Kein Zoom "
 
-#: src/ArenaWindow.cc:79
+#: src/ArenaWindow.cc:81
 msgid " Zoom In "
 msgstr " Zoom In "
 
-#: src/ArenaWindow.cc:81
+#: src/ArenaWindow.cc:83
 msgid " Zoom Out "
 msgstr " Zoom Out "
 
-#: src/ArenaWindow.cc:149
+#: src/ArenaWindow.cc:85
+msgid " Toggle Fullscreen "
+msgstr " Vollbild/Fenster "
+
+#: src/ArenaWindow.cc:165
 msgid "Arena"
 msgstr "Arena"
 
@@ -892,3 +897,4 @@ msgstr "Wähle eine Options-Datei zum laden"
 #: src/OptionsWindow.cc:481
 msgid "Choose an options file to save"
 msgstr "Wähle eine Options-Datei zum speichern"
+

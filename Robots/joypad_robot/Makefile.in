@@ -15,7 +15,7 @@
 @SET_MAKE@
 
 
-SOURCES = $(joypad_robot_robot_SOURCES)
+SOURCES = $(joypad_robot_robot_SOURCES) $(joypad_robot_analog_robot_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -40,7 +40,8 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @linuxjoystickavailable_TRUE@robotexec_PROGRAMS =  \
-@linuxjoystickavailable_TRUE@	joypad_robot.robot$(EXEEXT)
+@linuxjoystickavailable_TRUE@	joypad_robot.robot$(EXEEXT) \
+@linuxjoystickavailable_TRUE@	joypad_robot_analog.robot$(EXEEXT)
 subdir = Robots/joypad_robot
 DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -70,6 +71,10 @@ PROGRAMS = $(robotexec_PROGRAMS)
 am_joypad_robot_robot_OBJECTS = joypad_robot.$(OBJEXT)
 joypad_robot_robot_OBJECTS = $(am_joypad_robot_robot_OBJECTS)
 joypad_robot_robot_LDADD = $(LDADD)
+am_joypad_robot_analog_robot_OBJECTS = joypad_robot_analog.$(OBJEXT)
+joypad_robot_analog_robot_OBJECTS =  \
+	$(am_joypad_robot_analog_robot_OBJECTS)
+joypad_robot_analog_robot_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -77,8 +82,10 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(joypad_robot_robot_SOURCES)
-DIST_SOURCES = $(joypad_robot_robot_SOURCES)
+SOURCES = $(joypad_robot_robot_SOURCES) \
+	$(joypad_robot_analog_robot_SOURCES)
+DIST_SOURCES = $(joypad_robot_robot_SOURCES) \
+	$(joypad_robot_analog_robot_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -269,8 +276,9 @@ uudecode = @uudecode@
 robotexecdir = $(RTB_DIR)/Robots
 INCLUDES = -I$(top_srcdir)/include
 joypad_robot_robot_SOURCES = joypad_robot.c
+joypad_robot_analog_robot_SOURCES = joypad_robot_analog.c
 joypaddir = $(RTB_DIR)/Robots/joypad_robot
-joypad_DATA = $(joypad_robot_robot_SOURCES) Makefile.am README
+joypad_DATA = $(joypad_robot_robot_SOURCES) $(joypad_robot_analog_robot_SOURCES) Makefile.am README
 all: all-am
 
 .SUFFIXES:
@@ -330,6 +338,9 @@ clean-robotexecPROGRAMS:
 joypad_robot.robot$(EXEEXT): $(joypad_robot_robot_OBJECTS) $(joypad_robot_robot_DEPENDENCIES) 
 	@rm -f joypad_robot.robot$(EXEEXT)
 	$(LINK) $(joypad_robot_robot_LDFLAGS) $(joypad_robot_robot_OBJECTS) $(joypad_robot_robot_LDADD) $(LIBS)
+joypad_robot_analog.robot$(EXEEXT): $(joypad_robot_analog_robot_OBJECTS) $(joypad_robot_analog_robot_DEPENDENCIES) 
+	@rm -f joypad_robot_analog.robot$(EXEEXT)
+	$(LINK) $(joypad_robot_analog_robot_LDFLAGS) $(joypad_robot_analog_robot_OBJECTS) $(joypad_robot_analog_robot_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -338,6 +349,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/joypad_robot.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/joypad_robot_analog.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
