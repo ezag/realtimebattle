@@ -198,7 +198,8 @@ ArenaRealTime::parse_arena_file(string& filename)
 
     try{
       if(Broadcast::Instance()->is_active()){
-      char buffer[500];
+      // big buffer for long poly curve command lines
+      char buffer[1024];
       
       ifstream file(filename.c_str());
       if( !file )
@@ -211,7 +212,7 @@ ArenaRealTime::parse_arena_file(string& filename)
       do
         {
           file >> ws;
-          file.get(buffer, 500, '\n');
+          file.get(buffer, 1024, '\n');
           if( buffer[0] != '\0' ) print_to_logfile('A', buffer);
         } 
       while( buffer[0] != '\0' );
