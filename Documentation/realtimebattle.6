@@ -1,0 +1,161 @@
+.TH "realtimebattle" 6 "2006-01-25" "1.0.8" "RealTimeBattle"
+
+.SH NAME
+RealTimeBattle \- a robot programming game
+
+
+.SH SYNOPSIS
+\f[B]realtimebattle\f[R]
+[\f[B]\-n\f[R]|\f[B]\-c\f[R]|\f[B]\-d\f[R]|\f[B]\-D\f[R] \f[I]debug-level\f[R]]
+[\f[B]\-g\f[R]]
+[\f[B]\-o\f[R] \f[I]option\-file\f[R]]
+[\f[B]\-l\f[R] \f[I]logfile\f[R]]
+[\f[B]\-t\f[R] \f[I]tournament-file\f[R]]
+[\f[B]\-s\f[R] \f[I]statistics-file\f[R]]
+[\f[B]\-p\f[R] \f[I]port-number\f[R]]
+.br
+\f[B]realtimebattle \-\-replay \f[I]logfile\f[R]
+[\f[B]\-p\f[R] \f[I]port-number\f[R]]
+.br
+\f[B]realtimebattle -h \f[R]|\f[B] \-\-help
+.br
+\f[B]realtimebattle -v \f[R]|\f[B] \-\-version
+
+.SH DESCRIPTION
+\f[B]RealTimeBattle\f[R] is a programming game, in which robots controlled by programs compete against each other. The goal is to destroy the enemies, using the radar to examine the environment and the cannon to shoot.
+
+Even though the environment the robots are moving in is fairly simple, it is far from easy to construct an intelligent robot\-program. \f[B]RealTimeBattle\f[R] is constructed to be easy to use, flexible and fast. The intention is that the program could be used for learning programming languages, as a test for intelligent algorithms or just as a game to play and enjoy.
+
+Here is a list of features of \f[B]RealTimeBattle\f[R]:
+
+.IP \(bu 4 
+Game progresses in real time, with the robot programs running as child processes to \f[B]RealTimeBattle\f[R].
+.IP \(bu 4 
+The robots communicate with the main program using the standard input and output.
+.IP \(bu 4 
+Robots can be constructed in almost any programming language.
+.IP \(bu 4 
+Any number of robots can compete simultaneously if allowed by operating system and hardware.
+.IP \(bu 4 
+A simple messaging language is used for communication, which makes it easy to start constructing robots.
+.IP \(bu 4 
+Robots behave like a real physical object.
+.IP \(bu 4 
+Own arenas can be created.
+.IP \(bu 4 
+The simulation environment is highly configurable.
+.IP \(bu 4 
+It is possible to connect external clients to the simulation server.
+.IP \(bu 4 
+Basic team support is directly integrated in the game, sophisticated team play available due to team frameworks.
+.IP \(bu 4 
+\f[B]RealTimeBattle\f[R] is distributed under the General Public License (GPL). 
+    
+
+.SH OPTIONS
+
+.TP
+\fB\-\-debug_mode, \-d
+debug mode
+
+.TP
+\fB\-\-debug_level \fI0-5\fB, \-D \fI0-5\fB
+sets the initial debug level. implies \-d
+
+.TP
+\fB\-\-normal_mode, \-n
+normal mode (default)
+
+.TP
+\fB\-\-competition_mode, \-c
+competition mode
+
+.TP
+\fB\-\-no_graphics, \-g
+no graphics will be displayed
+
+.TP
+\fB\-\-option_file \fIfile\fB, \-o \fIfile\fB
+selects option\-file (default: $HOME/.rtbrc)
+
+.TP
+\fB\-\-log_file \fIfile\fB, \-l \fIfile\fB
+make log file, if 'file' is '\-'
+the log is sent to STDOUT
+
+.TP
+\fB\-\-tournament_file \fIfile\fB, \-t \fIfile\fB
+specify a tournament file to autostart a tournament
+
+.TP
+\fB\-\-statistics_file \fIfile\fB, \-s \fIfile\fB
+file to print the statistics to when autostarting
+
+.TP
+\fB\-\-message_file \fIfile\fB, \-m \fIfile\fB
+redirect messages to 'file'.
+'\-' as 'file' is equivalent to STDOUT.
+If both log and messages are send
+to STDOUT, '\-m' will be ignored
+
+.TP
+\fB\-\-replay \fIfile\fB, \-r \fIfile\fB
+a log file to replay.
+if '\-' is specified as file,
+input is taken from STDIN
+
+.TP
+\fB\-\-help, \-h
+prints this message
+
+.TP
+\fB\-\-version, \-v
+prints the version number
+
+.TP
+\fB\-\-port_number, \-p
+specifies the port for remote clients (default is 32134) (only available if compiled with --enable-network) 
+
+
+.SH EXAMPLES
+
+.TP
+\fBrealtimebattle
+Just start \f[B]RealTimeBattle\f[R] in normal mode with graphical user interface and listening for remote clients on port 32134 (if compiled with --enable-network).
+
+.TP
+\fBrealtimebattle \-D \fI5\fB
+Enable full debugging output. Note that this is also useful for debugging robots, because the debug level is sent to the robots as a game option.
+
+.TP
+\fBrealtimebattle \-c \-g \-o \f[I]option\-file\f[B] -t \f[I]tournament\-file\f[B] -l \f[I]logfile\f[B] -s \f[I]statistics\-file\f[B]
+A typical competition start of \f[B]RealTimeBattle\f[R]. There will be no graphical user interface and the results of the competion will be written to \f[I]logfile\f[R] and \f[I]statistics\-file\f[R].
+
+
+.SH FILES
+\f[I]/usr/local/games/RealTimeBattle/Documentation
+.br
+/usr/local/games/RealTimeBattle/Arenas
+.br
+/usr/local/games/RealTimeBattle/Robots
+.br
+/usr/local/include/RealTimeBattle/Messagetypes.h
+
+
+.SH SEE ALSO
+The full documentation for \f[B]RealTimeBattle\f[R] is maintained as an SGML manual and should have been installed together with the program in various formats.
+You may have a look at the project website, which also contains the documentation: 
+\f[I]http://realtimebattle.sourceforge.net/
+
+
+.SH MAINTAINER
+The current maintainer of the \f[B]RealTimeBattle\f[R] project is Johannes Nicolai <jonico@users.sourceforge.net>.
+Feel free to contact him and the other developers at the source forge project page: \f[I]http://sourceforge.net/projects/realtimebattle/
+
+
+.SH BUGS
+If you find anything in this package which doesn't work, appears strange, is missing, is spellt wrong or is just confusing,
+don't hesitate to send in a bug report to the Sourceforge Bug Tracker at: \f[I]http://sourceforge.net/tracker/?group_id=561
+
+.SH AUTHOR
+This manual page was written by Falko Menge <fakko@users.sourceforge.net> and is part of \f[B]RealTimeBattle\f[R].
