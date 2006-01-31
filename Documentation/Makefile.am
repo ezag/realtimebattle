@@ -17,8 +17,9 @@ docs_DATA = \
 
 rtbinfodir = $(infodir)
 rtbinfo_DATA = RealTimeBattle.info
+man_MANS = realtimebattle.6
 
-EXTRA_DIST = $(docs_DATA)  $(rtbinfo_DATA)
+EXTRA_DIST = $(docs_DATA)  $(rtbinfo_DATA) $(man_MANS)
 
 install-data-hook:
 	gzip -f $(rtbinfodir)/RealTimeBattle.info; \

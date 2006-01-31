@@ -67,13 +67,17 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-recursive installcheck-recursive installdirs-recursive \
 	pdf-recursive ps-recursive uninstall-info-recursive \
 	uninstall-recursive
+man6dir = $(mandir)/man6
+am__installdirs = "$(DESTDIR)$(man6dir)" "$(DESTDIR)$(docsdir)" \
+	"$(DESTDIR)$(rtbinfodir)"
+NROFF = nroff
+MANS = $(man_MANS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(docsdir)" "$(DESTDIR)$(rtbinfodir)"
 docsDATA_INSTALL = $(INSTALL_DATA)
 rtbinfoDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(docs_DATA) $(rtbinfo_DATA)
@@ -276,7 +280,8 @@ docs_DATA = \
 
 rtbinfodir = $(infodir)
 rtbinfo_DATA = RealTimeBattle.info
-EXTRA_DIST = $(docs_DATA)  $(rtbinfo_DATA)
+man_MANS = realtimebattle.6
+EXTRA_DIST = $(docs_DATA)  $(rtbinfo_DATA) $(man_MANS)
 PAPER_SIZE = a4
 all: all-recursive
 
@@ -311,6 +316,51 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 uninstall-info-am:
+install-man6: $(man6_MANS) $(man_MANS)
+	@$(NORMAL_INSTALL)
+	test -z "$(man6dir)" || $(mkdir_p) "$(DESTDIR)$(man6dir)"
+	@list='$(man6_MANS) $(dist_man6_MANS) $(nodist_man6_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.6*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  case "$$ext" in \
+	    6*) ;; \
+	    *) ext='6' ;; \
+	  esac; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) '$$file' '$(DESTDIR)$(man6dir)/$$inst'"; \
+	  $(INSTALL_DATA) "$$file" "$(DESTDIR)$(man6dir)/$$inst"; \
+	done
+uninstall-man6:
+	@$(NORMAL_UNINSTALL)
+	@list='$(man6_MANS) $(dist_man6_MANS) $(nodist_man6_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.6*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  case "$$ext" in \
+	    6*) ;; \
+	    *) ext='6' ;; \
+	  esac; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f '$(DESTDIR)$(man6dir)/$$inst'"; \
+	  rm -f "$(DESTDIR)$(man6dir)/$$inst"; \
+	done
 install-docsDATA: $(docs_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(docsdir)" || $(mkdir_p) "$(DESTDIR)$(docsdir)"
@@ -511,10 +561,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(DATA)
+all-am: Makefile $(MANS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(docsdir)" "$(DESTDIR)$(rtbinfodir)"; do \
+	for dir in "$(DESTDIR)$(man6dir)" "$(DESTDIR)$(docsdir)" "$(DESTDIR)$(rtbinfodir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -559,7 +609,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-docsDATA install-rtbinfoDATA
+install-data-am: install-docsDATA install-man install-rtbinfoDATA
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 
@@ -567,7 +617,7 @@ install-exec-am:
 
 install-info: install-info-recursive
 
-install-man:
+install-man: install-man6
 
 installcheck-am:
 
@@ -587,12 +637,14 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-docsDATA uninstall-info-am \
+uninstall-am: uninstall-docsDATA uninstall-info-am uninstall-man \
 	uninstall-rtbinfoDATA
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 
 uninstall-info: uninstall-info-recursive
+
+uninstall-man: uninstall-man6
 
 .PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am check check-am \
 	clean clean-generic clean-recursive ctags ctags-recursive \
@@ -600,13 +652,14 @@ uninstall-info: uninstall-info-recursive
 	distdir dvi dvi-am html html-am info info-am install \
 	install-am install-data install-data-am install-data-hook \
 	install-docsDATA install-exec install-exec-am install-info \
-	install-info-am install-man install-rtbinfoDATA install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	maintainer-clean maintainer-clean-generic \
+	install-info-am install-man install-man6 install-rtbinfoDATA \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
 	maintainer-clean-recursive mostlyclean mostlyclean-generic \
 	mostlyclean-recursive pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-docsDATA uninstall-hook \
-	uninstall-info-am uninstall-rtbinfoDATA
+	uninstall-info-am uninstall-man uninstall-man6 \
+	uninstall-rtbinfoDATA
 
 
 install-data-hook:
