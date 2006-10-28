@@ -249,11 +249,12 @@ target_alias = @target_alias@
 uudecode = @uudecode@
 docsdir = $(DOCS_DIR)/Spanish
 docs_DATA = \
-   rtb-docs-1.0.5-es-1.html rtb-docs-1.0.5-es-2.html rtb-docs-1.0.5-es-3.html \
-   rtb-docs-1.0.5-es-4.html rtb-docs-1.0.5-es-5.html rtb-docs-1.0.5-es-6.html \
-   rtb-docs-1.0.5-es.html next.gif prev.gif toc.gif
+   RealTimeBattle-1.html RealTimeBattle-2.html RealTimeBattle-3.html \
+   RealTimeBattle-4.html RealTimeBattle-5.html RealTimeBattle-6.html \
+   RealTimeBattle.html next.gif prev.gif toc.gif next.png prev.png toc.png RealTimeBattle.dvi RealTimeBattle.sgml RealTimeBattle.txt RealTimeBattle.info
 
 EXTRA_DIST = $(docs_DATA)
+PAPER_SIZE = a4
 all: all-am
 
 .SUFFIXES:
@@ -425,6 +426,123 @@ uninstall-am: uninstall-docsDATA uninstall-info-am
 	pdf-am ps ps-am uninstall uninstall-am uninstall-docsDATA \
 	uninstall-info-am
 
+
+all: docs
+
+docs: RealTimeBattle-1.html RealTimeBattle-2.html RealTimeBattle-3.html \
+      RealTimeBattle-4.html RealTimeBattle-5.html RealTimeBattle-6.html \
+      RealTimeBattle.html RealTimeBattle.dvi RealTimeBattle.info RealTimeBattle.txt
+
+html_docs: RealTimeBattle-1.html RealTimeBattle-2.html RealTimeBattle-3.html \
+           RealTimeBattle-4.html RealTimeBattle-5.html RealTimeBattle-6.html \
+           RealTimeBattle.html
+
+# Targets to generate the files if the sgml source exists, otherwise nothing happens 
+
+@SGML2HTML_TRUE@%.html: %.sgml
+@SGML2HTML_TRUE@	@if [ -f $< ]; then \
+@SGML2HTML_TRUE@		echo "sgml2html --split=0 -c latin $<"; \
+@SGML2HTML_TRUE@		sgml2html --split=0 -c latin $<; \
+@SGML2HTML_TRUE@	fi
+@SGML2HTML_FALSE@%.html: %.sgml
+@SGML2HTML_FALSE@	@echo "Warning: $< cannot be generated, sgml2html is missing."; \
+@SGML2HTML_FALSE@	touch $@
+
+#	elif [ ! -f $@ ]; then \
+#		echo "Error: $@ is missing and cannot be generated"; \
+#	fi
+
+@SGML2HTML_TRUE@RealTimeBattle%.html: RealTimeBattle.sgml
+@SGML2HTML_TRUE@	@if [ -f $< ]; then \
+@SGML2HTML_TRUE@		echo "sgml2html --imagebuttons -D table=real -c latin $<"; \
+@SGML2HTML_TRUE@		sgml2html --imagebuttons -D table=real -c latin $<; \
+@SGML2HTML_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2HTML_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2HTML_TRUE@	fi
+@SGML2HTML_FALSE@RealTimeBattle%.html: RealTimeBattle.sgml
+@SGML2HTML_FALSE@	@echo "Warning: $@ cannot be generated, sgml2html is missing."; \
+@SGML2HTML_FALSE@	touch $@
+
+@SGML2LATEX_TRUE@%.dvi: %.sgml
+@SGML2LATEX_TRUE@	@if [ -f $< ]; then \
+@SGML2LATEX_TRUE@		echo "sgml2latex  -p $(PAPER_SIZE) -D table=real -c latin -o dvi $<"; \
+@SGML2LATEX_TRUE@		sgml2latex  -p $(PAPER_SIZE) -D table=real -c latin  -o dvi $<; \
+@SGML2LATEX_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2LATEX_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2LATEX_TRUE@	fi
+@SGML2LATEX_FALSE@%dvi: %.sgml
+@SGML2LATEX_FALSE@	@echo "Warning: $@ cannot be generated, sgml2latex is missing."; \
+@SGML2LATEX_FALSE@	touch $@
+
+@SGML2LATEX_TRUE@%.ps: %.sgml
+@SGML2LATEX_TRUE@	@if [ -f $< ]; then \
+@SGML2LATEX_TRUE@		echo "sgml2latex  -p $(PAPER_SIZE) -D table=real -c latin -o ps $<"; \
+@SGML2LATEX_TRUE@		sgml2latex  -p $(PAPER_SIZE)  -D table=real -c latin -o ps $<; \
+@SGML2LATEX_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2LATEX_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2LATEX_TRUE@	fi
+@SGML2LATEX_FALSE@%.ps: %.sgml
+@SGML2LATEX_FALSE@	@echo "Warning: $@ cannot be generated, sgml2latex is missing."; \
+@SGML2LATEX_FALSE@	touch $@
+
+@SGML2INFO_TRUE@%.info: %.sgml
+@SGML2INFO_TRUE@	@if [ -f $< ]; then \
+@SGML2INFO_TRUE@		echo "sgml2info  -D table=char -c latin $<"; \
+@SGML2INFO_TRUE@		sgml2info  -D table=char -c latin $<; \
+@SGML2INFO_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2INFO_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2INFO_TRUE@	fi
+@SGML2INFO_FALSE@%.info: %.sgml
+@SGML2INFO_FALSE@	@echo "Warning: $@ cannot be generated, sgml2info is missing."; \
+@SGML2INFO_FALSE@	touch $@
+
+@SGML2RTF_TRUE@%.rtf: %.sgml
+@SGML2RTF_TRUE@	@if [ -f $< ]; then \
+@SGML2RTF_TRUE@		echo "sgml2rtf -D table=real -c latin $<"; \
+@SGML2RTF_TRUE@		sgml2rtf  -D table=real -c latin $<; \
+@SGML2RTF_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2RTF_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2RTF_TRUE@	fi
+@SGML2RTF_FALSE@%.rtf: %.sgml
+@SGML2RTF_FALSE@	@echo "Warning: $@ cannot be generated, sgml2rtf is missing."; \
+@SGML2RTF_FALSE@	touch $@
+
+@SGML2LYX_TRUE@%.lyx: %.sgml
+@SGML2LYX_TRUE@	@if [ -f $< ]; then \
+@SGML2LYX_TRUE@		echo "sgml2lyx -D table=real -c latin $<"; \
+@SGML2LYX_TRUE@		sgml2lyx  -D table=real -c latin $<; \
+@SGML2LYX_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2LYX_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2LYX_TRUE@	fi
+@SGML2LYX_FALSE@%.lyx: %.sgml
+@SGML2LYX_FALSE@	@echo "Warning: $@ cannot be generated, sgml2lyx is missing."; \
+@SGML2LYX_FALSE@	touch $@
+
+@SGML2TXT_TRUE@%.txt: %.sgml
+@SGML2TXT_TRUE@	@if [ -f $< ]; then \
+@SGML2TXT_TRUE@		echo "sgml2txt --filter -D table=char -c latin $<"; \
+@SGML2TXT_TRUE@		sgml2txt --filter -D table=char -c latin $<; \
+@SGML2TXT_TRUE@	fi
+@SGML2TXT_FALSE@%.txt: %.sgml
+@SGML2TXT_FALSE@	@echo "Warning: $@ cannot be generated, sgml2txt is missing."; \
+@SGML2TXT_FALSE@	touch $@
+
+@SGML2TXT_TRUE@../%: %.sgml
+@SGML2TXT_TRUE@	@if [ -f $< ]; then \
+@SGML2TXT_TRUE@		echo "sgml2txt --filter -D table=char -c latin $<"; \
+@SGML2TXT_TRUE@		sgml2txt --filter -D table=char -c latin $<; \
+@SGML2TXT_TRUE@		echo "mv $(subst ../$(subst ../,,$@),$(subst ../,,$@).txt,$@) $@"; \
+@SGML2TXT_TRUE@		mv $(subst ../$(subst ../,,$@),$(subst ../,,$@).txt,$@) $@; \
+@SGML2TXT_TRUE@	elif [ ! -f $@ ]; then \
+@SGML2TXT_TRUE@		echo "Error: $@ is missing and cannot be generated"; \
+@SGML2TXT_TRUE@	fi
+@SGML2TXT_FALSE@../%: %.sgml
+@SGML2TXT_FALSE@	@echo "Warning: $@ cannot be generated, sgml2txt is missing."; \
+@SGML2TXT_FALSE@	touch $@
+
+#Just to allow for non-existing .sgml-file
+%.sgml: 
+	@true
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
