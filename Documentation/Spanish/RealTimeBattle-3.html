@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Estructura</TITLE>
+ <LINK HREF="RealTimeBattle-4.html" REL=next>
+ <LINK HREF="RealTimeBattle-2.html" REL=previous>
+ <LINK HREF="RealTimeBattle.html#toc3" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="RealTimeBattle-4.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-2.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc3"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="Structure"></A> <A NAME="s3">3.</A> <A HREF="RealTimeBattle.html#toc3">Estructura</A></H2>
+
+<P>En esta secci&oacute;n se describe la estructura del programa, como se mueven
+los robots, disparar y controlar el radar, cuando se otorgan puntos y
+como se constituye un torneo.</P>
+
+<H2><A NAME="Robot_motion"></A> <A NAME="ss3.1">3.1</A> <A HREF="RealTimeBattle.html#toc3.1">Movimiento del robot</A>
+</H2>
+
+<P>El robot se comporta como un veh&iacute;culo con ruedas. Rueda hacia adelante
+con un peque&ntilde;o 
+<A HREF="RealTimeBattle-5.html#RollFriction">rozamiento de giro</A> y se desliza
+lateralmente con una 
+<A HREF="RealTimeBattle-5.html#SlideFriction">fricci&oacute;n de deslizamiento</A>
+mucho mayor. El tercer efecto de desaceleraci&oacute;n es la 
+<A HREF="RealTimeBattle-5.html#AirResistance">resistencia del aire</A>, la cual se
+aplica en direcci&oacute;n opuesta a la velocidad del robot y aumenta con la
+velocidad.</P>
+<P>Existen tres maneras de variar el movimiento del robot:
+<A HREF="RealTimeBattle-4.html#Accelerate">acelerar</A>, 
+<A HREF="RealTimeBattle-4.html#Rotate">rotar</A> y 
+<A HREF="RealTimeBattle-4.html#Brake">frenar</A>.</P>
+<P>La aceleraci&oacute;n se utiliza para incrementar la velocidad del robot en
+la direcci&oacute;n frontal. No es posible controlar la velocidad
+directamente, y la aceleraci&oacute;n es el &uacute;nico modo de poner el robot en
+movimiento.</P>
+<P>Al rotar el robot puedes hacer que este gire. Ten en cuenta que la
+rotaci&oacute;n no afecta directamente a la direcci&oacute;n del movimiento, solo a
+la direcci&oacute;n frontal del robot. La fricci&oacute;n de deslizamiento, junto
+con la aceleraci&oacute;n, llevar&aacute;n eventualmente a cabo el giro en s&iacute; del robot.</P>
+<P>El frenado incrementa la fricci&oacute;n de giro hasta un valor m&aacute;ximo. Este
+se da cuando las ruedas est&aacute;n bloqueadas y el robot se desliza en vez
+de rodar. No olvides liberar el freno cuando quieras aumentar la
+velocidad otra vez.</P>
+
+<H2><A NAME="Energy"></A> <A NAME="ss3.2">3.2</A> <A HREF="RealTimeBattle.html#toc3.2">Energ&iacute;a</A>
+</H2>
+
+<P>La salud del robot se mide por su energ&iacute;a. Existen varias maneras de
+que un robot pierda energ&iacute;a, ya que puede:</P>
+<P>
+<UL>
+<LI> ser alcanzado por un disparo,</LI>
+<LI> chocar con un muro o con otro robot,</LI>
+<LI> activar una mina o</LI>
+<LI> realizar un disparo.</LI>
+</UL>
+</P>
+<P>Solo hay una posibilidad, sin embargo, de ganar energ&iacute;a: comiendo una galleta.</P>
+
+<H2><A NAME="The_radar"></A> <A NAME="ss3.3">3.3</A> <A HREF="RealTimeBattle.html#toc3.3">El radar</A>
+</H2>
+
+<P>El principal m&eacute;todo para obtener informaci&oacute;n del entorno es a trav&eacute;s
+del radar. Cada vez que el robot es actualizado recibir&aacute; un 
+<A HREF="RealTimeBattle-4.html#Radar">mensaje de radar</A>, con informaci&oacute;n sobre el
+objeto m&aacute;s cercano en la direcci&oacute;n actual del radar. A saber, la
+distancia y el tipo de objeto. Si se trata de un robot, el nivel de
+energ&iacute;a de ese robot ser&aacute; revelado tambi&eacute;n.</P>
+<P>Dado que la informaci&oacute;n del radar es pr&aacute;cticamente todo lo que el
+robot conocer&aacute; acerca del entorno, es crucial hacer uso de ella del
+mejor modo posible. Tambi&eacute;n es importante 
+<A HREF="RealTimeBattle-4.html#Rotate">maniobrar el radar</A> bien, para que este de informaci&oacute;n &uacute;til.</P>
+
+<H2><A NAME="Position"></A> <A NAME="ss3.4">3.4</A> <A HREF="RealTimeBattle.html#toc3.4">Posici&oacute;n de los robots</A>
+</H2>
+
+<P>A partir de la versi&oacute;n 1.0.5 de RTB es posible obtener la posici&oacute;n de
+los robots m&aacute;s directamente. En lugar de tener que analizar el entorno
+con el radar y averiguar la posici&oacute;n a partir de los datos, RTB puede
+configurarse para enviar las 
+<A HREF="RealTimeBattle-4.html#Coordinates">coordenadas del robot</A>. Este aspecto es controlado a trav&eacute;s de la opci&oacute;n
+<A HREF="RealTimeBattle-5.html#SendCoordinates">Send robot coordinates</A>.</P>
+
+<H2><A NAME="Shooting"></A> <A NAME="ss3.5">3.5</A> <A HREF="RealTimeBattle.html#toc3.5">Disparo</A>
+</H2>
+
+<P>Disparar es el principal m&eacute;todo para eliminar otros robots. En
+RealTimeBattle un disparo se desplaza con velocidad constante,
+calculada como la suma de la velocidad del robot y la 
+<A HREF="RealTimeBattle-5.html#ShotSpeed">velocidad del disparo</A> en la direcci&oacute;n
+hacia donde apunta el ca&ntilde;&oacute;n. El disparo se mover&aacute; hasta que choque
+contra un objeto.</P>
+<P>Cuando se realiza un disparo se le da una energ&iacute;a, la cual determina
+los da&ntilde;os que otros robots sufrir&aacute;n cuando reciban el impacto. La
+cantidad de energ&iacute;a est&aacute;, no obstante, limitada;
+la 
+<A HREF="RealTimeBattle-5.html#ShotMinEnergy">energ&iacute;a m&iacute;nima</A> proh&iacute;be disparos de
+muy baja energ&iacute;a, por ejemplo para eliminar minas. La
+<A HREF="RealTimeBattle-5.html#ShotMaxEnergy">energ&iacute;a m&aacute;xima</A> est&aacute; restringida por la
+cantidad de energ&iacute;a potencial de disparo del robot, la cual aumenta
+conforme pasa el tiempo.</P>
+<P>Disparar no est&aacute;, pese a todo, libre de riesgo, dado que un robot que
+dispare perder&aacute; una cantidad de energ&iacute;a
+<A HREF="RealTimeBattle-5.html#ShootingPenalty">proporcional a la energ&iacute;a del disparo</A>. </P>
+<P>Si una galleta o mina recibe un disparo, es destruida,
+independientemente de la energ&iacute;a del disparo. En consecuencia deber&iacute;as
+utilizar una cantidad m&iacute;nima de energ&iacute;a al disparar contra minas.</P>
+<P>Los disparos que choquen entre s&iacute; no ser&aacute;n destruidos inmediatamente,
+sino que sus velocidades y energ&iacute;as quedar&aacute;n superpuestas, de modo que
+si dos disparos que chocan viajasen en la misma direcci&oacute;n, sus
+energ&iacute;as se sumar&iacute;an y, en caso de que chocasen de frente, sus
+energ&iacute;as se cancelar&iacute;an mutuamente. </P>
+
+<H2><A NAME="Collisions"></A> <A NAME="ss3.6">3.6</A> <A HREF="RealTimeBattle.html#toc3.6">Colisiones</A>
+</H2>
+
+<P>Los robots son objetos fr&aacute;giles, que quedan da&ntilde;ados al chocar con
+muros y otros robots. Al colisionar, los robots act&uacute;an como bolas que
+rebotan, con tres factores que influencian su comportamiento:
+<A HREF="RealTimeBattle-5.html#BounceCoefficient">el coeficiente de rebote, el coeficiente de dureza y el coeficiente de protecci&oacute;n</A>. En la parte
+<A HREF="RealTimeBattle-5.html#RobotFront">delantera</A>, los robots est&aacute;n hechos de un
+material diferente, normalmente m&aacute;s duro y que protege m&aacute;s. Este hecho
+puede usarse para embestir a otros robots, haciendo m&aacute;s da&ntilde;o del que
+se recibe.</P>
+
+<H2><A NAME="Cookies_and_mines"></A> <A NAME="ss3.7">3.7</A> <A HREF="RealTimeBattle.html#toc3.7">Galletas y minas</A>
+</H2>
+
+<P>Las galletas y las minas son esencialmente objetos iguales, con la
+&uacute;nica diferencia de que los robots ganar&aacute;n energ&iacute;a al recoger galletas
+y perder&aacute;n energ&iacute;a con las minas. Estos objetos se reparten
+aleatoriamente por la arena durante el juego. Su energ&iacute;a y frecuencia
+puede ser controlada con las correspondientes
+<A HREF="RealTimeBattle-5.html#Cookie_and_mine_options">opciones</A>.</P>
+
+<H2><A NAME="Time"></A> <A NAME="ss3.8">3.8</A> <A HREF="RealTimeBattle.html#toc3.8">Tiempo</A>
+</H2>
+
+<P>Como el nombre del programa indica, la referencia de tiempo usada es
+el tiempo real. Depende por completo de los robots el responder lo
+bastante r&aacute;pido a los eventos en el juego. El juego progresa mediante
+llamadas a la funci&oacute;n de actualizaci&oacute;n a intervalos regulares. Entre
+estos, los robots han de compartir el tiempo de CPU restante. Para
+evitar que los robots consuman demasiados recursos del procesador, su
+tiempo de proceso est&aacute; limitado en el
+<A HREF="RealTimeBattle-2.html#Command line options">modo de competici&oacute;n</A>. Las 
+<A HREF="RealTimeBattle-5.html#CPUOptions">opciones correspondientes</A> dan m&aacute;s
+detalles al respecto.</P>
+<P>La ejecuci&oacute;n en tiempo real puede, no obstante, ser violada bajo
+ciertas circunstancias. Puedes acelerar o retrasar la velocidad del
+juego cambiando la opci&oacute;n de la 
+<A HREF="RealTimeBattle-5.html#TimeScale">escala de tiempo</A>,
+y existe un m&eacute;todo que previene la ruptura del juego cuando la carga
+del sistema es demasiado alta. Si el tiempo entre dos actualizaciones
+es mayor que el 
+<A HREF="RealTimeBattle-5.html#MaxTimestep">m&aacute;ximo paso de tiempo</A>,
+el juego se retardar&aacute; consecuentemente.</P>
+
+<H2><A NAME="A_game"></A> <A NAME="ss3.9">3.9</A> <A HREF="RealTimeBattle.html#toc3.9">Un juego</A>
+</H2>
+
+<P>Al comienzo de un juego, los robots reciben una posici&oacute;n aleatoria en
+la arena, con orientaci&oacute;n asimismo aleatoria. El radar y el ca&ntilde;&oacute;n
+apuntan ambos hacia delante y la
+<A HREF="#Shooting">energ&iacute;a potencial de disparo</A> est&aacute; a
+cero. El objetivo de los robots es sobrevivir tanto tiempo como sea
+posible y, al mismo tiempo, destruir a los dem&aacute;s robots. Un robot
+obtendr&aacute; un punto por cada robot enemigo al que sobreviva. Un punto
+extra es, sin embargo, otorgado a todos los robots participantes. Los
+robots que mueran al mismo tiempo compartir&aacute;n los puntos
+equitativamente (o en otras palabras, recibir&aacute;n medio punto por cada
+uno de los dem&aacute;s que muera al mismo tiempo).</P>
+<P>Un juego termina si el n&uacute;mero de robots supervivientes es menor que
+dos, o el 
+<A HREF="RealTimeBattle-5.html#Timeout">tiempo de juego se ha agotado</A>.</P>
+
+
+<H2><A NAME="A_sequence"></A> <A NAME="ss3.10">3.10</A> <A HREF="RealTimeBattle.html#toc3.10">Una secuencia</A>
+</H2>
+
+<P>Una secuencia es una serie de juegos, donde los mismos robots
+luchan. Al principio de una secuencia los procesos de los robots son
+lanzados. El n&uacute;mero de robots en una secuencia est&aacute; limitado a 120,
+debido al l&iacute;mite de 256 descriptores de fichero en Linux. Por cada
+robot se abren dos tuber&iacute;as como canales de comunicaci&oacute;n entre este y
+RealTimeBattle.</P>
+<P>En consecuencia un cierto 
+<A HREF="RealTimeBattle-2.html#NumberOfGames">n&uacute;mero de juegos</A>
+son jugados, y finalmente se matan los procesos de los robots.</P>
+
+<H2><A NAME="A_tournament"></A> <A NAME="ss3.11">3.11</A> <A HREF="RealTimeBattle.html#toc3.11">Un torneo</A>
+</H2>
+
+<P>Un torneo es una colecci&oacute;n de secuencias.</P>
+<P>El n&uacute;mero de robots en un torneo es (te&oacute;ricamente) ilimitado.</P>
+<P>Cualquier n&uacute;mero de secuencias est&aacute; permitido, pero para hacer que un
+torneo sea justo, deber&iacute;as elegir un n&uacute;mero de secuencias tal que
+todos los robots jueguen el mismo n&uacute;mero de combates (por ejemplo,
+#secuencias = #robots por juego / MCD(#robots por juego,
+#robots en el torneo)).</P>
+
+
+
+<HR>
+<A HREF="RealTimeBattle-4.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-2.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc3"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

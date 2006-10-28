@@ -1,0 +1,460 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Uso del programa</TITLE>
+ <LINK HREF="RealTimeBattle-3.html" REL=next>
+ <LINK HREF="RealTimeBattle-1.html" REL=previous>
+ <LINK HREF="RealTimeBattle.html#toc2" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="RealTimeBattle-3.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-1.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc2"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="Usage"></A> <A NAME="s2">2.</A> <A HREF="RealTimeBattle.html#toc2">Uso del programa</A></H2>
+
+<P>Este cap&iacute;tulo describe como utilizar el programa en s&iacute;. No obstante,
+si te resulta aburrido de leer, si&eacute;ntete libre de usar el m&eacute;todo
+habitual de prueba y error, y vuelve aqu&iacute; si tropiezas con algo
+confuso en la interfaz de usuario. Es buena idea, sin embargo, leer la
+corta secci&oacute;n sobre
+<A HREF="#Command line options">opciones de la l&iacute;nea de comandos</A>
+bajo estas l&iacute;neas. Ten en cuenta que no hay ninguna ayuda integrada en el
+programa: es aqu&iacute; donde debes buscar ayuda.</P>
+
+<H2><A NAME="Command line options"></A> <A NAME="ss2.1">2.1</A> <A HREF="RealTimeBattle.html#toc2.1">Opciones de l&iacute;nea de comandos</A>
+</H2>
+
+<P>Hay varias opciones, en la l&iacute;nea de comandos, que determinan el
+comportamiento general de RealTimeBattle. Es posible elegir un
+fichero de opciones, donde se definan los valores por defecto de las
+<A HREF="RealTimeBattle-5.html#Options">opciones</A>. Tambi&eacute;n puedes seleccionar en que
+modo de juego se ejecutar&aacute; el programa: <CODE>debug</CODE>,
+<CODE>normal</CODE> o <CODE>competici&oacute;n</CODE>.</P>
+<P>
+<HR>
+<PRE>
+ Uso: RealTimeBattle [opciones] 
+
+ Opciones:
+    --debug_mode,                -d   modo de depuraci&oacute;n
+    --debug_level [0-5],         -D   determina el nivel inicial de depuraci&oacute;n
+                                      (implica -d)
+    --normal_mode,               -n   modo normal (por defecto)
+    --competition_mode,          -c   modo de competici&oacute;n
+
+    --no_graphics,               -g   no se mostrar&aacute;n gr&aacute;ficos
+    --option_file [file],        -o   selecciona el fichero de opciones
+                                      (por defecto (default: $HOME/.rtbrc)
+
+    --log_file [file],           -l   genera un fichero de registro (log file).
+                                      Si el fichero es "-", el registro se
+                                      env&iacute;a a STDOUT
+
+    --tournament_file [file],    -t   especifica un fichero de torneo para
+                                      comenzar un torneo autom&aacute;ticamente
+
+    --statistics_file [file],    -s   fichero en que se guardar&aacute;n las 
+                                      estad&iacute;sticas al comenzar autom&aacute;ticamente
+
+    --message_file [file],       -m   redirecciona los mensajes a un fichero.
+                                      '-' como fichero es equivalente a STDOUT.
+                                      Si tanto el registro como los mensajes
+                                      son enviados a STDOUT, '-m' ser&aacute; ignorado
+
+    --replay [file]              -r   reproduce un fichero de registro. Si se
+                                      especifica '-' como fichero, la entrada
+                                      se toma de STDIN
+
+    --help,                      -h   muestra este mensaje de ayuda
+    --version,                   -v   muestra el n&uacute;mero de versi&oacute;n
+    --port_number                -p   especifica el puerto para clientes
+                                      remotos (el puerto por defecto es 32134)
+</PRE>
+<HR>
+</P>
+<P>La opci&oacute;n "port_number" est&aacute; disponible solo si se eligi&oacute; compilar
+RealTimeBatle con la opci&oacute;n --enable-network. V&eacute;ase el fichero
+<CODE>INSTALL</CODE> para m&aacute;s informaci&oacute;n.</P>
+<P>Las diferencias entre los tres modos de juego se muestran en la
+siguiente tabla:</P>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<P>
+<BR><CENTER>
+<TABLE BORDER><TR><TD>
+Modo </TD><TD> Debug </TD><TD> Normal </TD><TD> Competici&oacute;n </TD></TR><TR><TD>
+Comando 'debug' disponible </TD><TD> S&iacute; </TD><TD> No </TD><TD> No </TD></TR><TR><TD>
+Pausa en el juego </TD><TD> S&iacute; </TD><TD> S&iacute; </TD><TD> No </TD></TR><TR><TD>
+Juego paso a paso </TD><TD> S&iacute; </TD><TD> No </TD><TD> No </TD></TR><TR><TD>
+Uso de CPU ilimitado para robots </TD><TD> S&iacute; </TD><TD> S&iacute; </TD><TD> No </TD></TR><TR><TD>
+</TD></TR></TABLE>
+</CENTER><BR>
+</P>
+
+
+<H2><A NAME="Control window"></A> <A NAME="ss2.2">2.2</A> <A HREF="RealTimeBattle.html#toc2.2">Ventana de control</A>
+</H2>
+
+<P>
+<DL>
+<DT><B>Nuevo campeonato:</B><DD><P>Para comenzar un torneo nuevo. La secci&oacute;n
+<A HREF="#Start new tournament window">Comenzar un torneo nuevo</A>
+te dar&aacute; m&aacute;s informaci&oacute;n.</P>
+
+<DT><B>Reproducir campeonato:</B><DD><P>
+<A HREF="#replaying">Reproducir un torneo</A>. Te pedir&aacute; que
+selecciones un 
+<A HREF="#log_files">fichero de registro (log file)</A>
+del juego para poder estudiarlo.</P>
+<P>
+<A NAME="pause"></A> </P>
+<DT><B>Pausa:</B><DD><P>Detiene el juego. En el
+<A HREF="#Command line options">modo de competici&oacute;n</A> la pausa
+ser&aacute; pospuesta hasta que el juego actual termine.</P>
+
+<DT><B>Fin:</B><DD><P>Detiene el torneo actual.</P>
+
+<DT><B>Opciones:</B><DD><P>Muestra la 
+<A HREF="#Options_window">ventana de opciones</A>.</P>
+
+<DT><B>Estad&iacute;sticas:</B><DD><P>Muestra la 
+<A HREF="#Statistics window">ventana de estad&iacute;sticas</A>.</P>
+
+<DT><B>Ver la arena:</B><DD><P>Esta opci&oacute;n puede ser usada para mostrar y ocultar las tres ventanas
+utilizadas durante el juego: 
+la 
+<A HREF="#Arena_window">ventana de la arena</A>,
+la 
+<A HREF="#Score window">ventana de puntuaci&oacute;n</A> y
+la 
+<A HREF="#Message window">ventana de mensajes</A>.</P>
+
+<DT><B>Quitar:</B><DD><P>Finaliza el programa.</P>
+
+</DL>
+</P>
+<P>En el 
+<A HREF="#Command line options">modo de depuraci&oacute;n (debug)</A>
+hay disponible otro conjunto de botones. Estos est&aacute;n pensados para
+ayudar en la depuraci&oacute;n de robots. Ten en cuenta que puedes depurar un
+proceso ejecuci&oacute;n; si utilizas <CODE>gdb</CODE> el comando es
+<CODE>gdb robot-name process-number</CODE>.</P>
+<P>
+<DL>
+<DT><B>Paso:</B><DD><P>Permite, en un juego 
+<A HREF="#pause">en pausa</A>, avanzar un
+paso de tiempo. Esto es muy &uacute;til cuando se ejecuta el robot en un
+depurador, ya que de otro modo el robot ser&aacute; saturado con mensajes
+(N. del T. el robot recibe demasiados mensajes como para poder analizarlos).</P>
+
+<DT><B>Fin juego:</B><DD><P>Finaliza el juego actual. Tiene el mismo efecto que un
+<A HREF="RealTimeBattle-5.html#Timeout">timeout</A>.</P>
+
+<DT><B>Matar robots marcados:</B><DD><P>En el modo de depuraci&oacute;n, se puede marcar un robot en la 
+<A HREF="#Score window">ventana de puntuaci&oacute;n</A>. Ese robot morir&aacute;
+al pulsar este bot&oacute;n.</P>
+<P>
+<A NAME="Debug level"></A> </P>
+<DT><B>Nivel de debug:</B><DD><P>Cambiar el nivel de depuraci&oacute;n es una manera de indicar a los robots
+que mensajes deben enviar. El rango es entre 0 y 5, donde 0 significa
+no depurar y 5 es el nivel m&aacute;s alto de depuraci&oacute;n, esto es, todos los
+mensajes de depuraci&oacute;n deben ser enviados.</P>
+
+</DL>
+</P>
+<P>Cuando est&eacute;s reproduciendo un fichero de registro (log file), que no
+sea suministrado por la entrada est&aacute;ndar, hay varios botones para
+controlar la reproducci&oacute;n. V&eacute;ase el cap&iacute;tulo acerca de la
+<A HREF="#replaying">reproducci&oacute;n</A> para m&aacute;s detalles.</P>
+
+<H2><A NAME="Start new tournament window"></A> <A NAME="ss2.3">2.3</A> <A HREF="RealTimeBattle.html#toc2.3">Comenzar un torneo nuevo</A>
+</H2>
+
+<P>Para seleccionar robots y arenas para el torneo, marca los ficheros a
+la derecha y pulsa el bot&oacute;n <CODE>a&ntilde;adir</CODE>. Los ficheros
+seleccionados se muestran a la izquierda y pueden eliminarse de manera
+similar.</P>
+<P>
+<A NAME="NumberOfGames"></A> 
+Un 
+<A HREF="RealTimeBattle-3.html#A_tournament">torneo</A> consiste en un n&uacute;mero de 
+<A HREF="RealTimeBattle-3.html#A_sequence">secuencias</A> de 
+<A HREF="RealTimeBattle-3.html#A_game">juegos</A>.
+En cada secuencia el mismo robot compite en todos los juegos. Aqu&iacute; se
+puede seleccionar el n&uacute;mero de juegos y secuencias, as&iacute; como el n&uacute;mero
+de robots en cada secuencia. Si pretendes jugar con todos los robots
+en todos los juegos se recomienda seleccionar una sola secuencia y, en
+cambio, incrementar el n&uacute;mero de juegos. El motivo es evitar que los
+procesos de los robots sean reiniciados, lo cual puede tomar un cierto
+tiempo, especialmente si el n&uacute;mero de robots es grande.</P>
+<P>Tambi&eacute;n es posible cargar un torneo o salvar el torneo actual. El
+&uacute;ltimo torneo jugado se almacena en /tmp/rtb/tmp.tour y se muestra
+siempre cuando esta ventana se abre. Si no est&aacute; disponible se muestra
+un torneo vac&iacute;o.</P>
+<P>Debes seleccionar al menos dos robots y una arena para poder empezar.</P>
+
+<H2><A NAME="robot_and_arena_directories"></A> <A NAME="ss2.4">2.4</A> <A HREF="RealTimeBattle.html#toc2.4">Directorios de robots y arenas</A>
+</H2>
+
+<P>A fin de que el programa pueda encontrar los robots y arenas existen
+dos opciones: 
+<A HREF="RealTimeBattle-5.html#Robot search path">ruta de b&uacute;squeda de robots</A> y
+<A HREF="RealTimeBattle-5.html#Arena search path">ruta de b&uacute;squeda de arenas</A>.
+Independientemente de las opciones, siempre se busca en los
+subdirectorios <CODE>Robots</CODE> y <CODE>Arenas</CODE> en el directorio de
+instalaci&oacute;n de RealtimeBattle, especificado en el Makefile principal
+durante la compilaci&oacute;n (por defecto <CODE>/usr/local/games/RealTimeBattle</CODE>),
+pero si creas un directorio nuevo, o si instalaste RealTimeBattle en
+otro directorio, tendr&aacute;s que establecer estas opciones.</P>
+
+<H2><A NAME="Arena_window"></A> <A NAME="ss2.5">2.5</A> <A HREF="RealTimeBattle.html#toc2.5">Ventana de la arena</A>
+</H2>
+
+<P>Aqu&iacute; es donde tienen lugar las batallas. Si quieres una vista m&aacute;s
+detallada, usa los botones de zoom o presiona las teclas +, - &oacute; 0. Los
+robots se representan como c&iacute;rculos coloreados con una marca en forma de
+escuadra que indica la direcci&oacute;n del radar. La l&iacute;nea gruesa es el
+ca&ntilde;&oacute;n, y la l&iacute;nea delgada apunta en la direcci&oacute;n frontal.</P>
+
+<H2><A NAME="Score window"></A> <A NAME="ss2.6">2.6</A> <A HREF="RealTimeBattle.html#toc2.6">Ventana de puntuaci&oacute;n</A>
+</H2>
+
+<P>En esta ventana se muestran los robots que compiten en la secuencia actual.</P>
+
+<H2><A NAME="Message window"></A> <A NAME="ss2.7">2.7</A> <A HREF="RealTimeBattle.html#toc2.7">Ventana de mensajes</A>
+</H2>
+
+<P>Aqu&iacute; se muestran los mensajes enviados por los robots utilizando
+<A HREF="RealTimeBattle-4.html#Print">Print y Debug</A>. Los mensajes m&aacute;s recientes son
+mostrados en la parte superior. Puedes limpiar la ventana y elegir ver
+solo los nuevos mensajes de un robot en particular.</P>
+
+<H2><A NAME="Options_window"></A> <A NAME="ss2.8">2.8</A> <A HREF="RealTimeBattle.html#toc2.8">Ventana de opciones</A>
+</H2>
+
+<P>Aqu&iacute; tienes la posibilidad de cambiar un gran n&uacute;mero de opciones. En
+el 
+<A HREF="RealTimeBattle-5.html#Options">cap&iacute;tulo de opciones</A> puedes encontrar
+informaci&oacute;n m&aacute;s detallada sobre cada opci&oacute;n. Los cambios no ser&aacute;n
+aplicados hasta que pulses bien el bot&oacute;n <CODE>apply</CODE> o el bot&oacute;n <CODE>OK</CODE>.</P>
+<P>Puedes guardar tus opciones en un fichero: <CODE>Save options</CODE>
+salvar&aacute; las opciones a un fichero de tu elecci&oacute;n, y <CODE>Save as
+default</CODE> las guardar&aacute; en el fichero <CODE>.rtbrc</CODE> de tu
+directorio de usuario.</P>
+<P>El bot&oacute;n <CODE>Default</CODE> reiniciar&aacute; todas las opciones a sus valores
+por defecto.</P>
+
+<H2><A NAME="Statistics window"></A> <A NAME="ss2.9">2.9</A> <A HREF="RealTimeBattle.html#toc2.9">Ventana de estad&iacute;sticas</A>
+</H2>
+
+<P>Hay varias maneras de estudiar las estad&iacute;sticas del torneo
+actual. Puedes elegir entre:</P>
+<P>
+<UL>
+<LI> estad&iacute;sticas sobre un <B>robot</B> individual,
+</LI>
+<LI> el resultado de un <B>juego</B>,
+</LI>
+<LI> el <B>total de la secuencia</B> o
+</LI>
+<LI> el <B>total</B> del torneo.
+</LI>
+</UL>
+
+Pulsando los botones con forma de flecha puedes moverte al primer
+elemento, retroceder uno, avanzar uno o ir al &uacute;ltimo elemento
+respectivamente. La barra del centro muestra que es lo que se est&aacute;
+mostrando y puls&aacute;ndola se actualizar&aacute;n las estad&iacute;sticas si el juego
+est&aacute; en marcha. Si est&aacute;s usando gtk+1.1.x, tambi&eacute;n es posible ordenar
+los datos por columnas pulsando sobre los t&iacute;tulos correspondientes. </P>
+
+<H2><A NAME="no_graphics"></A> <A NAME="ss2.10">2.10</A> <A HREF="RealTimeBattle.html#toc2.10">Ejecuci&oacute;n sin gr&aacute;ficos</A>
+</H2>
+
+<P>Si lo deseas, es posible ejecutar RealTimeBattle sin ning&uacute;n tipo de
+gr&aacute;ficos. Esto puede resultar muy &uacute;til cuando se est&aacute; realizando una
+serie larga de pruebas o se ejecuta una competici&oacute;n. Para utilizar
+esta opci&oacute;n tienes dos opciones: bien pasar el par&aacute;metro <CODE>-g</CODE> al
+lanzar el programa, o deshabilitar los gr&aacute;ficos al compilar el
+programa (v&eacute;ase el fichero <CODE>INSTALL</CODE> para m&aacute;s
+informaci&oacute;n). Esta &uacute;ltima alternativa es &uacute;til ya que el ejecutable
+ser&aacute; menor y, en consecuencia, m&aacute;s r&aacute;pido en m&aacute;quinas con poca
+memoria. Ello tambi&eacute;n permite ejecutar RealTimeBattle en ordenadores
+que no tengan <CODE>gtk+</CODE> instalado.</P>
+<P>Durante la ejecuci&oacute;n sin gr&aacute;ficos es necesario proporcionar un fichero
+de torneo, o no ocurrir&aacute; nada. Tambi&eacute;n es una buena idea crear un
+fichero de registro (log file) y/o un fichero de estad&iacute;sticas si
+quieres conocer el resultado.</P>
+
+<H2><A NAME="tournament_files"></A> <A NAME="ss2.11">2.11</A> <A HREF="RealTimeBattle.html#toc2.11">Ficheros de torneo</A>
+</H2>
+
+<P>El fichero de torneo se indica como una
+<A HREF="#Command line options">opci&oacute;n de l&iacute;nea de comandos</A>.
+Cuando se especifica, un torneo comenzar&aacute; y terminar&aacute;
+autom&aacute;ticamente. Para m&aacute;s informaci&oacute;n sobre como guardar las
+estad&iacute;sticas mira en la secci&oacute;n sobre los
+<A HREF="#statistics_files">ficheros de estad&iacute;sticas</A>.</P>
+<P>Un fichero de torneo consiste en cinco palabras clave. Todas estas
+palabras clave pueden ser especificadas m&uacute;ltiples veces, pero recuerda
+que solo la &uacute;ltima de las palabras clave que toma un n&uacute;mero
+como argumento es tenida en cuenta. Todas las palabras clave deben ir
+seguidas de un punto y coma.</P>
+<P>
+<DL>
+<DT><B>Games/Sequence o g/s:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero indica cuantos
+juegos deben ser jugados por torneo. El asterisco significa que el
+programa toma el n&uacute;mero exacto de arenas y lo utiliza como
+argumento. El valor por defecto es 1.</P>
+
+<DT><B>Robots/Sequence o r/s:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero es cuantos
+robots jugar&aacute;n en cada secuencia. El asterisco significa que el
+programa toma el n&uacute;mero exacto de robots y lo utiliza como
+argumento. El valor por defecto es 2.</P>
+
+<DT><B>Sequences o seq:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. Este n&uacute;mero indica cuantas
+secuencias se jugar&aacute;n en el torneo. El asterisco significa que el
+programa toma el n&uacute;mero exacto de robots y los robots por secuencia,
+realiza un c&aacute;lculo binomial para determinar el n&uacute;mero de secuencias
+necesario para que todos los robots se encuentren exactamente una vez,
+y utiliza este n&uacute;mero como argumento. El valor por defecto es 1.</P>
+
+<DT><B>Robots o r:</B><DD><P>Toma uno o m&aacute;s ficheros de robot como argumento.</P>
+
+<DT><B>Arenas o a:</B><DD><P>Toma uno o m&aacute;s ficheros de arena como argumento.</P>
+</DL>
+</P>
+<P>Los argumentos de fichero pueden ser uno de entre los siguientes:
+<DL>
+<DT><B>El fichero solo:</B><DD><P>Busca el fichero en cuesti&oacute;n en la ruta definida.</P>
+<P>Ejemplo: <CODE>Robot: empty.robot</CODE></P>
+
+<DT><B>Ruta completa del fichero:</B><DD><P>Usa el fichero en cuesti&oacute;n.</P>
+<P>Ejemplo: <CODE>Arena: /usr/local/games/RealTimeBattle/Arenas/Circle.arena</CODE></P>
+
+<DT><B>Todos los ficheros en la ruta:</B><DD><P>Busca la ruta completa y usa todos los ficheros encontrados.</P>
+<P>Ejemplo: <CODE>Arena: *</CODE></P>
+
+<DT><B>Un directorio espec&iacute;fico:</B><DD><P>Busca en el directorio especificado y usa todos los ficheros encontrados. </P>
+<P>Ejemplo: <CODE>Robot: /usr/local/games/RealTimeBattle/Robots/*</CODE></P>
+
+</DL>
+</P>
+<P>Es posible indicar varias veces el mismo fichero. De modo que si
+quieres tres robots rotate_and_fire.robot, simplemente escribe
+rotate_and_fire.robot tres veces. Esto tambi&eacute;n es aplicable a <CODE>*</CODE>.</P>
+<P>Ejemplo de fichero de torneo:</P>
+<P><CODE>R: * Arenas: Circle.arena Square.arena G/S: 2 r/s: 3 Sequences: *</CODE></P>
+
+<H2><A NAME="log_files"></A> <A NAME="ss2.12">2.12</A> <A HREF="RealTimeBattle.html#toc2.12">Ficheros de registro (log files)</A>
+</H2>
+
+<P>A veces puede ser &uacute;til 
+<A HREF="#replaying">reproducir</A> un juego
+y analizarlo en detalle o simplemente almacenarlo como referencia
+futura. A&ntilde;ade el par&aacute;metro <CODE>-l</CODE> al arrancar RealTimeBattle,
+con el nombre de fichero como argumento, para activar esta opci&oacute;n, y
+con argumento <CODE>'-'</CODE> para que el registro sea mostrado en la
+salida est&aacute;ndar.</P>
+<P>El formato del fichero de registro es de la siguiente manera: cada
+l&iacute;nea consiste en una letra, que determina el tipo de informaci&oacute;n,
+seguida de una lista de argumentos separados por espacios en
+blanco. En concreto se muestra la siguiente informaci&oacute;n:</P>
+<P>
+<DL>
+<DT><B>Cabecera:</B><DD><P>H [juegos/secuencia] [robots/secuencia] [secuencias] [robots]</P>
+
+<DT><B>Informaci&oacute;n de la arena:</B><DD><P>A [l&iacute;nea del fichero de la arena]</P>
+
+<DT><B>Comienzo del juego:</B><DD><P>G [n&uacute;mero de secuencia] [n&uacute;mero de juego]</P>
+
+<DT><B>Opci&oacute;n:</B><DD><P>O [opci&oacute;n:valor]</P>
+
+<DT><B>Lista de propiedades del robot:</B><DD><P>L [identificador de robot] [color del robot] [nombre del robot]</P>
+<P>
+<A NAME="RobotPositionInfo"></A> </P>
+<DT><B>Informaci&oacute;n sobre la posici&oacute;n del robot:</B><DD><P>R [identificador de robot] [x] [y] [&aacute;ngulo del ca&ntilde;&oacute;n] [&aacute;ngulo del
+radar] [energ&iacute;a]</P>
+
+<DT><B>Tiempo:</B><DD><P>T [tiempo transcurrido]</P>
+
+<DT><B>Mensaje impreso:</B><DD><P>P [identificador del robot] [mensaje impreso]</P>
+
+<DT><B>Galleta:</B><DD><P>C [identificador de galleta] [x] [y]</P>
+
+<DT><B>Mina:</B><DD><P>M [identificador de mina] [x] [y]</P>
+
+<DT><B>Disparo:</B><DD><P>S [identificador de disparo] [x] [y] [dx/dt] [dy/dt]</P>
+
+<DT><B>Muerte:</B><DD><P>D [tipo de objeto muerto] [identificador de objeto] (si es un robot:
+[puntos recibidos] [posici&oacute;n])</P>
+</DL>
+</P>
+
+<H2><A NAME="replaying"></A> <A NAME="ss2.13">2.13</A> <A HREF="RealTimeBattle.html#toc2.13">Reproducci&oacute;n</A>
+</H2>
+
+<P>Puedes repetir un juego a partir de su 
+<A HREF="#log_files">fichero de registro (log file)</A> bien
+pasando la 
+<A HREF="#Command line options">opci&oacute;n de l&iacute;nea de comando</A>
+<CODE>&quot;-r&quot;</CODE> o desde la 
+<A HREF="#Control window">ventana de control</A>.
+Ten en cuenta que si el registro proviene de la entrada est&aacute;ndar
+(opci&oacute;n de l&iacute;nea de comando <CODE>&quot;-r&nbsp;-&quot;</CODE>), no
+podr&aacute;s hacer mucho m&aacute;s que contemplar el juego, si bien de otro modo
+puedes influir en el desarrollo del juego:</P>
+<P>
+<UL>
+<LI>La barra de desplazamiento en la parte superior muestra el
+progreso del juego actual. Puedes saltar a cualquier momento del
+juego arrastrando el manejador de la barra.
+</LI>
+<LI>El avance r&aacute;pido y el rebobinado operan como cabr&iacute;a
+esperar. Puedes alterar la velocidad cambiando la opci&oacute;n
+<A HREF="RealTimeBattle-5.html#Fast forward factor">velocidad de avance</A>.
+</LI>
+<LI>El avance y retroceso paso a paso pueden utilizarse para
+estudiar lo que ocurre en detalle. En primer lugar, no obstante, el
+juego deber&aacute; estar en 
+<A HREF="#pause">pausa</A>.
+</LI>
+<LI>Con los cuatro botones de la parte inferior puedes saltar entre
+juegos y secuencias.</LI>
+</UL>
+</P>
+
+
+<H2><A NAME="statistics_files"></A> <A NAME="ss2.14">2.14</A> <A HREF="RealTimeBattle.html#toc2.14">Ficheros de estad&iacute;sticas</A>
+</H2>
+
+<P>El fichero de estad&iacute;sticas es un archivo empleado solo cuando se
+especifica un 
+<A HREF="#tournament_files">fichero de torneo</A>.
+Las estad&iacute;sticas ser&aacute;n guardadas en este fichero cuando el torneo
+termine. Por otra parte, puedes salvarlo a mano utilizando el bot&oacute;n
+<CODE>guardar estad&iacute;sticas</CODE> en la
+<A HREF="#Statistics window">ventana de estad&iacute;sticas</A>.</P>
+
+
+
+<HR>
+<A HREF="RealTimeBattle-3.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-1.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc2"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

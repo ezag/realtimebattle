@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Construcci&oacute;n de arenas</TITLE>
+ <LINK HREF="RealTimeBattle-5.html" REL=previous>
+ <LINK HREF="RealTimeBattle.html#toc6" REL=contents>
+</HEAD>
+<BODY>
+<IMG SRC="next.png" ALT="Next">
+<A HREF="RealTimeBattle-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="Arena construction"></A> <A NAME="s6">6.</A> <A HREF="RealTimeBattle.html#toc6">Construcci&oacute;n de arenas</A></H2>
+
+<P>En RealTimeBattle, es muy sencillo construir tus propias arenas. El
+lenguaje consiste en tan solo once comandos, y hay b&aacute;sicamente cuatro
+elementos de construcci&oacute;n: l&iacute;neas, c&iacute;rculos, c&iacute;rculos interiores y
+arcos. Esto es debido primordialmente a razones de velocidad, ya que
+en el caso de las l&iacute;neas y los c&iacute;rculos es muy f&aacute;cil comprobar si se
+ha producido una colisi&oacute;n. Los c&iacute;rculos y los c&iacute;rculos interiores
+evitan que los robots entren o salgan respectivamente de un &aacute;rea
+circular. La l&iacute;nea y el arco detienen a los robots a lo largo del lado
+m&aacute;s extenso (la parte curva para el arco), pero no se realiza ninguna
+comprobaci&oacute;n para el lado corto, por lo que tendr&aacute;s que poner c&iacute;rculos
+en cada extremo de las l&iacute;neas para convertirlas en objetos
+s&oacute;lidos. Los comandos <CODE>polygon</CODE>, <CODE>closed_polygon</CODE> y
+<CODE>poly_curve</CODE> est&aacute;n concebidos para simplificar esta tarea,
+dando siempre como resultado un objeto apropiado.</P>
+<P>Todos los &aacute;ngulos est&aacute;n en radianes por defecto pero pueden cambiarse
+a grados con el comando <CODE>angle_unit degrees</CODE>.</P>
+<P>Ten en cuenta que RealTimeBattle no comprueba si el fichero de arena
+proporciona una arena correcta, queda enteramente bajo tu
+responsabilidad. Sin embargo, producir&aacute; errores si existe alguna
+violaci&oacute;n de las reglas del lenguaje.</P>
+<P>Los ficheros de arena deben llevar la extensi&oacute;n <CODE>.arena</CODE> y ser
+almacenados en el directorio de arenas correspondiente donde
+RealTimeBattle pueda encontrarlos.</P>
+<P>Los valores asignados a los <CODE>coeficientes de rebote</CODE> y <CODE>dureza</CODE>
+dados a los comandos de creaci&oacute;n de paredes determinan el material del
+que est&aacute;n hechos. Ambos valores est&aacute;n comprendidos entre 0 y 1. Los
+muros m&aacute;s duros producir&aacute;n m&aacute;s da&ntilde;os en los robots que choquen contra
+ellos, y un coeficiente de rebote m&aacute;s elevado har&aacute; que reboten mejor.</P>
+<P>Es una buena idea examinar las arenas incluidas y aprender de los ejemplos.</P>
+
+<H2><A NAME="Arena_commands"></A> <A NAME="ss6.1">6.1</A> <A HREF="RealTimeBattle.html#toc6.1">Comandos de la arena</A>
+</H2>
+
+<P>Un comando consiste en el correspondiente nombre de comando y sus
+argumentos separados por espacios en blanco. ¡Aseg&uacute;rate de usar el
+n&uacute;mero de argumentos correcto!</P>
+<P>En la lista de comandos, los argumentos se indican entre corchetes.</P>
+<P>
+<DL>
+<DT><B>scale [value]</B><DD><P>Este valor multiplicado por la 
+<A HREF="RealTimeBattle-5.html#ArenaScale">escala de la arena</A>
+dar&aacute; el factor de la escala, por el que todas las coordenadas quedan
+multiplicadas. Este comando, de existir, debe ser el primero en
+aparecer dentro del fichero. El valor por defecto es 1.0.</P>
+
+<DT><B>angle_unit [unit]</B><DD><P>Cambia las unidades en que se miden los &aacute;ngulos, las cuales pueden ser bien
+grados (<CODE>degrees</CODE>) o radianes (<CODE>radians</CODE>). El valor por
+defecto es radianes.</P>
+
+<DT><B>boundary [left] [up] [right] [down]</B><DD><P>Los l&iacute;mites determinan el &aacute;rea en la cual el robot, las galletas y las
+minas ser&aacute;n situados. Tambi&eacute;n definen el &aacute;rea visible en la
+<A HREF="RealTimeBattle-2.html#Arena_window">ventana de la arena</A>. Este comando ha de
+aparecer obligatoriamente, y solo puede estar precedido por <CODE>scale</CODE>.</P>
+
+<DT><B>inner_circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Los robots est&aacute;n limitados a circular por el &aacute;rea interior de este c&iacute;rculo.</P>
+
+<DT><B>circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Pared de forma circular.</P>
+
+<DT><B>line [bounce] [hardness] [thickness] [start_x]
+[start_y] [end_x] [end_y]</B><DD><P>Crea una l&iacute;nea. Esta solo evita que el robot la atraviese a trav&eacute;s de su
+parte m&aacute;s larga, as&iacute; que recuerda situar c&iacute;rculos en los extremos.</P>
+
+<DT><B>arc [bnc] [hardn] [thickn] [center_x] [ctr_y]
+[inner_radius] [outer_rds] [angle1] [angle2]</B><DD><P>Un arco es el sector de una circunferencia entre dos &aacute;ngulos. Al igual
+que la l&iacute;nea, necesita c&iacute;rculos en ambos extremos.</P>
+
+<DT><B>polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x] [center_y])...</B><DD><P>Crea un cierto n&uacute;mero de c&iacute;rculos conectados entre s&iacute; por l&iacute;neas.</P>
+
+<DT><B>closed_polygon [bounce] [hardn] [thickn] [number of vertices]
+([center_x] [center_y])...</B><DD><P>Similar a <CODE>polygon</CODE>, pero el primer y el &uacute;ltimo v&eacute;rtice est&aacute;n
+tambi&eacute;n conectados por una l&iacute;nea.</P>
+
+<DT><B>poly_curve [bnc] [hardn] [thickn] [start_x]
+[start_y] [dir_x] [dir_y] 
+([command args ...]) ...</B><DD><P>El comando <CODE>poly_curve</CODE> es el m&aacute;s potente de ente los
+disponibles para la creaci&oacute;n de arenas. Se utiliza para crear paredes
+con l&iacute;neas y arcos. En cada paso se tiene la posici&oacute;n y la direcci&oacute;n
+actuales, las cuales son alteradas con los subcomandos. El &uacute;ltimo
+subcomando debe ser <CODE>C</CODE> o <CODE>Q</CODE>.</P>
+<P>
+<DL>
+<DT><B>L [length]</B><DD><P>Dibuja una linea con la longitud dada en la direcci&oacute;n actual.</P>
+
+<DT><B>T [angle]</B><DD><P>Gira la direcci&oacute;n actual.</P>
+
+<DT><B>A [angle] [radius]</B><DD><P>Dibuja un arco.</P>
+
+<DT><B>C</B><DD><P>Termina conectando con el punto inicial.</P>
+
+<DT><B>Q</B><DD><P>Salir.</P>
+</DL>
+</P>
+
+<DT><B>exclusion_point [position_x]
+[position_y]</B><DD><P>Cuando la arena ente los l&iacute;mites consiste en varias &aacute;reas separadas,
+deben excluirse todas menos una insertando puntos de exclusi&oacute;n. Todos
+los puntos desde los que se pueda dibujar una linea recta hasta un
+punto de exclusi&oacute;n, sin atravesar una pared, se considera que quedan
+fuera de la arena.</P>
+
+</DL>
+</P>
+<HR>
+<IMG SRC="next.png" ALT="Next">
+<A HREF="RealTimeBattle-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

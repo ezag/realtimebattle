@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Opciones</TITLE>
+ <LINK HREF="RealTimeBattle-6.html" REL=next>
+ <LINK HREF="RealTimeBattle-4.html" REL=previous>
+ <LINK HREF="RealTimeBattle.html#toc5" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="RealTimeBattle-6.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-4.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc5"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="Options"></A> <A NAME="s5">5.</A> <A HREF="RealTimeBattle.html#toc5">Opciones</A></H2>
+
+<P>RealTimeBattle es configurable con unas cuantas opciones, reunidas en
+distintos grupos. La filosof&iacute;a es ofrecer la m&aacute;xima libertad para
+poder configurar el juego del modo en que se desee. Esto significa,
+sin embargo, que algunas combinaciones de valores pueden dar malos
+resultados, lo cual puede causar problemas en el programa.</P>
+
+<H2><A NAME="Environmental options"></A> <A NAME="ss5.1">5.1</A> <A HREF="RealTimeBattle.html#toc5.1">Opciones de entorno</A>
+</H2>
+
+<P>
+<DL>
+
+<DT><B>Constante gravitatoria:</B><DD><P>La aceleraci&oacute;n debido a la gravedad. En la Tierra es aproximadamente
+9.8. Un valor mayor aumentar&aacute; el rozamiento y la fricci&oacute;n,
+ralentizando los robots como consecuencia.</P>
+<P>
+<A NAME="AirResistance"></A> </P>
+<DT><B>Resistencia del aire:</B><DD><P>Tal como su nombre indica. Aumenta con la velocidad.</P>
+<P>
+<A NAME="RollFriction"></A> </P>
+<DT><B>Rozamiento de giro:</B><DD><P>Rozamiento en la direcci&oacute;n del robot si este no est&aacute; frenando.</P>
+<P>
+<A NAME="SlideFriction"></A> </P>
+<DT><B>Fricci&oacute;n de deslizamiento:</B><DD><P>La fricci&oacute;n ortogonal a la direcci&oacute;n del robot. Tambi&eacute;n el rozamiento
+m&aacute;ximo del robot si este se encuentra frenando.</P>
+<P>
+<A NAME="SendCoordinates"></A> </P>
+<DT><B>Send robot coordinates:</B><DD><P>Determina como se enviar&aacute;n las coordenadas a los robots. Las
+siguientes opciones est&aacute;n disponibles:
+<UL>
+<LI> 0 - no enviar coordenada alguna (por defecto)</LI>
+<LI> 1 - enviar coordenadas relativas a la posici&oacute;n inicial</LI>
+<LI> 2 - enviar coordenadas absolutas</LI>
+</UL>
+</P>
+
+</DL>
+</P>
+
+<H2><A NAME="Robot options"></A> <A NAME="ss5.2">5.2</A> <A HREF="RealTimeBattle.html#toc5.2">Opciones de los robots</A>
+</H2>
+
+<P>
+<DL>
+<P>
+<A NAME="RobotMaxAcceleration"></A> </P>
+<DT><B>Aceleraci&oacute;n m&aacute;xima:</B><DD><P>No se permite que los robots aceleren m&aacute;s r&aacute;pido que este valor...</P>
+
+<DT><B>Aceleraci&oacute;n m&iacute;nima:</B><DD><P>...ni m&aacute;s lentamente que este.</P>
+<P>
+<A NAME="RobotRadius"></A> </P>
+<DT><B>Radio:</B><DD><P>Determina el tama&ntilde;o del robot.</P>
+
+<DT><B>Masa:</B><DD><P>Una masa mayor incrementar&aacute; el da&ntilde;o en las colisiones.</P>
+<P>
+<A NAME="BounceCoefficient"></A> </P>
+<DT><B>Coeficiente de rebote:</B><DD><P>Afecta al rebote de los robots. Si es cero los robots quedar&aacute;n unidos
+tras un choque, y si el valor es uno actuar&aacute;n como bolas de billar perfectas.</P>
+
+<DT><B>Coeficiente de dureza:</B><DD><P>Determina el da&ntilde;o que los robots recibir&aacute;n al chocar. Cuanto m&aacute;s bajo
+sea el valor, m&aacute;s blando ser&aacute; el material.</P>
+
+<DT><B>Coeficiente de protecci&oacute;n:</B><DD><P>Influye en la protecci&oacute;n que lleva el robot. Este factor debe ser
+multiplicado por la energ&iacute;a del impacto para averiguar en cuanto se
+reducir&aacute; la energ&iacute;a del robot.</P>
+<P>
+<A NAME="RobotFront"></A> </P>
+<DT><B>Delantera del robot:</B><DD><P>La parte delantera del robot es una secci&oacute;n con materiales distintos,
+normalmente m&aacute;s duros y con una mejor protecci&oacute;n, de modo que los
+robots pueden da&ntilde;arse unos a otros embistiendo.</P>
+
+<DT><B>Coeficiente de rebote frontal:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+<DT><B>Coeficiente de dureza frontal:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+<DT><B>Coeficiente de protecci&oacute;n frontal:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+<DT><B>Energia de inicio:</B><DD><P>Cantidad de energ&iacute;a que los robots tendr&aacute;n al comienzo de cada juego.</P>
+
+<DT><B>Energ&iacute;a m&aacute;xima:</B><DD><P>Comiendo galletas, un robot puede aumentar su energ&iacute;a; aunque no por
+encima de este valor.</P>
+<P>
+<A NAME="RobotMaxRotateSpeed"></A> </P>
+<DT><B>Velocidad m&aacute;xima de rotaci&oacute;n:</B><DD><P>Indica cuan r&aacute;pido puede un robot girar sobre s&iacute; mismo. Unidades:
+radianes/s.</P>
+
+<DT><B>Velocidad m&aacute;xima de rotaci&oacute;n del ca&ntilde;&oacute;n:</B><DD><P>Indica la velocidad m&aacute;xima a la que el ca&ntilde;&oacute;n puede rotar. Ten en
+cuenta que el ca&ntilde;&oacute;n y el radar se mueven de forma relativa al robot,
+por lo que la velocidad de rotaci&oacute;n en un momento dado puede ser mayor.</P>
+
+<DT><B>Velocidad m&aacute;xima de rotaci&oacute;n del radar:</B><DD><P>Indica la velocidad m&aacute;xima a la que el radar puede rotar. V&eacute;ase la
+nota anterior.</P>
+<P>
+<A NAME="EnergyLevels"></A> </P>
+<DT><B>Niveles de energ&iacute;a:</B><DD><P>El robot solo conocer&aacute; su energ&iacute;a de modo aproximado. Este valor
+define cuantos niveles discretos se usar&aacute;n para la aproximaci&oacute;n.</P>
+
+</DL>
+</P>
+
+<H2><A NAME="Shot options"></A> <A NAME="ss5.3">5.3</A> <A HREF="RealTimeBattle.html#toc5.3">Opciones de disparo</A>
+</H2>
+
+<P>
+<DL>
+<DT><B>Radio:</B><DD><P>Tama&ntilde;o de los disparos. Debe ser menor que el
+<A HREF="#RobotRadius">radio del robot</A>.</P>
+<P>
+<A NAME="ShotSpeed"></A> </P>
+<DT><B>Velocidad:</B><DD><P>Los disparos se desplazan con esta velocidad en la direcci&oacute;n del ca&ntilde;&oacute;n
+m&aacute;s la velocidad del robot.</P>
+<P>
+<A NAME="ShootingPenalty"></A> </P>
+<DT><B>Penalizaci&oacute;n:</B><DD><P>Al disparar, el propio robot resulta da&ntilde;ado. Este es el factor por el
+que la energ&iacute;a del disparo es multiplicada para obtener la energ&iacute;a de
+dicho da&ntilde;o. Si el n&uacute;mero de robots es grande, este n&uacute;mero se reduce,
+de modo que de media nunca se pierda por disparar (suponiendo que se acierte).</P>
+<P>
+<A NAME="ShotMinEnergy"></A> </P>
+<DT><B>Energ&iacute;a m&iacute;nima:</B><DD><P>M&iacute;nimo valor permitido para la energ&iacute;a del disparo. Un robot que
+trate de disparar con menos energ&iacute;a fallar&aacute; en su intento.</P>
+<P>
+<A NAME="ShotMaxEnergy"></A> </P>
+<DT><B>Energ&iacute;a m&aacute;xima:</B><DD><P>Los robots tienen una energ&iacute;a de disparo que aumenta con el tiempo,
+pero que nunca superar&aacute; este valor.</P>
+<P>
+<A NAME="ShotEnergyIncreaseSpeed"></A> </P>
+<DT><B>Velocidad de aumento de energ&iacute;a:</B><DD><P>Determina la velocidad a la que la energ&iacute;a de disparo de los robots,
+antes mencionada, aumentar&aacute;. Unidades: energ&iacute;a/s</P>
+
+</DL>
+</P>
+
+<H2><A NAME="Cookie_and_mine_options"></A> <A NAME="ss5.4">5.4</A> <A HREF="RealTimeBattle.html#toc5.4">Opciones extra</A>
+</H2>
+
+<P>
+<DL>
+<DT><B>Energ&iacute;a m&aacute;xima de una galleta:</B><DD><P>La energ&iacute;a de una galleta es un n&uacute;mero aleatorio entre el m&aacute;ximo y el
+m&iacute;nimo valor de energ&iacute;a para una galleta.</P>
+
+<DT><B>Energ&iacute;a m&iacute;nima de una galleta:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+<DT><B>Frecuencia de las galletas:</B><DD><P>N&uacute;mero de galletas por segundo que aparecer&aacute;n de media.</P>
+
+<DT><B>Radio de las galletas:</B><DD><P>Tama&ntilde;o de las galletas.</P>
+
+<DT><B>Energ&iacute;a m&aacute;xima de una mina:</B><DD><P>La energ&iacute;a de una mina es un n&uacute;mero aleatorio entre el m&aacute;ximo y el
+m&iacute;nimo valor de energ&iacute;a para una mina.</P>
+
+<DT><B>Energ&iacute;a m&iacute;nima de una mina:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+<DT><B>Frecuencia de las minas:</B><DD><P>N&uacute;mero de minas por segundo que aparecer&aacute;n de media.</P>
+
+<DT><B>Radio de las minas:</B><DD><P>Tama&ntilde;o de las minas.</P>
+
+<DT><B>Color de las galletas:</B><DD><P>Color de las galletas en formato hexadecimal (rojo-verde-azul).</P>
+
+<DT><B>Color de las minas:</B><DD><P>Ver m&aacute;s arriba.</P>
+
+</DL>
+</P>
+
+<H2><A NAME="Time options"></A> <A NAME="ss5.5">5.5</A> <A HREF="RealTimeBattle.html#toc5.5">Opciones de tiempo</A>
+</H2>
+
+<P>
+<DL>
+<P>
+<A NAME="Timeout"></A> </P>
+<DT><B>Timeout:</B><DD><P>Este es el tiempo m&aacute;ximo que durar&aacute; un juego. Cuando el tiempo se
+agota, todos los robots supervivientes mueren, sin obtener ning&uacute;n
+punto adicional.</P>
+<P>
+<A NAME="MaxTimestep"></A> </P>
+<DT><B>M&aacute;ximo paso de tiempo:</B><DD><P>Si el ordenador queda ralentizado temporalmente, el tiempo entre
+actualizaciones puede ser demasiado largo. Establecer esta opci&oacute;n har&aacute;
+que el programa ralentice artificialmente el reloj en esos casos y, en
+consecuencia, que viole la ejecuci&oacute;n en tiempo real.</P>
+<P>
+<A NAME="TimeScale"></A> </P>
+<DT><B>Escala de tiempo:</B><DD><P>Incrementar la escala de tiempo a un valor superior a uno significa
+que el reloj del juego ir&aacute; m&aacute;s r&aacute;pido que un reloj
+convencional. Cambiar este valor puede ser &uacute;til si se quiere dar m&aacute;s
+tiempo a los robots o si se tiene un ordenador r&aacute;pido y se quiere
+acelerar el juego.</P>
+<P>
+<A NAME="UpdateInterval"></A> </P>
+<DT><B>Intervalo de refresco:</B><DD><P>Esta opci&oacute;n determina el tiempo entre actualizaciones de los robots,
+esto es, como de r&aacute;pido se cambiar&aacute; el estado de los robots. Este
+par&aacute;metro no queda influenciado por la escala de tiempo y no puede ser
+alterado cuando el programa est&aacute; en marcha. La precisi&oacute;n es de 1/100 s
+(dependiendo de la precisi&oacute;n del sistema en el que RealTimeBattle est&eacute;
+corriendo). </P>
+<P>
+<A NAME="RobotStartupTime"></A> </P>
+<DT><B>Retardo de inicio:</B><DD><P>Determina el tiempo entre que los procesos de los robots son
+ejecutados y da comienzo la secuencia. Si los robots son negros y no
+tienen nombre, puede ser necesario aumentar este par&aacute;metro del valor
+por defecto de un segundo. Esto puede ocurrir si, por ejemplo, los
+robots son muchos, muy pesados, o la ejecuci&oacute;n tiene lugar en una
+m&aacute;quina lenta o remota.</P>
+<P>
+<A NAME="CPUOptions"></A> </P>
+<DT><B>L&iacute;mite de gasto de CPU:</B><DD><P>En el 
+<A HREF="RealTimeBattle-2.html#Command line options">modo de competici&oacute;n</A> el
+uso de procesador de un robot esta limitado. Al comienzo de una
+secuencia, cada robot recibir&aacute; esta cantidad de tiempo de CPU para su
+consumo. </P>
+
+<DT><B>Tiempo extra de uso de CPU:</B><DD><P>Cuando el tiempo de CPU inicialmente asignado se agota, el robot
+recibir&aacute; esta cantidad adicional de tiempo de proceso. </P>
+
+<DT><B>Tiempo extra de uso de CPU:</B><DD><P>El tiempo extra de CPU debe durar al menos un periodo completo de CPU,
+de lo contrario el robot morir&aacute; en el juego actual.</P>
+<P>
+<A NAME="CPUWarningPercentage"></A> </P>
+<DT><B>Porcentaje de aviso en el uso de la CPU:</B><DD><P>Cuando un robot ha utilizado esta cantidad de tiempo de CPU, recibir&aacute;
+un mensaje de advertencia.</P>
+
+<DT><B>Intervalo de chequeo del proceso:</B><DD><P>En el 
+<A HREF="RealTimeBattle-2.html#Command line options">modo de competici&oacute;n</A> este
+par&aacute;metro determina la frecuencia a la que el programa comprobar&aacute; el
+uso de CPU.</P>
+<P>
+<A NAME="LoggingFrequency"></A> </P>
+<DT><B>Frecuencia de registro:</B><DD><P>Para reducir el tama&ntilde;o de los
+<A HREF="RealTimeBattle-2.html#log_files">ficheros de registro (log files)</A> puedes
+incrementar este valor. Con &eacute;l, la
+<A HREF="RealTimeBattle-2.html#RobotPositionInfo">posici&oacute;n del robot</A> es registrada
+solo cada en&eacute;simo
+<A HREF="#UpdateInterval">intervalo de refresco</A>.</P>
+
+</DL>
+</P>
+
+<H2><A NAME="Window sizes"></A> <A NAME="ss5.6">5.6</A> <A HREF="RealTimeBattle.html#toc5.6">Tama&ntilde;o de las ventanas</A>
+</H2>
+
+<P>Aqu&iacute; se puede establecer el tama&ntilde;o inicial para algunas ventanas, a saber
+la 
+<A HREF="RealTimeBattle-2.html#Arena_window">ventana de la arena</A>,
+la 
+<A HREF="RealTimeBattle-2.html#Message window">ventana de mensajes</A>,
+la 
+<A HREF="RealTimeBattle-2.html#Score window">ventana de puntuaci&oacute;n</A> y
+la 
+<A HREF="RealTimeBattle-2.html#Statistics window">ventana de estad&iacute;sticas</A>.
+Tambi&eacute;n se puede establecer la posici&oacute;n de las tres primeras y de la 
+<A HREF="RealTimeBattle-2.html#Control window">ventana de control</A>.</P>
+
+<H2><A NAME="Miscellaneous options"></A> <A NAME="ss5.7">5.7</A> <A HREF="RealTimeBattle.html#toc5.7">Otras opciones</A>
+</H2>
+
+<P>
+<DL>
+<P>
+<A NAME="ArenaScale"></A> </P>
+<DT><B>Escala de la arena:</B><DD><P>Escala a la que se representar&aacute; la arena. Un valor de 2 produce lados
+el doble de largos, o sea, un &aacute;rea cuatro veces mayor.</P>
+<P>
+<A NAME="Fast forward factor"></A> </P>
+<DT><B>Velocidad de avance:</B><DD><P>Determina, al 
+<A HREF="RealTimeBattle-2.html#replaying">reproducir</A>, la velocidad cuando se pulsa
+el bot&oacute;n de avance r&aacute;pido o el bot&oacute;n de rebobinado.</P>
+<P>
+<A NAME="Max robots allowed simultaneously"></A> </P>
+<DT><B>N&uacute;mero m&aacute;ximo de robots simult&aacute;neos:</B><DD><P>Permite al usuario cambiar la cantidad m&aacute;xima de robots permitidos en
+una secuencia. Si hay demasiados, el sistema puede acusarlo (el valor
+concreto depende del ordenador que se use).</P>
+
+<DT><B>Color de fondo:</B><DD><P>El color de fondo y...</P>
+
+<DT><B>Color de primer plano:</B><DD><P>...el color de primer plano para la arena.</P>
+<P>
+<A NAME="Colour for RTB messages"></A> </P>
+<DT><B>Color para los mensajes:</B><DD><P>Color de texto cuando RealTimeBattle env&iacute;a un mensaje.</P>
+<P>
+<A NAME="Robot search path"></A> </P>
+<DT><B>Ruta de b&uacute;squeda de robots:</B><DD><P>Se trata de una lista de directorios separados por dos puntos, donde
+se buscar&aacute;n los robots al comienzo de un 
+<A HREF="RealTimeBattle-2.html#Start new tournament window">nuevo torneo</A>.
+No obstante, siempre se buscar&aacute; en el subdirectorio <CODE>Robots</CODE>,
+dentro del directorio de instalaci&oacute;n de RealTimeBattle
+(por defecto: <CODE>/usr/local/games/RealTimeBattle</CODE>).</P>
+<P>
+<A NAME="Arena search path"></A> </P>
+<DT><B>Ruta de b&uacute;squeda de arenas:</B><DD><P>Igual que en el caso anterior, pero para ficheros de arena en lugar de
+robots. En este caso el subdirectorio es <CODE>Arenas</CODE>.</P>
+
+</DL>
+</P>
+
+
+
+<HR>
+<A HREF="RealTimeBattle-6.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="RealTimeBattle-4.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="RealTimeBattle.html#toc5"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

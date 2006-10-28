@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Introducci&oacute;n</TITLE>
+ <LINK HREF="RealTimeBattle-2.html" REL=next>
+
+ <LINK HREF="RealTimeBattle.html#toc1" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="RealTimeBattle-2.html"><IMG SRC="next.png" ALT="Next"></A>
+<IMG SRC="prev.png" ALT="Previous">
+<A HREF="RealTimeBattle.html#toc1"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="Introduction"></A> <A NAME="s1">1.</A> <A HREF="RealTimeBattle.html#toc1">Introducci&oacute;n</A></H2>
+
+<P>Este es el manual de usuario de RealTimeBattle. Aqu&iacute; encontrar&aacute;s como
+ejecutar el programa, como funciona, como crear tus propios robots y
+como construir tus campos de batalla, tambi&eacute;n llamados arenas (N. de
+T. el t&eacute;rmino arena se utilizar&aacute; en lo sucesivo para referirse al
+lugar donde compiten los robots).</P>
+<P>RealTimeBattle es un juego de programaci&oacute;n para Unix, en el cual
+robots controlados por programas luchan unos contra otros. La meta es
+destruir a los enemigos, usando el radar para examinar el entorno y el
+ca&ntilde;&oacute;n para disparar.</P>
+<P>A pesar de que el entorno en que los robots se mueven es bastante
+simple, no es sencillo construir un programa-robot realmente
+inteligente. RealTimeBattle ha sido creado para ser flexible, r&aacute;pido y
+f&aacute;cil de usar. La intenci&oacute;n es que este programa pueda ser utilizado
+como prueba para algoritmos de Inteligencia Artificial, as&iacute; como para
+jugar y pasarlo bien.</P>
+<P>Las caracter&iacute;sticas incluyen:</P>
+<P>
+<UL>
+<LI> Progreso del juego en tiempo real, con los robots ejecut&aacute;ndose
+como procesos hijos de RealTimeBattle.
+</LI>
+<LI> Los robots se comunican con el programa principal usando la
+entrada y salida est&aacute;ndar.
+</LI>
+<LI> Los robots pueden ser construidos en casi cualquier lenguaje de
+programaci&oacute;n.
+</LI>
+<LI> Hasta 120 robots pueden competir simult&aacute;neamente.
+</LI>
+<LI> Se usa un lenguaje simple para el intercambio de mensajes, lo
+cual hace que sea f&aacute;cil comenzar a construir robots.
+</LI>
+<LI> Los robots tienen un comportamiento similar a los objetos reales.
+</LI>
+<LI> Puedes crear tus propias arenas.
+</LI>
+<LI> Altamente configurable.
+</LI>
+<LI> Posibilidad de conectar clientes externos.
+</LI>
+<LI> Soporte b&aacute;sico para equipos directamente integrado en el juego,
+con un sofisticado modo de juego disponible gracias a la
+infraestructura de equipos.
+</LI>
+</UL>
+</P>
+
+<H2><A NAME="More information"></A> <A NAME="ss1.1">1.1</A> <A HREF="RealTimeBattle.html#toc1.1">M&aacute;s informaci&oacute;n</A>
+</H2>
+
+<P>Puede encontrarse m&aacute;s informaci&oacute;n en los ficheros <CODE>INSTALL</CODE>,
+<CODE>AUTHORS</CODE>, <CODE>BUGS</CODE>, <CODE>TODO</CODE>, <CODE>README</CODE>,
+<CODE>FAQ</CODE> y <CODE>ChangeLog</CODE>, incluidos en la
+distribuci&oacute;n. Informaci&oacute;n m&aacute;s actualizada est&aacute; disponible en la
+<A HREF="http://realtimebattle.sf.net">p&aacute;gina de RealTimeBattle</A>, 
+donde tambi&eacute;n encontrar&aacute;s robots, noticias sobre torneos, as&iacute; como este
+manual en distintos formatos.</P>
+
+<H2><A NAME="Requirements"></A> <A NAME="ss1.2">1.2</A> <A HREF="RealTimeBattle.html#toc1.2">Requisitos</A>
+</H2>
+
+<P>Los requisitos de hardware dependen en gran medida de lo que vayas a
+hacer. Jugar con unos pocos robots deber&iacute;a ser posible en cualquier
+ordenador donde se pueda ejecutar GNU/Linux o cualquier otro Unix. No
+obstante, los requisitos de hardware aumentar&aacute;n con el n&uacute;mero de robots
+que se quiera tener simult&aacute;neamente en el campo de batalla;
+ejecutar 120 robots avanzados es ciertamente exigente para cualquier PC.</P>
+<P>RealTimeBattle est&aacute; disponible &uacute;nicamente en Unix. Ha sido
+desarrollado en una m&aacute;quina Linux, aunque puede igualmente ser 
+compilado en otros tipos de Unix. La ejecuci&oacute;n en
+<A HREF="RealTimeBattle-2.html#Command line options">modo de competici&oacute;n</A> es posible
+solamente en Linux por el momento, con el directorio /proc activado,
+debido a la necesidad de obtener estad&iacute;sticas sobre el uso de la CPU de los
+procesos hijo.</P>
+<P>El &uacute;nico requisito software es 
+<A HREF="http://www.gtk.org">gtk+</A>,
+el cual es empleado para la interfaz gr&aacute;fica de usuario.</P>
+
+<H2><A NAME="Background"></A> <A NAME="ss1.3">1.3</A> <A HREF="RealTimeBattle.html#toc1.3">Historia</A>
+</H2>
+
+<P>El proyecto comenz&oacute; en Agosto de 1998. La inspiraci&oacute;n provino de
+<A HREF="http://www.robotbattle.com/">RobotBattle</A>, un juego
+muy interesante que sol&iacute;amos disfrutar unos a&ntilde;os antes. Aquella versi&oacute;n de
+RobotBattle, sin embargo, ten&iacute;a algunas pegas: solo estaba disponible
+para Windows y los robots eran escritos en un lenguaje propietario, lo
+cual restring&iacute;a las posibilidades de escribir robots
+inteligentes. RobotBattle ha estado bajo desarrollo desde entonces,
+pero a&uacute;n carece de soporte para otros sistemas operativos.</P>
+<P>Decidimos por lo tanto hacer un juego de programaci&oacute;n de robots para
+Unix, que hace uso de las caracter&iacute;sticas de un sistema operativo moderno.</P>
+
+<H2><A NAME="License"></A> <A NAME="ss1.4">1.4</A> <A HREF="RealTimeBattle.html#toc1.4">Licencia</A>
+</H2>
+
+<P>RealTimeBattle es distribuido bajo licencia
+<A HREF="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</A>,
+siguiendo el esp&iacute;ritu de la comunidad Linux. Las versiones oficiales
+de RealTimeBattle ser&aacute;n liberadas por los propios autores.</P>
+<P>Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony.
+V&eacute;ase el fichero <CODE>AUTHORS</CODE> para el resto de desarrolladores.</P>
+<P>Este programa es software libre; puedes redistribuirlo y/o modificarlo
+bajo los t&eacute;rminos de la licencia GNU GPL, publicados por la Free
+Software Foundation; bien la versi&oacute;n 2 de la licencia, o cualquier
+versi&oacute;n posterior (a tu elecci&oacute;n).</P>
+<P>Este programa es distribuido con la esperanza de que sea &uacute;til, pero
+SIN NINGUNA GARANT&Iacute;A; sin ni siquiera la garant&iacute;a impl&iacute;cita de que sea
+COMERCIAL o APROPIADO PARA UN PROP&Oacute;SITO PARTICULAR. V&eacute;ase la licencia
+GNU GPL para m&aacute;s detalles.</P>
+<P>Deber&iacute;as haber recibido una copia de la GNU General Public License
+junto con este programa; en caso contrario, dir&iacute;gete a la Free
+Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+02111-1307, USA.</P>
+
+<H2><A NAME="BugReports"></A> <A NAME="ss1.5">1.5</A> <A HREF="RealTimeBattle.html#toc1.5">Notificaci&oacute;n de errores</A>
+</H2>
+
+<P>Si encuentras algo en este paquete que no funciona, parece extra&ntilde;o,
+esta ausente, se encuentra mal escrito o simplemente es confuso, no
+dudes en enviar una notificaci&oacute;n del error a trav&eacute;s del 
+<A HREF="http://sourceforge.net/tracker/?group_id=561=100561">Sourceforge Bug Tracker</A>. </P>
+
+
+
+<HR>
+<A HREF="RealTimeBattle-2.html"><IMG SRC="next.png" ALT="Next"></A>
+<IMG SRC="prev.png" ALT="Previous">
+<A HREF="RealTimeBattle.html#toc1"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>
