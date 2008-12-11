@@ -24,6 +24,9 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 using namespace std;
 
+class Vector2D;
+Vector2D angle2vec(const double);
+
 class Vector2D
 {
 public:

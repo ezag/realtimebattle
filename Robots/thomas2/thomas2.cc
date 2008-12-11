@@ -25,6 +25,7 @@ Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <glib.h>
 #include <math.h>
 #include <Messagetypes.h>
+#include <string.h>
 #define abs(x) ((x>0) ? (x) : -(x))
 #define sgn(x) ((x>0) ? 1 : -1)
 #define max(a,b) (((a) > (b)) ? (a) : (b))

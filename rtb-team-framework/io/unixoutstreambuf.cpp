@@ -1,5 +1,5 @@
 /************************************************************************
-    $Id: unixoutstreambuf.cpp,v 1.2 2005/02/24 10:27:54 jonico Exp $
+    $Id: unixoutstreambuf.cpp,v 1.3 2008/12/11 11:52:44 fakko Exp $
     
     RTB - Team Framework: Framework for RealTime Battle robots to communicate efficiently in a team
     Copyright (C) 2004 The RTB- Team Framework Group: http://rtb-team.sourceforge.net
@@ -19,6 +19,10 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
     $Log: unixoutstreambuf.cpp,v $
+    Revision 1.3  2008/12/11 11:52:44  fakko
+    - Applied two patches from the Debian package of RealTimeBattle
+    - Several fixes of includes to make the code compile with latest gcc versions
+
     Revision 1.2  2005/02/24 10:27:54  jonico
     Updated newest version of the framework
 
@@ -33,6 +37,7 @@
 #include "unixoutstreambuf.h"
 #include <sstream>
 #include <errno.h>
+#include <string.h>
 /**
  * Namespace
  */

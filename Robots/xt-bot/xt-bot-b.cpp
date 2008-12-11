@@ -31,6 +31,7 @@ General Public License for more details.
 #include <signal.h>
 #include <unistd.h>
 #include <Messagetypes.h>
+#include <string.h>
 
 using std::cout;
 using std::cin;
