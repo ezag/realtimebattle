@@ -150,7 +150,7 @@ static const int number_of_object_types = 5;
 
 struct Message
 {
-  char* msg;
+  const char* msg;
   int number_of_args;
   enum argument_type arg_type[4];
 };
