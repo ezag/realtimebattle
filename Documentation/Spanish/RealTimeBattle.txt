@@ -1,4 +1,4 @@
-  Manual de Usuario de RealTimeBattle, versión 1.0.8
+  Manual de Usuario de RealTimeBattle, versión 1.0.9
   Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai
   (jonico@users.sourceforge.net)
   4 Octubre 2005
@@ -66,7 +66,7 @@
 
   ______________________________________________________________________
 
-  [1m1.  Introducción[0m
+  1.  Introducción
 
   Este es el manual de usuario de RealTimeBattle. Aquí encontrarás como
   ejecutar el programa, como funciona, como crear tus propios robots y
@@ -116,7 +116,7 @@
      infraestructura de equipos.
 
 
-  [1m1.1.  Más información[0m
+  1.1.  Más información
 
   Puede encontrarse más información en los ficheros INSTALL, AUTHORS,
   BUGS, TODO, README, FAQ y ChangeLog, incluidos en la distribución.
@@ -126,7 +126,7 @@
   distintos formatos.
 
 
-  [1m1.2.  Requisitos[0m
+  1.2.  Requisitos
 
   Los requisitos de hardware dependen en gran medida de lo que vayas a
   hacer. Jugar con unos pocos robots debería ser posible en cualquier
@@ -147,7 +147,7 @@
   empleado para la interfaz gráfica de usuario.
 
 
-  [1m1.3.  Historia[0m
+  1.3.  Historia
 
   El proyecto comenzó en Agosto de 1998. La inspiración provino de
   RobotBattle <http://www.robotbattle.com/>, un juego muy interesante
@@ -163,14 +163,14 @@
   moderno.
 
 
-  [1m1.4.  Licencia[0m
+  1.4.  Licencia
 
   RealTimeBattle es distribuido bajo licencia GNU General Public License
   <http://www.gnu.org/copyleft/gpl.html>, siguiendo el espíritu de la
   comunidad Linux. Las versiones oficiales de RealTimeBattle serán
   liberadas por los propios autores.
 
-  Copyright (C) 1998-2000  Erik Ouchterlony and Ragnar Ouchterlony.
+  Copyright (C) 1998-2000 Erik Ouchterlony and Ragnar Ouchterlony.
   Véase el fichero AUTHORS para el resto de desarrolladores.
 
   Este programa es software libre; puedes redistribuirlo y/o modificarlo
@@ -189,14 +189,14 @@
   02111-1307, USA.
 
 
-  [1m1.5.  Notificación de errores[0m
+  1.5.  Notificación de errores
 
   Si encuentras algo en este paquete que no funciona, parece extraño,
   esta ausente, se encuentra mal escrito o simplemente es confuso, no
   dudes en enviar una notificación del error a través del Sourceforge
   Bug Tracker <http://sourceforge.net/tracker/?group_id=561=100561>.
 
-  [1m2.  Uso del programa[0m
+  2.  Uso del programa
 
   Este capítulo describe como utilizar el programa en sí. No obstante,
   si te resulta aburrido de leer, siéntete libre de usar el método
@@ -207,7 +207,7 @@
   programa: es aquí donde debes buscar ayuda.
 
 
-  [1m2.1.  Opciones de línea de comandos[0m
+  2.1.  Opciones de línea de comandos
 
   Hay varias opciones, en la línea de comandos, que determinan el
   comportamiento general de RealTimeBattle. Es posible elegir un fichero
@@ -220,39 +220,39 @@
    Uso: RealTimeBattle [opciones]
 
    Opciones:
-      --debug_mode,                -d   modo de depuración
-      --debug_level [0-5],         -D   determina el nivel inicial de depuración
-                                        (implica -d)
-      --normal_mode,               -n   modo normal (por defecto)
-      --competition_mode,          -c   modo de competición
+   --debug_mode, -d modo de depuración
+   --debug_level [0-5], -D determina el nivel inicial de depuración
+   (implica -d)
+   --normal_mode, -n modo normal (por defecto)
+   --competition_mode, -c modo de competición
 
-      --no_graphics,               -g   no se mostrarán gráficos
-      --option_file [file],        -o   selecciona el fichero de opciones
-                                        (por defecto (default: $HOME/.rtbrc)
+   --no_graphics, -g no se mostrarán gráficos
+   --option_file [file], -o selecciona el fichero de opciones
+   (por defecto (default: $HOME/.rtbrc)
 
-      --log_file [file],           -l   genera un fichero de registro (log file).
-                                        Si el fichero es "-", el registro se
-                                        envía a STDOUT
+   --log_file [file], -l genera un fichero de registro (log file).
+   Si el fichero es "-", el registro se
+   envía a STDOUT
 
-      --tournament_file [file],    -t   especifica un fichero de torneo para
-                                        comenzar un torneo automáticamente
+   --tournament_file [file], -t especifica un fichero de torneo para
+   comenzar un torneo automáticamente
 
-      --statistics_file [file],    -s   fichero en que se guardarán las
-                                        estadísticas al comenzar automáticamente
+   --statistics_file [file], -s fichero en que se guardarán las
+   estadísticas al comenzar automáticamente
 
-      --message_file [file],       -m   redirecciona los mensajes a un fichero.
-                                        '-' como fichero es equivalente a STDOUT.
-                                        Si tanto el registro como los mensajes
-                                        son enviados a STDOUT, '-m' será ignorado
+   --message_file [file], -m redirecciona los mensajes a un fichero.
+   '-' como fichero es equivalente a STDOUT.
+   Si tanto el registro como los mensajes
+   son enviados a STDOUT, '-m' será ignorado
 
-      --replay [file]              -r   reproduce un fichero de registro. Si se
-                                        especifica '-' como fichero, la entrada
-                                        se toma de STDIN
+   --replay [file] -r reproduce un fichero de registro. Si se
+   especifica '-' como fichero, la entrada
+   se toma de STDIN
 
-      --help,                      -h   muestra este mensaje de ayuda
-      --version,                   -v   muestra el número de versión
-      --port_number                -p   especifica el puerto para clientes
-                                        remotos (el puerto por defecto es 32134)
+   --help, -h muestra este mensaje de ayuda
+   --version, -v muestra el número de versión
+   --port_number -p especifica el puerto para clientes
+   remotos (el puerto por defecto es 32134)
   ______________________________________________________________________
 
 
@@ -269,55 +269,55 @@
 
   ______________________________________________________________________
   +----------------------------------+-------+--------+-------------+
-  | Modo                             | Debug | Normal | Competición |
+  | Modo | Debug | Normal | Competición |
   +----------------------------------+-------+--------+-------------+
-  | Comando 'debug' disponible       |   Sí  |   No   |      No     |
-  | Pausa en el juego                |   Sí  |   Sí   |      No     |
-  | Juego paso a paso                |   Sí  |   No   |      No     |
-  | Uso de CPU ilimitado para robots |   Sí  |   Sí   |      No     |
+  | Comando 'debug' disponible | Sí | No | No |
+  | Pausa en el juego | Sí | Sí | No |
+  | Juego paso a paso | Sí | No | No |
+  | Uso de CPU ilimitado para robots | Sí | Sí | No |
   +----------------------------------+-------+--------+-------------+
   ______________________________________________________________________
 
 
 
-  [1m2.2.  Ventana de control[0m
+  2.2.  Ventana de control
 
 
-     [1mNuevo campeonato:[0m
+     Nuevo campeonato:
         Para comenzar un torneo nuevo. La sección ``Comenzar un torneo
         nuevo'' te dará más información.
 
 
-     [1mReproducir campeonato:[0m
+     Reproducir campeonato:
         ``Reproducir un torneo''. Te pedirá que selecciones un ``fichero
         de registro (log file)'' del juego para poder estudiarlo.
 
 
-     [1mPausa:[0m
+     Pausa:
         Detiene el juego. En el ``modo de competición'' la pausa será
         pospuesta hasta que el juego actual termine.
 
 
-     [1mFin:[0m
+     Fin:
         Detiene el torneo actual.
 
 
-     [1mOpciones:[0m
+     Opciones:
         Muestra la ``ventana de opciones''.
 
 
-     [1mEstadísticas:[0m
+     Estadísticas:
         Muestra la ``ventana de estadísticas''.
 
 
-     [1mVer la arena:[0m
+     Ver la arena:
         Esta opción puede ser usada para mostrar y ocultar las tres
         ventanas utilizadas durante el juego: la ``ventana de la
         arena'', la ``ventana de puntuación'' y la ``ventana de
         mensajes''.
 
 
-     [1mQuitar:[0m
+     Quitar:
         Finaliza el programa.
 
 
@@ -327,7 +327,7 @@
   el comando es gdb robot-name process-number.
 
 
-     [1mPaso:[0m
+     Paso:
         Permite, en un juego ``en pausa'', avanzar un paso de tiempo.
         Esto es muy útil cuando se ejecuta el robot en un depurador, ya
         que de otro modo el robot será saturado con mensajes (N. del T.
@@ -335,18 +335,18 @@
         analizarlos).
 
 
-     [1mFin juego:[0m
+     Fin juego:
         Finaliza el juego actual. Tiene el mismo efecto que un
         ``timeout''.
 
 
-     [1mMatar robots marcados:[0m
+     Matar robots marcados:
         En el modo de depuración, se puede marcar un robot en la
         ``ventana de puntuación''. Ese robot morirá al pulsar este
         botón.
 
 
-     [1mNivel de debug:[0m
+     Nivel de debug:
         Cambiar el nivel de depuración es una manera de indicar a los
         robots que mensajes deben enviar. El rango es entre 0 y 5, donde
         0 significa no depurar y 5 es el nivel más alto de depuración,
@@ -359,7 +359,7 @@
   ``reproducción'' para más detalles.
 
 
-  [1m2.3.  Comenzar un torneo nuevo[0m
+  2.3.  Comenzar un torneo nuevo
 
   Para seleccionar robots y arenas para el torneo, marca los ficheros a
   la derecha y pulsa el botón añadir. Los ficheros seleccionados se
@@ -383,7 +383,7 @@
   Debes seleccionar al menos dos robots y una arena para poder empezar.
 
 
-  [1m2.4.  Directorios de robots y arenas[0m
+  2.4.  Directorios de robots y arenas
 
   A fin de que el programa pueda encontrar los robots y arenas existen
   dos opciones: ``ruta de búsqueda de robots'' y ``ruta de búsqueda de
@@ -395,7 +395,7 @@
   directorio, tendrás que establecer estas opciones.
 
 
-  [1m2.5.  Ventana de la arena[0m
+  2.5.  Ventana de la arena
 
   Aquí es donde tienen lugar las batallas. Si quieres una vista más
   detallada, usa los botones de zoom o presiona las teclas +, - ó 0. Los
@@ -404,13 +404,13 @@
   cañón, y la línea delgada apunta en la dirección frontal.
 
 
-  [1m2.6.  Ventana de puntuación[0m
+  2.6.  Ventana de puntuación
 
   En esta ventana se muestran los robots que compiten en la secuencia
   actual.
 
 
-  [1m2.7.  Ventana de mensajes[0m
+  2.7.  Ventana de mensajes
 
   Aquí se muestran los mensajes enviados por los robots utilizando
   ``Print y Debug''. Los mensajes más recientes son mostrados en la
@@ -418,7 +418,7 @@
   mensajes de un robot en particular.
 
 
-  [1m2.8.  Ventana de opciones[0m
+  2.8.  Ventana de opciones
 
   Aquí tienes la posibilidad de cambiar un gran número de opciones. En
   el ``capítulo de opciones'' puedes encontrar información más detallada
@@ -433,20 +433,20 @@
   defecto.
 
 
-  [1m2.9.  Ventana de estadísticas[0m
+  2.9.  Ventana de estadísticas
 
   Hay varias maneras de estudiar las estadísticas del torneo actual.
   Puedes elegir entre:
 
 
-  ·  estadísticas sobre un [1mrobot [22mindividual,
+  ·  estadísticas sobre un robot individual,
 
-  ·  el resultado de un [1mjuego[22m,
+  ·  el resultado de un juego,
 
-  ·  el [1mtotal de la secuencia [22mo
+  ·  el total de la secuencia o
 
 
-  ·  el [1mtotal [22mdel torneo.
+  ·  el total del torneo.
 
      Pulsando los botones con forma de flecha puedes moverte al primer
      elemento, retroceder uno, avanzar uno o ir al último elemento
@@ -457,7 +457,7 @@
      correspondientes.
 
 
-  [1m2.10.  Ejecución sin gráficos[0m
+  2.10.  Ejecución sin gráficos
 
   Si lo deseas, es posible ejecutar RealTimeBattle sin ningún tipo de
   gráficos. Esto puede resultar muy útil cuando se está realizando una
@@ -476,7 +476,7 @@
   quieres conocer el resultado.
 
 
-  [1m2.11.  Ficheros de torneo[0m
+  2.11.  Ficheros de torneo
 
   El fichero de torneo se indica como una ``opción de línea de
   comandos''.  Cuando se especifica, un torneo comenzará y terminará
@@ -491,21 +491,21 @@
   seguidas de un punto y coma.
 
 
-     [1mGames/Sequence o g/s:[0m
+     Games/Sequence o g/s:
         Toma un número o * como argumento. El número indica cuantos
         juegos deben ser jugados por torneo. El asterisco significa que
         el programa toma el número exacto de arenas y lo utiliza como
         argumento. El valor por defecto es 1.
 
 
-     [1mRobots/Sequence o r/s:[0m
+     Robots/Sequence o r/s:
         Toma un número o * como argumento. El número es cuantos robots
         jugarán en cada secuencia. El asterisco significa que el
         programa toma el número exacto de robots y lo utiliza como
         argumento. El valor por defecto es 2.
 
 
-     [1mSequences o seq:[0m
+     Sequences o seq:
         Toma un número o * como argumento. Este número indica cuantas
         secuencias se jugarán en el torneo. El asterisco significa que
         el programa toma el número exacto de robots y los robots por
@@ -515,35 +515,35 @@
         valor por defecto es 1.
 
 
-     [1mRobots o r:[0m
+     Robots o r:
         Toma uno o más ficheros de robot como argumento.
 
 
-     [1mArenas o a:[0m
+     Arenas o a:
         Toma uno o más ficheros de arena como argumento.
 
   Los argumentos de fichero pueden ser uno de entre los siguientes:
 
-     [1mEl fichero solo:[0m
+     El fichero solo:
         Busca el fichero en cuestión en la ruta definida.
 
         Ejemplo: Robot: empty.robot
 
 
-     [1mRuta completa del fichero:[0m
+     Ruta completa del fichero:
         Usa el fichero en cuestión.
 
         Ejemplo: Arena:
         /usr/local/games/RealTimeBattle/Arenas/Circle.arena
 
 
-     [1mTodos los ficheros en la ruta:[0m
+     Todos los ficheros en la ruta:
         Busca la ruta completa y usa todos los ficheros encontrados.
 
         Ejemplo: Arena: *
 
 
-     [1mUn directorio específico:[0m
+     Un directorio específico:
         Busca en el directorio especificado y usa todos los ficheros
         encontrados.
 
@@ -559,7 +559,7 @@
   R: * Arenas: Circle.arena Square.arena G/S: 2 r/s: 3 Sequences: *
 
 
-  [1m2.12.  Ficheros de registro (log files)[0m
+  2.12.  Ficheros de registro (log files)
 
   A veces puede ser útil ``reproducir'' un juego y analizarlo en detalle
   o simplemente almacenarlo como referencia futura. Añade el parámetro
@@ -573,63 +573,63 @@
   En concreto se muestra la siguiente información:
 
 
-     [1mCabecera:[0m
+     Cabecera:
         H [juegos/secuencia] [robots/secuencia] [secuencias] [robots]
 
 
 
-     [1mInformación de la arena:[0m
+     Información de la arena:
         A [línea del fichero de la arena]
 
 
-     [1mComienzo del juego:[0m
+     Comienzo del juego:
         G [número de secuencia] [número de juego]
 
 
-     [1mOpción:[0m
+     Opción:
         O [opción:valor]
 
 
-     [1mLista de propiedades del robot:[0m
+     Lista de propiedades del robot:
         L [identificador de robot] [color del robot] [nombre del robot]
 
 
-     [1mInformación sobre la posición del robot:[0m
+     Información sobre la posición del robot:
         R [identificador de robot] [x] [y] [ángulo del cañón] [ángulo
         del radar] [energía]
 
 
-     [1mTiempo:[0m
+     Tiempo:
         T [tiempo transcurrido]
 
 
-     [1mMensaje impreso:[0m
+     Mensaje impreso:
         P [identificador del robot] [mensaje impreso]
 
 
-     [1mGalleta:[0m
+     Galleta:
         C [identificador de galleta] [x] [y]
 
 
-     [1mMina:[0m
+     Mina:
         M [identificador de mina] [x] [y]
 
 
-     [1mDisparo:[0m
+     Disparo:
         S [identificador de disparo] [x] [y] [dx/dt] [dy/dt]
 
 
-     [1mMuerte:[0m
+     Muerte:
         D [tipo de objeto muerto] [identificador de objeto] (si es un
         robot: [puntos recibidos] [posición])
 
 
-  [1m2.13.  Reproducción[0m
+  2.13.  Reproducción
 
   Puedes repetir un juego a partir de su ``fichero de registro (log
   file)'' bien pasando la ``opción de línea de comando'' "-r" o desde la
   ``ventana de control''.  Ten en cuenta que si el registro proviene de
-  la entrada estándar (opción de línea de comando "-r-"), no podrás
+  la entrada estándar (opción de línea de comando "-r -"), no podrás
   hacer mucho más que contemplar el juego, si bien de otro modo puedes
   influir en el desarrollo del juego:
 
@@ -649,7 +649,7 @@
 
 
 
-  [1m2.14.  Ficheros de estadísticas[0m
+  2.14.  Ficheros de estadísticas
 
   El fichero de estadísticas es un archivo empleado solo cuando se
   especifica un ``fichero de torneo''.  Las estadísticas serán guardadas
@@ -659,14 +659,14 @@
 
 
 
-  [1m3.  Estructura[0m
+  3.  Estructura
 
   En esta sección se describe la estructura del programa, como se mueven
   los robots, disparar y controlar el radar, cuando se otorgan puntos y
   como se constituye un torneo.
 
 
-  [1m3.1.  Movimiento del robot[0m
+  3.1.  Movimiento del robot
 
   El robot se comporta como un vehículo con ruedas. Rueda hacia adelante
   con un pequeño ``rozamiento de giro'' y se desliza lateralmente con
@@ -694,7 +694,7 @@
   velocidad otra vez.
 
 
-  [1m3.2.  Energía[0m
+  3.2.  Energía
 
   La salud del robot se mide por su energía. Existen varias maneras de
   que un robot pierda energía, ya que puede:
@@ -713,7 +713,7 @@
   galleta.
 
 
-  [1m3.3.  El radar[0m
+  3.3.  El radar
 
   El principal método para obtener información del entorno es a través
   del radar. Cada vez que el robot es actualizado recibirá un ``mensaje
@@ -728,7 +728,7 @@
   para que este de información útil.
 
 
-  [1m3.4.  Posición de los robots[0m
+  3.4.  Posición de los robots
 
   A partir de la versión 1.0.5 de RTB es posible obtener la posición de
   los robots más directamente. En lugar de tener que analizar el entorno
@@ -737,7 +737,7 @@
   es controlado a través de la opción ``Send robot coordinates''.
 
 
-  [1m3.5.  Disparo[0m
+  3.5.  Disparo
 
   Disparar es el principal método para eliminar otros robots. En
   RealTimeBattle un disparo se desplaza con velocidad constante,
@@ -768,7 +768,7 @@
   energías se cancelarían mutuamente.
 
 
-  [1m3.6.  Colisiones[0m
+  3.6.  Colisiones
 
   Los robots son objetos frágiles, que quedan dañados al chocar con
   muros y otros robots. Al colisionar, los robots actúan como bolas que
@@ -780,7 +780,7 @@
   se recibe.
 
 
-  [1m3.7.  Galletas y minas[0m
+  3.7.  Galletas y minas
 
   Las galletas y las minas son esencialmente objetos iguales, con la
   única diferencia de que los robots ganarán energía al recoger galletas
@@ -789,7 +789,7 @@
   puede ser controlada con las correspondientes ``opciones''.
 
 
-  [1m3.8.  Tiempo[0m
+  3.8.  Tiempo
 
   Como el nombre del programa indica, la referencia de tiempo usada es
   el tiempo real. Depende por completo de los robots el responder lo
@@ -808,7 +808,7 @@
   el ``máximo paso de tiempo'', el juego se retardará consecuentemente.
 
 
-  [1m3.9.  Un juego[0m
+  3.9.  Un juego
 
   Al comienzo de un juego, los robots reciben una posición aleatoria en
   la arena, con orientación asimismo aleatoria. El radar y el cañón
@@ -826,7 +826,7 @@
 
 
 
-  [1m3.10.  Una secuencia[0m
+  3.10.  Una secuencia
 
   Una secuencia es una serie de juegos, donde los mismos robots luchan.
   Al principio de una secuencia los procesos de los robots son lanzados.
@@ -840,7 +840,7 @@
 
 
 
-  [1m3.11.  Un torneo[0m
+  3.11.  Un torneo
 
   Un torneo es una colección de secuencias.
 
@@ -854,7 +854,7 @@
 
 
 
-  [1m4.  Construcción de robots[0m
+  4.  Construcción de robots
 
   En este capítulo se describe lo que necesitas saber para construir tus
   propios robots. Lo más importante es conocer el lenguaje de los
@@ -863,7 +863,7 @@
   interesante estudiar los robots de ejemplo del directorio Robots/.
 
 
-  [1m4.1.  Leer mensajes[0m
+  4.1.  Leer mensajes
 
   Al comienzo de cada secuencia, los procesos de los robots son lanzados
   por el programa servidor y se les asignan dos tuberías, una para la
@@ -877,7 +877,7 @@
   existen (al menos) tres métodos diferentes entre los que elegir:
 
 
-     [1mLa entrada estándar es bloqueante:[0m
+     La entrada estándar es bloqueante:
         Este es el método más simple. Cuando se lee de la entrada
         estándar, el programa queda bloqueado hasta que llega el
         siguiente mensaje. El programa puede hacerse por tanto como si
@@ -886,17 +886,17 @@
         nuevos mensajes.
 
         Para elegir el método bloqueante, basta con enviar la siguiente
-        opción del robot [4mtan[24m [4mpronto[24m [4mcomo[24m [4mel[24m [4mprograma[24m [4mcomience[24m:
+        opción del robot tan pronto como el programa comience:
 
         cout << "RobotOption " << USE_NON_BLOCKING << " " << 0 << endl;
 
 
      Ten en cuenta que esto es código C++. Si no utilizas C++ simple-
      mente imprime este mensaje por la salida estándar. endl es lo mismo
-     que
+     que 'end of line'.
 
 
-     [1mSelect:[0m
+     Select:
         Utilizando la función select de la librería libc de Unix hace
         posible que el robot tenga un mejor control sobre cuando buscar
         nuevos mensajes. Permite, por ejemplo, leer todos los mensajes
@@ -905,8 +905,8 @@
         más acerca de select, mira en la documentación de Unix (por
         ejemplo, páginas de manual o información de emacs).
 
-        Para elegir este método, envía la siguiente opción del robot [4mtan[0m
-        [4mpronto[24m [4mcomo[24m [4mel[24m [4mprograma[24m [4mcomience[24m:
+        Para elegir este método, envía la siguiente opción del robot tan
+        pronto como el programa comience:
 
         cout << "RobotOption " << USE_NON_BLOCKING << " " << 1 << endl;
 
@@ -914,7 +914,7 @@
      Ten en cuenta que esto es código C++.
 
 
-     [1mSeñales:[0m
+     Señales:
         Si quieres, puedes indicar a RealTimeBattle que envíe una señal
         al robot cuando un nuevo conjunto de mensajes haya sido enviado.
         Este método hace posible que el robot reciba continuamente
@@ -924,7 +924,7 @@
         otros robots para aprender más.
 
         Para elegir el método de señales, envía la siguiente opción del
-        robot [4mtan[24m [4mpronto[24m [4mcomo[24m [4mel[24m [4mprograma[24m [4mcomience[24m:
+        robot tan pronto como el programa comience:
 
         cout << "RobotOption " << USE_NON_BLOCKING << " " << 1 << endl;
         cout << "RobotOption " << SIGNAL << " " << SIGUSR1 << endl;
@@ -949,7 +949,7 @@
 
 
 
-  [1m4.2.  Messagetypes.h[0m
+  4.2.  Messagetypes.h
 
   El fichero Messagetypes.h es una buena fuente de información sobre el
   lenguaje de los mensajes. Es un fichero de cabecera de C/C++, pero
@@ -958,7 +958,7 @@
   objetos, opciones del juego y opciones de los robots.
 
 
-  [1m4.3.  Trampas[0m
+  4.3.  Trampas
 
   Dado que el combate se realiza en tiempo real con procesos reales,
   sería posible escribir programas que 'hagan trampa' de uno u otro
@@ -990,29 +990,29 @@
 
 
 
-  [1m4.4.  Mensajes a los robots[0m
+  4.4.  Mensajes a los robots
 
 
 
-     [1mInitialize [first? (int)][0m
+     Initialize [first? (int)]
         Este es el primer mensaje que el robot recibirá. Si el argumento
         es uno, se trata de la primera secuencia del torneo y deberán
         mandarse el ``nombre y color'' del robot al servidor, en caso
-        contrario deberán esperarse los mensajes [1mYourName [22my [1mYourColour[0m
+        contrario deberán esperarse los mensajes YourName y YourColour
         (ver más abajo).
 
 
-     [1mYourName [name (string)][0m
+     YourName [name (string)]
         Nombre actual del robot. No debe cambiarse a menos que se tengan
         buenas razones para ello.
 
 
-     [1mYourColour [colour (hex)][0m
+     YourColour [colour (hex)]
         Color actual del robot. Cámbialo si te desagrada. Todos los
         robots de un mismo equipo tendrán el mismo color.
 
 
-     [1mGameOption [optionnr (int)] [value (double)][0m
+     GameOption [optionnr (int)] [value (double)]
         Al comienzo de cada juego se enviarán a los robots un cierto
         número de parámetros, que pueden ser útiles para ellos. Para
         hallar una lista completa de estos, mira en el fichero
@@ -1023,19 +1023,19 @@
         opciones.
 
 
-     [1mGameStarts[0m
+     GameStarts
         Este mensaje es enviado cuando comienza el juego (¡sorpresa!).
 
 
-     [1mRadar [distance (double)] [observed object type (int)] [radar angle[0m
-        [1m(double)][0m
+     Radar [distance (double)] [observed object type (int)] [radar angle
+        (double)]
         Este mensaje proporciona cada turno información del radar.
         Recuerda que el ángulo del radar es relativo al frontal del
         robot y viene dado en radianes.
 
 
-     [1mInfo [time (double)] [speed (double)] [cannon angle[0m
-        (double)]" El mensaje [1mInfo [22msiempre sigue al mensaje [1mRadar[22m.
+     Info [time (double)] [speed (double)] [cannon angle
+        (double)]" El mensaje Info siempre sigue al mensaje Radar.
         Proporciona más información general sobre el estado del robot.
         El tiempo es el tiempo de juego transcurrido desde el comienzo
         del mismo. Este no es necesariamente igual al tiempo real
@@ -1043,7 +1043,7 @@
         paso de tiempo''.
 
 
-     [1mCoordinates [x (double)] [y (double)] [angle (double)][0m
+     Coordinates [x (double)] [y (double)] [angle (double)]
         Informa sobre la posición actual del robot. Es enviado solo si
         la opción ``Send robot coordinates'' es 1 o 2. Si es 1, se
         envían las coordenadas relativas a la posición inicial, con la
@@ -1051,7 +1051,7 @@
         solo adonde se ha desplazado desde entonces.
 
 
-     [1mRobotInfo [energy level (double)] [teammate? (int)][0m
+     RobotInfo [energy level (double)] [teammate? (int)]
         Si se detecta un robot con el radar, este mensaje se enviará a
         continuación, dando cierta información sobre el robot. El nivel
         de energía del oponente es suministrado del mismo modo que tu
@@ -1060,28 +1060,28 @@
         equipo y 0 significa enemigo.
 
 
-     [1mRotationReached [what has reached(int)][0m
+     RotationReached [what has reached(int)]
         Cuando la opción del robot ``SEND_ROTATION_REACHED'' está
         establecida del modo apropiado, este mensaje se envía cuando una
-        rotación (realizada con [1mRotateTo [22mo [1mRotateAmount[22m) ha finalizado o
+        rotación (realizada con RotateTo o RotateAmount) ha finalizado o
         la dirección ha cambiado (barrido). El argumento corresponde a
         'qué rotar' en, por ejemplo, el mensaje ``Rotate''.
 
 
-     [1mEnergy [energy level(double)][0m
+     Energy [energy level(double)]
         Al final de cada ronda el robot recibirá un mensaje con su
         propio nivel de energía. No se recibirá, sin embargo, el valor
         exacto de energía, sino que este es discretizado en un cierto
         número de ``niveles de energía''.
 
 
-     [1mRobotsLeft [number of robots (int)][0m
+     RobotsLeft [number of robots (int)]
         Al comienzo del juego, y cada vez que muera un robot, se enviará
         a todos los robots supervivientes el número de robots restantes.
 
 
-     [1mCollision [colliding object type (int)] [angle relative robot (dou-[0m
-        [1mble)][0m
+     Collision [colliding object type (int)] [angle relative robot (dou-
+        ble)]
         Cuando un robot choca contra (o recibe el impacto de) algo,
         recibe este mensaje. En el fichero ``Messagetypes.h'' puedes
         encontrar una lista de los tipos de objeto. Se recibe el ángulo
@@ -1092,7 +1092,7 @@
         energía.
 
 
-     [1mWarning [warning type (int)] [message (string)][0m
+     Warning [warning type (int)] [message (string)]
         Un mensaje de advertencia será enviado cuando haya de
         notificarse a un robot acerca de diferentes problemas que hayan
         ocurrido. Actualmente hay siete mensajes distintos de
@@ -1124,22 +1124,22 @@
         comienzo del juego.
 
 
-     [1mDead[0m
+     Dead
         El robot ha muerto. No intentes enviar más mensajes al servidor
         hasta el final del juego, ya que el servidor no los leerá.
 
 
-     [1mGameFinishes[0m
+     GameFinishes
         El juego actual ha terminado. ¡Prepárate para el siguiente!
 
 
-     [1mExitRobot[0m
+     ExitRobot
         ¡Sal del programa inmediatamente! De lo contrario será matado a
         la fuerza.
 
 
 
-  [1m4.5.  Mensajes de los robots[0m
+  4.5.  Mensajes de los robots
 
   Cuando envíes mensajes al servidor de RealTimeBattle asegúrate de que
   su longitud no sea mayor de 128 caracteres, de lo contrario
@@ -1148,7 +1148,7 @@
 
 
 
-     [1mRobotOption [option nr (int)] [value (int)][0m
+     RobotOption [option nr (int)] [value (int)]
         Actualmente solo están disponibles las siguientes opciones:
 
         SIGNAL: Indica al servidor que debe enviar una señal cuando haya
@@ -1176,7 +1176,7 @@
         enviarse, no existe valor por defecto.
 
 
-     [1mName [name (string)][0m
+     Name [name (string)]
         Cuando se recibe el mensaje ``Initialize'' con argumento 1,
         indicando que se trata de la primera secuencia, deben enviarse
         el nombre y color del robot. Si el nombre termina con la cadena
@@ -1184,19 +1184,19 @@
         Por ejemplo "Name foo Team: bar" asignará el robot al equipo bar
         y su nombre será foo. Todos los robots en un mismo equipo
         tendrán el mismo robot y se reconocerán entre sí a través del
-        mensaje [1mRobotInfo[22m. Para posibilidades más sofisticadas, mira la
+        mensaje RobotInfo. Para posibilidades más sofisticadas, mira la
         infraestructura de equipos para RealTimeBattle <http://rtb-
         team.sf.net>.
 
 
-     [1mColour [home colour (hex)] [away colour (hex)][0m
+     Colour [home colour (hex)] [away colour (hex)]
         Ver más arriba. Los colores son como las camisetas de fútbol
         habituales. El color propio es utilizado a menos que ya esté
         siendo empleado. De otro modo, se usará el segundo color o, como
         último recurso, un color en desuso seleccionado aleatoriamente.
 
 
-     [1mRotate [what to rotate (int)] [angular velocity (double)][0m
+     Rotate [what to rotate (int)] [angular velocity (double)]
         Fija la velocidad angular del robot, el cañón y/o el radar. El
         primer parámetro adopta valores de 1 para el robot, 2 para el
         cañón, 4 para el radar o una suma de estos para rotar varios
@@ -1206,52 +1206,52 @@
 
 
 
-     [1mRotateTo [what to rotate (int)] [angular velocity (double)] [end[0m
-        [1mangle (double)][0m
-        Como [1mRotate[22m, pero rotará a un ángulo dado. Ten en cuenta que los
+     RotateTo [what to rotate (int)] [angular velocity (double)] [end
+        angle (double)]
+        Como Rotate, pero rotará a un ángulo dado. Ten en cuenta que los
         ángulos del cañón y el radar son relativos al ángulo del robot.
         Este comando no puede ser utilizado para hacer girar el propio
-        robot, usa [1mRotateAmount [22men su lugar.
+        robot, usa RotateAmount en su lugar.
 
 
-     [1mRotateAmount [what to rotate (int)] [angular velocity (double)][0m
-        [1m[angle (double)][0m
-        Como [1mRotate[22m, pero rotará un ángulo relativo al ángulo actual.
+     RotateAmount [what to rotate (int)] [angular velocity (double)]
+        [angle (double)]
+        Como Rotate, pero rotará un ángulo relativo al ángulo actual.
 
 
-     [1mSweep [what to rotate (int)] [angular velocity (double)] [right[0m
-        [1mangle (double)] [left angle (double)][0m
-        Como [1mRotate[22m, pero deja el cañón y/o el radar en un modo de
+     Sweep [what to rotate (int)] [angular velocity (double)] [right
+        angle (double)] [left angle (double)]
+        Como Rotate, pero deja el cañón y/o el radar en un modo de
         barrido (no disponible para el robot).
 
 
-     [1mAccelerate [value (double)][0m
+     Accelerate [value (double)]
         Fija la aceleración del robot. El valor queda acotado por la
         ``aceleración máxima y mínima del robot''.
 
 
-     [1mBrake [portion (double)][0m
+     Brake [portion (double)]
         Activa el freno. Frenado total (parámetro igual a 1.0) significa
         que el rozamiento en la dirección del robot es igual a la
         ``fricción de deslizamiento''.
 
 
-     [1mShoot [shot energy (double)][0m
+     Shoot [shot energy (double)]
         Dispara con la energía dada.  Las ``opciones de disparo''
         proporcionan más información al respecto.
 
 
-     [1mPrint [message (string)][0m
+     Print [message (string)]
         Imprime un mensaje en la ``ventana de mensajes''.
 
 
-     [1mDebug [message (string)][0m
+     Debug [message (string)]
         Imprime un mensaje en la ``ventana de mensajes'' si se está en
         el ``modo de depuración''.
 
 
-     [1mDebugLine [angle1 (double)] [radius1 (double)] [angle2 (double)][0m
-        [1m[radius2 (double)][0m
+     DebugLine [angle1 (double)] [radius1 (double)] [angle2 (double)]
+        [radius2 (double)]
         Dibuja una línea directamente sobre la arena. Esto solo está
         permitido en el nivel de depuración más alto (5). De lo
         contrario se enviará un ``mensaje de advertencia''. Los
@@ -1259,16 +1259,16 @@
         coordenadas polares relativas al robot.
 
 
-     [1mDebugCircle [center angle (double)] [center radius (double)] [cir-[0m
-        [1mcle radius (double)][0m
-        Similar a [1mDebugLine[22m, pero dibuja un círculo. Los dos primeros
+     DebugCircle [center angle (double)] [center radius (double)] [cir-
+        cle radius (double)]
+        Similar a DebugLine, pero dibuja un círculo. Los dos primeros
         argumentos son el ángulo y el radio del punto central del
         círculo relativos al robot. El tercer argumento proporciona el
         radio del círculo.
 
 
 
-  [1m5.  Opciones[0m
+  5.  Opciones
 
   RealTimeBattle es configurable con unas cuantas opciones, reunidas en
   distintos grupos. La filosofía es ofrecer la máxima libertad para
@@ -1277,31 +1277,31 @@
   resultados, lo cual puede causar problemas en el programa.
 
 
-  [1m5.1.  Opciones de entorno[0m
+  5.1.  Opciones de entorno
 
 
 
-     [1mConstante gravitatoria:[0m
+     Constante gravitatoria:
         La aceleración debido a la gravedad. En la Tierra es
         aproximadamente 9.8. Un valor mayor aumentará el rozamiento y la
         fricción, ralentizando los robots como consecuencia.
 
 
-     [1mResistencia del aire:[0m
+     Resistencia del aire:
         Tal como su nombre indica. Aumenta con la velocidad.
 
 
-     [1mRozamiento de giro:[0m
+     Rozamiento de giro:
         Rozamiento en la dirección del robot si este no está frenando.
 
 
 
-     [1mFricción de deslizamiento:[0m
+     Fricción de deslizamiento:
         La fricción ortogonal a la dirección del robot. También el
         rozamiento máximo del robot si este se encuentra frenando.
 
 
-     [1mSend robot coordinates:[0m
+     Send robot coordinates:
         Determina como se enviarán las coordenadas a los robots. Las
         siguientes opciones están disponibles:
 
@@ -1313,110 +1313,110 @@
 
 
 
-  [1m5.2.  Opciones de los robots[0m
+  5.2.  Opciones de los robots
 
 
 
-     [1mAceleración máxima:[0m
+     Aceleración máxima:
         No se permite que los robots aceleren más rápido que este
         valor...
 
 
-     [1mAceleración mínima:[0m
+     Aceleración mínima:
         ...ni más lentamente que este.
 
 
-     [1mRadio:[0m
+     Radio:
         Determina el tamaño del robot.
 
 
-     [1mMasa:[0m
+     Masa:
         Una masa mayor incrementará el daño en las colisiones.
 
 
-     [1mCoeficiente de rebote:[0m
+     Coeficiente de rebote:
         Afecta al rebote de los robots. Si es cero los robots quedarán
         unidos tras un choque, y si el valor es uno actuarán como bolas
         de billar perfectas.
 
 
-     [1mCoeficiente de dureza:[0m
+     Coeficiente de dureza:
         Determina el daño que los robots recibirán al chocar. Cuanto más
         bajo sea el valor, más blando será el material.
 
 
-     [1mCoeficiente de protección:[0m
+     Coeficiente de protección:
         Influye en la protección que lleva el robot. Este factor debe
         ser multiplicado por la energía del impacto para averiguar en
         cuanto se reducirá la energía del robot.
 
 
-     [1mDelantera del robot:[0m
+     Delantera del robot:
         La parte delantera del robot es una sección con materiales
         distintos, normalmente más duros y con una mejor protección, de
         modo que los robots pueden dañarse unos a otros embistiendo.
 
 
-     [1mCoeficiente de rebote frontal:[0m
+     Coeficiente de rebote frontal:
         Ver más arriba.
 
 
 
-     [1mCoeficiente de dureza frontal:[0m
+     Coeficiente de dureza frontal:
         Ver más arriba.
 
 
-     [1mCoeficiente de protección frontal:[0m
+     Coeficiente de protección frontal:
         Ver más arriba.
 
 
-     [1mEnergia de inicio:[0m
+     Energia de inicio:
         Cantidad de energía que los robots tendrán al comienzo de cada
         juego.
 
 
-     [1mEnergía máxima:[0m
+     Energía máxima:
         Comiendo galletas, un robot puede aumentar su energía; aunque no
         por encima de este valor.
 
 
-     [1mVelocidad máxima de rotación:[0m
+     Velocidad máxima de rotación:
         Indica cuan rápido puede un robot girar sobre sí mismo.
         Unidades: radianes/s.
 
 
-     [1mVelocidad máxima de rotación del cañón:[0m
+     Velocidad máxima de rotación del cañón:
         Indica la velocidad máxima a la que el cañón puede rotar. Ten en
         cuenta que el cañón y el radar se mueven de forma relativa al
         robot, por lo que la velocidad de rotación en un momento dado
         puede ser mayor.
 
 
-     [1mVelocidad máxima de rotación del radar:[0m
+     Velocidad máxima de rotación del radar:
         Indica la velocidad máxima a la que el radar puede rotar. Véase
         la nota anterior.
 
 
-     [1mNiveles de energía:[0m
+     Niveles de energía:
         El robot solo conocerá su energía de modo aproximado. Este valor
         define cuantos niveles discretos se usarán para la aproximación.
 
 
 
-  [1m5.3.  Opciones de disparo[0m
+  5.3.  Opciones de disparo
 
 
-     [1mRadio:[0m
+     Radio:
         Tamaño de los disparos. Debe ser menor que el ``radio del
         robot''.
 
 
-     [1mVelocidad:[0m
+     Velocidad:
         Los disparos se desplazan con esta velocidad en la dirección del
         cañón más la velocidad del robot.
 
 
-     [1mPenalización:[0m
+     Penalización:
         Al disparar, el propio robot resulta dañado. Este es el factor
         por el que la energía del disparo es multiplicada para obtener
         la energía de dicho daño. Si el número de robots es grande, este
@@ -1424,77 +1424,77 @@
         disparar (suponiendo que se acierte).
 
 
-     [1mEnergía mínima:[0m
+     Energía mínima:
         Mínimo valor permitido para la energía del disparo. Un robot que
         trate de disparar con menos energía fallará en su intento.
 
-     [1mEnergía máxima:[0m
+     Energía máxima:
         Los robots tienen una energía de disparo que aumenta con el
         tiempo, pero que nunca superará este valor.
 
 
-     [1mVelocidad de aumento de energía:[0m
+     Velocidad de aumento de energía:
         Determina la velocidad a la que la energía de disparo de los
         robots, antes mencionada, aumentará. Unidades: energía/s
 
 
 
-  [1m5.4.  Opciones extra[0m
+  5.4.  Opciones extra
 
 
-     [1mEnergía máxima de una galleta:[0m
+     Energía máxima de una galleta:
         La energía de una galleta es un número aleatorio entre el máximo
         y el mínimo valor de energía para una galleta.
 
 
-     [1mEnergía mínima de una galleta:[0m
+     Energía mínima de una galleta:
         Ver más arriba.
 
 
-     [1mFrecuencia de las galletas:[0m
+     Frecuencia de las galletas:
         Número de galletas por segundo que aparecerán de media.
 
 
-     [1mRadio de las galletas:[0m
+     Radio de las galletas:
         Tamaño de las galletas.
 
 
-     [1mEnergía máxima de una mina:[0m
+     Energía máxima de una mina:
         La energía de una mina es un número aleatorio entre el máximo y
         el mínimo valor de energía para una mina.
 
 
-     [1mEnergía mínima de una mina:[0m
+     Energía mínima de una mina:
         Ver más arriba.
 
 
-     [1mFrecuencia de las minas:[0m
+     Frecuencia de las minas:
         Número de minas por segundo que aparecerán de media.
 
 
-     [1mRadio de las minas:[0m
+     Radio de las minas:
         Tamaño de las minas.
 
 
-     [1mColor de las galletas:[0m
+     Color de las galletas:
         Color de las galletas en formato hexadecimal (rojo-verde-azul).
 
 
-     [1mColor de las minas:[0m
+     Color de las minas:
         Ver más arriba.
 
 
 
-  [1m5.5.  Opciones de tiempo[0m
+  5.5.  Opciones de tiempo
 
 
 
-     [1mTimeout:[0m
+     Timeout:
         Este es el tiempo máximo que durará un juego. Cuando el tiempo
         se agota, todos los robots supervivientes mueren, sin obtener
         ningún punto adicional.
 
-     [1mMáximo paso de tiempo:[0m
+     Máximo paso de tiempo:
         Si el ordenador queda ralentizado temporalmente, el tiempo entre
         actualizaciones puede ser demasiado largo. Establecer esta
         opción hará que el programa ralentice artificialmente el reloj
@@ -1502,7 +1502,7 @@
         tiempo real.
 
 
-     [1mEscala de tiempo:[0m
+     Escala de tiempo:
         Incrementar la escala de tiempo a un valor superior a uno
         significa que el reloj del juego irá más rápido que un reloj
         convencional. Cambiar este valor puede ser útil si se quiere dar
@@ -1510,7 +1510,7 @@
         quiere acelerar el juego.
 
 
-     [1mIntervalo de refresco:[0m
+     Intervalo de refresco:
         Esta opción determina el tiempo entre actualizaciones de los
         robots, esto es, como de rápido se cambiará el estado de los
         robots. Este parámetro no queda influenciado por la escala de
@@ -1519,7 +1519,7 @@
         del sistema en el que RealTimeBattle esté corriendo).
 
 
-     [1mRetardo de inicio:[0m
+     Retardo de inicio:
         Determina el tiempo entre que los procesos de los robots son
         ejecutados y da comienzo la secuencia. Si los robots son negros
         y no tienen nombre, puede ser necesario aumentar este parámetro
@@ -1528,39 +1528,39 @@
         tiene lugar en una máquina lenta o remota.
 
 
-     [1mLímite de gasto de CPU:[0m
+     Límite de gasto de CPU:
         En el ``modo de competición'' el uso de procesador de un robot
         esta limitado. Al comienzo de una secuencia, cada robot recibirá
         esta cantidad de tiempo de CPU para su consumo.
 
 
-     [1mTiempo extra de uso de CPU:[0m
+     Tiempo extra de uso de CPU:
         Cuando el tiempo de CPU inicialmente asignado se agota, el robot
         recibirá esta cantidad adicional de tiempo de proceso.
 
 
-     [1mTiempo extra de uso de CPU:[0m
+     Tiempo extra de uso de CPU:
         El tiempo extra de CPU debe durar al menos un periodo completo
         de CPU, de lo contrario el robot morirá en el juego actual.
 
 
-     [1mPorcentaje de aviso en el uso de la CPU:[0m
+     Porcentaje de aviso en el uso de la CPU:
         Cuando un robot ha utilizado esta cantidad de tiempo de CPU,
         recibirá un mensaje de advertencia.
 
 
-     [1mIntervalo de chequeo del proceso:[0m
+     Intervalo de chequeo del proceso:
         En el ``modo de competición'' este parámetro determina la
         frecuencia a la que el programa comprobará el uso de CPU.
 
 
-     [1mFrecuencia de registro:[0m
+     Frecuencia de registro:
         Para reducir el tamaño de los ``ficheros de registro (log
         files)'' puedes incrementar este valor. Con él, la ``posición
         del robot'' es registrada solo cada enésimo ``intervalo de
         refresco''.
 
-  [1m5.6.  Tamaño de las ventanas[0m
+  5.6.  Tamaño de las ventanas
 
   Aquí se puede establecer el tamaño inicial para algunas ventanas, a
   saber la ``ventana de la arena'', la ``ventana de mensajes'', la
@@ -1569,39 +1569,39 @@
   de control''.
 
 
-  [1m5.7.  Otras opciones[0m
+  5.7.  Otras opciones
 
 
 
-     [1mEscala de la arena:[0m
+     Escala de la arena:
         Escala a la que se representará la arena. Un valor de 2 produce
         lados el doble de largos, o sea, un área cuatro veces mayor.
 
 
-     [1mVelocidad de avance:[0m
+     Velocidad de avance:
         Determina, al ``reproducir'', la velocidad cuando se pulsa el
         botón de avance rápido o el botón de rebobinado.
 
 
-     [1mNúmero máximo de robots simultáneos:[0m
+     Número máximo de robots simultáneos:
         Permite al usuario cambiar la cantidad máxima de robots
         permitidos en una secuencia. Si hay demasiados, el sistema puede
         acusarlo (el valor concreto depende del ordenador que se use).
 
 
-     [1mColor de fondo:[0m
+     Color de fondo:
         El color de fondo y...
 
 
-     [1mColor de primer plano:[0m
+     Color de primer plano:
         ...el color de primer plano para la arena.
 
 
-     [1mColor para los mensajes:[0m
+     Color para los mensajes:
         Color de texto cuando RealTimeBattle envía un mensaje.
 
 
-     [1mRuta de búsqueda de robots:[0m
+     Ruta de búsqueda de robots:
         Se trata de una lista de directorios separados por dos puntos,
         donde se buscarán los robots al comienzo de un ``nuevo torneo''.
         No obstante, siempre se buscará en el subdirectorio Robots,
@@ -1609,13 +1609,13 @@
         defecto: /usr/local/games/RealTimeBattle).
 
 
-     [1mRuta de búsqueda de arenas:[0m
+     Ruta de búsqueda de arenas:
         Igual que en el caso anterior, pero para ficheros de arena en
         lugar de robots. En este caso el subdirectorio es Arenas.
 
 
 
-  [1m6.  Construcción de arenas[0m
+  6.  Construcción de arenas
 
   En RealTimeBattle, es muy sencillo construir tus propias arenas. El
   lenguaje consiste en tan solo once comandos, y hay básicamente cuatro
@@ -1654,7 +1654,7 @@
   ejemplos.
 
 
-  [1m6.1.  Comandos de la arena[0m
+  6.1.  Comandos de la arena
 
   Un comando consiste en el correspondiente nombre de comando y sus
   argumentos separados por espacios en blanco. ¡Asegúrate de usar el
@@ -1663,57 +1663,57 @@
   En la lista de comandos, los argumentos se indican entre corchetes.
 
 
-     [1mscale [value][0m
+     scale [value]
         Este valor multiplicado por la ``escala de la arena'' dará el
         factor de la escala, por el que todas las coordenadas quedan
         multiplicadas. Este comando, de existir, debe ser el primero en
         aparecer dentro del fichero. El valor por defecto es 1.0.
 
 
-     [1mangle_unit [unit][0m
+     angle_unit [unit]
         Cambia las unidades en que se miden los ángulos, las cuales
         pueden ser bien grados (degrees) o radianes (radians). El valor
         por defecto es radianes.
 
 
-     [1mboundary [left] [up] [right] [down][0m
+     boundary [left] [up] [right] [down]
         Los límites determinan el área en la cual el robot, las galletas
         y las minas serán situados. También definen el área visible en
         la ``ventana de la arena''. Este comando ha de aparecer
         obligatoriamente, y solo puede estar precedido por scale.
 
 
-     [1minner_circle [bounce] [hardness] [center_x] [center_y] [radius][0m
+     inner_circle [bounce] [hardness] [center_x] [center_y] [radius]
         Los robots están limitados a circular por el área interior de
         este círculo.
 
 
-     [1mcircle [bounce] [hardness] [center_x] [center_y] [radius][0m
+     circle [bounce] [hardness] [center_x] [center_y] [radius]
         Pared de forma circular.
-     [1mline [bounce] [hardness] [thickness] [start_x][0m
+     line [bounce] [hardness] [thickness] [start_x]
         [start_y] [end_x] [end_y]" Crea una línea. Esta solo evita que
         el robot la atraviese a través de su parte más larga, así que
         recuerda situar círculos en los extremos.
 
 
-     [1marc [bnc] [hardn] [thickn] [center_x] [ctr_y][0m
+     arc [bnc] [hardn] [thickn] [center_x] [ctr_y]
         [inner_radius] [outer_rds] [angle1] [angle2]" Un arco es el
         sector de una circunferencia entre dos ángulos. Al igual que la
         línea, necesita círculos en ambos extremos.
 
 
-     [1mpolygon [bounce] [hardn] [thickn] [number of vertices] ([center_x][0m
-        [1m[center_y])...[0m
+     polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x]
+        [center_y])...
         Crea un cierto número de círculos conectados entre sí por
         líneas.
 
 
-     [1mclosed_polygon [bounce] [hardn] [thickn] [number of vertices][0m
+     closed_polygon [bounce] [hardn] [thickn] [number of vertices]
         ([center_x] [center_y])..."  Similar a polygon, pero el primer y
         el último vértice están también conectados por una línea.
 
 
-     [1mpoly_curve [bnc] [hardn] [thickn] [start_x][0m
+     poly_curve [bnc] [hardn] [thickn] [start_x]
         [start_y] [dir_x] [dir_y] ([command args ...]) ..."  El comando
         poly_curve es el más potente de ente los disponibles para la
         creación de arenas. Se utiliza para crear paredes con líneas y
@@ -1722,25 +1722,25 @@
         último subcomando debe ser C o Q.
 
 
-        [1mL [length][0m
+        L [length]
            Dibuja una linea con la longitud dada en la dirección actual.
 
 
-        [1mT [angle][0m
+        T [angle]
            Gira la dirección actual.
 
 
-        [1mA [angle] [radius][0m
+        A [angle] [radius]
            Dibuja un arco.
 
 
-        [1mC  [22mTermina conectando con el punto inicial.
+        C  Termina conectando con el punto inicial.
 
 
-        [1mQ  [22mSalir.
+        Q  Salir.
 
 
-     [1mexclusion_point [position_x][0m
+     exclusion_point [position_x]
         [position_y]" Cuando la arena ente los límites consiste en
         varias áreas separadas, deben excluirse todas menos una
         insertando puntos de exclusión. Todos los puntos desde los que

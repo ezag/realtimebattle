@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Construcci&oacute;n de arenas</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.9: Construcci&oacute;n de arenas</TITLE>
  <LINK HREF="RealTimeBattle-5.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc6" REL=contents>
 </HEAD>
@@ -52,62 +52,78 @@ n&uacute;mero de argumentos correcto!</P>
 <P>En la lista de comandos, los argumentos se indican entre corchetes.</P>
 <P>
 <DL>
-<DT><B>scale [value]</B><DD><P>Este valor multiplicado por la 
+<DT><B>scale [value]</B><DD>
+<P>Este valor multiplicado por la 
 <A HREF="RealTimeBattle-5.html#ArenaScale">escala de la arena</A>
 dar&aacute; el factor de la escala, por el que todas las coordenadas quedan
 multiplicadas. Este comando, de existir, debe ser el primero en
 aparecer dentro del fichero. El valor por defecto es 1.0.</P>
 
-<DT><B>angle_unit [unit]</B><DD><P>Cambia las unidades en que se miden los &aacute;ngulos, las cuales pueden ser bien
+<DT><B>angle_unit [unit]</B><DD>
+<P>Cambia las unidades en que se miden los &aacute;ngulos, las cuales pueden ser bien
 grados (<CODE>degrees</CODE>) o radianes (<CODE>radians</CODE>). El valor por
 defecto es radianes.</P>
 
-<DT><B>boundary [left] [up] [right] [down]</B><DD><P>Los l&iacute;mites determinan el &aacute;rea en la cual el robot, las galletas y las
+<DT><B>boundary [left] [up] [right] [down]</B><DD>
+<P>Los l&iacute;mites determinan el &aacute;rea en la cual el robot, las galletas y las
 minas ser&aacute;n situados. Tambi&eacute;n definen el &aacute;rea visible en la
 <A HREF="RealTimeBattle-2.html#Arena_window">ventana de la arena</A>. Este comando ha de
 aparecer obligatoriamente, y solo puede estar precedido por <CODE>scale</CODE>.</P>
 
-<DT><B>inner_circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Los robots est&aacute;n limitados a circular por el &aacute;rea interior de este c&iacute;rculo.</P>
+<DT><B>inner_circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD>
+<P>Los robots est&aacute;n limitados a circular por el &aacute;rea interior de este c&iacute;rculo.</P>
 
-<DT><B>circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Pared de forma circular.</P>
+<DT><B>circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD>
+<P>Pared de forma circular.</P>
 
 <DT><B>line [bounce] [hardness] [thickness] [start_x]
-[start_y] [end_x] [end_y]</B><DD><P>Crea una l&iacute;nea. Esta solo evita que el robot la atraviese a trav&eacute;s de su
+[start_y] [end_x] [end_y]</B><DD>
+<P>Crea una l&iacute;nea. Esta solo evita que el robot la atraviese a trav&eacute;s de su
 parte m&aacute;s larga, as&iacute; que recuerda situar c&iacute;rculos en los extremos.</P>
 
 <DT><B>arc [bnc] [hardn] [thickn] [center_x] [ctr_y]
-[inner_radius] [outer_rds] [angle1] [angle2]</B><DD><P>Un arco es el sector de una circunferencia entre dos &aacute;ngulos. Al igual
+[inner_radius] [outer_rds] [angle1] [angle2]</B><DD>
+<P>Un arco es el sector de una circunferencia entre dos &aacute;ngulos. Al igual
 que la l&iacute;nea, necesita c&iacute;rculos en ambos extremos.</P>
 
-<DT><B>polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x] [center_y])...</B><DD><P>Crea un cierto n&uacute;mero de c&iacute;rculos conectados entre s&iacute; por l&iacute;neas.</P>
+<DT><B>polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x] [center_y])...</B><DD>
+<P>Crea un cierto n&uacute;mero de c&iacute;rculos conectados entre s&iacute; por l&iacute;neas.</P>
 
 <DT><B>closed_polygon [bounce] [hardn] [thickn] [number of vertices]
-([center_x] [center_y])...</B><DD><P>Similar a <CODE>polygon</CODE>, pero el primer y el &uacute;ltimo v&eacute;rtice est&aacute;n
+([center_x] [center_y])...</B><DD>
+<P>Similar a <CODE>polygon</CODE>, pero el primer y el &uacute;ltimo v&eacute;rtice est&aacute;n
 tambi&eacute;n conectados por una l&iacute;nea.</P>
 
 <DT><B>poly_curve [bnc] [hardn] [thickn] [start_x]
 [start_y] [dir_x] [dir_y] 
-([command args ...]) ...</B><DD><P>El comando <CODE>poly_curve</CODE> es el m&aacute;s potente de ente los
+([command args ...]) ...</B><DD>
+<P>El comando <CODE>poly_curve</CODE> es el m&aacute;s potente de ente los
 disponibles para la creaci&oacute;n de arenas. Se utiliza para crear paredes
 con l&iacute;neas y arcos. En cada paso se tiene la posici&oacute;n y la direcci&oacute;n
 actuales, las cuales son alteradas con los subcomandos. El &uacute;ltimo
 subcomando debe ser <CODE>C</CODE> o <CODE>Q</CODE>.</P>
 <P>
 <DL>
-<DT><B>L [length]</B><DD><P>Dibuja una linea con la longitud dada en la direcci&oacute;n actual.</P>
+<DT><B>L [length]</B><DD>
+<P>Dibuja una linea con la longitud dada en la direcci&oacute;n actual.</P>
 
-<DT><B>T [angle]</B><DD><P>Gira la direcci&oacute;n actual.</P>
+<DT><B>T [angle]</B><DD>
+<P>Gira la direcci&oacute;n actual.</P>
 
-<DT><B>A [angle] [radius]</B><DD><P>Dibuja un arco.</P>
+<DT><B>A [angle] [radius]</B><DD>
+<P>Dibuja un arco.</P>
 
-<DT><B>C</B><DD><P>Termina conectando con el punto inicial.</P>
+<DT><B>C</B><DD>
+<P>Termina conectando con el punto inicial.</P>
 
-<DT><B>Q</B><DD><P>Salir.</P>
+<DT><B>Q</B><DD>
+<P>Salir.</P>
 </DL>
 </P>
 
 <DT><B>exclusion_point [position_x]
-[position_y]</B><DD><P>Cuando la arena ente los l&iacute;mites consiste en varias &aacute;reas separadas,
+[position_y]</B><DD>
+<P>Cuando la arena ente los l&iacute;mites consiste en varias &aacute;reas separadas,
 deben excluirse todas menos una insertando puntos de exclusi&oacute;n. Todos
 los puntos desde los que se pueda dibujar una linea recta hasta un
 punto de exclusi&oacute;n, sin atravesar una pared, se considera que quedan

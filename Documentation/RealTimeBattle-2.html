@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>RealTimeBattle User Manual, version 1.0.8: Usage</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>RealTimeBattle User Manual, version 1.0.9: Usage</TITLE>
  <LINK HREF="RealTimeBattle-3.html" REL=next>
  <LINK HREF="RealTimeBattle-1.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc2" REL=contents>
@@ -105,30 +105,37 @@ Robot CPU time unlimited </TD><TD> Yes </TD><TD> Yes </TD><TD> No </TD></TR><TR>
 
 <P>
 <DL>
-<DT><B>New tournament:</B><DD><P>This will start a new tournament. Section
+<DT><B>New tournament:</B><DD>
+<P>This will start a new tournament. Section
 <A HREF="#Start new tournament window">Start new tournament window</A> will give more
 information. </P>
 
-<DT><B>Replay tournament:</B><DD><P>
+<DT><B>Replay tournament:</B><DD>
+<P>
 <A HREF="#replaying">Replay a game</A>. It
 will ask you to select a 
 <A HREF="#log_files">log file</A> of the
 game you want to study.</P>
 <P>
 <A NAME="pause"></A> </P>
-<DT><B>Pause:</B><DD><P>Pauses the game, in 
+<DT><B>Pause:</B><DD>
+<P>Pauses the game, in 
 <A HREF="#Command line options">competition-mode</A> the pausing will be postponed
 until the end of the current game.</P>
 
-<DT><B>End:</B><DD><P>Stops the current tournament.</P>
+<DT><B>End:</B><DD>
+<P>Stops the current tournament.</P>
 
-<DT><B>Options:</B><DD><P>Brings up the 
+<DT><B>Options:</B><DD>
+<P>Brings up the 
 <A HREF="#Options_window">options window</A>.</P>
 
-<DT><B>Statistics:</B><DD><P>Displays the 
+<DT><B>Statistics:</B><DD>
+<P>Displays the 
 <A HREF="#Statistics window">statistics window</A>.</P>
 
-<DT><B>Show arena window:</B><DD><P>This box can be used to show and hide the
+<DT><B>Show arena window:</B><DD>
+<P>This box can be used to show and hide the
 three windows used when a game is running, i.e., 
 the 
 <A HREF="#Arena_window">arena window</A>,
@@ -137,7 +144,8 @@ the
 the 
 <A HREF="#Message window">message window</A>.</P>
 
-<DT><B>Quit:</B><DD><P>Terminates the program.</P>
+<DT><B>Quit:</B><DD>
+<P>Terminates the program.</P>
 
 </DL>
 </P>
@@ -147,19 +155,23 @@ are intended to help with debugging of robots. Note that you can debug a running
 <CODE>gdb</CODE> the command is <CODE>gdb robot-name process-number</CODE>.</P>
 <P>
 <DL>
-<DT><B>Step:</B><DD><P>In a 
+<DT><B>Step:</B><DD>
+<P>In a 
 <A HREF="#pause">paused</A> game this will move
 one time step forward. This is very useful when running the robot in a
 debugger, since otherwise the robot will be flooded with messages.</P>
 
-<DT><B>End game:</B><DD><P>This will finish the current game. It has the same effect as a
+<DT><B>End game:</B><DD>
+<P>This will finish the current game. It has the same effect as a
 <A HREF="RealTimeBattle-5.html#Timeout">timeout</A> would have.</P>
 
-<DT><B>Kill marked robot:</B><DD><P>In debug-mode, you can mark a robot in the
+<DT><B>Kill marked robot:</B><DD>
+<P>In debug-mode, you can mark a robot in the
 <A HREF="#Score window">score window</A>. That robot will die if you press this button.</P>
 <P>
 <A NAME="Debug level"></A> </P>
-<DT><B>Debug level:</B><DD><P>Changing debug level is a way of telling robots which messages they
+<DT><B>Debug level:</B><DD>
+<P>Changing debug level is a way of telling robots which messages they
 should send. The range is between 0 and 5, where 0 means no debugging and 5 is the highest level of
 debugging, i.e. all debug-messages should be send.</P>
 </DL>
@@ -286,39 +298,48 @@ times, but keep in mind that only the last one of the keywords that takes a numb
 counted. All keywords should be followed by a semicolon.</P>
 <P>
 <DL>
-<DT><B>Games/Sequence or g/s:</B><DD><P>Takes a number or a <CODE>*</CODE> as an argument. The
+<DT><B>Games/Sequence or g/s:</B><DD>
+<P>Takes a number or a <CODE>*</CODE> as an argument. The
 number is how many games should be played per tournament. The asterisk means that the
 program takes the exact amount of arenas and uses this as the argument. The default
 value is 1. </P>
 
-<DT><B>Robots/Sequence or r/s:</B><DD><P>Takes a number or a <CODE>*</CODE> as an argument. The
+<DT><B>Robots/Sequence or r/s:</B><DD>
+<P>Takes a number or a <CODE>*</CODE> as an argument. The
 number is how many robots is playing in each sequence. The asterisk means that the
 program takes the exact amount of robots and uses this as the argument. The default
 value is 2.</P>
 
-<DT><B>Sequences or seq:</B><DD><P>Takes a number or a <CODE>*</CODE> as an argument. This
+<DT><B>Sequences or seq:</B><DD>
+<P>Takes a number or a <CODE>*</CODE> as an argument. This
 number tells how many sequences shall be played in the tournament. The asterisk means
 that the program takes the exact amount of robots and the robots per sequence, does a
 binomial calculation to determine the number of sequence for all robots to meet each
 other exactly once, and uses this number as the argument.  The default value is 1.</P>
 
-<DT><B>Robots or r:</B><DD><P>Takes one or more robot files as its argument.</P>
+<DT><B>Robots or r:</B><DD>
+<P>Takes one or more robot files as its argument.</P>
 
-<DT><B>Arenas or a:</B><DD><P>Takes one or more arena files as its argument.</P>
+<DT><B>Arenas or a:</B><DD>
+<P>Takes one or more arena files as its argument.</P>
 </DL>
 </P>
 <P>File arguments can be one of the following:
 <DL>
-<DT><B>Just the file:</B><DD><P>This searches the path for the file</P>
+<DT><B>Just the file:</B><DD>
+<P>This searches the path for the file</P>
 <P>Example: <CODE>Robot: empty.robot</CODE></P>
 
-<DT><B>Full path to the file:</B><DD><P>This takes the given file</P>
+<DT><B>Full path to the file:</B><DD>
+<P>This takes the given file</P>
 <P>Example: <CODE>Arena: /usr/local/games/RealTimeBattle/Arenas/Circle.arena</CODE></P>
 
-<DT><B>All files in path:</B><DD><P>This searches the whole path and takes all files found.</P>
+<DT><B>All files in path:</B><DD>
+<P>This searches the whole path and takes all files found.</P>
 <P>Example: <CODE>Arena: *</CODE></P>
 
-<DT><B>One specific directory:</B><DD><P>This searches the specified directory and takes all files found. </P>
+<DT><B>One specific directory:</B><DD>
+<P>This searches the specified directory and takes all files found. </P>
 <P>Example: <CODE>Robot: /usr/local/games/RealTimeBattle/Robots/*</CODE></P>
 
 </DL>
@@ -341,19 +362,31 @@ with argument <CODE>'-'</CODE>, the log is printed to stdout.</P>
 the type of information, followed by a whitespace-separated list of arguments. The
 following information is given:
 <DL>
-<DT><B>Header:</B><DD><P>H [games/sequence] [robots/sequence] [sequences] [robots]</P>
-<DT><B>Arena info:</B><DD><P>A [line from the arena file]</P>
-<DT><B>Game start:</B><DD><P>G [sequence number] [game number]</P>
-<DT><B>Option:</B><DD><P>O [option:value]</P>
-<DT><B>List of robot properties:</B><DD><P>L [robot id] [robot colour] [robot name]
+<DT><B>Header:</B><DD>
+<P>H [games/sequence] [robots/sequence] [sequences] [robots]</P>
+<DT><B>Arena info:</B><DD>
+<P>A [line from the arena file]</P>
+<DT><B>Game start:</B><DD>
+<P>G [sequence number] [game number]</P>
+<DT><B>Option:</B><DD>
+<P>O [option:value]</P>
+<DT><B>List of robot properties:</B><DD>
+<P>L [robot id] [robot colour] [robot name]
 <A NAME="RobotPositionInfo"></A> </P>
-<DT><B>Robot position info:</B><DD><P>R [robot id] [x] [y] [cannon angle] [radar angle] [energy]</P>
-<DT><B>Time:</B><DD><P>T [time elapsed]</P>
-<DT><B>Print message:</B><DD><P>P [robot id] [message to print]</P>
-<DT><B>Cookie:</B><DD><P>C [cookie id] [x] [y]</P>
-<DT><B>Mine:</B><DD><P>M [mine id] [x] [y]</P>
-<DT><B>Shot:</B><DD><P>S [shot id] [x] [y] [dx/dt] [dy/dt]</P>
-<DT><B>Die:</B><DD><P>D [type of object killed] [object id] (if robot: [points
+<DT><B>Robot position info:</B><DD>
+<P>R [robot id] [x] [y] [cannon angle] [radar angle] [energy]</P>
+<DT><B>Time:</B><DD>
+<P>T [time elapsed]</P>
+<DT><B>Print message:</B><DD>
+<P>P [robot id] [message to print]</P>
+<DT><B>Cookie:</B><DD>
+<P>C [cookie id] [x] [y]</P>
+<DT><B>Mine:</B><DD>
+<P>M [mine id] [x] [y]</P>
+<DT><B>Shot:</B><DD>
+<P>S [shot id] [x] [y] [dx/dt] [dy/dt]</P>
+<DT><B>Die:</B><DD>
+<P>D [type of object killed] [object id] (if robot: [points
 received] [position])</P>
 </DL>
 </P>
@@ -365,10 +398,10 @@ received] [position])</P>
 <A HREF="#log_files">log file</A> either
 by giving the 
 <A HREF="#Command line options">command line option</A>
-<CODE>&quot;-r&quot;</CODE> or from the 
+<CODE>&#34;-r&#34;</CODE> or from the 
 <A HREF="#Control window">control window</A>.
 Note that if the log is coming from standard input (command line option
-<CODE>&quot;-r&nbsp;-&quot;</CODE>), you cannot do much but watch the game, but otherwise
+<CODE>&#34;-r&nbsp;-&#34;</CODE>), you cannot do much but watch the game, but otherwise
 you can influence the flow of the game:</P>
 <P>
 <UL>

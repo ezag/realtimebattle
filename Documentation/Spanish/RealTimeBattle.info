@@ -1,12 +1,12 @@
-This is RealTimeBattle.info, produced by makeinfo version 4.8 from
-/tmp/linuxdoc-dir-3938/sgmltmp.RealTimeBattle.info.2.
+This is RealTimeBattle.info, produced by makeinfo version 4.11 from
+/tmp/linuxdoc-tools.Bsk3g6MtOK/sgmltmp.RealTimeBattle.2.texi.
 
-   \input texinfo
+\input texinfo
 
 
 File: RealTimeBattle.info,  Node: Top,  Next: Introduccion,  Up: (dir)
 
-Manual de Usuario de RealTimeBattle, version 1.0.8
+Manual de Usuario de RealTimeBattle, version 1.0.9
 **************************************************
 
      Erik Ouchterlony and Ragnar Ouchterlony, Johannes Nicolai (jonico@users.sourceforge.net)
@@ -111,7 +111,7 @@ que se quiera tener simultaneamente en el campo de batalla; ejecutar
 
    RealTimeBattle esta disponible unicamente en Unix. Ha sido
 desarrollado en una maquina Linux, aunque puede igualmente ser
-compilado en otros tipos de Unix. La ejecucion en *Note Opciones de
+compilado en otros tipos de Unix. La ejecucion en *note Opciones de
 linea de comandos::  es posible solamente en Linux por el momento, con
 el directorio /proc activado, debido a la necesidad de obtener
 estadisticas sobre el uso de la CPU de los procesos hijo.
@@ -188,7 +188,7 @@ Este capitulo describe como utilizar el programa en si. No obstante, si
 te resulta aburrido de leer, sientete libre de usar el metodo habitual
 de prueba y error, y vuelve aqui si tropiezas con algo confuso en la
 interfaz de usuario. Es buena idea, sin embargo, leer la corta seccion
-sobre *Note Opciones de linea de comandos::
+sobre *note Opciones de linea de comandos::
 
    bajo estas lineas. Ten en cuenta que no hay ninguna ayuda integrada
 en el programa: es aqui donde debes buscar ayuda.
@@ -218,7 +218,7 @@ File: RealTimeBattle.info,  Node: Opciones de linea de comandos,  Next: Ventana 
 
 Hay varias opciones, en la linea de comandos, que determinan el
 comportamiento general de RealTimeBattle. Es posible elegir un fichero
-de opciones, donde se definan los valores por defecto de las *Note
+de opciones, donde se definan los valores por defecto de las *note
 Opciones:: . Tambien puedes seleccionar en que modo de juego se
 ejecutara el programa: `debug', `normal' o `competicion'.
 
@@ -282,41 +282,41 @@ File: RealTimeBattle.info,  Node: Ventana de control,  Next: Comenzar un torneo 
 ======================
 
 `Nuevo campeonato:'
-     Para comenzar un torneo nuevo. La seccion *Note Comenzar un torneo
+     Para comenzar un torneo nuevo. La seccion *note Comenzar un torneo
      nuevo::
 
      te dara mas informacion.
 
 `Reproducir campeonato:'
-     *Note Reproduccion:: . Te pedira que selecciones un *Note Ficheros
+     *note Reproduccion:: . Te pedira que selecciones un *note Ficheros
      de registro (log files)::
 
      del juego para poder estudiarlo.
 
 `Pausa:'
-     Detiene el juego. En el *Note Opciones de linea de comandos::  la
+     Detiene el juego. En el *note Opciones de linea de comandos::  la
      pausa sera pospuesta hasta que el juego actual termine.
 
 `Fin:'
      Detiene el torneo actual.
 
 `Opciones:'
-     Muestra la *Note Ventana de opciones:: .
+     Muestra la *note Ventana de opciones:: .
 
 `Estadisticas:'
-     Muestra la *Note Ventana de estadisticas:: .
+     Muestra la *note Ventana de estadisticas:: .
 
 `Ver la arena:'
      Esta opcion puede ser usada para mostrar y ocultar las tres
-     ventanas utilizadas durante el juego: la *Note Ventana de la
-     arena:: , la *Note Ventana de puntuacion::  y la *Note Ventana de
+     ventanas utilizadas durante el juego: la *note Ventana de la
+     arena:: , la *note Ventana de puntuacion::  y la *note Ventana de
      mensajes:: .
 
 `Quitar:'
      Finaliza el programa.
 
 
-   En el *Note Opciones de linea de comandos::
+   En el *note Opciones de linea de comandos::
 
    hay disponible otro conjunto de botones. Estos estan pensados para
 ayudar en la depuracion de robots. Ten en cuenta que puedes depurar un
@@ -324,18 +324,18 @@ proceso ejecucion; si utilizas `gdb' el comando es `gdb robot-name
 process-number'.
 
 `Paso:'
-     Permite, en un juego *Note Ventana de control:: , avanzar un paso
+     Permite, en un juego *note Ventana de control:: , avanzar un paso
      de tiempo. Esto es muy util cuando se ejecuta el robot en un
      depurador, ya que de otro modo el robot sera saturado con mensajes
      (N. del T. el robot recibe demasiados mensajes como para poder
      analizarlos).
 
 `Fin juego:'
-     Finaliza el juego actual. Tiene el mismo efecto que un *Note
+     Finaliza el juego actual. Tiene el mismo efecto que un *note
      Opciones de tiempo:: .
 
 `Matar robots marcados:'
-     En el modo de depuracion, se puede marcar un robot en la *Note
+     En el modo de depuracion, se puede marcar un robot en la *note
      Ventana de puntuacion:: . Ese robot morira al pulsar este boton.
 
 `Nivel de debug:'
@@ -347,7 +347,7 @@ process-number'.
 
    Cuando estes reproduciendo un fichero de registro (log file), que no
 sea suministrado por la entrada estandar, hay varios botones para
-controlar la reproduccion. Vease el capitulo acerca de la *Note
+controlar la reproduccion. Vease el capitulo acerca de la *note
 Reproduccion::  para mas detalles.
 
 
@@ -360,8 +360,8 @@ Para seleccionar robots y arenas para el torneo, marca los ficheros a
 la derecha y pulsa el boton `anadir'. Los ficheros seleccionados se
 muestran a la izquierda y pueden eliminarse de manera similar.
 
-   Un *Note Un torneo::  consiste en un numero de *Note Una secuencia::
-de *Note Un juego:: .  En cada secuencia el mismo robot compite en
+   Un *note Un torneo::  consiste en un numero de *note Una secuencia::
+de *note Un juego:: .  En cada secuencia el mismo robot compite en
 todos los juegos. Aqui se puede seleccionar el numero de juegos y
 secuencias, asi como el numero de robots en cada secuencia. Si
 pretendes jugar con todos los robots en todos los juegos se recomienda
@@ -384,7 +384,7 @@ File: RealTimeBattle.info,  Node: Directorios de robots y arenas,  Next: Ventana
 ==================================
 
 A fin de que el programa pueda encontrar los robots y arenas existen
-dos opciones: *Note Otras opciones::  y *Note Construccion de arenas:: .
+dos opciones: *note Otras opciones::  y *note Construccion de arenas:: .
 Independientemente de las opciones, siempre se busca en los
 subdirectorios `Robots' y `Arenas' en el directorio de instalacion de
 RealtimeBattle, especificado en el Makefile principal durante la
@@ -419,7 +419,7 @@ File: RealTimeBattle.info,  Node: Ventana de mensajes,  Next: Ventana de opcione
 2.7 Ventana de mensajes
 =======================
 
-Aqui se muestran los mensajes enviados por los robots utilizando *Note
+Aqui se muestran los mensajes enviados por los robots utilizando *note
 Mensajes de los robots:: . Los mensajes mas recientes son mostrados en
 la parte superior. Puedes limpiar la ventana y elegir ver solo los
 nuevos mensajes de un robot en particular.
@@ -431,7 +431,7 @@ File: RealTimeBattle.info,  Node: Ventana de opciones,  Next: Ventana de estadis
 =======================
 
 Aqui tienes la posibilidad de cambiar un gran numero de opciones. En el
-*Note Opciones::  puedes encontrar informacion mas detallada sobre cada
+*note Opciones::  puedes encontrar informacion mas detallada sobre cada
 opcion. Los cambios no seran aplicados hasta que pulses bien el boton
 `apply' o el boton `OK'.
 
@@ -493,10 +493,10 @@ File: RealTimeBattle.info,  Node: Ficheros de torneo,  Next: Ficheros de registr
 2.11 Ficheros de torneo
 =======================
 
-El fichero de torneo se indica como una *Note Opciones de linea de
+El fichero de torneo se indica como una *note Opciones de linea de
 comandos:: .  Cuando se especifica, un torneo comenzara y terminara
 automaticamente. Para mas informacion sobre como guardar las
-estadisticas mira en la seccion sobre los *Note Ficheros de
+estadisticas mira en la seccion sobre los *note Ficheros de
 estadisticas:: .
 
    Un fichero de torneo consiste en cinco palabras clave. Todas estas
@@ -571,7 +571,7 @@ File: RealTimeBattle.info,  Node: Ficheros de registro (log files),  Next: Repro
 2.12 Ficheros de registro (log files)
 =====================================
 
-A veces puede ser util *Note Reproduccion::  un juego y analizarlo en
+A veces puede ser util *note Reproduccion::  un juego y analizarlo en
 detalle o simplemente almacenarlo como referencia futura. Anade el
 parametro `-l' al arrancar RealTimeBattle, con el nombre de fichero
 como argumento, para activar esta opcion, y con argumento `'-" para que
@@ -627,10 +627,10 @@ File: RealTimeBattle.info,  Node: Reproduccion,  Next: Ficheros de estadisticas,
 2.13 Reproduccion
 =================
 
-Puedes repetir un juego a partir de su *Note Ficheros de registro (log
-files)::  bien pasando la *Note Opciones de linea de comandos::
+Puedes repetir un juego a partir de su *note Ficheros de registro (log
+files)::  bien pasando la *note Opciones de linea de comandos::
 
-   `"-r"' o desde la *Note Ventana de control:: .  Ten en cuenta que si
+   `"-r"' o desde la *note Ventana de control:: .  Ten en cuenta que si
 el registro proviene de la entrada estandar (opcion de linea de comando
 `"-r -"'), no podras hacer mucho mas que contemplar el juego, si bien
 de otro modo puedes influir en el desarrollo del juego:
@@ -640,12 +640,12 @@ de otro modo puedes influir en el desarrollo del juego:
      juego arrastrando el manejador de la barra.
 
    * El avance rapido y el rebobinado operan como cabria esperar.
-     Puedes alterar la velocidad cambiando la opcion *Note Otras
+     Puedes alterar la velocidad cambiando la opcion *note Otras
      opciones:: .
 
    * El avance y retroceso paso a paso pueden utilizarse para estudiar
      lo que ocurre en detalle. En primer lugar, no obstante, el juego
-     debera estar en *Note Ventana de control:: .
+     debera estar en *note Ventana de control:: .
 
    * Con los cuatro botones de la parte inferior puedes saltar entre
      juegos y secuencias.
@@ -657,10 +657,10 @@ File: RealTimeBattle.info,  Node: Ficheros de estadisticas,  Prev: Reproduccion,
 =============================
 
 El fichero de estadisticas es un archivo empleado solo cuando se
-especifica un *Note Ficheros de torneo:: .  Las estadisticas seran
+especifica un *note Ficheros de torneo:: .  Las estadisticas seran
 guardadas en este fichero cuando el torneo termine. Por otra parte,
 puedes salvarlo a mano utilizando el boton `guardar estadisticas' en la
-*Note Ventana de estadisticas:: .
+*note Ventana de estadisticas:: .
 
 
 File: RealTimeBattle.info,  Node: Estructura,  Next: Construccion de robots,  Prev: Uso del programa,  Up: Top
@@ -693,15 +693,15 @@ File: RealTimeBattle.info,  Node: Movimiento del robot,  Next: Energia,  Up: Est
 ========================
 
 El robot se comporta como un vehiculo con ruedas. Rueda hacia adelante
-con un pequeno *Note Opciones de entorno::  y se desliza lateralmente
-con una *Note Opciones de entorno::
+con un pequeno *note Opciones de entorno::  y se desliza lateralmente
+con una *note Opciones de entorno::
 
-   mucho mayor. El tercer efecto de desaceleracion es la *Note Opciones
+   mucho mayor. El tercer efecto de desaceleracion es la *note Opciones
 de entorno:: , la cual se aplica en direccion opuesta a la velocidad
 del robot y aumenta con la velocidad.
 
-   Existen tres maneras de variar el movimiento del robot: *Note
-Mensajes de los robots:: , *Note Mensajes de los robots::  y *Note
+   Existen tres maneras de variar el movimiento del robot: *note
+Mensajes de los robots:: , *note Mensajes de los robots::  y *note
 Mensajes de los robots:: .
 
    La aceleracion se utiliza para incrementar la velocidad del robot en
@@ -746,7 +746,7 @@ File: RealTimeBattle.info,  Node: El radar,  Next: Posicion de los robots,  Prev
 ============
 
 El principal metodo para obtener informacion del entorno es a traves
-del radar. Cada vez que el robot es actualizado recibira un *Note
+del radar. Cada vez que el robot es actualizado recibira un *note
 Mensajes a los robots:: , con informacion sobre el objeto mas cercano
 en la direccion actual del radar. A saber, la distancia y el tipo de
 objeto. Si se trata de un robot, el nivel de energia de ese robot sera
@@ -754,7 +754,7 @@ revelado tambien.
 
    Dado que la informacion del radar es practicamente todo lo que el
 robot conocera acerca del entorno, es crucial hacer uso de ella del
-mejor modo posible. Tambien es importante *Note Mensajes de los robots::
+mejor modo posible. Tambien es importante *note Mensajes de los robots::
 bien, para que este de informacion util.
 
 
@@ -766,8 +766,8 @@ File: RealTimeBattle.info,  Node: Posicion de los robots,  Next: Disparo,  Prev:
 A partir de la version 1.0.5 de RTB es posible obtener la posicion de
 los robots mas directamente. En lugar de tener que analizar el entorno
 con el radar y averiguar la posicion a partir de los datos, RTB puede
-configurarse para enviar las *Note Mensajes a los robots:: . Este
-aspecto es controlado a traves de la opcion *Note Opciones de entorno::
+configurarse para enviar las *note Mensajes a los robots:: . Este
+aspecto es controlado a traves de la opcion *note Opciones de entorno::
 .
 
 
@@ -778,20 +778,20 @@ File: RealTimeBattle.info,  Node: Disparo,  Next: Colisiones,  Prev: Posicion de
 
 Disparar es el principal metodo para eliminar otros robots. En
 RealTimeBattle un disparo se desplaza con velocidad constante,
-calculada como la suma de la velocidad del robot y la *Note Opciones de
+calculada como la suma de la velocidad del robot y la *note Opciones de
 disparo::  en la direccion hacia donde apunta el canon. El disparo se
 movera hasta que choque contra un objeto.
 
    Cuando se realiza un disparo se le da una energia, la cual determina
 los danos que otros robots sufriran cuando reciban el impacto. La
-cantidad de energia esta, no obstante, limitada; la *Note Opciones de
+cantidad de energia esta, no obstante, limitada; la *note Opciones de
 disparo::  prohibe disparos de muy baja energia, por ejemplo para
-eliminar minas. La *Note Opciones de disparo::  esta restringida por la
+eliminar minas. La *note Opciones de disparo::  esta restringida por la
 cantidad de energia potencial de disparo del robot, la cual aumenta
 conforme pasa el tiempo.
 
    Disparar no esta, pese a todo, libre de riesgo, dado que un robot que
-dispare perdera una cantidad de energia *Note Opciones de disparo:: .
+dispare perdera una cantidad de energia *note Opciones de disparo:: .
 
    Si una galleta o mina recibe un disparo, es destruida,
 independientemente de la energia del disparo. En consecuencia deberias
@@ -811,8 +811,8 @@ File: RealTimeBattle.info,  Node: Colisiones,  Next: Galletas y minas,  Prev: Di
 
 Los robots son objetos fragiles, que quedan danados al chocar con muros
 y otros robots. Al colisionar, los robots actuan como bolas que
-rebotan, con tres factores que influencian su comportamiento: *Note
-Opciones de los robots:: . En la parte *Note Opciones de los robots:: ,
+rebotan, con tres factores que influencian su comportamiento: *note
+Opciones de los robots:: . En la parte *note Opciones de los robots:: ,
 los robots estan hechos de un material diferente, normalmente mas duro
 y que protege mas. Este hecho puede usarse para embestir a otros
 robots, haciendo mas dano del que se recibe.
@@ -827,7 +827,7 @@ Las galletas y las minas son esencialmente objetos iguales, con la
 unica diferencia de que los robots ganaran energia al recoger galletas
 y perderan energia con las minas. Estos objetos se reparten
 aleatoriamente por la arena durante el juego. Su energia y frecuencia
-puede ser controlada con las correspondientes *Note Opciones extra:: .
+puede ser controlada con las correspondientes *note Opciones extra:: .
 
 
 File: RealTimeBattle.info,  Node: Tiempo,  Next: Un juego,  Prev: Galletas y minas,  Up: Estructura
@@ -841,16 +841,16 @@ bastante rapido a los eventos en el juego. El juego progresa mediante
 llamadas a la funcion de actualizacion a intervalos regulares. Entre
 estos, los robots han de compartir el tiempo de CPU restante. Para
 evitar que los robots consuman demasiados recursos del procesador, su
-tiempo de proceso esta limitado en el *Note Opciones de linea de
-comandos:: . Las *Note Opciones de tiempo::  dan mas detalles al
+tiempo de proceso esta limitado en el *note Opciones de linea de
+comandos:: . Las *note Opciones de tiempo::  dan mas detalles al
 respecto.
 
    La ejecucion en tiempo real puede, no obstante, ser violada bajo
 ciertas circunstancias. Puedes acelerar o retrasar la velocidad del
-juego cambiando la opcion de la *Note Opciones de tiempo:: , y existe
+juego cambiando la opcion de la *note Opciones de tiempo:: , y existe
 un metodo que previene la ruptura del juego cuando la carga del sistema
 es demasiado alta. Si el tiempo entre dos actualizaciones es mayor que
-el *Note Opciones de tiempo:: , el juego se retardara consecuentemente.
+el *note Opciones de tiempo:: , el juego se retardara consecuentemente.
 
 
 File: RealTimeBattle.info,  Node: Un juego,  Next: Una secuencia,  Prev: Tiempo,  Up: Estructura
@@ -860,7 +860,7 @@ File: RealTimeBattle.info,  Node: Un juego,  Next: Una secuencia,  Prev: Tiempo,
 
 Al comienzo de un juego, los robots reciben una posicion aleatoria en
 la arena, con orientacion asimismo aleatoria. El radar y el canon
-apuntan ambos hacia delante y la *Note Disparo::  esta a cero. El
+apuntan ambos hacia delante y la *note Disparo::  esta a cero. El
 objetivo de los robots es sobrevivir tanto tiempo como sea posible y,
 al mismo tiempo, destruir a los demas robots. Un robot obtendra un
 punto por cada robot enemigo al que sobreviva. Un punto extra es, sin
@@ -870,7 +870,7 @@ otras palabras, recibiran medio punto por cada uno de los demas que
 muera al mismo tiempo).
 
    Un juego termina si el numero de robots supervivientes es menor que
-dos, o el *Note Opciones de tiempo:: .
+dos, o el *note Opciones de tiempo:: .
 
 
 File: RealTimeBattle.info,  Node: Una secuencia,  Next: Un torneo,  Prev: Un juego,  Up: Estructura
@@ -884,7 +884,7 @@ El numero de robots en una secuencia esta limitado a 120, debido al
 limite de 256 descriptores de fichero en Linux. Por cada robot se abren
 dos tuberias como canales de comunicacion entre este y RealTimeBattle.
 
-   En consecuencia un cierto *Note Comenzar un torneo nuevo::
+   En consecuencia un cierto *note Comenzar un torneo nuevo::
 
    son jugados, y finalmente se matan los procesos de los robots.
 
@@ -997,7 +997,7 @@ utilizarlo en tus propios robots.
    Ten en cuenta que no es una buena idea emplear "espera activa", por
 ejemplo, mirar continuamente si hay un mensaje nuevo hasta que se
 obtiene uno. Esto ralentizaria las cosas notablemente y, peor todavia,
-en *Note Opciones de linea de comandos::  el robot consumira
+en *note Opciones de linea de comandos::  el robot consumira
 rapidamente su tiempo de CPU y morira.
 
 
@@ -1026,7 +1026,7 @@ cantidad de recursos para perjudicar a los otros robots, etc. Por
 supuesto, este no es el modo en que se pretende la victoria sobre los
 oponentes, por lo que intentamos erradicarlo tanto como sea posible.
 
-   En *Note Opciones de linea de comandos:: , los robots tienen un
+   En *note Opciones de linea de comandos:: , los robots tienen un
 tiempo de CPU limitado, de modo que un robot no puede utilizar todos
 los recursos del procesador. Podria resultar posible sortear este
 obstaculo lanzando procesos hijos. Pero dado que el tiempo utilizado
@@ -1042,7 +1042,7 @@ directorios.
 
    Pese a todo, aun es posible que puedan hallarse otras maneras de
 evitar estas restricciones. Si detectas una de estas maneras, envia por
-favor un *Note Notificacion de errores:: . De todas formas, queda a
+favor un *note Notificacion de errores:: . De todas formas, queda a
 discrecion del organizador de un torneo el asegurarse de que las reglas
 se cumplan.
 
@@ -1055,7 +1055,7 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
 `Initialize [first? (int)]'
      Este es el primer mensaje que el robot recibira. Si el argumento es
      uno, se trata de la primera secuencia del torneo y deberan
-     mandarse el *Note Mensajes de los robots::  del robot al servidor,
+     mandarse el *note Mensajes de los robots::  del robot al servidor,
      en caso contrario deberan esperarse los mensajes `YourName' y
      `YourColour' (ver mas abajo).
 
@@ -1070,12 +1070,12 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
 `GameOption [optionnr (int)] [value (double)]'
      Al comienzo de cada juego se enviaran a los robots un cierto
      numero de parametros, que pueden ser utiles para ellos. Para
-     hallar una lista completa de estos, mira en el fichero *Note
+     hallar una lista completa de estos, mira en el fichero *note
      Messagetypes-h::
 
-     el enumerado `game_option_type'. En el capitulo de *Note Opciones::
+     el enumerado `game_option_type'. En el capitulo de *note Opciones::
      puedes obtener informacion mas detallada sobre cada opcion. El
-     *Note Ventana de control::  es tambien enviado como una opcion del
+     *note Ventana de control::  es tambien enviado como una opcion del
      juego a pesar de no encontrarse en la lista de opciones.
 
 `GameStarts'
@@ -1091,12 +1091,12 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
      Proporciona mas informacion general sobre el estado del robot. El
      tiempo es el tiempo de juego transcurrido desde el comienzo del
      mismo. Este no es necesariamente igual al tiempo real transcurrido,
-     debido a la *Note Opciones de tiempo::  y el *Note Opciones de
+     debido a la *note Opciones de tiempo::  y el *note Opciones de
      tiempo:: .
 
 `Coordinates [x (double)] [y (double)] [angle (double)]'
      Informa sobre la posicion actual del robot. Es enviado solo si la
-     opcion *Note Opciones de entorno::  es 1 o 2. Si es 1, se envian
+     opcion *note Opciones de entorno::  es 1 o 2. Si es 1, se envian
      las coordenadas relativas a la posicion inicial, con la
      consecuencia de que el robot no sabe donde ha comenzado, sino solo
      adonde se ha desplazado desde entonces.
@@ -1110,18 +1110,18 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
      significa enemigo.
 
 `RotationReached [what has reached(int)]'
-     Cuando la opcion del robot *Note Mensajes de los robots::  esta
+     Cuando la opcion del robot *note Mensajes de los robots::  esta
      establecida del modo apropiado, este mensaje se envia cuando una
      rotacion (realizada con `RotateTo' o `RotateAmount') ha finalizado
      o la direccion ha cambiado (barrido). El argumento corresponde a
-     'que rotar' en, por ejemplo, el mensaje *Note Mensajes de los
+     'que rotar' en, por ejemplo, el mensaje *note Mensajes de los
      robots:: .
 
 `Energy [energy level(double)]'
      Al final de cada ronda el robot recibira un mensaje con su propio
      nivel de energia. No se recibira, sin embargo, el valor exacto de
      energia, sino que este es discretizado en un cierto numero de
-     *Note Opciones de los robots:: .
+     *note Opciones de los robots:: .
 
 `RobotsLeft [number of robots (int)]'
      Al comienzo del juego, y cada vez que muera un robot, se enviara a
@@ -1129,7 +1129,7 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
 
 `Collision [colliding object type (int)] [angle relative robot (double)]'
      Cuando un robot choca contra (o recibe el impacto de) algo, recibe
-     este mensaje. En el fichero *Note Messagetypes-h::
+     este mensaje. En el fichero *note Messagetypes-h::
 
      puedes encontrar una lista de los tipos de objeto. Se recibe el
      angulo desde donde la colision ha ocurrido (el angulo relativo al
@@ -1147,16 +1147,16 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
      `UNKNOWN_MESSAGE:' El servidor recibio un mensaje que no pudo
      reconocer.
 
-     `PROCESS_TIME_LOW:' El uso de CPU ha alcanzado el *Note Opciones
-     de tiempo:: .  Solo en *Note Opciones de linea de comandos:: .
+     `PROCESS_TIME_LOW:' El uso de CPU ha alcanzado el *note Opciones
+     de tiempo:: .  Solo en *note Opciones de linea de comandos:: .
 
      `MESSAGE_SENT_IN_ILLEGAL_STATE:' El mensaje recibido no puede ser
      tratado en el estado actual del programa. Por ejemplo, en caso de
-     que *Note Mensajes de los robots::
+     que *note Mensajes de los robots::
 
      sea enviado antes del comienzo del juego.
 
-     `UNKNOWN_OPTION:' El robot envio una *Note Mensajes de los robots::
+     `UNKNOWN_OPTION:' El robot envio una *note Mensajes de los robots::
      con un nombre ilegal o un argumento ilegal para esa opcion.
 
      `OBSOLETE_KEYWORD:' La palabra clave enviada es obsoleta y no debe
@@ -1164,7 +1164,7 @@ File: RealTimeBattle.info,  Node: Mensajes a los robots,  Next: Mensajes de los 
      sobre que palabra emplear en su lugar.
 
      `NAME_NOT_GIVEN:' El robot no ha enviado su nombre antes del
-     comienzo del juego. Esto puede ocurrir si el *Note Opciones de
+     comienzo del juego. Esto puede ocurrir si el *note Opciones de
      tiempo::  es demasiado corto o el robot no envia su nombre lo
      bastante pronto.
 
@@ -1209,7 +1209,7 @@ desconocido.
      El valor por defecto es falso.
 
      `SEND_ROTATION_REACHED:' Si deseas que el servidor envie un
-     mensaje de tipo *Note Mensajes a los robots::
+     mensaje de tipo *note Mensajes a los robots::
 
      cuando una rotacion termine, debes establecer esta opcion. Con un
      valor de 1, el mensaje se envia cuando `RotateTo' o `RotateAmount'
@@ -1217,13 +1217,13 @@ desconocido.
      barrido tambien son notificados. El valor por defecto es 0, a
      saber, no enviar ningun mensaje.
 
-     `USE_NON_BLOCKING:' Selecciona como funcionara la *Note Leer
+     `USE_NON_BLOCKING:' Selecciona como funcionara la *note Leer
      mensajes:: . Esta opcion debe enviarse exactamente una vez tan
      pronto como el programa se inicie. Dado que siempre debe enviarse,
      no existe valor por defecto.
 
 `Name [name (string)]'
-     Cuando se recibe el mensaje *Note Mensajes a los robots::
+     Cuando se recibe el mensaje *note Mensajes a los robots::
 
      con argumento 1, indicando que se trata de la primera secuencia,
      deben enviarse el nombre y color del robot. Si el nombre termina
@@ -1246,7 +1246,7 @@ desconocido.
      primer parametro adopta valores de 1 para el robot, 2 para el
      canon, 4 para el radar o una suma de estos para rotar varios
      elementos al mismo tiempo. La velocidad angular es dada en
-     radianes por segundo y esta limitada por la *Note Opciones de los
+     radianes por segundo y esta limitada por la *note Opciones de los
      robots:: .
 
 `RotateTo [what to rotate (int)] [angular velocity (double)] [end angle (double)]'
@@ -1263,29 +1263,29 @@ desconocido.
      barrido (no disponible para el robot).
 
 `Accelerate [value (double)]'
-     Fija la aceleracion del robot. El valor queda acotado por la *Note
+     Fija la aceleracion del robot. El valor queda acotado por la *note
      Opciones de los robots:: .
 
 `Brake [portion (double)]'
      Activa el freno. Frenado total (parametro igual a 1.0) significa
-     que el rozamiento en la direccion del robot es igual a la *Note
+     que el rozamiento en la direccion del robot es igual a la *note
      Opciones de entorno:: .
 
 `Shoot [shot energy (double)]'
-     Dispara con la energia dada.  Las *Note Opciones de disparo::
+     Dispara con la energia dada.  Las *note Opciones de disparo::
      proporcionan mas informacion al respecto.
 
 `Print [message (string)]'
-     Imprime un mensaje en la *Note Ventana de mensajes:: .
+     Imprime un mensaje en la *note Ventana de mensajes:: .
 
 `Debug [message (string)]'
-     Imprime un mensaje en la *Note Ventana de mensajes::  si se esta
-     en el *Note Opciones de linea de comandos:: .
+     Imprime un mensaje en la *note Ventana de mensajes::  si se esta
+     en el *note Opciones de linea de comandos:: .
 
 `DebugLine [angle1 (double)] [radius1 (double)] [angle2 (double)] [radius2 (double)]'
      Dibuja una linea directamente sobre la arena. Esto solo esta
      permitido en el nivel de depuracion mas alto (5). De lo contrario
-     se enviara un *Note Mensajes a los robots:: . Los argumentos son
+     se enviara un *note Mensajes a los robots:: . Los argumentos son
      el punto inicial y final de la linea en coordenadas polares
      relativas al robot.
 
@@ -1429,7 +1429,7 @@ File: RealTimeBattle.info,  Node: Opciones de disparo,  Next: Opciones extra,  P
 =======================
 
 `Radio:'
-     Tamano de los disparos. Debe ser menor que el *Note Opciones de
+     Tamano de los disparos. Debe ser menor que el *note Opciones de
      los robots:: .
 
 `Velocidad:'
@@ -1536,7 +1536,7 @@ File: RealTimeBattle.info,  Node: Opciones de tiempo,  Next: Tamano de las venta
      lugar en una maquina lenta o remota.
 
 `Limite de gasto de CPU:'
-     En el *Note Opciones de linea de comandos::  el uso de procesador
+     En el *note Opciones de linea de comandos::  el uso de procesador
      de un robot esta limitado. Al comienzo de una secuencia, cada
      robot recibira esta cantidad de tiempo de CPU para su consumo.
 
@@ -1553,14 +1553,14 @@ File: RealTimeBattle.info,  Node: Opciones de tiempo,  Next: Tamano de las venta
      recibira un mensaje de advertencia.
 
 `Intervalo de chequeo del proceso:'
-     En el *Note Opciones de linea de comandos::  este parametro
+     En el *note Opciones de linea de comandos::  este parametro
      determina la frecuencia a la que el programa comprobara el uso de
      CPU.
 
 `Frecuencia de registro:'
-     Para reducir el tamano de los *Note Ficheros de registro (log
-     files)::  puedes incrementar este valor. Con el, la *Note Ficheros
-     de registro (log files)::  es registrada solo cada enesimo *Note
+     Para reducir el tamano de los *note Ficheros de registro (log
+     files)::  puedes incrementar este valor. Con el, la *note Ficheros
+     de registro (log files)::  es registrada solo cada enesimo *note
      Opciones de tiempo:: .
 
 
@@ -1571,10 +1571,10 @@ File: RealTimeBattle.info,  Node: Tamano de las ventanas,  Next: Otras opciones,
 ==========================
 
 Aqui se puede establecer el tamano inicial para algunas ventanas, a
-saber la *Note Ventana de la arena:: , la *Note Ventana de mensajes:: ,
-la *Note Ventana de puntuacion::  y la *Note Ventana de estadisticas:: .
+saber la *note Ventana de la arena:: , la *note Ventana de mensajes:: ,
+la *note Ventana de puntuacion::  y la *note Ventana de estadisticas:: .
 Tambien se puede establecer la posicion de las tres primeras y de la
-*Note Ventana de control:: .
+*note Ventana de control:: .
 
 
 File: RealTimeBattle.info,  Node: Otras opciones,  Prev: Tamano de las ventanas,  Up: Opciones
@@ -1587,7 +1587,7 @@ File: RealTimeBattle.info,  Node: Otras opciones,  Prev: Tamano de las ventanas,
      lados el doble de largos, o sea, un area cuatro veces mayor.
 
 `Velocidad de avance:'
-     Determina, al *Note Reproduccion:: , la velocidad cuando se pulsa
+     Determina, al *note Reproduccion:: , la velocidad cuando se pulsa
      el boton de avance rapido o el boton de rebobinado.
 
 `Numero maximo de robots simultaneos:'
@@ -1606,7 +1606,7 @@ File: RealTimeBattle.info,  Node: Otras opciones,  Prev: Tamano de las ventanas,
 
 `Ruta de busqueda de robots:'
      Se trata de una lista de directorios separados por dos puntos,
-     donde se buscaran los robots al comienzo de un *Note Comenzar un
+     donde se buscaran los robots al comienzo de un *note Comenzar un
      torneo nuevo:: .  No obstante, siempre se buscara en el
      subdirectorio `Robots', dentro del directorio de instalacion de
      RealTimeBattle (por defecto: `/usr/local/games/RealTimeBattle').
@@ -1675,7 +1675,7 @@ numero de argumentos correcto!
    En la lista de comandos, los argumentos se indican entre corchetes.
 
 `scale [value]'
-     Este valor multiplicado por la *Note Otras opciones::
+     Este valor multiplicado por la *note Otras opciones::
 
      dara el factor de la escala, por el que todas las coordenadas
      quedan multiplicadas. Este comando, de existir, debe ser el
@@ -1690,7 +1690,7 @@ numero de argumentos correcto!
 `boundary [left] [up] [right] [down]'
      Los limites determinan el area en la cual el robot, las galletas y
      las minas seran situados. Tambien definen el area visible en la
-     *Note Ventana de la arena:: . Este comando ha de aparecer
+     *note Ventana de la arena:: . Este comando ha de aparecer
      obligatoriamente, y solo puede estar precedido por `scale'.
 
 `inner_circle [bounce] [hardness] [center_x] [center_y] [radius]'
@@ -1752,55 +1752,55 @@ numero de argumentos correcto!
 
 
 Tag Table:
-Node: Top141
-Node: Introduccion595
-Node: Mas informacion2606
-Node: Requisitos3097
-Node: Historia4154
-Node: Licencia4944
-Node: Notificacion de errores6156
-Node: Uso del programa6582
-Node: Opciones de linea de comandos7565
-Node: Ventana de control10940
-Node: Comenzar un torneo nuevo13406
-Node: Directorios de robots y arenas14689
-Node: Ventana de la arena15436
-Node: Ventana de puntuacion15969
-Node: Ventana de mensajes16237
-Node: Ventana de opciones16677
-Node: Ventana de estadisticas17383
-Node: Ejecucion sin graficos18227
-Node: Ficheros de torneo19272
-Node: Ficheros de registro (log files)22114
-Node: Reproduccion23810
-Node: Ficheros de estadisticas25023
-Node: Estructura25497
-Node: Movimiento del robot26001
-Node: Energia27387
-Node: El radar27851
-Node: Posicion de los robots28604
-Node: Disparo29121
-Node: Colisiones30656
-Node: Galletas y minas31251
-Node: Tiempo31739
-Node: Un juego32840
-Node: Una secuencia33715
-Node: Un torneo34340
-Node: Construccion de robots34854
-Node: Leer mensajes35454
-Node: Messagetypes-h39050
-Node: Trampas39535
-Node: Mensajes a los robots41222
-Node: Mensajes de los robots47257
-Node: Opciones52548
-Node: Opciones de entorno53193
-Node: Opciones de los robots54197
-Node: Opciones de disparo56503
-Node: Opciones extra57681
-Node: Opciones de tiempo58674
-Node: Tamano de las ventanas61628
-Node: Otras opciones62120
-Node: Construccion de arenas63548
-Node: Comandos de la arena65572
+Node: Top147
+Node: Introduccion601
+Node: Mas informacion2612
+Node: Requisitos3103
+Node: Historia4160
+Node: Licencia4950
+Node: Notificacion de errores6162
+Node: Uso del programa6588
+Node: Opciones de linea de comandos7571
+Node: Ventana de control10946
+Node: Comenzar un torneo nuevo13412
+Node: Directorios de robots y arenas14695
+Node: Ventana de la arena15442
+Node: Ventana de puntuacion15975
+Node: Ventana de mensajes16243
+Node: Ventana de opciones16683
+Node: Ventana de estadisticas17389
+Node: Ejecucion sin graficos18233
+Node: Ficheros de torneo19278
+Node: Ficheros de registro (log files)22120
+Node: Reproduccion23816
+Node: Ficheros de estadisticas25029
+Node: Estructura25503
+Node: Movimiento del robot26007
+Node: Energia27393
+Node: El radar27857
+Node: Posicion de los robots28610
+Node: Disparo29127
+Node: Colisiones30662
+Node: Galletas y minas31257
+Node: Tiempo31745
+Node: Un juego32846
+Node: Una secuencia33721
+Node: Un torneo34346
+Node: Construccion de robots34860
+Node: Leer mensajes35460
+Node: Messagetypes-h39056
+Node: Trampas39541
+Node: Mensajes a los robots41228
+Node: Mensajes de los robots47263
+Node: Opciones52554
+Node: Opciones de entorno53199
+Node: Opciones de los robots54203
+Node: Opciones de disparo56509
+Node: Opciones extra57687
+Node: Opciones de tiempo58680
+Node: Tamano de las ventanas61634
+Node: Otras opciones62126
+Node: Construccion de arenas63554
+Node: Comandos de la arena65578
 
 End Tag Table

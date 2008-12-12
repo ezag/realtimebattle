@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Uso del programa</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.9: Uso del programa</TITLE>
  <LINK HREF="RealTimeBattle-3.html" REL=next>
  <LINK HREF="RealTimeBattle-1.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc2" REL=contents>
@@ -111,30 +111,37 @@ Uso de CPU ilimitado para robots </TD><TD> S&iacute; </TD><TD> S&iacute; </TD><T
 
 <P>
 <DL>
-<DT><B>Nuevo campeonato:</B><DD><P>Para comenzar un torneo nuevo. La secci&oacute;n
+<DT><B>Nuevo campeonato:</B><DD>
+<P>Para comenzar un torneo nuevo. La secci&oacute;n
 <A HREF="#Start new tournament window">Comenzar un torneo nuevo</A>
 te dar&aacute; m&aacute;s informaci&oacute;n.</P>
 
-<DT><B>Reproducir campeonato:</B><DD><P>
+<DT><B>Reproducir campeonato:</B><DD>
+<P>
 <A HREF="#replaying">Reproducir un torneo</A>. Te pedir&aacute; que
 selecciones un 
 <A HREF="#log_files">fichero de registro (log file)</A>
 del juego para poder estudiarlo.</P>
 <P>
 <A NAME="pause"></A> </P>
-<DT><B>Pausa:</B><DD><P>Detiene el juego. En el
+<DT><B>Pausa:</B><DD>
+<P>Detiene el juego. En el
 <A HREF="#Command line options">modo de competici&oacute;n</A> la pausa
 ser&aacute; pospuesta hasta que el juego actual termine.</P>
 
-<DT><B>Fin:</B><DD><P>Detiene el torneo actual.</P>
+<DT><B>Fin:</B><DD>
+<P>Detiene el torneo actual.</P>
 
-<DT><B>Opciones:</B><DD><P>Muestra la 
+<DT><B>Opciones:</B><DD>
+<P>Muestra la 
 <A HREF="#Options_window">ventana de opciones</A>.</P>
 
-<DT><B>Estad&iacute;sticas:</B><DD><P>Muestra la 
+<DT><B>Estad&iacute;sticas:</B><DD>
+<P>Muestra la 
 <A HREF="#Statistics window">ventana de estad&iacute;sticas</A>.</P>
 
-<DT><B>Ver la arena:</B><DD><P>Esta opci&oacute;n puede ser usada para mostrar y ocultar las tres ventanas
+<DT><B>Ver la arena:</B><DD>
+<P>Esta opci&oacute;n puede ser usada para mostrar y ocultar las tres ventanas
 utilizadas durante el juego: 
 la 
 <A HREF="#Arena_window">ventana de la arena</A>,
@@ -143,7 +150,8 @@ la
 la 
 <A HREF="#Message window">ventana de mensajes</A>.</P>
 
-<DT><B>Quitar:</B><DD><P>Finaliza el programa.</P>
+<DT><B>Quitar:</B><DD>
+<P>Finaliza el programa.</P>
 
 </DL>
 </P>
@@ -155,21 +163,25 @@ proceso ejecuci&oacute;n; si utilizas <CODE>gdb</CODE> el comando es
 <CODE>gdb robot-name process-number</CODE>.</P>
 <P>
 <DL>
-<DT><B>Paso:</B><DD><P>Permite, en un juego 
+<DT><B>Paso:</B><DD>
+<P>Permite, en un juego 
 <A HREF="#pause">en pausa</A>, avanzar un
 paso de tiempo. Esto es muy &uacute;til cuando se ejecuta el robot en un
 depurador, ya que de otro modo el robot ser&aacute; saturado con mensajes
 (N. del T. el robot recibe demasiados mensajes como para poder analizarlos).</P>
 
-<DT><B>Fin juego:</B><DD><P>Finaliza el juego actual. Tiene el mismo efecto que un
+<DT><B>Fin juego:</B><DD>
+<P>Finaliza el juego actual. Tiene el mismo efecto que un
 <A HREF="RealTimeBattle-5.html#Timeout">timeout</A>.</P>
 
-<DT><B>Matar robots marcados:</B><DD><P>En el modo de depuraci&oacute;n, se puede marcar un robot en la 
+<DT><B>Matar robots marcados:</B><DD>
+<P>En el modo de depuraci&oacute;n, se puede marcar un robot en la 
 <A HREF="#Score window">ventana de puntuaci&oacute;n</A>. Ese robot morir&aacute;
 al pulsar este bot&oacute;n.</P>
 <P>
 <A NAME="Debug level"></A> </P>
-<DT><B>Nivel de debug:</B><DD><P>Cambiar el nivel de depuraci&oacute;n es una manera de indicar a los robots
+<DT><B>Nivel de debug:</B><DD>
+<P>Cambiar el nivel de depuraci&oacute;n es una manera de indicar a los robots
 que mensajes deben enviar. El rango es entre 0 y 5, donde 0 significa
 no depurar y 5 es el nivel m&aacute;s alto de depuraci&oacute;n, esto es, todos los
 mensajes de depuraci&oacute;n deben ser enviados.</P>
@@ -316,40 +328,49 @@ como argumento es tenida en cuenta. Todas las palabras clave deben ir
 seguidas de un punto y coma.</P>
 <P>
 <DL>
-<DT><B>Games/Sequence o g/s:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero indica cuantos
+<DT><B>Games/Sequence o g/s:</B><DD>
+<P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero indica cuantos
 juegos deben ser jugados por torneo. El asterisco significa que el
 programa toma el n&uacute;mero exacto de arenas y lo utiliza como
 argumento. El valor por defecto es 1.</P>
 
-<DT><B>Robots/Sequence o r/s:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero es cuantos
+<DT><B>Robots/Sequence o r/s:</B><DD>
+<P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. El n&uacute;mero es cuantos
 robots jugar&aacute;n en cada secuencia. El asterisco significa que el
 programa toma el n&uacute;mero exacto de robots y lo utiliza como
 argumento. El valor por defecto es 2.</P>
 
-<DT><B>Sequences o seq:</B><DD><P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. Este n&uacute;mero indica cuantas
+<DT><B>Sequences o seq:</B><DD>
+<P>Toma un n&uacute;mero o <CODE>*</CODE> como argumento. Este n&uacute;mero indica cuantas
 secuencias se jugar&aacute;n en el torneo. El asterisco significa que el
 programa toma el n&uacute;mero exacto de robots y los robots por secuencia,
 realiza un c&aacute;lculo binomial para determinar el n&uacute;mero de secuencias
 necesario para que todos los robots se encuentren exactamente una vez,
 y utiliza este n&uacute;mero como argumento. El valor por defecto es 1.</P>
 
-<DT><B>Robots o r:</B><DD><P>Toma uno o m&aacute;s ficheros de robot como argumento.</P>
+<DT><B>Robots o r:</B><DD>
+<P>Toma uno o m&aacute;s ficheros de robot como argumento.</P>
 
-<DT><B>Arenas o a:</B><DD><P>Toma uno o m&aacute;s ficheros de arena como argumento.</P>
+<DT><B>Arenas o a:</B><DD>
+<P>Toma uno o m&aacute;s ficheros de arena como argumento.</P>
 </DL>
 </P>
 <P>Los argumentos de fichero pueden ser uno de entre los siguientes:
 <DL>
-<DT><B>El fichero solo:</B><DD><P>Busca el fichero en cuesti&oacute;n en la ruta definida.</P>
+<DT><B>El fichero solo:</B><DD>
+<P>Busca el fichero en cuesti&oacute;n en la ruta definida.</P>
 <P>Ejemplo: <CODE>Robot: empty.robot</CODE></P>
 
-<DT><B>Ruta completa del fichero:</B><DD><P>Usa el fichero en cuesti&oacute;n.</P>
+<DT><B>Ruta completa del fichero:</B><DD>
+<P>Usa el fichero en cuesti&oacute;n.</P>
 <P>Ejemplo: <CODE>Arena: /usr/local/games/RealTimeBattle/Arenas/Circle.arena</CODE></P>
 
-<DT><B>Todos los ficheros en la ruta:</B><DD><P>Busca la ruta completa y usa todos los ficheros encontrados.</P>
+<DT><B>Todos los ficheros en la ruta:</B><DD>
+<P>Busca la ruta completa y usa todos los ficheros encontrados.</P>
 <P>Ejemplo: <CODE>Arena: *</CODE></P>
 
-<DT><B>Un directorio espec&iacute;fico:</B><DD><P>Busca en el directorio especificado y usa todos los ficheros encontrados. </P>
+<DT><B>Un directorio espec&iacute;fico:</B><DD>
+<P>Busca en el directorio especificado y usa todos los ficheros encontrados. </P>
 <P>Ejemplo: <CODE>Robot: /usr/local/games/RealTimeBattle/Robots/*</CODE></P>
 
 </DL>
@@ -376,31 +397,43 @@ seguida de una lista de argumentos separados por espacios en
 blanco. En concreto se muestra la siguiente informaci&oacute;n:</P>
 <P>
 <DL>
-<DT><B>Cabecera:</B><DD><P>H [juegos/secuencia] [robots/secuencia] [secuencias] [robots]</P>
+<DT><B>Cabecera:</B><DD>
+<P>H [juegos/secuencia] [robots/secuencia] [secuencias] [robots]</P>
 
-<DT><B>Informaci&oacute;n de la arena:</B><DD><P>A [l&iacute;nea del fichero de la arena]</P>
+<DT><B>Informaci&oacute;n de la arena:</B><DD>
+<P>A [l&iacute;nea del fichero de la arena]</P>
 
-<DT><B>Comienzo del juego:</B><DD><P>G [n&uacute;mero de secuencia] [n&uacute;mero de juego]</P>
+<DT><B>Comienzo del juego:</B><DD>
+<P>G [n&uacute;mero de secuencia] [n&uacute;mero de juego]</P>
 
-<DT><B>Opci&oacute;n:</B><DD><P>O [opci&oacute;n:valor]</P>
+<DT><B>Opci&oacute;n:</B><DD>
+<P>O [opci&oacute;n:valor]</P>
 
-<DT><B>Lista de propiedades del robot:</B><DD><P>L [identificador de robot] [color del robot] [nombre del robot]</P>
+<DT><B>Lista de propiedades del robot:</B><DD>
+<P>L [identificador de robot] [color del robot] [nombre del robot]</P>
 <P>
 <A NAME="RobotPositionInfo"></A> </P>
-<DT><B>Informaci&oacute;n sobre la posici&oacute;n del robot:</B><DD><P>R [identificador de robot] [x] [y] [&aacute;ngulo del ca&ntilde;&oacute;n] [&aacute;ngulo del
+<DT><B>Informaci&oacute;n sobre la posici&oacute;n del robot:</B><DD>
+<P>R [identificador de robot] [x] [y] [&aacute;ngulo del ca&ntilde;&oacute;n] [&aacute;ngulo del
 radar] [energ&iacute;a]</P>
 
-<DT><B>Tiempo:</B><DD><P>T [tiempo transcurrido]</P>
+<DT><B>Tiempo:</B><DD>
+<P>T [tiempo transcurrido]</P>
 
-<DT><B>Mensaje impreso:</B><DD><P>P [identificador del robot] [mensaje impreso]</P>
+<DT><B>Mensaje impreso:</B><DD>
+<P>P [identificador del robot] [mensaje impreso]</P>
 
-<DT><B>Galleta:</B><DD><P>C [identificador de galleta] [x] [y]</P>
+<DT><B>Galleta:</B><DD>
+<P>C [identificador de galleta] [x] [y]</P>
 
-<DT><B>Mina:</B><DD><P>M [identificador de mina] [x] [y]</P>
+<DT><B>Mina:</B><DD>
+<P>M [identificador de mina] [x] [y]</P>
 
-<DT><B>Disparo:</B><DD><P>S [identificador de disparo] [x] [y] [dx/dt] [dy/dt]</P>
+<DT><B>Disparo:</B><DD>
+<P>S [identificador de disparo] [x] [y] [dx/dt] [dy/dt]</P>
 
-<DT><B>Muerte:</B><DD><P>D [tipo de objeto muerto] [identificador de objeto] (si es un robot:
+<DT><B>Muerte:</B><DD>
+<P>D [tipo de objeto muerto] [identificador de objeto] (si es un robot:
 [puntos recibidos] [posici&oacute;n])</P>
 </DL>
 </P>
@@ -412,10 +445,10 @@ radar] [energ&iacute;a]</P>
 <A HREF="#log_files">fichero de registro (log file)</A> bien
 pasando la 
 <A HREF="#Command line options">opci&oacute;n de l&iacute;nea de comando</A>
-<CODE>&quot;-r&quot;</CODE> o desde la 
+<CODE>&#34;-r&#34;</CODE> o desde la 
 <A HREF="#Control window">ventana de control</A>.
 Ten en cuenta que si el registro proviene de la entrada est&aacute;ndar
-(opci&oacute;n de l&iacute;nea de comando <CODE>&quot;-r&nbsp;-&quot;</CODE>), no
+(opci&oacute;n de l&iacute;nea de comando <CODE>&#34;-r&nbsp;-&#34;</CODE>), no
 podr&aacute;s hacer mucho m&aacute;s que contemplar el juego, si bien de otro modo
 puedes influir en el desarrollo del juego:</P>
 <P>

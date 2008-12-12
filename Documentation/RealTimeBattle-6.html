@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>RealTimeBattle User Manual, version 1.0.8: Arena construction</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>RealTimeBattle User Manual, version 1.0.9: Arena construction</TITLE>
  <LINK HREF="RealTimeBattle-5.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc6" REL=contents>
 </HEAD>
@@ -50,53 +50,68 @@ whitespace. Be sure to give the right number of arguments!</P>
 <P>In the command list, the arguments are given in square brackets.</P>
 <P>
 <DL>
-<DT><B>scale [value]</B><DD><P>This value times the 
+<DT><B>scale [value]</B><DD>
+<P>This value times the 
 <A HREF="RealTimeBattle-5.html#ArenaScale">arena scale</A>
 will give the scale factor, by which all coordinates are multiplied. This command must be,
 if it exists, the very first in the file, default is 1.0.</P>
 
-<DT><B>angle_unit [unit]</B><DD><P>Switches to the selected angle unit, which
+<DT><B>angle_unit [unit]</B><DD>
+<P>Switches to the selected angle unit, which
 can be either of <CODE>degrees</CODE> or <CODE>radians</CODE>. Default is radians.</P>
 
-<DT><B>boundary [left] [up] [right] [down]</B><DD><P>The boundary encloses the area, in which robot,
+<DT><B>boundary [left] [up] [right] [down]</B><DD>
+<P>The boundary encloses the area, in which robot,
 cookies and mines are placed. It also determines the visible area in the 
 <A HREF="RealTimeBattle-2.html#Arena_window">arena window</A>. This command is required and may only be preceded by
 <CODE>scale</CODE>.</P>
 
-<DT><B>inner_circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Robots are limited to the inside of this circle.</P>
+<DT><B>inner_circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD>
+<P>Robots are limited to the inside of this circle.</P>
 
-<DT><B>circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD><P>Circle shaped wall.</P>
+<DT><B>circle [bounce] [hardness] [center_x] [center_y] [radius]</B><DD>
+<P>Circle shaped wall.</P>
 
 <DT><B>line [bounce] [hardness] [thickness] [start_x]
-[start_y] [end_x] [end_y]</B><DD><P>Creates a line. It only prevents the robot from passing through to long
+[start_y] [end_x] [end_y]</B><DD>
+<P>Creates a line. It only prevents the robot from passing through to long
 side, so remember to put circles at the short ends.</P>
 
 <DT><B>arc [bnc] [hardn] [thickn] [center_x] [ctr_y]
-[inner_radius] [outer_rds] [angle1] [angle2]</B><DD><P>An arc is a sector of a ring within two angles. Like the line, it needs
+[inner_radius] [outer_rds] [angle1] [angle2]</B><DD>
+<P>An arc is a sector of a ring within two angles. Like the line, it needs
 circles at both the ends.</P>
 
 
-<DT><B>polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x] [center_y])...</B><DD><P>This will create a number of circles, connected by lines.</P>
+<DT><B>polygon [bounce] [hardn] [thickn] [number of vertices] ([center_x] [center_y])...</B><DD>
+<P>This will create a number of circles, connected by lines.</P>
 
 
 <DT><B>closed_polygon [bounce] [hardn] [thickn] [number of vertices]
-([center_x] [center_y])...</B><DD><P>As a <CODE>polygon</CODE>, but the first and the last vertices are also
+([center_x] [center_y])...</B><DD>
+<P>As a <CODE>polygon</CODE>, but the first and the last vertices are also
 connected by a line.</P>
 
 <DT><B>poly_curve [bnc] [hardn] [thickn] [start_x]
 [start_y] [dir_x] [dir_y] 
-([command args ...]) ...</B><DD><P>The <CODE>poly_curve</CODE> is the most powerful of the arena commands. It is
+([command args ...]) ...</B><DD>
+<P>The <CODE>poly_curve</CODE> is the most powerful of the arena commands. It is
 used to build walls with lines and arcs. At each step you have a current
 position and direction, which are affected by the subcommands. The last
 subcommand must be <CODE>C</CODE> or <CODE>Q</CODE>.</P>
 <P>
 <DL>
-<DT><B>L [length]</B><DD><P>Draw a line with given length in the current
+<DT><B>L [length]</B><DD>
+<P>Draw a line with given length in the current
 direction.</P>
-<DT><B>T [angle]</B><DD><P>Turn the current dircetion.</P>
-<DT><B>A [angle] [radius]</B><DD><P>Draw an arc.</P>
-<DT><B>C</B><DD><P>Finish by connecting with the starting point.</P>
-<DT><B>Q</B><DD><P>Quit.</P>
+<DT><B>T [angle]</B><DD>
+<P>Turn the current dircetion.</P>
+<DT><B>A [angle] [radius]</B><DD>
+<P>Draw an arc.</P>
+<DT><B>C</B><DD>
+<P>Finish by connecting with the starting point.</P>
+<DT><B>Q</B><DD>
+<P>Quit.</P>
 </DL>
 </P>
 
@@ -104,7 +119,8 @@ direction.</P>
 
 
 
-<DT><B>exclusion_point [position_x] [position_y]</B><DD><P>When the arena
+<DT><B>exclusion_point [position_x] [position_y]</B><DD>
+<P>When the arena
 inside the boundary consists of several separated areas, you should
 exclude all but one by inserting exclusion points. All points from
 which you can draw a straight line to an exclusion point without

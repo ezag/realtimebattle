@@ -23,8 +23,10 @@ It can be started only ONCE.
 joypad_robot_analog: This robot needs a joystick on /dev/js0 or /dev/input/js0 and a working linux joystick api to let it work.
 It can be started only ONCE.
 
-jBot.robot: You will need java and a startup time in RealTimeBattle of about half and a second to let this robot work.
+jBot.robot: You will need Java and a startup time in RealTimeBattle of about half and a second to let this robot work.
 
-perl.robot, perl-Skeleton.robot: As the name says, you will nedd perl in order to start these robots. perl.robot will create a log file located at /tmp/perl.robot.log
+perl.robot, perl-Skeleton.robot: As the name says, you will need Perl in order to start these robots. perl.robot will create a log file located at /tmp/perl.robot.log
 
-raziel.py.robot: You will need python in order to run this robot.
+raziel.py.robot: You will need Python in order to run this robot.
+
+*.php.robot: You will need PHP in order to run these robots.

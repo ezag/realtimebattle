@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.8: Construcci&oacute;n de robots</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>Manual de Usuario de RealTimeBattle, versi&oacute;n 1.0.9: Construcci&oacute;n de robots</TITLE>
  <LINK HREF="RealTimeBattle-5.html" REL=next>
  <LINK HREF="RealTimeBattle-3.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc4" REL=contents>
@@ -34,7 +34,8 @@ capaz de saber cuando ha recibido un nuevo mensaje. Para conseguirlo,
 existen (al menos) tres m&eacute;todos diferentes entre los que elegir:</P>
 <P>
 <DL>
-<DT><B>La entrada est&aacute;ndar es bloqueante:</B><DD><P>Este es el m&eacute;todo m&aacute;s simple. Cuando se lee de la entrada est&aacute;ndar, el
+<DT><B>La entrada est&aacute;ndar es bloqueante:</B><DD>
+<P>Este es el m&eacute;todo m&aacute;s simple. Cuando se lee de la entrada est&aacute;ndar, el
 programa queda bloqueado hasta que llega el siguiente mensaje. El
 programa puede hacerse por tanto como si siempre hubiera un mensaje
 esperando. La contrapartida es que no se puede hacer ning&uacute;n c&aacute;lculo
@@ -49,7 +50,8 @@ Ten en cuenta que esto es c&oacute;digo C++. Si no utilizas C++ simplemente
 imprime este mensaje por la salida est&aacute;ndar. endl es lo mismo que 
 'end of line'.</P>
 
-<DT><B>Select:</B><DD><P>Utilizando la funci&oacute;n <CODE>select</CODE> de la librer&iacute;a libc de Unix hace
+<DT><B>Select:</B><DD>
+<P>Utilizando la funci&oacute;n <CODE>select</CODE> de la librer&iacute;a libc de Unix hace
 posible que el robot tenga un mejor control sobre cuando buscar nuevos
 mensajes. Permite, por ejemplo, leer todos los mensajes disponibles,
 realizar algunos c&aacute;lculos, enviar comandos y a continuaci&oacute;n esperar la
@@ -64,7 +66,8 @@ cout &lt;&lt; "RobotOption " &lt;&lt; USE_NON_BLOCKING &lt;&lt; " " &lt;&lt; 1 &
 
 Ten en cuenta que esto es c&oacute;digo C++.</P>
 
-<DT><B>Se&ntilde;ales:</B><DD><P>Si quieres, puedes indicar a RealTimeBattle que env&iacute;e una se&ntilde;al al
+<DT><B>Se&ntilde;ales:</B><DD>
+<P>Si quieres, puedes indicar a RealTimeBattle que env&iacute;e una se&ntilde;al al
 robot cuando un nuevo conjunto de mensajes haya sido enviado. Este
 m&eacute;todo hace posible que el robot reciba continuamente informaci&oacute;n
 actualizada del programa servidor incluso cuando se encuentre ocupado
@@ -86,7 +89,7 @@ Ten en cuenta que esto es c&oacute;digo C++.</P>
 <CODE>rotate_and_fire</CODE> ha sido escrito en tres versiones distintas,
 aunque equivalentes. Tomate la libertad de estudiar y copiar este
 c&oacute;digo para utilizarlo en tus propios robots.</P>
-<P>Ten en cuenta que no es una buena idea emplear &quot;espera activa&quot;,
+<P>Ten en cuenta que no es una buena idea emplear &#34;espera activa&#34;,
 por ejemplo, mirar continuamente si hay un mensaje nuevo hasta que se
 obtiene uno. Esto ralentizar&iacute;a las cosas notablemente y, peor todav&iacute;a,
 en 
@@ -142,21 +145,25 @@ las reglas se cumplan.</P>
 <P>
 <A NAME="Initialize"></A> </P>
 
-<DT><B>Initialize [first? (int)]</B><DD><P>Este es el primer mensaje que el robot recibir&aacute;. Si el argumento es
+<DT><B>Initialize [first? (int)]</B><DD>
+<P>Este es el primer mensaje que el robot recibir&aacute;. Si el argumento es
 uno, se trata de la primera secuencia del torneo y deber&aacute;n mandarse el
 <A HREF="#NameAndColour">nombre y color</A> del robot al servidor,
 en caso contrario deber&aacute;n esperarse los mensajes <B>YourName</B> y
 <B>YourColour</B> (ver m&aacute;s abajo).</P>
 <P>
 <A NAME="YourName"></A> </P>
-<DT><B>YourName [name (string)]</B><DD><P>Nombre actual del robot. No debe cambiarse a menos que se tengan
+<DT><B>YourName [name (string)]</B><DD>
+<P>Nombre actual del robot. No debe cambiarse a menos que se tengan
 buenas razones para ello.</P>
 <P>
 <A NAME="YourColour"></A> </P>
-<DT><B>YourColour [colour (hex)]</B><DD><P>Color actual del robot. C&aacute;mbialo si te desagrada. Todos los robots de
+<DT><B>YourColour [colour (hex)]</B><DD>
+<P>Color actual del robot. C&aacute;mbialo si te desagrada. Todos los robots de
 un mismo equipo tendr&aacute;n el mismo color.</P>
 
-<DT><B>GameOption [optionnr (int)] [value (double)]</B><DD><P>Al comienzo de cada juego se enviar&aacute;n a los robots un cierto n&uacute;mero de
+<DT><B>GameOption [optionnr (int)] [value (double)]</B><DD>
+<P>Al comienzo de cada juego se enviar&aacute;n a los robots un cierto n&uacute;mero de
 par&aacute;metros, que pueden ser &uacute;tiles para ellos. Para hallar una lista
 completa de estos, mira en el fichero 
 <A HREF="#Messagetypes.h">Messagetypes.h</A>
@@ -166,15 +173,18 @@ detallada sobre cada opci&oacute;n. El
 <A HREF="RealTimeBattle-2.html#Debug level">nivel de depuraci&oacute;n</A> es tambi&eacute;n enviado como una opci&oacute;n del juego a pesar de
 no encontrarse en la lista de opciones.</P>
 
-<DT><B>GameStarts</B><DD><P>Este mensaje es enviado cuando comienza el juego (¡sorpresa!).</P>
+<DT><B>GameStarts</B><DD>
+<P>Este mensaje es enviado cuando comienza el juego (¡sorpresa!).</P>
 <P>
 <A NAME="Radar"></A> </P>
-<DT><B>Radar [distance (double)] [observed object type (int)] [radar angle (double)]</B><DD><P>Este mensaje proporciona cada turno informaci&oacute;n del radar. Recuerda
+<DT><B>Radar [distance (double)] [observed object type (int)] [radar angle (double)]</B><DD>
+<P>Este mensaje proporciona cada turno informaci&oacute;n del radar. Recuerda
 que el &aacute;ngulo del radar es relativo al frontal del robot y viene dado
 en radianes.</P>
 
 <DT><B>Info [time (double)] [speed (double)] [cannon angle
-(double)]</B><DD><P>El mensaje <B>Info</B> siempre sigue al mensaje <B>Radar</B>.
+(double)]</B><DD>
+<P>El mensaje <B>Info</B> siempre sigue al mensaje <B>Radar</B>.
 Proporciona m&aacute;s informaci&oacute;n general sobre el estado del robot. El
 tiempo es el tiempo de juego transcurrido desde el comienzo del
 mismo. Este no es necesariamente igual al tiempo real transcurrido,
@@ -183,20 +193,23 @@ debido a la
 <A HREF="RealTimeBattle-5.html#MaxTimestep">m&aacute;ximo paso de tiempo</A>.</P>
 <P>
 <A NAME="Coordinates"></A> </P>
-<DT><B>Coordinates [x (double)] [y (double)] [angle (double)]</B><DD><P>Informa sobre la posici&oacute;n actual del robot. Es enviado solo si la opci&oacute;n
+<DT><B>Coordinates [x (double)] [y (double)] [angle (double)]</B><DD>
+<P>Informa sobre la posici&oacute;n actual del robot. Es enviado solo si la opci&oacute;n
 <A HREF="RealTimeBattle-5.html#SendCoordinates">Send robot coordinates</A> es 1 o 2. Si
 es 1, se env&iacute;an las coordenadas relativas a la posici&oacute;n inicial, con
 la consecuencia de que el robot no sabe donde ha comenzado, sino solo
 adonde se ha desplazado desde entonces.</P>
 
-<DT><B>RobotInfo [energy level (double)] [teammate? (int)]</B><DD><P>Si se detecta un robot con el radar, este mensaje se enviar&aacute; a
+<DT><B>RobotInfo [energy level (double)] [teammate? (int)]</B><DD>
+<P>Si se detecta un robot con el radar, este mensaje se enviar&aacute; a
 continuaci&oacute;n, dando cierta informaci&oacute;n sobre el robot. El nivel de
 energ&iacute;a del oponente es suministrado del mismo modo que tu propia
 energ&iacute;a (ver m&aacute;s abajo). El segundo argumento solo es interesante en
 el modo de equipos: 1 significa compa&ntilde;ero de equipo y 0 significa enemigo.</P>
 <P>
 <A NAME="RotationReached"></A> </P>
-<DT><B>RotationReached [what has reached(int)]</B><DD><P>Cuando la opci&oacute;n del robot
+<DT><B>RotationReached [what has reached(int)]</B><DD>
+<P>Cuando la opci&oacute;n del robot
 <A HREF="#RobotOption">SEND_ROTATION_REACHED</A> est&aacute;
 establecida del modo apropiado, este mensaje se env&iacute;a cuando una rotaci&oacute;n
 (realizada con <B>RotateTo</B> o <B>RotateAmount</B>) ha
@@ -204,15 +217,18 @@ finalizado o la direcci&oacute;n ha cambiado (barrido). El argumento
 corresponde a 'qu&eacute; rotar' en, por ejemplo, el mensaje
 <A HREF="#Rotate">Rotate</A>. </P>
 
-<DT><B>Energy [energy level(double)]</B><DD><P>Al final de cada ronda el robot recibir&aacute; un mensaje con su propio
+<DT><B>Energy [energy level(double)]</B><DD>
+<P>Al final de cada ronda el robot recibir&aacute; un mensaje con su propio
 nivel de energ&iacute;a. No se recibir&aacute;, sin embargo, el valor exacto de
 energ&iacute;a, sino que este es discretizado en un cierto n&uacute;mero de 
 <A HREF="RealTimeBattle-5.html#EnergyLevels">niveles de energ&iacute;a</A>.</P>
 
-<DT><B>RobotsLeft [number of robots (int)]</B><DD><P>Al comienzo del juego, y cada vez que muera un robot, se enviar&aacute; a
+<DT><B>RobotsLeft [number of robots (int)]</B><DD>
+<P>Al comienzo del juego, y cada vez que muera un robot, se enviar&aacute; a
 todos los robots supervivientes el n&uacute;mero de robots restantes.</P>
 
-<DT><B>Collision [colliding object type (int)] [angle relative robot (double)]</B><DD><P>Cuando un robot choca contra (o recibe el impacto de) algo, recibe
+<DT><B>Collision [colliding object type (int)] [angle relative robot (double)]</B><DD>
+<P>Cuando un robot choca contra (o recibe el impacto de) algo, recibe
 este mensaje. En el fichero 
 <A HREF="#Messagetypes.h">Messagetypes.h</A>
 puedes encontrar una lista de los tipos de objeto. Se recibe el
@@ -222,7 +238,8 @@ severidad del impacto. Esto puede, no obstante, determinarse
 indirectamente (de forma aproximada) a trav&eacute;s de la p&eacute;rdida de energ&iacute;a.</P>
 <P>
 <A NAME="Warning"></A> </P>
-<DT><B>Warning [warning type (int)] [message (string)]</B><DD><P>Un mensaje de advertencia ser&aacute; enviado cuando haya de notificarse a
+<DT><B>Warning [warning type (int)] [message (string)]</B><DD>
+<P>Un mensaje de advertencia ser&aacute; enviado cuando haya de notificarse a
 un robot acerca de diferentes problemas que hayan ocurrido. Actualmente hay
 siete mensajes distintos de advertencia que pueden ser enviados, a saber:</P>
 <P><CODE>UNKNOWN_MESSAGE:</CODE>
@@ -253,13 +270,16 @@ demasiado corto o el robot no env&iacute;a su nombre lo bastante pronto.</P>
 <P><CODE>COLOUR_NOT_GIVEN:</CODE>
 El robot no ha enviado su color antes del comienzo del juego.</P>
 
-<DT><B>Dead</B><DD><P>El robot ha muerto. No intentes enviar m&aacute;s mensajes al servidor hasta
+<DT><B>Dead</B><DD>
+<P>El robot ha muerto. No intentes enviar m&aacute;s mensajes al servidor hasta
 el final del juego, ya que el servidor no los leer&aacute;.</P>
 
-<DT><B>GameFinishes</B><DD><P>El juego actual ha terminado. ¡Prep&aacute;rate para el siguiente!</P>
+<DT><B>GameFinishes</B><DD>
+<P>El juego actual ha terminado. ¡Prep&aacute;rate para el siguiente!</P>
 <P>
 <A NAME="ExitRobot"></A> </P>
-<DT><B>ExitRobot</B><DD><P>¡Sal del programa inmediatamente! De lo contrario ser&aacute; matado a la fuerza.</P>
+<DT><B>ExitRobot</B><DD>
+<P>¡Sal del programa inmediatamente! De lo contrario ser&aacute; matado a la fuerza.</P>
 
 </DL>
 </P>
@@ -277,7 +297,8 @@ mensaje desconocido.</P>
 <DL>
 <P>
 <A NAME="RobotOption"></A> </P>
-<DT><B>RobotOption [option nr (int)] [value (int)]</B><DD><P>Actualmente solo est&aacute;n disponibles las siguientes opciones:</P>
+<DT><B>RobotOption [option nr (int)] [value (int)]</B><DD>
+<P>Actualmente solo est&aacute;n disponibles las siguientes opciones:</P>
 <P><CODE>SIGNAL:</CODE>
 Indica al servidor que debe enviar una se&ntilde;al cuando haya un mensaje
 esperando. El argumento determinar&aacute; que se&ntilde;al. Env&iacute;a este mensaje (por
@@ -304,7 +325,8 @@ debe enviarse exactamente una vez tan pronto como el programa se
 inicie. Dado que siempre debe enviarse, no existe valor por defecto.</P>
 <P>
 <A NAME="NameAndColour"></A> </P>
-<DT><B>Name [name (string)]</B><DD><P>Cuando se recibe el mensaje 
+<DT><B>Name [name (string)]</B><DD>
+<P>Cuando se recibe el mensaje 
 <A HREF="#Initialize">Initialize</A>
 con argumento 1, indicando que se trata de la primera secuencia, deben
 enviarse el nombre y color del robot. Si el nombre termina con la cadena
@@ -316,13 +338,15 @@ del mensaje <B>RobotInfo</B>. Para posibilidades m&aacute;s sofisticadas,
 mira la
 <A HREF="http://rtb-team.sf.net">infraestructura de equipos para RealTimeBattle</A>.</P>
 
-<DT><B>Colour [home colour (hex)] [away colour (hex)]</B><DD><P>Ver m&aacute;s arriba. Los colores son como las camisetas de f&uacute;tbol
+<DT><B>Colour [home colour (hex)] [away colour (hex)]</B><DD>
+<P>Ver m&aacute;s arriba. Los colores son como las camisetas de f&uacute;tbol
 habituales. El color propio es utilizado a menos que ya est&eacute; siendo
 empleado. De otro modo, se usar&aacute; el segundo color o, como &uacute;ltimo
 recurso, un color en desuso seleccionado aleatoriamente.</P>
 <P>
 <A NAME="Rotate"></A> </P>
-<DT><B>Rotate [what to rotate (int)] [angular velocity (double)]</B><DD><P>Fija la velocidad angular del robot, el ca&ntilde;&oacute;n y/o el radar. El primer
+<DT><B>Rotate [what to rotate (int)] [angular velocity (double)]</B><DD>
+<P>Fija la velocidad angular del robot, el ca&ntilde;&oacute;n y/o el radar. El primer
 par&aacute;metro adopta valores de 1 para el robot, 2 para el ca&ntilde;&oacute;n, 4 para
 el radar o una suma de estos para rotar varios elementos al mismo
 tiempo. La velocidad angular es dada en radianes por segundo y est&aacute;
@@ -330,46 +354,56 @@ limitada por la
 <A HREF="RealTimeBattle-5.html#RobotMaxRotateSpeed">m&aacute;xima velocidad de rotaci&oacute;n (robot/ca&ntilde;&oacute;n/radar)</A>.</P>
 
 
-<DT><B>RotateTo [what to rotate (int)] [angular velocity (double)] [end angle (double)]</B><DD><P>Como <B>Rotate</B>, pero rotar&aacute; a un &aacute;ngulo dado. Ten en cuenta que
+<DT><B>RotateTo [what to rotate (int)] [angular velocity (double)] [end angle (double)]</B><DD>
+<P>Como <B>Rotate</B>, pero rotar&aacute; a un &aacute;ngulo dado. Ten en cuenta que
 los &aacute;ngulos del ca&ntilde;&oacute;n y el radar son relativos al &aacute;ngulo del
 robot. Este comando no puede ser utilizado para hacer girar el propio
 robot, usa <B>RotateAmount</B> en su lugar.</P>
 <P>
 <A NAME="RotateAmount"></A> </P>
-<DT><B>RotateAmount [what to rotate (int)] [angular velocity (double)] [angle (double)]</B><DD><P>Como <B>Rotate</B>, pero rotar&aacute; un &aacute;ngulo relativo al &aacute;ngulo actual.</P>
+<DT><B>RotateAmount [what to rotate (int)] [angular velocity (double)] [angle (double)]</B><DD>
+<P>Como <B>Rotate</B>, pero rotar&aacute; un &aacute;ngulo relativo al &aacute;ngulo actual.</P>
 
-<DT><B>Sweep [what to rotate (int)] [angular velocity (double)] [right angle (double)] [left angle (double)]</B><DD><P>Como <B>Rotate</B>, pero deja el ca&ntilde;&oacute;n y/o el radar en un modo de
+<DT><B>Sweep [what to rotate (int)] [angular velocity (double)] [right angle (double)] [left angle (double)]</B><DD>
+<P>Como <B>Rotate</B>, pero deja el ca&ntilde;&oacute;n y/o el radar en un modo de
 barrido (no disponible para el robot).</P>
 <P>
 <A NAME="Accelerate"></A> </P>
-<DT><B>Accelerate [value (double)]</B><DD><P>Fija la aceleraci&oacute;n del robot. El valor queda acotado por la
+<DT><B>Accelerate [value (double)]</B><DD>
+<P>Fija la aceleraci&oacute;n del robot. El valor queda acotado por la
 <A HREF="RealTimeBattle-5.html#RobotMaxAcceleration">aceleraci&oacute;n m&aacute;xima y m&iacute;nima del robot</A>.</P>
 <P>
 <A NAME="Brake"></A> </P>
-<DT><B>Brake [portion (double)]</B><DD><P>Activa el freno. Frenado total (par&aacute;metro igual a 1.0) significa que
+<DT><B>Brake [portion (double)]</B><DD>
+<P>Activa el freno. Frenado total (par&aacute;metro igual a 1.0) significa que
 el rozamiento en la direcci&oacute;n del robot es igual a la
 <A HREF="RealTimeBattle-5.html#SlideFriction">fricci&oacute;n de deslizamiento</A>.</P>
 
-<DT><B>Shoot [shot energy (double)]</B><DD><P>Dispara con la energ&iacute;a dada.
+<DT><B>Shoot [shot energy (double)]</B><DD>
+<P>Dispara con la energ&iacute;a dada.
 Las 
 <A HREF="RealTimeBattle-5.html#Shot options">opciones de disparo</A> proporcionan
 m&aacute;s informaci&oacute;n al respecto.</P>
 <P>
 <A NAME="Print"></A> </P>
-<DT><B>Print [message (string)]</B><DD><P>Imprime un mensaje en la 
+<DT><B>Print [message (string)]</B><DD>
+<P>Imprime un mensaje en la 
 <A HREF="RealTimeBattle-2.html#Message window">ventana de mensajes</A>.</P>
 
-<DT><B>Debug [message (string)]</B><DD><P>Imprime un mensaje en la
+<DT><B>Debug [message (string)]</B><DD>
+<P>Imprime un mensaje en la
 <A HREF="RealTimeBattle-2.html#Message window">ventana de mensajes</A> si se est&aacute; en el 
 <A HREF="RealTimeBattle-2.html#Command line options">modo de depuraci&oacute;n</A>.</P>
 
-<DT><B>DebugLine [angle1 (double)] [radius1 (double)] [angle2 (double)] [radius2 (double)]</B><DD><P>Dibuja una l&iacute;nea directamente sobre la arena. Esto solo est&aacute; permitido
+<DT><B>DebugLine [angle1 (double)] [radius1 (double)] [angle2 (double)] [radius2 (double)]</B><DD>
+<P>Dibuja una l&iacute;nea directamente sobre la arena. Esto solo est&aacute; permitido
 en el nivel de depuraci&oacute;n m&aacute;s alto (5). De lo contrario se enviar&aacute; un
 <A HREF="#Warning">mensaje de advertencia</A>. Los argumentos son
 el punto inicial y final de la l&iacute;nea en coordenadas polares relativas
 al robot.</P>
 
-<DT><B>DebugCircle [center angle (double)] [center radius (double)] [circle radius (double)]</B><DD><P>Similar a <B>DebugLine</B>, pero dibuja un c&iacute;rculo. Los dos primeros
+<DT><B>DebugCircle [center angle (double)] [center radius (double)] [circle radius (double)]</B><DD>
+<P>Similar a <B>DebugLine</B>, pero dibuja un c&iacute;rculo. Los dos primeros
 argumentos son el &aacute;ngulo y el radio del punto central del c&iacute;rculo 
 relativos al robot. El tercer argumento proporciona el radio del c&iacute;rculo.</P>
 

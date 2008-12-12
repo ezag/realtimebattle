@@ -7,7 +7,7 @@ dnl Version numbers
 
 RTB_MAJOR_VERSION=1
 RTB_MINOR_VERSION=0
-RTB_MICRO_VERSION=8
+RTB_MICRO_VERSION=9
 RTB_EXTRA_VERSION=[-Ext]
 RTB_RPM_RELEASE=1
 
@@ -301,6 +301,8 @@ Robots/perl/perl.robot
 Robots/perl/Makefile
 Robots/raziel/raziel.py.robot
 Robots/raziel/Makefile
+Robots/php-simple/Makefile
+Robots/php/Makefile
 include/Makefile
 ])
 

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <HTML>
 <HEAD>
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.21">
- <TITLE>RealTimeBattle Benutzer-Handbuch, Version 1.0.8: Bedienung des Programms</TITLE>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.50">
+ <TITLE>RealTimeBattle Benutzer-Handbuch, Version 1.0.9: Bedienung des Programms</TITLE>
  <LINK HREF="RealTimeBattle-3.html" REL=next>
  <LINK HREF="RealTimeBattle-1.html" REL=previous>
  <LINK HREF="RealTimeBattle.html#toc2" REL=contents>
@@ -109,30 +109,37 @@ CPU-Zeit der Roboter ist unbeschr&auml;nkt </TD><TD> Ja </TD><TD> Ja </TD><TD> N
 
 <P>
 <DL>
-<DT><B>New tournament:</B><DD><P>Ein neues Turnier wird gestartet. Die Sektion
+<DT><B>New tournament:</B><DD>
+<P>Ein neues Turnier wird gestartet. Die Sektion
 <A HREF="#Start new tournament window">Neues Turnier-Fenster &ouml;ffnen</A>
 gibt mehr Informationen dar&uuml;ber.</P>
 
-<DT><B>Replay tournament:</B><DD><P>
+<DT><B>Replay tournament:</B><DD>
+<P>
 <A HREF="#replaying">Ein Spiel ablaufen lassen</A>.
 Du wirst das 
 <A HREF="#log_files">Logfile</A> des Spiels ausw&auml;hlen m&uuml;ssen
 das du studieren willst.</P>
 <P>
 <A NAME="pause"></A> </P>
-<DT><B>Pause:</B><DD><P>H&auml;lt das Spiel an. Im
+<DT><B>Pause:</B><DD>
+<P>H&auml;lt das Spiel an. Im
 <A HREF="#Command line options">Competition-Modus</A> wird erst am Ende
 des aktuellen Spiels angehalten.</P>
 
-<DT><B>End:</B><DD><P>Beendet das aktuelle Turnier.</P>
+<DT><B>End:</B><DD>
+<P>Beendet das aktuelle Turnier.</P>
 
-<DT><B>Options:</B><DD><P>&Ouml;ffnet das 
+<DT><B>Options:</B><DD>
+<P>&Ouml;ffnet das 
 <A HREF="#Options_window">Options-Fenster</A>.</P>
 
-<DT><B>Statistics:</B><DD><P>Zeigt das 
+<DT><B>Statistics:</B><DD>
+<P>Zeigt das 
 <A HREF="#Statistics window">Statistik-Fenster</A> an.</P>
 
-<DT><B>Show arena window:</B><DD><P>Diese Box kann dazu benutzt werden die drei Fenster, die w&auml;hrend eines
+<DT><B>Show arena window:</B><DD>
+<P>Diese Box kann dazu benutzt werden die drei Fenster, die w&auml;hrend eines
 laufenden Spieles zu sehen sind, zu verstecken oder anzuzeigen, n&auml;mlich:
 das 
 <A HREF="#Arena_window">Arena-Fenster</A>,
@@ -141,7 +148,8 @@ das
 das 
 <A HREF="#Message window">Nachrichten-Fenster</A>.</P>
 
-<DT><B>Quit:</B><DD><P>Beendet das Programm.</P>
+<DT><B>Quit:</B><DD>
+<P>Beendet das Programm.</P>
 
 </DL>
 </P>
@@ -153,21 +161,25 @@ man <CODE>gdb</CODE> benutzt, muss man folgenderma&szlig;en starten:
 <CODE>gdb Robotername Prozessnummer</CODE>.</P>
 <P>
 <DL>
-<DT><B>Step:</B><DD><P>In einem 
+<DT><B>Step:</B><DD>
+<P>In einem 
 <A HREF="#pause">angehaltenen</A> Spiel wird dieser Button das Spiel um
 eine Zeiteinheit voranschreiten lassen. Dies ist sehr n&uuml;tzlich, wenn man einen
 Roboter im Debugger am Laufen hat, da der Roboter sonst mit Nachrichten
 &uuml;berflutet werden w&uuml;rde.</P>
 
-<DT><B>End game:</B><DD><P>Das aktuelle Spiel wird beendet. Das hat den selben Effekt wie ihn ein
+<DT><B>End game:</B><DD>
+<P>Das aktuelle Spiel wird beendet. Das hat den selben Effekt wie ihn ein
 <A HREF="RealTimeBattle-5.html#Timeout">Timeout</A> haben w&uuml;rde.</P>
 
-<DT><B>Kill marked robot:</B><DD><P>Im Debug-Modus kann man einen Roboter im
+<DT><B>Kill marked robot:</B><DD>
+<P>Im Debug-Modus kann man einen Roboter im
 <A HREF="#Score window">Score-Fenster</A> markieren. Dieser Roboter wird
 sterben, wenn man diesen Button dr&uuml;ckt.</P>
 <P>
 <A NAME="Debug level"></A> </P>
-<DT><B>Debug level:</B><DD><P>Den Debug-Level zu &auml;ndern ist eine M&ouml;glichkeit, den
+<DT><B>Debug level:</B><DD>
+<P>Den Debug-Level zu &auml;ndern ist eine M&ouml;glichkeit, den
 Robotern mitzuteilen, welche Nachrichten sie senden sollen. Dieser Wert liegt
 zwischen 0 und 5, wobei 0 bedeutet, dass &uuml;berhaupt nicht debuggt wird, und 5
 ist der h&ouml;chste Debug-Level, d.h. alle Debug-Nachrichten sollen gesendet
@@ -307,18 +319,21 @@ nur das letzte Schl&uuml;sselwort, das eine Zahl als Parameter annimmt, gez&auml
 Alle Schl&uuml;sselw&ouml;rter sollten mit einem Strichpunkt beendet werden.</P>
 <P>
 <DL>
-<DT><B>Games/Sequence oder g/s:</B><DD><P>Als Parameter muss man entweder eine Zahl
+<DT><B>Games/Sequence oder g/s:</B><DD>
+<P>Als Parameter muss man entweder eine Zahl
 oder ein <CODE>*</CODE> angeben. Die Zahl legt fest wieviele Spiele pro Turnier
 gespielt werden sollen. Das Sternchen bedeutet, dass das Programm die genaue
 Anzahl von Arenas hernimmt und diese Zahl als Parameter verwendet. Der
 voreingestellte Wert ist 1.</P>
 
-<DT><B>Robots/Sequence oder r/s:</B><DD><P>Als Parameter muss man entweder eine Zahl
+<DT><B>Robots/Sequence oder r/s:</B><DD>
+<P>Als Parameter muss man entweder eine Zahl
 oder ein <CODE>*</CODE> angeben. Die Zahl legt fest wie viele Roboter in jeder
 Sequenz antreten. Das Sternchen bedeutet, dass das Programm die Anzahl der
 Roboter als Parameter nimmt. Der Default-Wert ist hier 2.</P>
 
-<DT><B>Sequences oder seq:</B><DD><P>Als Parameter muss man entweder eine Zahl
+<DT><B>Sequences oder seq:</B><DD>
+<P>Als Parameter muss man entweder eine Zahl
 oder ein <CODE>*</CODE> angeben. Die Zahl legt die Anzahl der Sequenzen die
 im Turnier gespielt werden sollen fest. Wenn man ein Sternchen angibt,
 errechnet das Programm aus der Anzahl der Roboter und der Anzahl der Roboter
@@ -326,27 +341,33 @@ pro Sequenz eine Zahl, soda&szlig; alle Roboter genau einmal gegeneinander antre
 Diese errechnete Zahl wird dann als Parameter verwendet. Der Default-Wert
 ist 1. </P>
 
-<DT><B>Robots oder r:</B><DD><P>Als Parameter wird eine oder mehrere
+<DT><B>Robots oder r:</B><DD>
+<P>Als Parameter wird eine oder mehrere
 Roboter-Datei(en) angegeben.</P>
 
-<DT><B>Arenas oder a:</B><DD><P>Eine oder mehrere Arena-Dateien werden als Parameter
+<DT><B>Arenas oder a:</B><DD>
+<P>Eine oder mehrere Arena-Dateien werden als Parameter
 &uuml;bergeben.</P>
 </DL>
 </P>
 <P>Datei-Argumente k&ouml;nnen wie folgt aussehen:
 <DL>
-<DT><B>Nur die Datei selber:</B><DD><P>Hier wird der Pfad nach der Datei durchsucht.</P>
+<DT><B>Nur die Datei selber:</B><DD>
+<P>Hier wird der Pfad nach der Datei durchsucht.</P>
 <P>Beispiel: <CODE>Robot: empty.robot</CODE></P>
 
-<DT><B>Der volle Pfad zur Datei + der Dateiname:</B><DD><P>Die angegebene Datei
+<DT><B>Der volle Pfad zur Datei + der Dateiname:</B><DD>
+<P>Die angegebene Datei
 wird verwendet.</P>
 <P>Beispiel: <CODE>Arena: /usr/local/Games/RealTimeBattle/Arenas/Circle.arena</CODE></P>
 
-<DT><B>Alle Dateien im Pfad:</B><DD><P>Diese Angabe durchsucht den ganzen Pfad und
+<DT><B>Alle Dateien im Pfad:</B><DD>
+<P>Diese Angabe durchsucht den ganzen Pfad und
 verwendet alle gefundenen Dateien.</P>
 <P>Beispiel: <CODE>Arena: *</CODE></P>
 
-<DT><B>Ein bestimmtes Verzeichnis:</B><DD><P>Es wird das angegebene Verzeichnis
+<DT><B>Ein bestimmtes Verzeichnis:</B><DD>
+<P>Es wird das angegebene Verzeichnis
 durchsucht und alle gefundenen Dateien werden verwendet.</P>
 <P>Beispiel: <CODE>Robot: /usr/local/Games/RealTimeBattle/Robots/*</CODE></P>
 
@@ -375,19 +396,31 @@ Jede Zeile besteht aus einem Buchstaben, der den Typ der Information angibt,
 gefolgt von einer Liste von Argumenten die durch 'Whitespaces' getrennt sind.
 Die folgenden Informationen werden angegeben:
 <DL>
-<DT><B>Header:</B><DD><P>H [Spiele/Sequenz] [Roboter/Sequenz] [Sequenzen] [Roboter]</P>
-<DT><B>Arena Info:</B><DD><P>A [Zeile aus der Arena Datei]</P>
-<DT><B>Spielstart:</B><DD><P>G [Sequenznummer] [Spielnummer]</P>
-<DT><B>Option:</B><DD><P>O [Option:Wert]</P>
-<DT><B>Liste von Robotereigenschaften:</B><DD><P>L [Roboter-ID] [Roboterfarbe] [Robotername]
+<DT><B>Header:</B><DD>
+<P>H [Spiele/Sequenz] [Roboter/Sequenz] [Sequenzen] [Roboter]</P>
+<DT><B>Arena Info:</B><DD>
+<P>A [Zeile aus der Arena Datei]</P>
+<DT><B>Spielstart:</B><DD>
+<P>G [Sequenznummer] [Spielnummer]</P>
+<DT><B>Option:</B><DD>
+<P>O [Option:Wert]</P>
+<DT><B>Liste von Robotereigenschaften:</B><DD>
+<P>L [Roboter-ID] [Roboterfarbe] [Robotername]
 <A NAME="RobotPositionInfo"></A> </P>
-<DT><B>Roboter Positions-Info:</B><DD><P>R [Roboter-ID] [x] [y] [Kanonen-Winkel] [Radar-Winkel] [Energie]</P>
-<DT><B>Zeit:</B><DD><P>T [verstrichene Zeit]</P>
-<DT><B>Nachricht ausgeben:</B><DD><P>P [Roboter-ID] [Nachricht]</P>
-<DT><B>Cookie:</B><DD><P>C [Cookie-ID] [x] [y]</P>
-<DT><B>Mine:</B><DD><P>M [Minen-ID] [x] [y]</P>
-<DT><B>Schu&szlig;:</B><DD><P>S [Schu&szlig;-ID] [x] [y] [dx/dt] [dy/dt]</P>
-<DT><B>Tod:</B><DD><P>D [Typ des gekillten Objekts] [Object-ID] [Wenn's ein Roboter war: erhaltene Punkte] [Position]</P>
+<DT><B>Roboter Positions-Info:</B><DD>
+<P>R [Roboter-ID] [x] [y] [Kanonen-Winkel] [Radar-Winkel] [Energie]</P>
+<DT><B>Zeit:</B><DD>
+<P>T [verstrichene Zeit]</P>
+<DT><B>Nachricht ausgeben:</B><DD>
+<P>P [Roboter-ID] [Nachricht]</P>
+<DT><B>Cookie:</B><DD>
+<P>C [Cookie-ID] [x] [y]</P>
+<DT><B>Mine:</B><DD>
+<P>M [Minen-ID] [x] [y]</P>
+<DT><B>Schu&szlig;:</B><DD>
+<P>S [Schu&szlig;-ID] [x] [y] [dx/dt] [dy/dt]</P>
+<DT><B>Tod:</B><DD>
+<P>D [Typ des gekillten Objekts] [Object-ID] [Wenn's ein Roboter war: erhaltene Punkte] [Position]</P>
 </DL>
 </P>
 
@@ -400,11 +433,11 @@ zwar entweder aus dem
 <A HREF="#Control window">Kontroll-Fenster</A>
 heraus, oder indem du die 
 <A HREF="#Command line options">Kommandozeilenoption</A>
-<CODE>&quot;-r&quot;</CODE> verwendest.
+<CODE>&#34;-r&#34;</CODE> verwendest.
 Beachte aber, dass du, wenn du Standard-Input als Log-Datei verwendest
 (
 <A HREF="#Command line options">Kommandozeilenoption</A> 
-<CODE>&quot;-r&nbsp;-&quot;</CODE>), nicht viel mehr machen kannst als
+<CODE>&#34;-r&nbsp;-&#34;</CODE>), nicht viel mehr machen kannst als
 das Spiel anzusehen. Normalerweise kann man den Ablauf des Spiels
 folgenderma&szlig;en beinflussen:</P>
 <P>

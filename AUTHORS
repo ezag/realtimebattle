@@ -8,6 +8,7 @@ Mr. Friendly (Volker Ströbel)
 Johannes Nicolai
 Remi Vanicat
 Moskvan Jaromir
+Falko Menge
 
 Translators:
 Andoni Ayala
@@ -24,8 +25,9 @@ perl-Skeleton: Shinsuke Noguchi
 perl: unknown
 raziel: Torsten Sachse, Johannes Nicolai
 brotfrucht: This is the first working strategy for the RTB Team Framework, see the AUTHORS file there for details
+php: Falko Menge
 
-and many other
+and many others
 
 If you have contributed to RealTimeBattle and you are not on the list or want to be removed from it, please report to
 jonico@users.sourceforge.net

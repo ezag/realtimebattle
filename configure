@@ -662,6 +662,7 @@ VERSION
 INSTALL_PROGRAM
 INSTALL_SCRIPT
 INSTALL_DATA
+am__isrc
 CYGPATH_W
 ACLOCAL
 AUTOCONF
@@ -810,6 +811,9 @@ CCC
 CC
 CFLAGS
 CXXCPP
+PKG_CONFIG
+GTK_CFLAGS
+GTK_LIBS
 PYTHON'
 ac_subdirs_all='rtb-team-framework'
 
@@ -1430,6 +1434,9 @@ Some influential environment variables:
   CC          C compiler command
   CFLAGS      C compiler flags
   CXXCPP      C++ preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
+  GTK_LIBS    linker flags for GTK, overriding pkg-config
   PYTHON
 
 Use these variables to override the choices made by `configure' or to help
@@ -1888,7 +1895,7 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 RTB_MAJOR_VERSION=1
 RTB_MINOR_VERSION=0
-RTB_MICRO_VERSION=8
+RTB_MICRO_VERSION=9
 RTB_EXTRA_VERSION=-Ext
 RTB_RPM_RELEASE=1
 
@@ -1921,7 +1928,8 @@ _ACEOF
 
 
 
-am__api_version="1.9"
+am__api_version='1.10'
+
 # Find a good install program.  We prefer a C program (faster),
 # so one script is as good as another.  But avoid the broken or
 # incompatible versions:
@@ -2073,38 +2081,53 @@ else
 echo "$as_me: WARNING: \`missing' script is too old or missing" >&2;}
 fi
 
-if mkdir -p --version . >/dev/null 2>&1 && test ! -d ./--version; then
-  # We used to keeping the `.' as first argument, in order to
-  # allow $(mkdir_p) to be used without argument.  As in
-  #   $(mkdir_p) $(somedir)
-  # where $(somedir) is conditionally defined.  However this is wrong
-  # for two reasons:
-  #  1. if the package is installed by a user who cannot write `.'
-  #     make install will fail,
-  #  2. the above comment should most certainly read
-  #     $(mkdir_p) $(DESTDIR)$(somedir)
-  #     so it does not work when $(somedir) is undefined and
-  #     $(DESTDIR) is not.
-  #  To support the latter case, we have to write
-  #     test -z "$(somedir)" || $(mkdir_p) $(DESTDIR)$(somedir),
-  #  so the `.' trick is pointless.
-  mkdir_p='mkdir -p --'
+{ echo "$as_me:$LINENO: checking for a thread-safe mkdir -p" >&5
+echo $ECHO_N "checking for a thread-safe mkdir -p... $ECHO_C" >&6; }
+if test -z "$MKDIR_P"; then
+  if test "${ac_cv_path_mkdir+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  # On NextStep and OpenStep, the `mkdir' command does not
-  # recognize any option.  It will interpret all options as
-  # directories to create, and then abort because `.' already
-  # exists.
-  for d in ./-p ./--version;
-  do
-    test -d $d && rmdir $d
-  done
-  # $(mkinstalldirs) is defined by Automake if mkinstalldirs exists.
-  if test -f "$ac_aux_dir/mkinstalldirs"; then
-    mkdir_p='$(mkinstalldirs)'
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH$PATH_SEPARATOR/opt/sfw/bin
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_prog in mkdir gmkdir; do
+	 for ac_exec_ext in '' $ac_executable_extensions; do
+	   { test -f "$as_dir/$ac_prog$ac_exec_ext" && $as_test_x "$as_dir/$ac_prog$ac_exec_ext"; } || continue
+	   case `"$as_dir/$ac_prog$ac_exec_ext" --version 2>&1` in #(
+	     'mkdir (GNU coreutils) '* | \
+	     'mkdir (coreutils) '* | \
+	     'mkdir (fileutils) '4.1*)
+	       ac_cv_path_mkdir=$as_dir/$ac_prog$ac_exec_ext
+	       break 3;;
+	   esac
+	 done
+       done
+done
+IFS=$as_save_IFS
+
+fi
+
+  if test "${ac_cv_path_mkdir+set}" = set; then
+    MKDIR_P="$ac_cv_path_mkdir -p"
   else
-    mkdir_p='$(install_sh) -d'
+    # As a last resort, use the slow shell script.  Don't cache a
+    # value for MKDIR_P within a source directory, because that will
+    # break other packages using the cache if that directory is
+    # removed, or if the value is a relative name.
+    test -d ./--version && rmdir ./--version
+    MKDIR_P="$ac_install_sh -d"
   fi
 fi
+{ echo "$as_me:$LINENO: result: $MKDIR_P" >&5
+echo "${ECHO_T}$MKDIR_P" >&6; }
+
+mkdir_p="$MKDIR_P"
+case $mkdir_p in
+  [\\/$]* | ?:[\\/]*) ;;
+  */*) mkdir_p="\$(top_builddir)/$mkdir_p" ;;
+esac
 
 for ac_prog in gawk mawk nawk awk
 do
@@ -2187,12 +2210,16 @@ else
 fi
 rmdir .tst 2>/dev/null
 
-# test to see if srcdir already configured
-if test "`cd $srcdir && pwd`" != "`pwd`" &&
-   test -f $srcdir/config.status; then
-  { { echo "$as_me:$LINENO: error: source directory already configured; run \"make distclean\" there first" >&5
+if test "`cd $srcdir && pwd`" != "`pwd`"; then
+  # Use -I$(srcdir) only when $(srcdir) != ., so that make's output
+  # is not polluted with repeated "-I."
+  am__isrc=' -I$(srcdir)'
+  # test to see if srcdir already configured
+  if test -f $srcdir/config.status; then
+    { { echo "$as_me:$LINENO: error: source directory already configured; run \"make distclean\" there first" >&5
 echo "$as_me: error: source directory already configured; run \"make distclean\" there first" >&2;}
    { (exit 1); exit 1; }; }
+  fi
 fi
 
 # test whether we have cygpath
@@ -2226,7 +2253,7 @@ AUTOHEADER=${AUTOHEADER-"${am_missing_run}autoheader"}
 
 MAKEINFO=${MAKEINFO-"${am_missing_run}makeinfo"}
 
-install_sh=${install_sh-"$am_aux_dir/install-sh"}
+install_sh=${install_sh-"\$(SHELL) $am_aux_dir/install-sh"}
 
 # Installed binaries are usually stripped using `strip' when the user
 # run `make install-strip'.  However `strip' might not be the right
@@ -2330,7 +2357,7 @@ else
 fi
 
 fi
-INSTALL_STRIP_PROGRAM="\${SHELL} \$(install_sh) -c -s"
+INSTALL_STRIP_PROGRAM="\$(install_sh) -c -s"
 
 # We need awk for the "check" target.  The system "awk" is bad on
 # some platforms.
@@ -2430,9 +2457,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2html = xyes; then
+ if test x$sgml2html = xyes; then
   SGML2HTML_TRUE=
   SGML2HTML_FALSE='#'
 else
@@ -2479,9 +2504,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2latex = xyes; then
+ if test x$sgml2latex = xyes; then
   SGML2LATEX_TRUE=
   SGML2LATEX_FALSE='#'
 else
@@ -2528,9 +2551,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2info = xyes; then
+ if test x$sgml2info = xyes; then
   SGML2INFO_TRUE=
   SGML2INFO_FALSE='#'
 else
@@ -2577,9 +2598,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2txt = xyes; then
+ if test x$sgml2txt = xyes; then
   SGML2TXT_TRUE=
   SGML2TXT_FALSE='#'
 else
@@ -2626,9 +2645,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2lyx = xyes; then
+ if test x$sgml2lyx = xyes; then
   SGML2LYX_TRUE=
   SGML2LYX_FALSE='#'
 else
@@ -2675,9 +2692,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-
-
-if test x$sgml2rtf = xyes; then
+ if test x$sgml2rtf = xyes; then
   SGML2RTF_TRUE=
   SGML2RTF_FALSE='#'
 else
@@ -3346,16 +3361,13 @@ if test "x$enable_dependency_tracking" != xno; then
   am_depcomp="$ac_aux_dir/depcomp"
   AMDEPBACKSLASH='\'
 fi
-
-
-if test "x$enable_dependency_tracking" != xno; then
+ if test "x$enable_dependency_tracking" != xno; then
   AMDEP_TRUE=
   AMDEP_FALSE='#'
 else
   AMDEP_TRUE='#'
   AMDEP_FALSE=
 fi
-
 
 
 
@@ -3426,6 +3438,7 @@ else
        depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
        $SHELL ./depcomp $depcc -c -o sub/conftest.${OBJEXT-o} sub/conftest.c \
          >/dev/null 2>conftest.err &&
+       grep sub/conftst1.h sub/conftest.Po > /dev/null 2>&1 &&
        grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
        grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
@@ -3455,9 +3468,7 @@ fi
 echo "${ECHO_T}$am_cv_CXX_dependencies_compiler_type" >&6; }
 CXXDEPMODE=depmode=$am_cv_CXX_dependencies_compiler_type
 
-
-
-if
+ if
   test "x$enable_dependency_tracking" != xno \
   && test "$am_cv_CXX_dependencies_compiler_type" = gcc3; then
   am__fastdepCXX_TRUE=
@@ -4301,6 +4312,7 @@ else
        depfile=sub/conftest.Po tmpdepfile=sub/conftest.TPo \
        $SHELL ./depcomp $depcc -c -o sub/conftest.${OBJEXT-o} sub/conftest.c \
          >/dev/null 2>conftest.err &&
+       grep sub/conftst1.h sub/conftest.Po > /dev/null 2>&1 &&
        grep sub/conftst6.h sub/conftest.Po > /dev/null 2>&1 &&
        grep sub/conftest.${OBJEXT-o} sub/conftest.Po > /dev/null 2>&1 &&
        ${MAKE-make} -s -f confmf > /dev/null 2>&1; then
@@ -4330,9 +4342,7 @@ fi
 echo "${ECHO_T}$am_cv_CC_dependencies_compiler_type" >&6; }
 CCDEPMODE=depmode=$am_cv_CC_dependencies_compiler_type
 
-
-
-if
+ if
   test "x$enable_dependency_tracking" != xno \
   && test "$am_cv_CC_dependencies_compiler_type" = gcc3; then
   am__fastdepCC_TRUE=
@@ -4347,12 +4357,14 @@ fi
 am_cv_prog_cc_stdc=$ac_cv_prog_cc_stdc
 
 
-{ echo "$as_me:$LINENO: checking for library containing strerror" >&5
-echo $ECHO_N "checking for library containing strerror... $ECHO_C" >&6; }
-if test "${ac_cv_search_strerror+set}" = set; then
+
+        { echo "$as_me:$LINENO: checking for strerror in -lcposix" >&5
+echo $ECHO_N "checking for strerror in -lcposix... $ECHO_C" >&6; }
+if test "${ac_cv_lib_cposix_strerror+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  ac_func_search_save_LIBS=$LIBS
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcposix  $LIBS"
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -4375,14 +4387,7 @@ return strerror ();
   return 0;
 }
 _ACEOF
-for ac_lib in '' cposix; do
-  if test -z "$ac_lib"; then
-    ac_res="none required"
-  else
-    ac_res=-l$ac_lib
-    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
-  fi
-  rm -f conftest.$ac_objext conftest$ac_exeext
+rm -f conftest.$ac_objext conftest$ac_exeext
 if { (ac_try="$ac_link"
 case "(($ac_try" in
   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
@@ -4400,35 +4405,25 @@ eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
 	 test ! -s conftest.err
        } && test -s conftest$ac_exeext &&
        $as_test_x conftest$ac_exeext; then
-  ac_cv_search_strerror=$ac_res
+  ac_cv_lib_cposix_strerror=yes
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-
+	ac_cv_lib_cposix_strerror=no
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
-      conftest$ac_exeext
-  if test "${ac_cv_search_strerror+set}" = set; then
-  break
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
 fi
-done
-if test "${ac_cv_search_strerror+set}" = set; then
-  :
-else
-  ac_cv_search_strerror=no
+{ echo "$as_me:$LINENO: result: $ac_cv_lib_cposix_strerror" >&5
+echo "${ECHO_T}$ac_cv_lib_cposix_strerror" >&6; }
+if test $ac_cv_lib_cposix_strerror = yes; then
+  LIBS="$LIBS -lcposix"
 fi
-rm conftest.$ac_ext
-LIBS=$ac_func_search_save_LIBS
-fi
-{ echo "$as_me:$LINENO: result: $ac_cv_search_strerror" >&5
-echo "${ECHO_T}$ac_cv_search_strerror" >&6; }
-ac_res=$ac_cv_search_strerror
-if test "$ac_res" != no; then
-  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
-fi
+
 
 
 
@@ -5545,9 +5540,7 @@ else
   enable_network=no
 fi
 
-
-
-if test x$enable_network = xno; then
+ if test x$enable_network = xno; then
   NO_NETWORK_TRUE=
   NO_NETWORK_FALSE='#'
 else
@@ -5566,9 +5559,7 @@ else
   enable_graphics=yes
 fi
 
-
-
-if test x$enable_graphics = xno; then
+ if test x$enable_graphics = xno; then
   NO_GRAPHICS_TRUE=
   NO_GRAPHICS_FALSE='#'
 else
@@ -5779,11 +5770,11 @@ fi
 
 if test "x$enable_graphics" = "xyes"; then
 
-  succeeded=no
 
-  if test -z "$PKG_CONFIG"; then
-    # Extract the first word of "pkg-config", so it can be a program name with args.
-set dummy pkg-config; ac_word=$2
+if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
+	if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}pkg-config; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
 echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6; }
 if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
@@ -5809,7 +5800,6 @@ done
 done
 IFS=$as_save_IFS
 
-  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
   ;;
 esac
 fi
@@ -5823,60 +5813,157 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+fi
+if test -z "$ac_cv_path_PKG_CONFIG"; then
+  ac_pt_PKG_CONFIG=$PKG_CONFIG
+  # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+{ echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6; }
+if test "${ac_cv_path_ac_pt_PKG_CONFIG+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $ac_pt_PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PKG_CONFIG="$ac_pt_PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_ac_pt_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
   fi
+done
+done
+IFS=$as_save_IFS
 
-  if test "$PKG_CONFIG" = "no" ; then
-     echo "*** The pkg-config script could not be found. Make sure it is"
-     echo "*** in your path, or set the PKG_CONFIG environment variable"
-     echo "*** to the full path to pkg-config."
-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
+  ;;
+esac
+fi
+ac_pt_PKG_CONFIG=$ac_cv_path_ac_pt_PKG_CONFIG
+if test -n "$ac_pt_PKG_CONFIG"; then
+  { echo "$as_me:$LINENO: result: $ac_pt_PKG_CONFIG" >&5
+echo "${ECHO_T}$ac_pt_PKG_CONFIG" >&6; }
+else
+  { echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6; }
+fi
+
+  if test "x$ac_pt_PKG_CONFIG" = x; then
+    PKG_CONFIG=""
   else
-     PKG_CONFIG_MIN_VERSION=0.9.0
-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        { echo "$as_me:$LINENO: checking for gtk+-2.0 gdk-2.0" >&5
-echo $ECHO_N "checking for gtk+-2.0 gdk-2.0... $ECHO_C" >&6; }
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ echo "$as_me:$LINENO: WARNING: In the future, Autoconf will not detect cross-tools
+whose name does not start with the host triplet.  If you think this
+configuration is useful to you, please write to autoconf@gnu.org." >&5
+echo "$as_me: WARNING: In the future, Autoconf will not detect cross-tools
+whose name does not start with the host triplet.  If you think this
+configuration is useful to you, please write to autoconf@gnu.org." >&2;}
+ac_tool_warned=yes ;;
+esac
+    PKG_CONFIG=$ac_pt_PKG_CONFIG
+  fi
+else
+  PKG_CONFIG="$ac_cv_path_PKG_CONFIG"
+fi
 
-        if $PKG_CONFIG --exists "gtk+-2.0 gdk-2.0" ; then
-            { echo "$as_me:$LINENO: result: yes" >&5
+fi
+if test -n "$PKG_CONFIG"; then
+	_pkg_min_version=0.9.0
+	{ echo "$as_me:$LINENO: checking pkg-config is at least version $_pkg_min_version" >&5
+echo $ECHO_N "checking pkg-config is at least version $_pkg_min_version... $ECHO_C" >&6; }
+	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
+		{ echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6; }
-            succeeded=yes
+	else
+		{ echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6; }
+		PKG_CONFIG=""
+	fi
 
-            { echo "$as_me:$LINENO: checking GTK_CFLAGS" >&5
-echo $ECHO_N "checking GTK_CFLAGS... $ECHO_C" >&6; }
-            GTK_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0 gdk-2.0"`
-            { echo "$as_me:$LINENO: result: $GTK_CFLAGS" >&5
-echo "${ECHO_T}$GTK_CFLAGS" >&6; }
+fi
 
-            { echo "$as_me:$LINENO: checking GTK_LIBS" >&5
-echo $ECHO_N "checking GTK_LIBS... $ECHO_C" >&6; }
-            GTK_LIBS=`$PKG_CONFIG --libs "gtk+-2.0 gdk-2.0"`
-            { echo "$as_me:$LINENO: result: $GTK_LIBS" >&5
-echo "${ECHO_T}$GTK_LIBS" >&6; }
+pkg_failed=no
+{ echo "$as_me:$LINENO: checking for GTK" >&5
+echo $ECHO_N "checking for GTK... $ECHO_C" >&6; }
+
+if test -n "$PKG_CONFIG"; then
+    if test -n "$GTK_CFLAGS"; then
+        pkg_cv_GTK_CFLAGS="$GTK_CFLAGS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gtk+-2.0 gdk-2.0\"") >&5
+  ($PKG_CONFIG --exists --print-errors "gtk+-2.0 gdk-2.0") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_GTK_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0 gdk-2.0" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+if test -n "$PKG_CONFIG"; then
+    if test -n "$GTK_LIBS"; then
+        pkg_cv_GTK_LIBS="$GTK_LIBS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gtk+-2.0 gdk-2.0\"") >&5
+  ($PKG_CONFIG --exists --print-errors "gtk+-2.0 gdk-2.0") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_GTK_LIBS=`$PKG_CONFIG --libs "gtk+-2.0 gdk-2.0" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        GTK_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "gtk+-2.0 gdk-2.0"`
         else
-            GTK_CFLAGS=""
-            GTK_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but
-            ## do set a variable so people can do so.
-            GTK_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gtk+-2.0 gdk-2.0"`
-
+	        GTK_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gtk+-2.0 gdk-2.0"`
         fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$GTK_PKG_ERRORS" >&5
 
-
-
-     else
-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
-     fi
-  fi
-
-  if test $succeeded = yes; then
-     :
-  else
-      { { echo "$as_me:$LINENO: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&5
+	{ echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6; }
+                 { { echo "$as_me:$LINENO: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&5
 echo "$as_me: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&2;}
    { (exit 1); exit 1; }; }
-  fi
-
+elif test $pkg_failed = untried; then
+	 { { echo "$as_me:$LINENO: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&5
+echo "$as_me: error: \"Could not find gtk libs: $GTK_PKG_ERRORS\"" >&2;}
+   { (exit 1); exit 1; }; }
+else
+	GTK_CFLAGS=$pkg_cv_GTK_CFLAGS
+	GTK_LIBS=$pkg_cv_GTK_LIBS
+        { echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6; }
+	:
+fi
 
 
 fi
@@ -5949,9 +6036,7 @@ if test "x$use_rpm" = "xyes"; then
 	INSTALL_INFO=no
 fi
 
-
-
-if test x$use_rpm = xyes; then
+ if test x$use_rpm = xyes; then
   ENABLE_RPM_TRUE=
   ENABLE_RPM_FALSE='#'
 else
@@ -6783,9 +6868,7 @@ else
   getopt=yes
 fi
 
-
-
-if test x$getopt = xyes; then
+ if test x$getopt = xyes; then
   NO_GETOPT_LONG_TRUE=
   NO_GETOPT_LONG_FALSE='#'
 else
@@ -13087,9 +13170,7 @@ fi
 
 done
 
-
-
-if test x$linuxjoystickavailable = "xyes"; then
+ if test x$linuxjoystickavailable = "xyes"; then
   linuxjoystickavailable_TRUE=
   linuxjoystickavailable_FALSE='#'
 else
@@ -13207,7 +13288,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 13210 "configure" */
+/* #line 13291 "configure" */
 public class Test {
 }
 EOF
@@ -13231,9 +13312,7 @@ fi
 echo "${ECHO_T}$ac_cv_prog_javac_works" >&6; }
 
 
-
-
-if test "x$JAVAC" != x; then
+ if test "x$JAVAC" != x; then
   javacavailable_TRUE=
   javacavailable_FALSE='#'
 else
@@ -13391,7 +13470,7 @@ EOF
 if uudecode$EXEEXT Test.uue; then
         ac_cv_prog_uudecode_base64=yes
 else
-        echo "configure: 13394: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
+        echo "configure: 13473: uudecode had trouble decoding base 64 file 'Test.uue'" >&5
         echo "configure: failed file was:" >&5
         cat Test.uue >&5
         ac_cv_prog_uudecode_base64=no
@@ -13511,7 +13590,7 @@ else
 JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 cat << \EOF > $JAVA_TEST
-/* #line 13514 "configure" */
+/* #line 13593 "configure" */
 public class Test {
 }
 EOF
@@ -13547,7 +13626,7 @@ JAVA_TEST=Test.java
 CLASS_TEST=Test.class
 TEST=Test
 cat << \EOF > $JAVA_TEST
-/* [#]line 13550 "configure" */
+/* [#]line 13629 "configure" */
 public class Test {
 public static void main (String args[]) {
         System.exit (0);
@@ -13589,9 +13668,7 @@ echo "${ECHO_T}$ac_cv_prog_java_works" >&6; }
 
 
 
-
-
-if test "x$JAVA" != x; then
+ if test "x$JAVA" != x; then
   javaavailable_TRUE=
   javaavailable_FALSE='#'
 else
@@ -13720,9 +13797,7 @@ echo "$as_me: In last check we got a proper-looking answer from perl's Config: $
     fi
   fi
 
-
-
-if test "x$PERL_SHEBANG" != x ; then
+ if test "x$PERL_SHEBANG" != x ; then
   perlavailable_TRUE=
   perlavailable_FALSE='#'
 else
@@ -13821,9 +13896,7 @@ echo "${ECHO_T}no" >&6; }
     fi
 
 
-
-
-if test "x$PYTHON" != "xmissing"; then
+ if test "x$PYTHON" != "xmissing"; then
   pythonavailable_TRUE=
   pythonavailable_FALSE='#'
 else
@@ -13851,7 +13924,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ac_config_commands="$ac_config_commands default-2"
 
 
-ac_config_files="$ac_config_files m4/Makefile intl/Makefile Makefile po/Makefile.in Arenas/Makefile Packages/Makefile Packages/rpm/Makefile Packages/debian/Makefile Packages/freebsd/Makefile Documentation/Makefile Documentation/German/Makefile Documentation/Spanish/Makefile Documentation/French/Makefile src/Makefile Robots/Makefile Robots/seek_and_destroy/Makefile Robots/rotate_and_fire/Makefile Robots/empty/Makefile Robots/xt-bot/Makefile Robots/thomas2/Makefile Robots/joypad_robot/Makefile Robots/jBot/Makefile Robots/jBot/jBot.robot Robots/perl-Skeleton/perl-Skeleton.robot Robots/perl-Skeleton/Makefile Robots/perl/perl.robot Robots/perl/Makefile Robots/raziel/raziel.py.robot Robots/raziel/Makefile include/Makefile"
+ac_config_files="$ac_config_files m4/Makefile intl/Makefile Makefile po/Makefile.in Arenas/Makefile Packages/Makefile Packages/rpm/Makefile Packages/debian/Makefile Packages/freebsd/Makefile Documentation/Makefile Documentation/German/Makefile Documentation/Spanish/Makefile Documentation/French/Makefile src/Makefile Robots/Makefile Robots/seek_and_destroy/Makefile Robots/rotate_and_fire/Makefile Robots/empty/Makefile Robots/xt-bot/Makefile Robots/thomas2/Makefile Robots/joypad_robot/Makefile Robots/jBot/Makefile Robots/jBot/jBot.robot Robots/perl-Skeleton/perl-Skeleton.robot Robots/perl-Skeleton/Makefile Robots/perl/perl.robot Robots/perl/Makefile Robots/raziel/raziel.py.robot Robots/raziel/Makefile Robots/php-simple/Makefile Robots/php/Makefile include/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -14439,6 +14512,7 @@ gives unlimited permission to copy, distribute and modify it."
 ac_pwd='$ac_pwd'
 srcdir='$srcdir'
 INSTALL='$INSTALL'
+MKDIR_P='$MKDIR_P'
 _ACEOF
 
 cat >>$CONFIG_STATUS <<\_ACEOF
@@ -14582,6 +14656,8 @@ do
     "Robots/perl/Makefile") CONFIG_FILES="$CONFIG_FILES Robots/perl/Makefile" ;;
     "Robots/raziel/raziel.py.robot") CONFIG_FILES="$CONFIG_FILES Robots/raziel/raziel.py.robot" ;;
     "Robots/raziel/Makefile") CONFIG_FILES="$CONFIG_FILES Robots/raziel/Makefile" ;;
+    "Robots/php-simple/Makefile") CONFIG_FILES="$CONFIG_FILES Robots/php-simple/Makefile" ;;
+    "Robots/php/Makefile") CONFIG_FILES="$CONFIG_FILES Robots/php/Makefile" ;;
     "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
 
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
@@ -14693,6 +14769,7 @@ VERSION!$VERSION$ac_delim
 INSTALL_PROGRAM!$INSTALL_PROGRAM$ac_delim
 INSTALL_SCRIPT!$INSTALL_SCRIPT$ac_delim
 INSTALL_DATA!$INSTALL_DATA$ac_delim
+am__isrc!$am__isrc$ac_delim
 CYGPATH_W!$CYGPATH_W$ac_delim
 ACLOCAL!$ACLOCAL$ac_delim
 AUTOCONF!$AUTOCONF$ac_delim
@@ -14741,7 +14818,6 @@ am__quote!$am__quote$ac_delim
 AMDEP_TRUE!$AMDEP_TRUE$ac_delim
 AMDEP_FALSE!$AMDEP_FALSE$ac_delim
 AMDEPBACKSLASH!$AMDEPBACKSLASH$ac_delim
-CXXDEPMODE!$CXXDEPMODE$ac_delim
 _ACEOF
 
   if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 97; then
@@ -14783,6 +14859,7 @@ _ACEOF
 ac_delim='%!_!# '
 for ac_last_try in false false false false false :; do
   cat >conf$$subs.sed <<_ACEOF
+CXXDEPMODE!$CXXDEPMODE$ac_delim
 am__fastdepCXX_TRUE!$am__fastdepCXX_TRUE$ac_delim
 am__fastdepCXX_FALSE!$am__fastdepCXX_FALSE$ac_delim
 CC!$CC$ac_delim
@@ -14871,7 +14948,7 @@ LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 86; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 87; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5
@@ -15098,6 +15175,11 @@ ac_abs_srcdir=$ac_abs_top_srcdir$ac_dir_suffix
   [\\/$]* | ?:[\\/]* ) ac_INSTALL=$INSTALL ;;
   *) ac_INSTALL=$ac_top_build_prefix$INSTALL ;;
   esac
+  ac_MKDIR_P=$MKDIR_P
+  case $MKDIR_P in
+  [\\/$]* | ?:[\\/]* ) ;;
+  */*) ac_MKDIR_P=$ac_top_build_prefix$MKDIR_P ;;
+  esac
 _ACEOF
 
 cat >>$CONFIG_STATUS <<\_ACEOF
@@ -15151,6 +15233,7 @@ s&@builddir@&$ac_builddir&;t t
 s&@abs_builddir@&$ac_abs_builddir&;t t
 s&@abs_top_builddir@&$ac_abs_top_builddir&;t t
 s&@INSTALL@&$ac_INSTALL&;t t
+s&@MKDIR_P@&$ac_MKDIR_P&;t t
 $ac_datarootdir_hack
 " $ac_file_inputs | sed -f "$tmp/subs-1.sed" | sed -f "$tmp/subs-2.sed" >$tmp/out
 
@@ -15266,21 +15349,22 @@ echo "$as_me: $ac_file is unchanged" >&6;}
   fi
   rm -f "$tmp/out12"
 # Compute $ac_file's index in $config_headers.
+_am_arg=$ac_file
 _am_stamp_count=1
 for _am_header in $config_headers :; do
   case $_am_header in
-    $ac_file | $ac_file:* )
+    $_am_arg | $_am_arg:* )
       break ;;
     * )
       _am_stamp_count=`expr $_am_stamp_count + 1` ;;
   esac
 done
-echo "timestamp for $ac_file" >`$as_dirname -- $ac_file ||
-$as_expr X$ac_file : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
-	 X$ac_file : 'X\(//\)[^/]' \| \
-	 X$ac_file : 'X\(//\)$' \| \
-	 X$ac_file : 'X\(/\)' \| . 2>/dev/null ||
-echo X$ac_file |
+echo "timestamp for $_am_arg" >`$as_dirname -- "$_am_arg" ||
+$as_expr X"$_am_arg" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$_am_arg" : 'X\(//\)[^/]' \| \
+	 X"$_am_arg" : 'X\(//\)$' \| \
+	 X"$_am_arg" : 'X\(/\)' \| . 2>/dev/null ||
+echo X"$_am_arg" |
     sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
 	    s//\1/
 	    q
@@ -15315,8 +15399,9 @@ echo "$as_me: executing $ac_file commands" >&6;}
   # some people rename them; so instead we look at the file content.
   # Grep'ing the first line is not enough: some people post-process
   # each Makefile.in and add a new line on top of each file to say so.
-  # So let's grep whole file.
-  if grep '^#.*generated by automake' $mf > /dev/null 2>&1; then
+  # Grep'ing the whole file is not good either: AIX grep has a line
+  # limit of 2048, but all sed's we know have understand at least 4000.
+  if sed -n 's,^#.*generated by automake.*,X,p' "$mf" | grep X >/dev/null 2>&1; then
     dirpart=`$as_dirname -- "$mf" ||
 $as_expr X"$mf" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
 	 X"$mf" : 'X\(//\)[^/]' \| \
